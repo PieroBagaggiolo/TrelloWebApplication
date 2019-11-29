@@ -9,7 +9,11 @@ namespace TrelloWebApplication.Models
     {
         public string id { get; set; }
         public string status { get; set; }
-        public string 
+        public DateTime scadenza { get;set; }
+
+        public List<string> etichette { get; set; }
+
+        //label campi: name e color(?)
 
     }
 }
