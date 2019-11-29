@@ -31,12 +31,10 @@ namespace TrelloWebApplication.Controllers
                 sr.Close();
             }
 
-            
-            
             // deserialize data. After deserialization, our object json will be 
             // populated with information from JSON file
             var serializer = new JavaScriptSerializer();
-            var json = serializer.Deserialize<Card>(result);
+            var json = serializer.Deserialize<List<Card>>(result);
             return View();
         }
 

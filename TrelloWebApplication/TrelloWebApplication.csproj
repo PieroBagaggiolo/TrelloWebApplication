@@ -168,6 +168,7 @@
     <Compile Include="Models\Attachment.cs" />
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\Carddd.cs" />
     <Compile Include="Models\CheckItemState.cs" />
     <Compile Include="Models\Label.cs" />
     <Compile Include="Models\Preview.cs" />
