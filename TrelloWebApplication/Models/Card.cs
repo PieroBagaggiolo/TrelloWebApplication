@@ -12,8 +12,8 @@ namespace TrelloWebApplication.Models
         public DateTime scadenza { get;set; }
 
         public List<string> etichette { get; set; }
-
+        public List<CheckElements> opzioni { get; set; }
         //label campi: name e color(?)
-
+        
     }
 }

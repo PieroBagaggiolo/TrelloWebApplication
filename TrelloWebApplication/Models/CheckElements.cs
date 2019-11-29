@@ -7,5 +7,6 @@ namespace TrelloWebApplication.Models
 {
     public class CheckElements
     {
+        public string nome { get; set; }
     }
 }
