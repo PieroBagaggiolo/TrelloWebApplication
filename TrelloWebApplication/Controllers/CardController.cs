@@ -12,6 +12,7 @@ using TrelloWebApplication.Models;
 
 //allegati    https://api.trello.com/1/card/5ddd60afceb892734d8d82cc/attachments?key=9936fabac5fdc5f00e46ff3a454e9feb&token=27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01
 // api tutte card : https://api.trello.com/1/boards/5ddd5dad735c842669b7b819/cards?key=9936fabac5fdc5f00e46ff3a454e9feb&token=27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01
+//api card archiviate: https://trello.com/1/boards/5ddd5dad735c842669b7b819/cards/closed?key=9936fabac5fdc5f00e46ff3a454e9feb&token=27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01
 namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
@@ -49,11 +50,39 @@ namespace TrelloWebApplication.Controllers
 
             // deserialize data. After deserialization, our object json will be 
             // populated with information from JSON file
+            string prov2 = ("https://api.trello.com/1/boards/5ddd5dad735c842669b7b819/lists?key=9936fabac5fdc5f00e46ff3a454e9feb&token=27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01");
+            string nomeList = null;
+            WebRequest requestObj2 = WebRequest.Create(prov2);
+            requestObj2.Method = "GET";
+            HttpWebResponse responseObj2 = null;
+            responseObj2 = (HttpWebResponse)requestObj2.GetResponse();
+            using (Stream stream = responseObj2.GetResponseStream())
+            {
+                StreamReader sr = new StreamReader(stream);
+                nomeList = sr.ReadToEnd();
+                sr.Close();
 
+            }
+            
             var serializer = new JavaScriptSerializer();
+            var pro = serializer.Deserialize<List<List>>(nomeList);
             var json = serializer.Deserialize<List<Card>>(result);
             json.AddRange(serializer.Deserialize<List<Card>>(result1));
-            var j = serializer.Deserialize<List<Attachment>>(result1);
+            foreach (var item in json)
+            {
+                string list = item.IdList;
+                
+
+                foreach (var p in pro)
+                {
+                    if (p.Id==item.IdList)
+                    {
+                        item.IdList = p.Name;
+                    }
+                }
+            }
+
+            var pippo = 0;
             return View();
         }
 

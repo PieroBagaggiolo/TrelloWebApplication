@@ -171,6 +171,7 @@
     <Compile Include="Models\Carddd.cs" />
     <Compile Include="Models\CheckItemState.cs" />
     <Compile Include="Models\Label.cs" />
+    <Compile Include="Models\List.cs" />
     <Compile Include="Models\Preview.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
