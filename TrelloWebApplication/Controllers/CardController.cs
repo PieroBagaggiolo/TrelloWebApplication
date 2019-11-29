@@ -70,9 +70,6 @@ namespace TrelloWebApplication.Controllers
             json.AddRange(serializer.Deserialize<List<Card>>(result1));
             foreach (var item in json)
             {
-                string list = item.IdList;
-                
-
                 foreach (var p in pro)
                 {
                     if (p.Id==item.IdList)
