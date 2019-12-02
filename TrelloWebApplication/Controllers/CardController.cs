@@ -38,7 +38,7 @@ namespace TrelloWebApplication.Controllers
             return View(card);
         }
 
-public ActionResult ExportPDF()
+        public ActionResult ExportPDF()
         {
             ActionAsPdf result = new ActionAsPdf("Index")
             {
