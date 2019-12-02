@@ -32,21 +32,13 @@ namespace TrelloWebApplication.Controllers
             Card card = null;
             foreach (var item in model)
             {
-                if (item.Id == id)
-
-
-            Card card=null;
-            foreach (var item in model)
-            {
-                if (item.Id==id)
-                {
-                    card = item;
+                    if (item.Id == id)
                 }
-            }
 
           
             return View(card);
         }
+
 
         public ActionResult ExportPDF()
         {
@@ -57,12 +49,14 @@ namespace TrelloWebApplication.Controllers
             return result;
         }
 
+
         public ActionResult ExportExcel()
         {
             
             return null;
         }
-            return View(card);
-        }
+            
+
+        
     }
 }
