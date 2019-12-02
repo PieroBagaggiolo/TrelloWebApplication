@@ -1,9 +1,11 @@
-﻿@model TrelloWebApplication.Models.Card
-
+@model TrelloWebApplication.Models.Card
 <head>
     <style type="text/css">
-        .table-striped tr > td, th{
-            padding-left: 50px;
+        tr  > td, th {
+            padding: 7px 0px 7px 25px;
+        }
+        .tabSecondaria tr, td, th{
+            padding: 0 0 0 0;
         }
     </style>
 </head>
@@ -13,27 +15,22 @@
 
 <h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
 
-<table class="table-striped">
+<table class="table-striped" id="tab1">
     <tr>
         <th>
             ID
         </th>
-        <th>
-            STATO
-        </th>
-        <th style="padding-left: 100px">
-            LABEL
-        </th>
-        <th style="padding-left: 100px">
-            CHECKLISTS
-        </th>
-    </tr>
-    <tr>
         <td>
             @Html.DisplayFor(model => model.Id)
         </td>
-        @if(Model.Closed == "False")
-        {
+    </tr>
+
+    <tr>
+        <th>
+            STATO
+        </th>
+            @if (Model.Closed == "False")
+            {
             <td>
                 @Html.DisplayFor(model => model.IdList)
             </td>
@@ -44,12 +41,19 @@
                 CARD ARCHIVIATA
             </td>
         }
-            @if (Model.Labels != null)
+        </tr>
+
+        <tr>
+            <th>
+                LABEL
+            </th>
+
+            @if (Model.Labels.Count > 0)
             {
                 <td>
                     @foreach (var m in Model.Labels)
                     {
-                        <table>
+                        <table class="tabSecondaria">
                             <tr>
                                 <td>
                                     @Html.DisplayFor(modelm => m.Name) -
@@ -62,106 +66,76 @@
             }
             else
             {
-                    <td>
-                        NO LABELS
-                    </td>
+                <td>NO LABELS</td>
             }
-
-
-
+        </tr>
+        <tr>
+            <th>CHECKLISTS</th>
             @if (Model.ChekedLists != null)
             {
                 <td>
-                @foreach (var m in Model.ChekedLists)
-                {
-                    <table>
-                        <tr>
-                            <th>
-                                @Html.DisplayFor(modelm => m.Name)
-                            </th>
-                        </tr>
-                        @foreach (var chk in m.CheckItems)
-                        {
+                    @foreach (var m in Model.ChekedLists)
+                    {
+                        <table class="tabSecondaria">
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelchk => chk.Name) -
-                                    (@Html.DisplayFor(modelchk => chk.State))
-                                </td>
+                                <th>
+                                    @Html.DisplayFor(modelm => m.Name)
+                                </th>
                             </tr>
-                        }
-                    </table>
-                }
-                    </td>
+                            @foreach (var chk in m.CheckItems)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelchk => chk.Name) -
+                                        (@Html.DisplayFor(modelchk => chk.State))
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </td>
             }
             else
-            {             
+            {
                 <td style="padding-left:100px">NO CHECKLISTS</td>
             }
-            
-            <tr>
-                <th>
-                    ATTACHMENTS
-                </th>
-            </tr>
+        </tr>
+        <tr>
+            <th>ATTACHMENTS</th>
+
             @if (Model.Attachments != null)
             {
                 foreach (var att in Model.Attachments)
                 {
-                    <tr>
-                        <td>
-                            <img src="@Url.Content(att.Url)" alt="@att.Name" />
-                        </td>
-                    </tr>
+                    <td>
+                        <img src="@Url.Content(att.Url)" alt="@att.Name" />
+                    </td>
                 }
             }
             else
             {
-                <tr>
-                    <td>NO ATTACHMENTS</td>
-                </tr>
+                <td>NO ATTACHMENTS</td>
             }
-        </table>
+        </tr>
+        <tr>
+            <th>
+                Expire Time
+            </th>
+
+            @if (Model.Due != null)
+            {
+                <td>
+                    @Html.DisplayFor(model => model.Due)
+                </td>
+            }
+                else
+            {
+                <td>N Expire time</td>
+            }
+        </tr>
+    </table>
+
 <p>
-
-<div>
-    <h4>Card</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Closed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Closed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Due)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Due)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdList)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdList)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
