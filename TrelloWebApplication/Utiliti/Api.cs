@@ -51,6 +51,7 @@ namespace TrelloWebApplication.Utiliti
             return serie;
         }
 
+
         private static string ApiRest(string prov)
         {
             WebRequest requestObj = WebRequest.Create(prov);
