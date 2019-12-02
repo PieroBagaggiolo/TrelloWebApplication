@@ -45,6 +45,13 @@ namespace TrelloWebApplication.Utiliti
             return checklist;
         }
 
+        public static string Json(List<Card> model)
+        {
+            string serie = serializer.Serialize(model);
+            return serie;
+        }
+
+
         private static string ApiRest(string prov)
         {
             WebRequest requestObj = WebRequest.Create(prov);

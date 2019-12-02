@@ -23,14 +23,24 @@ namespace TrelloWebApplication.Controllers
 
         public ActionResult Details(string id = null)
         {
+
             Card card = null;
             foreach (var item in model)
             {
                 if (item.Id == id)
+
+            Card card=null;
+            foreach (var item in model)
+            {
+                if (item.Id==id)
+
                 {
                     card = item;
                 }
             }
+
+
+      
 
             return View(card);
         }
