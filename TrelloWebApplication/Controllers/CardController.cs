@@ -52,8 +52,7 @@ namespace TrelloWebApplication.Controllers
             return null;
         }
 
-        ExcelPackage pack = new ExcelPackage();
-        ExcelWorksheet ws = pack.Workbook.Worksheets.Add("Report");
+        
 
     }
 }

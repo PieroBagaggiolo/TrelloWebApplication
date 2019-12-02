@@ -1,11 +1,23 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TrelloWebApplication.Models;
 
 namespace TrelloWebApplication.Utiliti
 {
-    public class ExportExcel
+    public class ReportClass
     {
+        public static void ExportExcel()
+        {
+            List<Card> cards;
+            Json(cards);
+            ExcelPackage pack = new ExcelPackage();
+            ExcelWorksheet ws = pack.Workbook.Worksheets.Add("Details");
+
+            ws.Cells["A1"].Value = "";
+
+        }
     }
 }
