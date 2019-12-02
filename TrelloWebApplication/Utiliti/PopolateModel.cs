@@ -42,7 +42,6 @@ namespace TrelloWebApplication.Utiliti
 
                 }
             }
-            string a =Api.Json(cardtot);
          return cardtot;           
         }
     }
