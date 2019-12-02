@@ -7,7 +7,7 @@ using TrelloWebApplication.Models;
 
 namespace TrelloWebApplication.Utiliti
 {
-    public static class ReportClass
+    public static class ReportMethods
     {
         public static void ExportSingleExcel(Card model)
         {

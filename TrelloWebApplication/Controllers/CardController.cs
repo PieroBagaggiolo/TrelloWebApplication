@@ -13,8 +13,6 @@ using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
 
 
-
-
 namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
@@ -59,7 +57,7 @@ public ActionResult ExportPDF()
                     card = item;
                 }
             }
-            ExportSingleExcel(card);
+            ReportMethods.ExportSingleExcel(card);
             return View(card);
         }
     }
