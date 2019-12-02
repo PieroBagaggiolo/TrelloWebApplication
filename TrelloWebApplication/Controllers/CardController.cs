@@ -1,4 +1,5 @@
-﻿using Rotativa;
+﻿using OfficeOpenXml;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -47,8 +48,12 @@ namespace TrelloWebApplication.Controllers
 
         public ActionResult ExportExcel()
         {
+            
             return null;
         }
+
+        ExcelPackage pack = new ExcelPackage();
+        ExcelWorksheet ws = pack.Workbook.Worksheets.Add("Report");
 
     }
 }
