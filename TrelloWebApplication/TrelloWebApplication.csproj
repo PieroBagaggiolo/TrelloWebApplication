@@ -173,6 +173,7 @@
     <Compile Include="Models\Label.cs" />
     <Compile Include="Models\List.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utiliti\Api.cs" />
     <Compile Include="Utiliti\PopolateModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -214,7 +215,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Card\card.cshtml" />
+    <Content Include="Views\Card\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
