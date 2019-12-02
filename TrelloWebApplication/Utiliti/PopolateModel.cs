@@ -42,6 +42,7 @@ namespace TrelloWebApplication.Utiliti
 
                 }
             }
+
          return cardtot;           
         }
     }
