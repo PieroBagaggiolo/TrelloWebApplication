@@ -48,16 +48,20 @@ namespace TrelloWebApplication.Controllers
             }
             foreach (var card in Cardtot)
             {
-                int m = Int32.Parse(card.Badges.Attachments);
-                if (m!=0)
+                if (card.Badges.Attachments!="0")
                 {
                     string url = ApiRest("https://api.trello.com/1/cards/" + card.Id + "/attachments?key="+key+ "&token=" + token);
 
                     var allegato = serializer.Deserialize<List<Attachment>>(url);
                     
                         card.Attachments=allegato;
-                  
-                    
+                }
+                int m = Int32.Parse(card.Badges.CheckItems);
+                if (m>0)
+                {
+                    string check = ApiRest("https://api.trello.com/1/cards/" + card.Id + "/checklists?key=" + key + "&token=" + token);
+                    var checklist = serializer.Deserialize<List<ChekedList>>(check);
+                    card.ChekedLists = checklist;
 
                 }
             }

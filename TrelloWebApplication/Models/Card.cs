@@ -16,12 +16,11 @@ namespace TrelloWebApplication.Models
         // public string Desc { get; set; }
         public string Due { get; set; }
         //public string IdBoard { get; set; }
-        public string[] IdCheckLists { get; set; }
         public string IdList { get; set; }
         public List<Label> Labels { get; set; }
         public string Name { get; set; }
         public List<Attachment> Attachments { get; set; }
-
+        public List<ChekedList> ChekedLists { get; set; }
 
         /// <summary>
         /// Format card information
