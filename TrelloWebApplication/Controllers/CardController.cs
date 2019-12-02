@@ -12,6 +12,8 @@ using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
 
 
+
+
 namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
@@ -46,10 +48,18 @@ namespace TrelloWebApplication.Controllers
             return result;
         }
 
-        public ActionResult ExportExcel()
+        public ActionResult ExportExcel(string id = null)
         {
-            
-            return null;
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+                {
+                    card = item;
+                }
+            }
+            ExportSingleExcel(card);
+            return View();
         }
 
         
