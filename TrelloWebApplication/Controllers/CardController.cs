@@ -1,6 +1,10 @@
+
 ﻿using OfficeOpenXml;
 using Rotativa;
 using System;
+=======
+﻿using System;
+
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +29,12 @@ namespace TrelloWebApplication.Controllers
 
         public ActionResult Details(string id = null)
         {
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+
+
             Card card=null;
             foreach (var item in model)
             {
@@ -33,6 +43,7 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
+
           
             return View(card);
         }
@@ -51,8 +62,7 @@ namespace TrelloWebApplication.Controllers
             
             return null;
         }
-
-        
-
+            return View(card);
+        }
     }
 }
