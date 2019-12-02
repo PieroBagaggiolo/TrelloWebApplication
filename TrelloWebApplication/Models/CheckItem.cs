@@ -5,9 +5,9 @@ using System.Web;
 
 namespace TrelloWebApplication.Models
 {
-    public class CheckItemState
+    public class CheckItem
     {
-        public string IdCheckItem { get; set; }
         public string State { get; set; }
+        public string Name { get; set; }
     }
 }
