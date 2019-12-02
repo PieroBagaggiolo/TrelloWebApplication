@@ -27,23 +27,21 @@ namespace TrelloWebApplication.Controllers
             Card card = null;
             foreach (var item in model)
             {
-                if (item.Id == id)
+                
+                    if (item.Id == id)
 
-            Card card=null;
-            foreach (var item in model)
-            {
-                if (item.Id==id)
-
-                {
-                    card = item;
+                    {
+                        card = item;
+                    
                 }
+
+
+
+
             }
 
-
-      
-
             return View(card);
-        }
 
+        }
     }
 }
