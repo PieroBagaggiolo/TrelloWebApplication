@@ -2,9 +2,6 @@
 ﻿using OfficeOpenXml;
 using Rotativa;
 using System;
-=======
-﻿using System;
-
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -36,21 +33,14 @@ namespace TrelloWebApplication.Controllers
             {
                 if (item.Id == id)
 
-
-            Card card=null;
-            foreach (var item in model)
-            {
-                if (item.Id==id)
                 {
                     card = item;
                 }
             }
-
-          
             return View(card);
         }
 
-        public ActionResult ExportPDF()
+public ActionResult ExportPDF()
         {
             ActionAsPdf result = new ActionAsPdf("Index")
             {
@@ -70,8 +60,6 @@ namespace TrelloWebApplication.Controllers
                 }
             }
             ExportSingleExcel(card);
-            return View();
-        }
             return View(card);
         }
     }
