@@ -1,8 +1,7 @@
 ﻿@model TrelloWebApplication.Models.Card
-
 <head>
     <style type="text/css">
-        .table-striped tr > td, th{
+        .table-striped tr > td, th {
             padding-left: 50px;
         }
     </style>
@@ -21,6 +20,8 @@
         <th>
             STATO
         </th>
+
+
         <th style="padding-left: 100px">
             LABEL
         </th>
@@ -67,7 +68,7 @@
         {
             <td>NO FUCKING LABELS</td>
         }
-       
+
         @if (Model.ChekedLists != null)
         {
             <td>
@@ -97,72 +98,51 @@
             <td style="padding-left:100px">NO CHECKLISTS</td>
         }
 
+    <tr>
+        <th>
+            ATTACHMENTS
+        </th>
+    </tr>
+    @if (Model.Attachments != null)
+    {
+        foreach (var att in Model.Attachments)
+        {
             <tr>
-                <th>
-                    ATTACHMENTS
-                </th>
+                <td>
+                    <img src="@Url.Content(att.Url)" alt="@att.Name" />
+                </td>
             </tr>
-            @if (Model.Attachments != null)
-            {
-                foreach (var att in Model.Attachments)
-                {
-                    <tr>
-                        <td>
-                            <img src="@Url.Content(att.Url)" alt="@att.Name" />
-                        </td>
-                    </tr>
-                }
-            }
-            else
-            {
-                <tr>
-                    <td>NO ATTACHMENTS</td>
-                </tr>
-            }
+        }
+    }
+    else
+    {
+        <tr>
+            <td>NO ATTACHMENTS</td>
+        </tr>
+    }
+
+
+<tr>
+    <th>
+        Expire Time
+    </th>
+</tr>
+@if (Model.Due != null)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.Due)
+            </td>
+        </tr>
+}
+else
+{
+    <tr>
+        <td>NO Expire</td>
+    </tr>
+}
         </table>
+
 <p>
-
-
-<div>
-    <h4>Card</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Closed)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Closed)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Due)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Due)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdList)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdList)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-
     @Html.ActionLink("Back to List", "Index")
 </p>
