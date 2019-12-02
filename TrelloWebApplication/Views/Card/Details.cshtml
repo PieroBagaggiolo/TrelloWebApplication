@@ -1,5 +1,128 @@
 ﻿@model TrelloWebApplication.Models.Card
 
+<head>
+    <style type="text/css">
+        .table-striped tr > td, th{
+            padding-left: 50px;
+        }
+    </style>
+</head>
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
+
+<table class="table-striped">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            STATO
+        </th>
+        <th style="padding-left: 100px">
+            LABEL
+        </th>
+        <th style="padding-left: 100px">
+            CHECKLISTS
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Id)
+        </td>
+        @if(Model.Closed == "False")
+        {
+            <td>
+                @Html.DisplayFor(model => model.IdList)
+            </td>
+        }
+        else
+        {
+            <td>
+                CARD ARCHIVIATA
+            </td>
+        }
+            @if (Model.Labels != null)
+            {
+                <td>
+                    @foreach (var m in Model.Labels)
+                    {
+                        <table>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelm => m.Name) -
+                                    (@Html.DisplayFor(modelm => m.Color))
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </td>
+            }
+            else
+            {
+                    <td>
+                        NO LABELS
+                    </td>
+            }
+
+
+
+            @if (Model.ChekedLists != null)
+            {
+                <td>
+                @foreach (var m in Model.ChekedLists)
+                {
+                    <table>
+                        <tr>
+                            <th>
+                                @Html.DisplayFor(modelm => m.Name)
+                            </th>
+                        </tr>
+                        @foreach (var chk in m.CheckItems)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelchk => chk.Name) -
+                                    (@Html.DisplayFor(modelchk => chk.State))
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+                    </td>
+            }
+            else
+            {             
+                <td style="padding-left:100px">NO CHECKLISTS</td>
+            }
+            
+            <tr>
+                <th>
+                    ATTACHMENTS
+                </th>
+            </tr>
+            @if (Model.Attachments != null)
+            {
+                foreach (var att in Model.Attachments)
+                {
+                    <tr>
+                        <td>
+                            <img src="@Url.Content(att.Url)" alt="@att.Name" />
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td>NO ATTACHMENTS</td>
+                </tr>
+            }
+        </table>
+<p>
+
 <div>
     <h4>Card</h4>
     <hr />
