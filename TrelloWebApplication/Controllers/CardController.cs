@@ -17,7 +17,7 @@ namespace TrelloWebApplication.Controllers
         public ActionResult Index()
         {
             var model = PopolateModel.Popola();
-            return View();
+            return View(model);
         }
 
     }

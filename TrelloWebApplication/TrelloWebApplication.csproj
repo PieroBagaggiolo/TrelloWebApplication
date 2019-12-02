@@ -169,7 +169,6 @@
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\CheckItem.cs" />
-    <Compile Include="Models\CheckItemState.cs" />
     <Compile Include="Models\ChekedList.cs" />
     <Compile Include="Models\Label.cs" />
     <Compile Include="Models\List.cs" />
@@ -215,7 +214,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Card\Index.cshtml" />
+    <Content Include="Views\Card\card.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
