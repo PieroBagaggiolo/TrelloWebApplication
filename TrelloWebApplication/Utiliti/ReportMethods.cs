@@ -9,10 +9,9 @@ namespace TrelloWebApplication.Utiliti
 {
     public class ReportClass
     {
-        public static void ExportExcel()
+        public static void ExportExcel(List<Card> model)
         {
-            List<Card> cards;
-            Json(cards);
+            Api.Json(model);
             ExcelPackage pack = new ExcelPackage();
             ExcelWorksheet ws = pack.Workbook.Worksheets.Add("Details");
 
