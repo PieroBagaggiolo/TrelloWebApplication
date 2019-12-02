@@ -27,11 +27,12 @@
             CHECKLISTS
         </th>
     </tr>
+
     <tr>
         <td>
             @Html.DisplayFor(model => model.Id)
         </td>
-        @if(Model.Closed == "False")
+        @if (Model.Closed == "False")
         {
             <td>
                 @Html.DisplayFor(model => model.IdList)
@@ -45,35 +46,30 @@
         }
 
 
-        
-            @if (Model.Labels != null)
-            {
-                <td>
-                    @foreach (var m in Model.Labels)
-                    {
-                        <table>
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelm => m.Name) -
-                                    (@Html.DisplayFor(modelm => m.Color))
-                                </td>
-                            </tr>
-                        </table>
-                    }
-                </td>
-            }
-            else
-            {
-                    <td>
-                        NO LABELS
-                    </td>
-            }
-
-
-
-            @if (Model.ChekedLists != null)
-            {
-                <td>
+        @if (Model.Labels != null)
+        {
+            <td>
+                @foreach (var m in Model.Labels)
+                {
+                    <table>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelm => m.Name) -
+                                (@Html.DisplayFor(modelm => m.Color))
+                            </td>
+                        </tr>
+                    </table>
+                }
+            </td>
+        }
+        else
+        {
+            <td>NO FUCKING LABELS</td>
+        }
+       
+        @if (Model.ChekedLists != null)
+        {
+            <td>
                 @foreach (var m in Model.ChekedLists)
                 {
                     <table>
@@ -93,13 +89,13 @@
                         }
                     </table>
                 }
-                    </td>
-            }
-            else
-            {             
-                <td style="padding-left:100px">NO CHECKLISTS</td>
-            }
-            
+            </td>
+        }
+        else
+        {
+            <td style="padding-left:100px">NO CHECKLISTS</td>
+        }
+
             <tr>
                 <th>
                     ATTACHMENTS
