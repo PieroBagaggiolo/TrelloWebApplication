@@ -1,10 +1,11 @@
 @model TrelloWebApplication.Models.Card
 <head>
     <style type="text/css">
-        tr  > td, th {
+        tr > td, th {
             padding: 7px 0px 7px 25px;
         }
-        .tabSecondaria tr, td, th{
+
+        .tabSecondaria tr, td, th {
             padding: 0 0 0 0;
         }
     </style>
@@ -14,7 +15,7 @@
 }
 
 <h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
-
+<br />
 <table class="table-striped" id="tab1">
     <tr>
         <th>
@@ -29,8 +30,8 @@
         <th>
             STATO
         </th>
-            @if (Model.Closed == "False")
-            {
+        @if (Model.Closed == "False")
+        {
             <td>
                 @Html.DisplayFor(model => model.IdList)
             </td>
@@ -41,101 +42,107 @@
                 CARD ARCHIVIATA
             </td>
         }
-        </tr>
+    </tr>
 
-        <tr>
-            <th>
-                LABEL
-            </th>
+    <tr>
+        <th>
+            LABEL
+        </th>
 
-            @if (Model.Labels.Count > 0)
-            {
-                <td>
-                    @foreach (var m in Model.Labels)
-                    {
-                        <table class="tabSecondaria">
+        @if (Model.Labels.Count > 0)
+        {
+            <td>
+                @foreach (var m in Model.Labels)
+                {
+                    <table>
+                        @*tab secondaria*@
+                    <tr>
+                        <td style="padding-left: 0px">
+                            · @Html.DisplayFor(modelm => m.Name) -
+                            (@Html.DisplayFor(modelm => m.Color))
+                        </td>
+                    </tr>
+                </table>
+            }
+            </td>
+        }
+        else
+        {
+            <td>NO LABELS</td>
+        }
+    </tr>
+    <tr>
+        <th>CHECKLISTS</th>
+        @if (Model.ChekedLists != null)
+        {
+            <td>
+                @foreach (var m in Model.ChekedLists)
+                {
+                    <table class="tabSecondaria">
+                        <tr>
+                            <th>
+                                - @Html.DisplayFor(modelm => m.Name)
+                            </th>
+                        </tr>
+                        @foreach (var chk in m.CheckItems)
+                        {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelm => m.Name) -
-                                    (@Html.DisplayFor(modelm => m.Color))
+                                    · @Html.DisplayFor(modelchk => chk.Name) -
+                                    (@Html.DisplayFor(modelchk => chk.State))
                                 </td>
                             </tr>
-                        </table>
-                    }
-                </td>
-            }
-            else
-            {
-                <td>NO LABELS</td>
-            }
-        </tr>
-        <tr>
-            <th>CHECKLISTS</th>
-            @if (Model.ChekedLists != null)
-            {
-                <td>
-                    @foreach (var m in Model.ChekedLists)
-                    {
-                        <table class="tabSecondaria">
-                            <tr>
-                                <th>
-                                    @Html.DisplayFor(modelm => m.Name)
-                                </th>
-                            </tr>
-                            @foreach (var chk in m.CheckItems)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelchk => chk.Name) -
-                                        (@Html.DisplayFor(modelchk => chk.State))
-                                    </td>
-                                </tr>
-                            }
-                        </table>
-                    }
-                </td>
-            }
-            else
-            {
-                <td style="padding-left:100px">NO CHECKLISTS</td>
-            }
-        </tr>
-        <tr>
-            <th>ATTACHMENTS</th>
-
-            @if (Model.Attachments != null)
-            {
-                foreach (var att in Model.Attachments)
-                {
-                    <td>
-                        <img src="@Url.Content(att.Url)" alt="@att.Name" />
-                    </td>
+                        }
+                    </table>
                 }
-            }
-            else
-            {
-                <td>NO ATTACHMENTS</td>
-            }
-        </tr>
-        <tr>
-            <th>
-                Expire Time
-            </th>
+            </td>
+        }
+        else
+        {
+            <td style="padding-left:100px">NO CHECKLISTS</td>
+        }
+    </tr>
+    <tr>
+        <th>ATTACHMENTS</th>
 
-            @if (Model.Due != null)
+        @if (Model.Attachments != null)
+        {
+            foreach (var att in Model.Attachments)
             {
                 <td>
-                    @Html.DisplayFor(model => model.Due)
+                    <a href="@att.Name" download>
+                        <img src="@Url.Content(att.Url)" alt="@att.Name" />
+                    </a>
                 </td>
             }
-                else
-            {
-                <td>N Expire time</td>
-            }
-        </tr>
-    </table>
+        }
+        else
+        {
+            <td>NO ATTACHMENTS</td>
+        }
+    </tr>
+    <tr>
+        <th>
+            Expire Time
+        </th>
 
+        @if (Model.Due != null)
+        {
+            <td>
+                @Html.DisplayFor(model => model.Due)
+            </td>
+        }
+        else
+        {
+            <td>N Expire time</td>
+        }
+    </tr>
+</table>
+<br />
+<button type="button" class="btn btn-danger" onclick="location.href '@Url.Action("ExportPDF","Report")'">PRINT PDF</button>
+<button type="button" class="btn btn-success" onclick="location.href '@Url.Action("ExportExcel","Report")'">PRINT EXCEL</button>
+<br />
+<br />
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
-
