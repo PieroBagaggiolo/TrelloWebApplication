@@ -18,7 +18,7 @@ namespace TrelloWebApplication.Controllers
         {
             ActionAsPdf result = new ActionAsPdf("Index")
             {
-                FileName = Server.MapPath("../Content/Details.pdf")
+                FileName = Server.MapPath("~/Content/Details.pdf")
             };
             return result;
         }
