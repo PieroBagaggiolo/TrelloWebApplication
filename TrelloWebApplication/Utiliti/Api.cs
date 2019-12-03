@@ -45,7 +45,7 @@ namespace TrelloWebApplication.Utiliti
             return checklist;
         }
 
-        public static string Json(List<Card> model)
+        public static string Json(Card model)
         {
             string serie = serializer.Serialize(model);
             return serie;

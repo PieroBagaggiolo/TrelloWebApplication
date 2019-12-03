@@ -1,40 +1,37 @@
-
-﻿using OfficeOpenXml;
-using Rotativa;
+﻿using Rotativa;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
 
-
 namespace TrelloWebApplication.Controllers
 {
-    public class CardController : Controller
+    public class ReportController : Controller
     {
         List<Card> model = PopolateModel.Popola();
-        public ActionResult Index()
+        public ActionResult ExportPDF()
         {
-            var model = PopolateModel.Popola();
-            return View(model);
+            ActionAsPdf result = new ActionAsPdf("Index")
+            {
+                FileName = Server.MapPath("../Content/Details.pdf")
+            };
+            return result;
         }
 
-        public ActionResult Details(string id = null)
+        public ActionResult ExportExcel(string id = null)
         {
             Card card = null;
             foreach (var item in model)
             {
                 if (item.Id == id)
-
                 {
                     card = item;
                 }
             }
+            ReportMethods.ExportSingleExcel(card);
             return View(card);
         }
     }
