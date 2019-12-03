@@ -110,9 +110,9 @@
             foreach (var att in Model.Attachments)
             {
                 <td>
-                    <a href="@att.Name" download>
+                    
                         <img src="@Url.Content(att.Url)" alt="@att.Name" />
-                    </a>
+                    
                 </td>
             }
         }

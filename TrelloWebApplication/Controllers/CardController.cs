@@ -15,12 +15,13 @@ using TrelloWebApplication.Utiliti;
 
 namespace TrelloWebApplication.Controllers
 {
+
     public class CardController : Controller
     {
         List<Card> model = PopolateModel.Popola();
         public ActionResult Index()
         {
-            var model = PopolateModel.Popola();
+             
             return View(model);
         }
 
