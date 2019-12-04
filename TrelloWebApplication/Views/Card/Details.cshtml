@@ -1,24 +1,14 @@
 @model TrelloWebApplication.Models.Card
-<head>
-    <style type="text/css">
-        tr > td, th {
-            padding: 7px 0px 7px 25px;
-        }
 
-        .tabSecondaria tr, td, th {
-            padding: 0 0 0 0;
-        }
-    </style>
-</head>
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
 <br />
-<table class="table-striped" id="tab1">
+<table class="table" >
     <tr>
-        <th>
+        <th id="primo">
             ID
         </th>
         <td>
@@ -58,7 +48,7 @@
                         @*tab secondaria*@
                     <tr>
                         <td style="padding-left: 0px">
-                            � @Html.DisplayFor(modelm => m.Name) -
+                            @Html.DisplayFor(modelm => m.Name) -
                             (@Html.DisplayFor(modelm => m.Color))
                         </td>
                     </tr>
@@ -88,7 +78,7 @@
                         {
                             <tr>
                                 <td>
-                                    � @Html.DisplayFor(modelchk => chk.Name) -
+                                    @Html.DisplayFor(modelchk => chk.Name) -
                                     (@Html.DisplayFor(modelchk => chk.State))
                                 </td>
                             </tr>
@@ -111,7 +101,9 @@
             {
                 <td>
                     
-                        <img src="@Url.Content(att.Url)" alt="@att.Name" />
+                    <a href="https://www.w3schools.com/images/myw3schoolsimage.jpg" download="w3logo">
+                        <div>Prova</div>
+                    </a>
                     
                 </td>
             }
