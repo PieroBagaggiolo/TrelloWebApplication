@@ -19,6 +19,7 @@ namespace TrelloWebApplication.Controllers
     public class CardController : Controller
     {
         List<Card> model = PopolateModel.Popola();
+        
         public ActionResult Index()
         {
              
@@ -36,13 +37,29 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
-
             return View(card);
         }
         public ActionResult ExportPDF()
         {
-            var p =Api.ApiRest("http://localhost:53250/Card");
-            ActionAsPdf result = new ActionAsPdf(p)
+            ActionAsPdf result = new ActionAsPdf("Index")
+            {
+                FileName = Server.MapPath("../Content/Details.pdf")
+            };
+            return result;
+        }
+        public ActionResult ExportPDFp(string id=null)
+        {
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+
+                {
+                    card = item;
+                }
+            }
+
+            ActionAsPdf result = new ActionAsPdf("Details",card)
             {
                 FileName = Server.MapPath("../Content/Details.pdf")
             };

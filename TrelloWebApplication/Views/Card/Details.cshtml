@@ -6,7 +6,7 @@
 
 <h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
 <br />
-<table class="table" >
+<table class="table">
     <tr>
         <th id="primo">
             ID
@@ -46,14 +46,14 @@
                 {
                     <table>
                         @*tab secondaria*@
-                    <tr>
-                        <td style="padding-left: 0px">
-                            @Html.DisplayFor(modelm => m.Name) -
-                            (@Html.DisplayFor(modelm => m.Color))
-                        </td>
-                    </tr>
-                </table>
-            }
+                        <tr>
+                            <td style="padding-left: 0px">
+                                @Html.DisplayFor(modelm => m.Name) -
+                                (@Html.DisplayFor(modelm => m.Color))
+                            </td>
+                        </tr>
+                    </table>
+                }
             </td>
         }
         else
@@ -89,17 +89,18 @@
         }
         else
         {
-            <td >NO CHECKLISTS</td>
+            <td>NO CHECKLISTS</td>
         }
     </tr>
     <tr>
         <th>ATTACHMENTS</th>
 
         @if (Model.Attachments != null)
-        {<td>
-            @foreach (var att in Model.Attachments)
-            {
-                
+        {
+            <td>
+                @foreach (var att in Model.Attachments)
+                {
+
                     <table>
                         <tr>
                             <td>
@@ -111,14 +112,14 @@
                             </td>
                         </tr>
                     </table>
-                
-            }
-        </td>
-         }
-         else
-         {
-               <td>NO ATTACHMENTS</td>
-         }
+
+                }
+            </td>
+        }
+        else
+        {
+            <td>NO ATTACHMENTS</td>
+        }
     </tr>
     <tr>
         <th>
@@ -143,6 +144,8 @@
 <button type="button" class="btn btn-success" onclick="location.href '@Url.Action("ExportExcel","Report")'">PRINT EXCEL</button>
 <br />
 <br />
+@Html.ActionLink("PRINT PDF", "ExportPDF", new { id = Model.Id })
+@Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report")
 
 <p>
     @Html.ActionLink("Back to List", "Index")
