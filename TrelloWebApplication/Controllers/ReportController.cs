@@ -12,14 +12,16 @@ namespace TrelloWebApplication.Controllers
     public class ReportController : Controller
     {
         List<Card> model = PopolateModel.Popola();
-        public ActionResult ExportPDF()
-        {
-            return new ActionAsPdf("Index")
-            {
-                FileName = Server.MapPath("../Content/Details.pdf")
-            };
-            
-        }
+
+
+        //public ActionResult ExportPDF()
+        //{
+        //    ActionAsPdf result = new ActionAsPdf("Index")
+        //    {
+        //        FileName = Server.MapPath("../Content/Details.pdf")
+        //    };
+        //    return result;
+        //}
 
         public ActionResult ExportExcel(string id = null)
         {

@@ -1,55 +1,44 @@
 ﻿@model IEnumerable<TrelloWebApplication.Models.Card>
 
-
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Trello Cards List</h2>
+<p>
+    Lista dell cards presenti nella bacheca di Trello
+</p>
+<p>
+    - Clicca su Details per vedere il loro status, le loro checklist, eventuali scadenze, eventuali allegati e le loro label.
+</p>
+<p>
+    - Per scaricare gli eventuali allegati recarsi su Details e seguire le istruzioni.
+</p>
 <br />
 <table class="table">
     <tr>
         <th>
             Trello cards' names list
         </th>
-
-
-<h1>Card Trello</h1>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            Attività
-        </th>
-
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-
-
-
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
-
-
-            @Html.DisplayFor(modelItem => item.IdList)
-        </td>
-
-        <td>
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) 
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        </tr>
+    }
 </table>
 
-@Html.ActionLink("PRINT PDF", "ExportPDF", "Report")
-@Html.ActionLink("PRINT EXCEL", "ExportExcel", "Card")
+@Html.ActionLink("PRINT PDF", "ExportPDF", "Card")
+@Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report")
+
+@*<button type="button" class="btn btn-danger" onclick="location.href '@Url.Action("ExportPDF","Report")'">PRINT PDF</button>
+    <button type="button" class="btn btn-success" onclick="location.href '@Url.Action("ExportExcel","Report")'">PRINT EXCEL</button>*@
+

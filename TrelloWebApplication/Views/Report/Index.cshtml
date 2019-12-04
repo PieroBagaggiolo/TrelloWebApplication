@@ -1,4 +1,4 @@
-@model TrelloWebApplication.Models.Card
+﻿@model TrelloWebApplication.Models.Card
 <head>
     <style type="text/css">
 
@@ -134,13 +134,3 @@
         }
     </tr>
 </table>
-<br />
-@*<button type="button" class="btn btn-danger" onclick="location.href '@Url.Action("ExportPDF","Card")'">PRINT PDF</button>
-    <button type="button" class="btn btn-success" onclick="location.href '@Url.Action("ExportExcel","Report")'">PRINT EXCEL</button>*@
-@Html.ActionLink("PRINT PDF", "ExportPDF", "Card")
-@Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report")
-<br />
-<br />
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>

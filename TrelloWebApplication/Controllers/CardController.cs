@@ -15,13 +15,23 @@ using TrelloWebApplication.Utiliti;
 
 namespace TrelloWebApplication.Controllers
 {
+
     public class CardController : Controller
     {
         List<Card> model = PopolateModel.Popola();
         public ActionResult Index()
         {
-            var model = PopolateModel.Popola();
+             
             return View(model);
+        }
+
+        public ActionResult ExportPDF()
+        {
+            ActionAsPdf result = new ActionAsPdf("Index")
+            {
+                FileName = Server.MapPath("../Content/Details.pdf")
+            };
+            return result;
         }
 
         public ActionResult Details(string id = null)
@@ -35,16 +45,9 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
+
             return View(card);
         }
 
-        public ActionResult ExportPDF()
-        {
-            return new ActionAsPdf("Index")
-            {
-                FileName = Server.MapPath("../Content/Details.pdf")
-            };
-
-        }
     }
 }
