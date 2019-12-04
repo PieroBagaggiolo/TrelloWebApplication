@@ -6,15 +6,6 @@
 }
 
 <h2>Trello Cards List</h2>
-<p>
-    Lista dell cards presenti nella bacheca di Trello
-</p>
-<p>
-    - Clicca su Details per vedere il loro status, le loro checklist, eventuali scadenze, eventuali allegati e le loro label.
-</p>
-<p>
-    - Per scaricare gli eventuali allegati recarsi su Details e seguire le istruzioni.
-</p>
 <br />
 <table class="table">
     <tr>
@@ -59,3 +50,6 @@
 }
 
 </table>
+
+@Html.ActionLink("PRINT PDF", "ExportPDF", "Report")
+@Html.ActionLink("PRINT EXCEL", "ExportExcel", "Card")
