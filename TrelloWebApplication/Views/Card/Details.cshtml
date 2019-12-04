@@ -96,22 +96,29 @@
         <th>ATTACHMENTS</th>
 
         @if (Model.Attachments != null)
-        {
-            foreach (var att in Model.Attachments)
+        {<td>
+            @foreach (var att in Model.Attachments)
             {
-                <td>
-                    
-                    <a href="https://www.w3schools.com/images/myw3schoolsimage.jpg" download="w3logo">
-                        <div>Prova</div>
-                    </a>
-                    
-                </td>
+                
+                    <table>
+                        <tr>
+                            <td>
+
+                                <a href="@Url.Content(att.Url)" download="@Url.Content(att.Name)">
+                                    @Url.Content(att.Name)
+                                </a>
+
+                            </td>
+                        </tr>
+                    </table>
+                
             }
-        }
-        else
-        {
-            <td>NO ATTACHMENTS</td>
-        }
+        </td>
+         }
+         else
+         {
+               <td>NO ATTACHMENTS</td>
+         }
     </tr>
     <tr>
         <th>
