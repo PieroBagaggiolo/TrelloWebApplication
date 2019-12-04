@@ -62,7 +62,7 @@ namespace TrelloWebApplication.Utiliti
                     card.Due = newData;
                 }
             }
-            
+
          return cardtot;           
         }
 

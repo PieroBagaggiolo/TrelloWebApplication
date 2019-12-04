@@ -58,7 +58,7 @@
                         @*tab secondaria*@
                     <tr>
                         <td style="padding-left: 0px">
-                            · @Html.DisplayFor(modelm => m.Name) -
+                            ï¿½ @Html.DisplayFor(modelm => m.Name) -
                             (@Html.DisplayFor(modelm => m.Color))
                         </td>
                     </tr>
@@ -88,7 +88,7 @@
                         {
                             <tr>
                                 <td>
-                                    · @Html.DisplayFor(modelchk => chk.Name) -
+                                    ï¿½ @Html.DisplayFor(modelchk => chk.Name) -
                                     (@Html.DisplayFor(modelchk => chk.State))
                                 </td>
                             </tr>
@@ -126,6 +126,7 @@
             Expire Time
         </th>
 
+
         @if (Model.Due != null)
         {
             <td>
@@ -143,6 +144,7 @@
 <button type="button" class="btn btn-success" onclick="location.href '@Url.Action("ExportExcel","Report")'">PRINT EXCEL</button>
 <br />
 <br />
+
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>

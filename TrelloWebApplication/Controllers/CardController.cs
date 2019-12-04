@@ -36,7 +36,9 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
+
             return View(card);
         }
+
     }
 }
