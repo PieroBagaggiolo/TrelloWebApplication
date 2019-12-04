@@ -58,7 +58,6 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
-
             ActionAsPdf result = new ActionAsPdf("Details",card)
             {
                 FileName = Server.MapPath("../Content/Details.pdf")

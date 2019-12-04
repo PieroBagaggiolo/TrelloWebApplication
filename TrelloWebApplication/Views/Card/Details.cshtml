@@ -140,13 +140,12 @@
     </tr>
 </table>
 <br />
-<button type="button" class="btn btn-danger" onclick="location.href '@Url.Action("ExportPDF","Report")'">PRINT PDF</button>
-<button type="button" class="btn btn-success" onclick="location.href '@Url.Action("ExportExcel","Report")'">PRINT EXCEL</button>
-<br />
-<br />
-@Html.ActionLink("PRINT PDF", "ExportPDF", new { id = Model.Id })
-@Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report")
 
+@Html.ActionLink("PRINT PDF", "ExportPDFp", new { id = Model.Id }, new { @class="btn btn-danger btn-large"})
+@Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report", new { @class = "btn btn-primary btn-large" })
+
+<br />
+<br />
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
