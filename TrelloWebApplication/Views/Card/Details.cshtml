@@ -1,43 +1,150 @@
-﻿@model TrelloWebApplication.Models.Card
+@model TrelloWebApplication.Models.Card
+<head>
+    <style type="text/css">
+        tr > td, th {
+            padding: 7px 0px 7px 25px;
+        }
 
-<div>
-    <h4>Card</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Closed)
-        </dt>
+        .tabSecondaria tr, td, th {
+            padding: 0 0 0 0;
+        }
+    </style>
+</head>
+@{
+    ViewBag.Title = "Details";
+}
 
-        <dd>
-            @Html.DisplayFor(model => model.Closed)
-        </dd>
+<h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
+<br />
+<table class="table-striped" id="tab1">
+    <tr>
+        <th>
+            ID
+        </th>
+        <td>
+            @Html.DisplayFor(model => model.Id)
+        </td>
+    </tr>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Due)
-        </dt>
+    <tr>
+        <th>
+            STATO
+        </th>
+        @if (Model.Closed == "False")
+        {
+            <td>
+                @Html.DisplayFor(model => model.IdList)
+            </td>
+        }
+        else
+        {
+            <td>
+                CARD ARCHIVIATA
+            </td>
+        }
+    </tr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Due)
-        </dd>
+    <tr>
+        <th>
+            LABEL
+        </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IdList)
-        </dt>
+        @if (Model.Labels.Count > 0)
+        {
+            <td>
+                @foreach (var m in Model.Labels)
+                {
+                    <table>
+                        @*tab secondaria*@
+                    <tr>
+                        <td style="padding-left: 0px">
+                            � @Html.DisplayFor(modelm => m.Name) -
+                            (@Html.DisplayFor(modelm => m.Color))
+                        </td>
+                    </tr>
+                </table>
+            }
+            </td>
+        }
+        else
+        {
+            <td>NO LABELS</td>
+        }
+    </tr>
+    <tr>
+        <th>CHECKLISTS</th>
+        @if (Model.ChekedLists != null)
+        {
+            <td>
+                @foreach (var m in Model.ChekedLists)
+                {
+                    <table class="tabSecondaria">
+                        <tr>
+                            <th>
+                                - @Html.DisplayFor(modelm => m.Name)
+                            </th>
+                        </tr>
+                        @foreach (var chk in m.CheckItems)
+                        {
+                            <tr>
+                                <td>
+                                    � @Html.DisplayFor(modelchk => chk.Name) -
+                                    (@Html.DisplayFor(modelchk => chk.State))
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+            </td>
+        }
+        else
+        {
+            <td style="padding-left:100px">NO CHECKLISTS</td>
+        }
+    </tr>
+    <tr>
+        <th>ATTACHMENTS</th>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdList)
-        </dd>
+        @if (Model.Attachments != null)
+        {
+            foreach (var att in Model.Attachments)
+            {
+                <td>
+                    
+                        <img src="@Url.Content(att.Url)" alt="@att.Name" />
+                    
+                </td>
+            }
+        }
+        else
+        {
+            <td>NO ATTACHMENTS</td>
+        }
+    </tr>
+    <tr>
+        <th>
+            Expire Time
+        </th>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
-</div>
+        @if (Model.Due != null)
+        {
+            <td>
+                @Html.DisplayFor(model => model.Due)
+            </td>
+        }
+        else
+        {
+            <td>No Expire time</td>
+        }
+    </tr>
+</table>
+<br />
+<button type="button" class="btn btn-danger" onclick="location.href '@Url.Action("ExportPDF","Report")'">PRINT PDF</button>
+<button type="button" class="btn btn-success" onclick="location.href '@Url.Action("ExportExcel","Report")'">PRINT EXCEL</button>
+<br />
+<br />
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

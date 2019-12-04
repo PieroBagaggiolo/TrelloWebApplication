@@ -24,9 +24,6 @@ namespace TrelloWebApplication.Utiliti
                         card.IdList = list.Name;
                     }
                 }
-            }
-            foreach (var card in cardtot)
-            {
                 if (card.Badges.Attachments != "0")
                 {
 
@@ -41,8 +38,33 @@ namespace TrelloWebApplication.Utiliti
                     card.ChekedLists = checklist;
 
                 }
+                if (card.Due != null)
+                {
+                    string newData = "";
+                    foreach (var temp in card.Due)
+                    {
+                        if (temp.ToString() == ".")
+                        {
+                            break;
+                        }
+
+                        if (temp.ToString() != "T")
+                        {
+                            newData = newData + temp.ToString();
+                        }
+                        else
+                        {
+                            newData = newData + " Alle ore : ";
+                        }
+
+                    }
+
+                    card.Due = newData;
+                }
             }
+
          return cardtot;           
         }
+
     }
 }
