@@ -6,7 +6,9 @@
 
 <h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
 <br />
+
 <table class="table" id="tb2">
+
     <tr>
         <th id="primo">
             ID
@@ -140,11 +142,13 @@
     </tr>
 </table>
 <br />
-@Html.ActionLink("PRINT PDF", "ExportPDF", "Card", new { @class = "btn btn-danger btn-large" })
-@Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report", new { @class = "btn btn-success btn-large" })
-<br />
-<br />
 
+
+@Html.ActionLink("PRINT PDF", "ExportPDFp", new { id = Model.Id }, new { @class="btn btn-danger btn-large"})
+@Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report", new { @class = "btn btn-success btn-large" })
+
+<br />
+<br />
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
