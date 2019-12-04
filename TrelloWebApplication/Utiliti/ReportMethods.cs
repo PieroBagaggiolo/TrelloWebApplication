@@ -46,6 +46,7 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
             workSheet.Cells[recordIndex, 2].Value = model.Id;
             workSheet.Cells[recordIndex, 3].Value = model.IdList;
+            if (model.Labels.Count > 0)
             foreach (var item in model.Labels)
             {
                 workSheet.Cells[i, 4].Value = item.Name+"("+item.Color+")";
@@ -53,6 +54,8 @@ namespace TrelloWebApplication.Utiliti
             }
             
             i = recordIndex;
+            
+            if (model.ChekedLists != null)
             foreach (var item in model.ChekedLists)
             {
                 workSheet.Cells[i, 5].Value = item.Name;
@@ -61,11 +64,10 @@ namespace TrelloWebApplication.Utiliti
                     
                     workSheet.Cells[i, 6].Value = sol.Name + "(" + sol.State + ")  ";
                     i++;
-                }
-
-                
+                }               
             }
             i = recordIndex;
+            if (model.Attachments != null)
             foreach (var item in model.Attachments)
             {
                 workSheet.Cells[i, 7].Value = item.Name+"Url :("+item.Url+")";
