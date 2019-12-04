@@ -14,6 +14,7 @@ namespace TrelloWebApplication.Utiliti
         public static void ExportSingleExcel(Card model)
         {
             string labels = "";
+            
             foreach (var item in model.Labels)
             {
                 labels = labels + item.Name + "(" + item.Color + ");/";
@@ -41,14 +42,39 @@ namespace TrelloWebApplication.Utiliti
 
             //Corpo della table
             int recordIndex = 3;
+            int i = recordIndex;
             workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
             workSheet.Cells[recordIndex, 2].Value = model.Id;
             workSheet.Cells[recordIndex, 3].Value = model.IdList;
-            workSheet.Cells[recordIndex, 4].Value = labels;
+            if (model.Labels.Count > 0)
+            foreach (var item in model.Labels)
+            {
+                workSheet.Cells[i, 4].Value = item.Name+"("+item.Color+")";
+                i++;
+            }
             
-            workSheet.Cells[recordIndex, 5].Value = model.ChekedLists;
-            workSheet.Cells[recordIndex, 6].Value = model.Attachments;
-            workSheet.Cells[recordIndex, 7].Value = model.Due;
+            i = recordIndex;
+            
+            if (model.ChekedLists != null)
+            foreach (var item in model.ChekedLists)
+            {
+                workSheet.Cells[i, 5].Value = item.Name;
+                foreach (var sol in item.CheckItems)
+                {
+                    
+                    workSheet.Cells[i, 6].Value = sol.Name + "(" + sol.State + ")  ";
+                    i++;
+                }               
+            }
+            i = recordIndex;
+            if (model.Attachments != null)
+            foreach (var item in model.Attachments)
+            {
+                workSheet.Cells[i, 7].Value = item.Name+"Url :("+item.Url+")";
+                i++;
+            }
+            
+            workSheet.Cells[recordIndex, 8].Value = model.Due;
 
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();

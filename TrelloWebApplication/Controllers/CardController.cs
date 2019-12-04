@@ -29,7 +29,7 @@ namespace TrelloWebApplication.Controllers
 
         public ActionResult ExportPDF()
         {
-            ActionAsPdf result = new ActionAsPdf("Details")
+            ActionAsPdf result = new ActionAsPdf("Index")
             {
                 FileName = Server.MapPath("../Content/Details.pdf")
             };
@@ -65,14 +65,7 @@ namespace TrelloWebApplication.Controllers
             ReportMethods.ExportSingleExcel(card);
             return View(card);
         }
-        public ActionResult ExportPDF()
-        {
-            ActionAsPdf result = new ActionAsPdf("Index")
-            {
-                FileName = Server.MapPath("../Content/Details.pdf")
-            };
-            return result;
-        }
+
         public ActionResult ExportPDFp(string id=null)
         {
             Card card = null;
