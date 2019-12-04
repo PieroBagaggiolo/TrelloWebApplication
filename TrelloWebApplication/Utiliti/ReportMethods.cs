@@ -34,11 +34,13 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Cells[1, 3].Value = "STATO";
             workSheet.Cells[1, 4].Value = "LABEL";
             workSheet.Cells[1, 5].Value = "CHECKLIST";
-            workSheet.Cells[1, 6].Value = "ATTACHMENTS";
-            workSheet.Cells[1, 7].Value = "EXPIRE TIME";
+            workSheet.Cells[2, 5].Value = "Titolo";
+            workSheet.Cells[2, 6].Value = "Opzioni";
+            workSheet.Cells[1, 7].Value = "ATTACHMENTS";
+            workSheet.Cells[1, 8].Value = "EXPIRE TIME";
 
-            //CORPO DELLA TABELLA
-            int recordIndex = 2;
+            //Corpo della table
+            int recordIndex = 3;
             workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
             workSheet.Cells[recordIndex, 2].Value = model.Id;
             workSheet.Cells[recordIndex, 3].Value = model.IdList;
