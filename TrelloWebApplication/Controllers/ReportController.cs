@@ -12,8 +12,6 @@ namespace TrelloWebApplication.Controllers
     public class ReportController : Controller
     {
         List<Card> model = PopolateModel.Popola();
-
-
         public ActionResult ExportPDF()
         {
             ActionAsPdf result = new ActionAsPdf("Index")
@@ -23,18 +21,30 @@ namespace TrelloWebApplication.Controllers
             return result;
         }
 
-        public ActionResult ExportExcel(string id = null)
-        {
-            Card card = null;
-            foreach (var item in model)
-            {
-                if (item.Id == id)
-                {
-                    card = item;
-                }
-            }
-            ReportMethods.ExportSingleExcel(card);
-            return View(card);
-        }
+
+
+        //public ActionResult ExportPDF()
+        //{
+        //    ActionAsPdf result = new ActionAsPdf("Index")
+        //    {
+        //        FileName = Server.MapPath("../Content/Details.pdf")
+        //    };
+        //    return result;
+        //}
+
+        //    public ActionResult ExportExcel(string id = null)
+        //    {
+        //        Card card = null;
+        //        foreach (var item in model)
+        //        {
+        //            if (item.Id == id)
+        //            {
+        //                card = item;
+        //            }
+        //        }
+        //        ReportMethods.ExportSingleExcel(card);
+        //        return View(card);
+        //    }
     }
 }
+
