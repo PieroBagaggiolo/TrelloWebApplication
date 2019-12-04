@@ -50,7 +50,7 @@ namespace TrelloWebApplication.Utiliti
             string serie = serializer.Serialize(model);
             return serie;
         }
-        private static string ApiRest(string prov)
+        public static string ApiRest(string prov)
         {
             WebRequest requestObj = WebRequest.Create(prov);
             requestObj.Method = "GET";

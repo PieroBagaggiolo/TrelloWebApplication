@@ -1,24 +1,16 @@
 @model TrelloWebApplication.Models.Card
-<head>
-    <style type="text/css">
-        tr > td, th {
-            padding: 7px 0px 7px 25px;
-        }
 
-        .tabSecondaria tr, td, th {
-            padding: 0 0 0 0;
-        }
-    </style>
-</head>
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
 <br />
-<table class="table-striped" id="tab1">
+
+<table class="table" id="tb2">
+
     <tr>
-        <th>
+        <th id="primo">
             ID
         </th>
         <td>
@@ -56,14 +48,14 @@
                 {
                     <table>
                         @*tab secondaria*@
-                    <tr>
-                        <td style="padding-left: 0px">
-                            � @Html.DisplayFor(modelm => m.Name) -
-                            (@Html.DisplayFor(modelm => m.Color))
-                        </td>
-                    </tr>
-                </table>
-            }
+                        <tr>
+                            <td style="padding-left: 0px">
+                                @Html.DisplayFor(modelm => m.Name) -
+                                (@Html.DisplayFor(modelm => m.Color))
+                            </td>
+                        </tr>
+                    </table>
+                }
             </td>
         }
         else
@@ -88,7 +80,7 @@
                         {
                             <tr>
                                 <td>
-                                    � @Html.DisplayFor(modelchk => chk.Name) -
+                                    @Html.DisplayFor(modelchk => chk.Name) -
                                     (@Html.DisplayFor(modelchk => chk.State))
                                 </td>
                             </tr>
@@ -99,7 +91,7 @@
         }
         else
         {
-            <td style="padding-left:100px">NO CHECKLISTS</td>
+            <td>NO CHECKLISTS</td>
         }
     </tr>
     <tr>
@@ -107,14 +99,24 @@
 
         @if (Model.Attachments != null)
         {
-            foreach (var att in Model.Attachments)
-            {
-                <td>
-                    
-                        <img src="@Url.Content(att.Url)" alt="@att.Name" />
-                    
-                </td>
-            }
+            <td>
+                @foreach (var att in Model.Attachments)
+                {
+
+                    <table>
+                        <tr>
+                            <td>
+
+                                <a href="@Url.Content(att.Url)" download="@Url.Content(att.Name)">
+                                    @Url.Content(att.Name)
+                                </a>
+
+                            </td>
+                        </tr>
+                    </table>
+
+                }
+            </td>
         }
         else
         {
@@ -140,11 +142,13 @@
     </tr>
 </table>
 <br />
-<button type="button" class="btn btn-danger" onclick="location.href '@Url.Action("ExportPDF","Report")'">PRINT PDF</button>
-<button type="button" class="btn btn-success" onclick="location.href '@Url.Action("ExportExcel","Report")'">PRINT EXCEL</button>
-<br />
-<br />
 
+
+@Html.ActionLink("PRINT PDF", "ExportPDFp", new { id = Model.Id }, new { @class="btn btn-danger btn-large"})
+@Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report", new { @class = "btn btn-success btn-large" })
+
+<br />
+<br />
 <p>
     @Html.ActionLink("Back to List", "Index")
 </p>
