@@ -232,9 +232,17 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Card\Index.cshtml" />
     <Content Include="Views\Card\Details.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+<<<<<<< HEAD
+=======
+
+    <Folder Include="Content\img\" />
+    <Folder Include="Views\Report\" />
+
+>>>>>>> df0c4e5458359539ae5a69118e7765a5c056f45c
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

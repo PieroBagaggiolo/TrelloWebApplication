@@ -24,10 +24,6 @@ namespace TrelloWebApplication.Utiliti
                         card.IdList = list.Name;
                     }
                 }
-            }
-            
-            foreach (var card in cardtot)
-            {
                 if (card.Badges.Attachments != "0")
                 {
 
@@ -42,37 +38,33 @@ namespace TrelloWebApplication.Utiliti
                     card.ChekedLists = checklist;
 
                 }
-            }
-
-            foreach (var card in cardtot)
-            {
-                if (card.Due!=null)
+                if (card.Due != null)
                 {
-                    string anno="";
-               
-                    // string p = card.Due.ToString("D");       2019 {3} - {4} 12 {6} - {7} 13 {9}T {10}12: {13}05:00.000Z
+                    string newData = "";
                     foreach (var temp in card.Due)
                     {
-                        if (temp.ToString()==".")
+                        if (temp.ToString() == ".")
                         {
                             break;
                         }
-                       
+
                         if (temp.ToString() != "T")
                         {
-                            anno =anno+ temp.ToString();
+                            newData = newData + temp.ToString();
                         }
                         else
                         {
-                            anno = anno + " Alle ore : ";
+                            newData = newData + " Alle ore : ";
                         }
-                        
+
                     }
 
-                    card.Due = anno;
+                    card.Due = newData;
                 }
             }
+
          return cardtot;           
         }
+
     }
 }
