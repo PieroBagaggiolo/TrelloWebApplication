@@ -5,7 +5,6 @@
     height: 100%;
     background-image: url("/Content/img/sfondo.jpg");
     background-size:cover;
-    color:red;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -62,3 +61,10 @@ a{
     color: white;
 }
 
+#tb1 {
+    width: 38%;
+}
+
+#tb2 {
+    width: 58%;
+}
