@@ -15,7 +15,7 @@
     - Per scaricare gli eventuali allegati recarsi su Details e seguire le istruzioni.
 </p>
 <br />
-<table class="table">
+<table class="table" id="tb1">
     <tr>
         <th>
             Trello cards' names list
@@ -36,7 +36,7 @@
     }
 </table>
 
-@Html.ActionLink("PRINT PDF", "ExportPDF", "Report")
+@Html.ActionLink("PRINT PDF", "ExportPDF", "Card")
 @Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report")
 
 @*<button type="button" class="btn btn-danger" onclick="location.href '@Url.Action("ExportPDF","Report")'">PRINT PDF</button>

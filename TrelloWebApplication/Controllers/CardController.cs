@@ -39,6 +39,14 @@ namespace TrelloWebApplication.Controllers
 
             return View(card);
         }
-
+        public ActionResult ExportPDF()
+        {
+            var p =Api.ApiRest("http://localhost:53250/Card");
+            ActionAsPdf result = new ActionAsPdf(p)
+            {
+                FileName = Server.MapPath("../Content/Details.pdf")
+            };
+            return result;
+        }
     }
 }
