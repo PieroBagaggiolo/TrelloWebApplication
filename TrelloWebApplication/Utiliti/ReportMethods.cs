@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +12,16 @@ namespace TrelloWebApplication.Utiliti
     {
         public static void ExportSingleExcel(Card model)
         {
-            ExcelPackage pack = new ExcelPackage();
-            ExcelWorksheet ws = pack.Workbook.Worksheets.Add("Details");
 
-            ws.Cells["A1"].Value = "ID";
-            ws.Cells["B1"].Value = "Stato";
-            //ws.Cells["C1"].Value = "Label";
-            //ws.Cells["D1"].Value = "Due Date";
-           // ws.Cells["E1"].Value = "CheckList";
-            //int row = 2;
-           // ws.Cells[string.Format("A{0}", row)].Value = model.Id;
-           // ws.Cells[string.Format("B{0}", row)].Value = model.IdList;
-           // ws.Cells[string.Format("C{0}", row)].Value = model.Labels;
-            //ws.Cells
+            //creazione di un foglio EXCEL
+            ExcelPackage ex = new ExcelPackage();
+            var workSheet = ex.Workbook.Worksheets.Add("Sheet1");
+            workSheet.TabColor = System.Drawing.Color.Black;
+            workSheet.DefaultRowHeight = 12;
+            //intestazione
+            workSheet.Row(1).Height = 20;
+            workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(1).Style.Font.Bold = true;
         }
     }
 }
