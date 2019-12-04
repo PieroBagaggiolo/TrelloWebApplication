@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
+using TrelloWebApplication.Controllers;
 
 
 namespace TrelloWebApplication.Controllers
@@ -50,14 +51,19 @@ namespace TrelloWebApplication.Controllers
             return View(card);
         }
 
-        //public ActionResult ExportSinglePDF(string id = null)
-        //{
-
-        //    return new ActionAsPdf("Details")
-        //    {
-        //        FileName = Server.MapPath("../Content/Details.pdf")
-        //    };
-        //}
-
+        public ActionResult ExcelEx(string id = null)
+        {
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+                {
+                    card = item;
+                }
+            }
+            ReportMethods.ExportSingleExcel(card);
+            return View(card);
+        }
     }
+
 }
