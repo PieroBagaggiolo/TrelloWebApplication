@@ -73,6 +73,22 @@ namespace TrelloWebApplication.Utiliti
             }
         }
 
-        public static void ExportList
+        public static void ExportListExcel(List<Card> CardList)
+        {
+            ExcelPackage pack = new ExcelPackage();
+            var ws = pack.Workbook.Worksheets.Add("List");
+            ws.TabColor = System.Drawing.Color.Black;
+            ws.DefaultRowHeight = 12;
+
+            ws.Row(1).Height = 20;
+            ws.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            ws.Row(1).Style.Font.Bold = true;
+
+            ws.Cells[1, 1].Value = "#";
+            ws.Cells[1, 2].Value = "Name";
+
+            int index = 2;
+
+        }
     }
 }
