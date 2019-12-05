@@ -49,11 +49,6 @@ tr > td, th {
     border-radius: 15px;
     opacity: 0.8;
 }   
-/*.table-striped > tbody > tr:nth-of-type(odd)
-{
-     background-color: transparent;
-    border-radius:50%;
-}*/
 a{
     color:white;
 }
@@ -63,7 +58,7 @@ a{
 }
 
 #tb1 {
-    width: 38%;
+    width: 80%;
 }
 
 #tb2 {

@@ -17,6 +17,6 @@ namespace TrelloWebApplication.Models
         public string Name { get; set; }
         public List<Attachment> Attachments { get; set; }
         public List<ChekedList> ChekedLists { get; set; }
-
+        public string CommentTemp { get; set; }
     }
 }

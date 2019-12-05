@@ -1,149 +1,188 @@
 @model TrelloWebApplication.Models.Card
-@{
-    ViewBag.Title = "Details";
-}
-<h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
-<br />
-
-<table class="table" id="tb2">
 
 
-    <tr>
-        <th id="primo">
-            ID
-        </th>
-        <td>
-            @Html.DisplayFor(model => model.Id)
-        </td>
-    </tr>
-    <tr>
-        <th>
-            STATO
-        </th>
-        @if (Model.Closed == "False")
-        {
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    @{ViewBag.Title = "Details";}
+</head>
+
+<body>
+
+
+    <h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
+    <br />
+
+
+    <table class="table" id="tb2">
+
+        <tr>
+            <th id="primo">
+                ID
+            </th>
             <td>
-                @Html.DisplayFor(model => model.IdList)
+
+                @Html.DisplayFor(model => model.Id)
+
             </td>
-        }
-        else
-        {
-            <td>
-                CARD ARCHIVIATA
-            </td>
-        }
-    </tr>
-    <tr>
-        <th>
-            LABEL
-        </th>
+        </tr>
 
-        @if (Model.Labels.Count > 0)
-        {
-            <td>
-                @foreach (var m in Model.Labels)
-                {
-                    <table>
-                        
-                        <tr>
-                            <td style="padding-left: 0px">
-                                @Html.DisplayFor(modelm => m.Name) -
-                                (@Html.DisplayFor(modelm => m.Color))
-                            </td>
-                        </tr>
-                    </table>
-                }
-            </td>
-        }
-        else
-        {
-            <td>NO LABELS</td>
-        }
-    </tr>
-    <tr>
-        <th>CHECKLISTS</th>
-        @if (Model.ChekedLists != null)
-        {
-            <td>
-                @foreach (var m in Model.ChekedLists)
-                {
-                    <table class="tabSecondaria">
-                        <tr>
-                            <th>
-                                - @Html.DisplayFor(modelm => m.Name)
-                            </th>
-                        </tr>
-                        @foreach (var chk in m.CheckItems)
-                        {
+        <tr>
+            <th>
+                STATO
+            </th>
+            @if (Model.Closed == "False")
+            {
+                <td>
+                    @Html.DisplayFor(model => model.IdList)
+                </td>
+            }
+            else
+            {
+                <td>
+                    CARD ARCHIVIATA
+                </td>
+            }
+        </tr>
+
+        <tr>
+            <th>
+                LABEL
+            </th>
+
+            @if (Model.Labels.Count > 0)
+            {
+                <td>
+                    @foreach (var m in Model.Labels)
+                    {
+                        <table>
+                            @*tab secondaria*@
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelchk => chk.Name) -
-                                    (@Html.DisplayFor(modelchk => chk.State))
+                                <td style="padding-left: 0px">
+                                    @Html.DisplayFor(modelm => m.Name) -
+                                    (@Html.DisplayFor(modelm => m.Color))
                                 </td>
                             </tr>
-                        }
-                    </table>
-                }
-            </td>
-        }
-        else
-        {
-            <td>NO CHECKLISTS</td>
-        }
-    </tr>
-    <tr>
-        <th>ATTACHMENTS</th>
-        @if (Model.Attachments != null)
-        {
-            <td>
-                @foreach (var att in Model.Attachments)
-                {
 
-                    <table>
-                        <tr>
-                            <td>
+                        </table>
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO LABELS</td>
+            }
+        </tr>
+        <tr>
+            <th>CHECKLISTS</th>
+            @if (Model.ChekedLists != null)
+            {
+                <td>
+                    @foreach (var m in Model.ChekedLists)
+                    {
+                        <table class="tabSecondaria">
+                            <tr>
+                                <th>
+                                    - @Html.DisplayFor(modelm => m.Name)
+                                </th>
+                            </tr>
+                            @foreach (var chk in m.CheckItems)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelchk => chk.Name) -
+                                        (@Html.DisplayFor(modelchk => chk.State))
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO CHECKLISTS</td>
+            }
+        </tr>
+        <tr>
+            <th>ATTACHMENTS</th>
 
-                                <a href="@Url.Content(att.Url)" download="@Url.Content(att.Name)">
-                                    @Url.Content(att.Name)
-                                </a>
+            @if (Model.Attachments != null)
+            {
+                <td>
+                    @foreach (var att in Model.Attachments)
+                    {
 
-                            </td>
-                        </tr>
-                    </table>
-
-                }
-            </td>
-        }
-        else
-        {
-            <td>NO ATTACHMENTS</td>
-        }
-    </tr>
-    <tr>
-        <th>
-            Expire Time
-        </th>
-
-
-        @if (Model.Due != null)
-        {
-            <td>
-                @Html.DisplayFor(model => model.Due)
-            </td>
-        }
-        else
-        {
-            <td>No Expire time</td>
-        }
-    </tr>
-</table>
-<br />
+                        <table>
+                            <tr>
+                                <td>
 
 
-@Html.ActionLink("PRINT PDF", "ExportPDFp", new { id = Model.Id }, new { @class="btn btn-danger btn-large"})
-@Html.ActionLink("PRINT EXCEL", "ExcelEx", new { id = Model.Id }, new { @class = "btn btn-success btn-large" })
-<br />
-<br />
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                                    <a href="@Url.Content(att.Url)" download="@Url.Content(att.Name)">
+                                        @Url.Content(att.Name)
+                                    </a>
+
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO ATTACHMENTS</td>
+            }
+        </tr>
+        <tr>
+            <th>
+                Expire Time
+            </th>
+
+
+            @if (Model.Due != null)
+            {
+                <td>
+                    @Html.DisplayFor(model => model.Due)
+                </td>
+            }
+            else
+            {
+                <td>No Expire time</td>
+            }
+        </tr>
+    </table>
+
+    <button id="btnCom" type="button" class="btn btn-warning">WRITE A COMMENT</button>
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="input-group" id="AddCom" style="display: none">
+            <span class="input-group-btn">
+                <button class="btn btn-default" id="btnSub" type="submit">ADD COMMENT</button>
+            </span>
+            <input type="text" class="form-control" name="CommentTemp" placeholder="Wite here your comment...">
+        </div>
+    }
+    <br />
+    @Html.ActionLink("PRINT PDF", "ExportPDFp", new { id = Model.Id }, new { @class = "btn btn-danger btn-large" })
+    @Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report", new { @class = "btn btn-success btn-large" })
+
+    <br />
+    <br />
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            }
+        </script>
+    }
+</body>
+

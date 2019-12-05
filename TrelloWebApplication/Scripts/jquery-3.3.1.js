@@ -11,6 +11,12 @@
  *
  * Date: 2018-01-20T17:24Z
  */
+
+$('#btnCom').click(function () {
+    $("#btnCom").hide();
+    $('#AddCom').show();
+});
+
 ( function( global, factory ) {
 
 	"use strict";

@@ -89,6 +89,47 @@ namespace TrelloWebApplication.Controllers
             };
             return result;
         }
+
+        public ActionResult Prova(string id=null, string commentoProva = null)
+        {
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+
+                {
+                    card = item;
+                }
+            }
+             Api.AddComment(commentoProva,card);
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult Details(Card pro)
+        {         
+            
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == pro.Id)
+
+                {
+                    card = item;
+                }
+            }
+            var searchTerm = pro.CommentTemp;
+            if (searchTerm!=null)
+            {
+                Api.AddComment(searchTerm, pro);
+                ViewBag.Message = "Comment added succesfully";
+                return View("Details", card);
+            }
+            ViewBag.Message = "Write something";
+            return View("Details", card);
+        }
+
     }
 
 }

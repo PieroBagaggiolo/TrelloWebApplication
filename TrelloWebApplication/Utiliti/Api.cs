@@ -66,5 +66,25 @@ namespace TrelloWebApplication.Utiliti
             }
             return result;
         }
+
+        public static void AddComment(string comment, Card model)
+        {
+            string url = "https://api.trello.com/1/cards/"+model.Id+"/actions/comments?text="+comment+ "&key=" + key + "&token=" + token;
+            ApiPost(url);
+        }
+
+        public static void ApiPost(string prov)
+        {
+            WebRequest requestObj = WebRequest.Create(prov);
+            requestObj.Method = "POST";
+            HttpWebResponse responseObj = null;
+            responseObj = (HttpWebResponse)requestObj.GetResponse();
+
+            using (Stream stream = responseObj.GetResponseStream())
+            {
+                StreamReader sr = new StreamReader(stream);
+                sr.Close();
+            }
+        }
     }
 }
