@@ -65,21 +65,6 @@ namespace TrelloWebApplication.Controllers
             return result;
         }
 
-        public ActionResult Prova(string id=null, string commentoProva = null)
-        {
-            Card card = null;
-            foreach (var item in model)
-            {
-                if (item.Id == id)
-
-                {
-                    card = item;
-                }
-            }
-             Api.AddComment(commentoProva,card);
-            return View();
-        }
-
 
         [HttpPost]
         public ActionResult Details(Card pro)
