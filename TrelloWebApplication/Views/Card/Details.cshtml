@@ -1,8 +1,10 @@
 @model TrelloWebApplication.Models.Card
 
-@{
-    ViewBag.Title = "Details";
-}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    @{ViewBag.Title = "Details";}
+</head>
+
 
 <h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
 <br />
@@ -141,11 +143,25 @@
         }
     </tr>
 </table>
+
+<button id="btnCom" type="button" class="btn btn-warning">WRITE A COMMENT</button>
 <br />
+<div class="input-group" id="AddCom" style="display: none">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <span class="input-group-btn">
+            <button class="btn btn-default" id="btnSub" type="submit">ADD COMMENT</button>
+        </span>
+        <input type="text" class="form-control" name="CommentTemp" placeholder="Wite here your comment...">
+    }
+    </div>
 
-
-@Html.ActionLink("PRINT PDF", "ExportPDFp", new { id = Model.Id }, new { @class="btn btn-danger btn-large"})
+<br />
+@Html.ActionLink("PRINT PDF", "ExportPDFp", new { id = Model.Id }, new { @class = "btn btn-danger btn-large" })
 @Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report", new { @class = "btn btn-success btn-large" })
+@*@Html.ActionLink("commento", "Prova", new { id = Model.Id, commentoProva = }, new { @class = "btn btn-primary btn-large" })*@
 
 <br />
 <br />
