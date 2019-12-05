@@ -65,6 +65,12 @@ namespace TrelloWebApplication.Controllers
             ReportMethods.ExportSingleExcel(card);
             return View(card);
         }
+        public ActionResult ExcelExIndex()
+        {
+          
+            ReportMethods.ExportExcelTotal();
+            return View();
+        }
 
         public ActionResult ExportPDFp(string id=null)
         {
