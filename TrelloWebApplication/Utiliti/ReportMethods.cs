@@ -55,6 +55,8 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Column(5).AutoFit();
             workSheet.Column(6).AutoFit();
             workSheet.Column(7).AutoFit();
+            workSheet.Column(8).AutoFit();
+            workSheet.Column(9).AutoFit();
 
             string title = "Total";
             CreazioneFile(ex, title);
@@ -76,8 +78,11 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Column(5).AutoFit();
             workSheet.Column(6).AutoFit();
             workSheet.Column(7).AutoFit();
+            workSheet.Column(8).AutoFit();
+            workSheet.Column(9).AutoFit();
 
-            string title = "Details "+model.Name;
+
+            string title = model.Name;
             CreazioneFile(ex, title);
         }
 
@@ -112,6 +117,9 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Row(recordIndex).Height = 20;
             workSheet.Row(recordIndex).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             workSheet.Row(recordIndex).Style.Font.Bold = true;
+            workSheet.Row(recordIndex+1).Height = 15;
+            workSheet.Row(recordIndex+1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(recordIndex+1).Style.Font.Bold = true;
             //Corpo della table
             workSheet.Cells[recordIndex, 1].Value = "#";
             workSheet.Cells[recordIndex, 2].Value = "ID";
@@ -135,6 +143,10 @@ namespace TrelloWebApplication.Utiliti
                     workSheet.Cells[i, 5].Value = item.Name + "(" + item.Color + ")";
                     i++;
                 }
+            else
+            {
+                workSheet.Cells[i, 5].Value = "no Labels";
+            }
 
             i = recordIndex;
 
@@ -149,6 +161,10 @@ namespace TrelloWebApplication.Utiliti
                         i++;
                     }
                 }
+            else
+            {
+                workSheet.Cells[i, 7].Value = "no ChekedLists";
+            }
             i = recordIndex;
             if (model.Attachments != null)
                 foreach (var item in model.Attachments)
@@ -156,6 +172,10 @@ namespace TrelloWebApplication.Utiliti
                     workSheet.Cells[i, 8].Value = item.Name + "Url :(" + item.Url + ")";
                     i++;
                 }
+            else
+            {
+                workSheet.Cells[i, 8].Value = "no Attachments";
+            }
 
             workSheet.Cells[recordIndex, 9].Value = model.Due;
         }
