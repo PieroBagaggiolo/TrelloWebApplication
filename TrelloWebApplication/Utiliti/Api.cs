@@ -18,73 +18,60 @@ namespace TrelloWebApplication.Utiliti
 
         public static List<Card> Card()
         {
-            string cardN = ApiRest(" https://api.trello.com/1/boards/" + idBrod + "/cards?key=" + key + "&token=" + token);
-            string cardArchiviate = ApiRest("https://trello.com/1/boards/" + idBrod + "/cards/closed?key=" + key + "&token=" + token);        
+            string cardN = ChiamtaApi(" https://api.trello.com/1/boards/" + idBrod + "/cards?key=" + key + "&token=" + token,"GET");
+            string cardArchiviate = ChiamtaApi("https://trello.com/1/boards/" + idBrod + "/cards/closed?key=" + key + "&token=" + token,"GET");        
             var Cardtot = serializer.Deserialize<List<Card>>(cardN);
             Cardtot.AddRange(serializer.Deserialize<List<Card>>(cardArchiviate));
             return Cardtot;
         }
         public static List<List> List()
         {
-            string nomeList = ApiRest("https://api.trello.com/1/boards/" + idBrod + "/lists?key=" + key + "&token=" + token);
+            string nomeList = ChiamtaApi("https://api.trello.com/1/boards/" + idBrod + "/lists?key=" + key + "&token=" + token,"GET");
             var listC = serializer.Deserialize<List<List>>(nomeList);
             return listC;
         }
 
         public static List<Attachment> Img(string cardId)
         {
-            string url = ApiRest("https://api.trello.com/1/cards/" + cardId + "/attachments?key=" + key + "&token=" + token);
+            string url = ChiamtaApi("https://api.trello.com/1/cards/" + cardId + "/attachments?key=" + key + "&token=" + token,"GET");
             var allegato = serializer.Deserialize<List<Attachment>>(url);
             return allegato;
         }
 
         public static List<ChekedList> Checked(string cardId)
         {
-            string check = ApiRest("https://api.trello.com/1/cards/" + cardId + "/checklists?key=" + key + "&token=" + token);
+            string check = ChiamtaApi("https://api.trello.com/1/cards/" + cardId + "/checklists?key=" + key + "&token=" + token,"GET");
             var checklist = serializer.Deserialize<List<ChekedList>>(check);
             return checklist;
         }
 
-        public static string Json(Card model)
-        {
-            string serie = serializer.Serialize(model);
-            return serie;
-        }
-        public static string ApiRest(string prov)
-        {
-            WebRequest requestObj = WebRequest.Create(prov);
-            requestObj.Method = "GET";
-            HttpWebResponse responseObj = null;
-            responseObj = (HttpWebResponse)requestObj.GetResponse();
-            string result = null;
+      
 
-            using (Stream stream = responseObj.GetResponseStream())
-            {
-                StreamReader sr = new StreamReader(stream);
-                result = sr.ReadToEnd();
-                sr.Close();
-            }
-            return result;
-        }
 
         public static void AddComment(string comment, Card model)
         {
             string url = "https://api.trello.com/1/cards/"+model.Id+"/actions/comments?text="+comment+ "&key=" + key + "&token=" + token;
-            ApiPost(url);
+            ChiamtaApi(url,"POST");
         }
 
-        public static void ApiPost(string prov)
+        public static string ChiamtaApi(string prov,string metodo)
         {
             WebRequest requestObj = WebRequest.Create(prov);
-            requestObj.Method = "POST";
+            requestObj.Method =metodo;
             HttpWebResponse responseObj = null;
             responseObj = (HttpWebResponse)requestObj.GetResponse();
-
+            string result = null;
             using (Stream stream = responseObj.GetResponseStream())
             {
                 StreamReader sr = new StreamReader(stream);
+                if (metodo=="GET")
+                {
+                    result = sr.ReadToEnd();
+                }
+               
                 sr.Close();
             }
+            return result;
         }
     }
 }

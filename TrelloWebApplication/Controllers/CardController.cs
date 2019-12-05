@@ -90,7 +90,6 @@ namespace TrelloWebApplication.Controllers
             return result;
         }
 
-
         [HttpPost]
         public ActionResult Details(Card pro)
         {         
