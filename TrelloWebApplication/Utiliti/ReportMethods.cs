@@ -55,6 +55,8 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Column(5).AutoFit();
             workSheet.Column(6).AutoFit();
             workSheet.Column(7).AutoFit();
+            workSheet.Column(8).AutoFit();
+            workSheet.Column(9).AutoFit();
 
             string title = "Total";
             CreazioneFile(ex, title);
@@ -79,8 +81,11 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Column(5).AutoFit();
             workSheet.Column(6).AutoFit();
             workSheet.Column(7).AutoFit();
+            workSheet.Column(8).AutoFit();
+            workSheet.Column(9).AutoFit();
 
-            string title = "Details "+model.Name;
+
+            string title = model.Name;
             CreazioneFile(ex, title);
         }
 
@@ -108,6 +113,44 @@ namespace TrelloWebApplication.Utiliti
 
             }
         }
+
+
+        private static void Riempimento(Card model, ExcelWorksheet workSheet,int recordIndex)
+        {
+            //intestazione
+            workSheet.Row(recordIndex).Height = 20;
+            workSheet.Row(recordIndex).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(recordIndex).Style.Font.Bold = true;
+            workSheet.Row(recordIndex+1).Height = 15;
+            workSheet.Row(recordIndex+1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(recordIndex+1).Style.Font.Bold = true;
+            //Corpo della table
+            workSheet.Cells[recordIndex, 1].Value = "#";
+            workSheet.Cells[recordIndex, 2].Value = "ID";
+            workSheet.Cells[recordIndex, 3].Value = "NAME CARD";
+            workSheet.Cells[recordIndex, 4].Value = "STATO";
+            workSheet.Cells[recordIndex, 5].Value = "LABEL";
+            workSheet.Cells[recordIndex, 6].Value = "CHECKLIST";
+            workSheet.Cells[recordIndex+1, 6].Value = "Titolo";
+            workSheet.Cells[recordIndex+1, 7].Value = "Opzioni";
+            workSheet.Cells[recordIndex, 8].Value = "ATTACHMENTS";
+            workSheet.Cells[recordIndex, 9].Value = "EXPIRE TIME";
+            recordIndex += 3;
+            int i = recordIndex;
+            workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
+            workSheet.Cells[recordIndex, 2].Value = model.Id;
+            workSheet.Cells[recordIndex, 3].Value = model.Name;
+            workSheet.Cells[recordIndex, 4].Value = model.IdList;
+            if (model.Labels.Count > 0)
+                foreach (var item in model.Labels)
+                {
+                    workSheet.Cells[i, 5].Value = item.Name + "(" + item.Color + ")";
+                    i++;
+                }
+            else
+            {
+                workSheet.Cells[i, 5].Value = "no Labels";
+            }
 
 
     private static void Riempimento(Card model, ExcelWorksheet workSheet, int recordIndex)
@@ -142,64 +185,24 @@ namespace TrelloWebApplication.Utiliti
 
         i = recordIndex;
 
-        if (model.ChekedLists != null)
-            foreach (var item in model.ChekedLists)
-            {
-                workSheet.Cells[i, 6].Value = item.Name;
-                foreach (var sol in item.CheckItems)
-                {
 
-                    workSheet.Cells[i, 7].Value = sol.Name + "(" + sol.State + ")  ";
+                        workSheet.Cells[i, 7].Value = sol.Name + "(" + sol.State + ")  ";
+                        i++;
+                    }
+                }
+            else
+            {
+                workSheet.Cells[i, 7].Value = "no ChekedLists";
+            }
+            i = recordIndex;
+            if (model.Attachments != null)
+                foreach (var item in model.Attachments)
+                 workSheet.Cells[i, 7].Value = sol.Name + "(" + sol.State + ")  ";
                     i++;
                 }
-            }
-        i = recordIndex;
-        if (model.Attachments != null)
-            foreach (var item in model.Attachments)
+            else
             {
-                workSheet.Cells[i, 8].Value = item.Name + "Url :(" + item.Url + ")";
-                i++;
-            }
-
-        workSheet.Cells[recordIndex, 9].Value = model.Due;
-    }
-        public static void ExportListExcel(List<Card> CardList)
-        {
-            ExcelPackage pack = new ExcelPackage();
-            var ws = pack.Workbook.Worksheets.Add("List");
-            ws.TabColor = System.Drawing.Color.Black;
-            ws.DefaultRowHeight = 12;
-
-            ws.Row(1).Height = 20;
-            ws.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-            ws.Row(1).Style.Font.Bold = true;
-
-            ws.Cells[1, 1].Value = "#";
-            ws.Cells[1, 2].Value = "Name";
-
-            int index = 2;
-            foreach (var item in CardList)
-            {
-                ws.Cells[index, 1].Value = (index - 1).ToString();
-                ws.Cells[index, 2].Value = item.Name;
-                index++;
-            }
-
-            ws.Column(1).AutoFit();
-            ws.Column(2).AutoFit();
-
-            string title = "List";
-            using (var memoryStream = new MemoryStream())
-            {
-
-                HttpContext cor = HttpContext.Current;
-                cor.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                cor.Response.AddHeader("content-disposition", "attachment; filename=" + title + ".xlsx");
-                pack.SaveAs(memoryStream);
-                memoryStream.WriteTo(cor.Response.OutputStream);
-                cor.Response.Flush();
-                cor.Response.End();
-
+                workSheet.Cells[i, 8].Value = "no Attachments";
             }
 
         }
