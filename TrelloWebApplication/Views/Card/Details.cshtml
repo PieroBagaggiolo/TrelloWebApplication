@@ -5,166 +5,176 @@
     @{ViewBag.Title = "Details";}
 </head>
 
+<body>
 
-<h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
-<br />
 
-<table class="table" id="tb2">
+    <h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
+    <br />
 
-    <tr>
-        <th id="primo">
-            ID
-        </th>
-        <td>
-            @Html.DisplayFor(model => model.Id)
-        </td>
-    </tr>
+    <table class="table" id="tb2">
 
-    <tr>
-        <th>
-            STATO
-        </th>
-        @if (Model.Closed == "False")
-        {
+        <tr>
+            <th id="primo">
+                ID
+            </th>
             <td>
-                @Html.DisplayFor(model => model.IdList)
+                @Html.DisplayFor(model => model.Id)
             </td>
-        }
-        else
-        {
-            <td>
-                CARD ARCHIVIATA
-            </td>
-        }
-    </tr>
+        </tr>
 
-    <tr>
-        <th>
-            LABEL
-        </th>
+        <tr>
+            <th>
+                STATO
+            </th>
+            @if (Model.Closed == "False")
+            {
+                <td>
+                    @Html.DisplayFor(model => model.IdList)
+                </td>
+            }
+            else
+            {
+                <td>
+                    CARD ARCHIVIATA
+                </td>
+            }
+        </tr>
 
-        @if (Model.Labels.Count > 0)
-        {
-            <td>
-                @foreach (var m in Model.Labels)
-                {
-                    <table>
-                        @*tab secondaria*@
-                        <tr>
-                            <td style="padding-left: 0px">
-                                @Html.DisplayFor(modelm => m.Name) -
-                                (@Html.DisplayFor(modelm => m.Color))
-                            </td>
-                        </tr>
-                    </table>
-                }
-            </td>
-        }
-        else
-        {
-            <td>NO LABELS</td>
-        }
-    </tr>
-    <tr>
-        <th>CHECKLISTS</th>
-        @if (Model.ChekedLists != null)
-        {
-            <td>
-                @foreach (var m in Model.ChekedLists)
-                {
-                    <table class="tabSecondaria">
-                        <tr>
-                            <th>
-                                - @Html.DisplayFor(modelm => m.Name)
-                            </th>
-                        </tr>
-                        @foreach (var chk in m.CheckItems)
-                        {
+        <tr>
+            <th>
+                LABEL
+            </th>
+
+            @if (Model.Labels.Count > 0)
+            {
+                <td>
+                    @foreach (var m in Model.Labels)
+                    {
+                        <table>
+                            @*tab secondaria*@
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelchk => chk.Name) -
-                                    (@Html.DisplayFor(modelchk => chk.State))
+                                <td style="padding-left: 0px">
+                                    @Html.DisplayFor(modelm => m.Name) -
+                                    (@Html.DisplayFor(modelm => m.Color))
                                 </td>
                             </tr>
-                        }
-                    </table>
-                }
-            </td>
-        }
-        else
-        {
-            <td>NO CHECKLISTS</td>
-        }
-    </tr>
-    <tr>
-        <th>ATTACHMENTS</th>
+                        </table>
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO LABELS</td>
+            }
+        </tr>
+        <tr>
+            <th>CHECKLISTS</th>
+            @if (Model.ChekedLists != null)
+            {
+                <td>
+                    @foreach (var m in Model.ChekedLists)
+                    {
+                        <table class="tabSecondaria">
+                            <tr>
+                                <th>
+                                    - @Html.DisplayFor(modelm => m.Name)
+                                </th>
+                            </tr>
+                            @foreach (var chk in m.CheckItems)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelchk => chk.Name) -
+                                        (@Html.DisplayFor(modelchk => chk.State))
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO CHECKLISTS</td>
+            }
+        </tr>
+        <tr>
+            <th>ATTACHMENTS</th>
 
-        @if (Model.Attachments != null)
-        {
-            <td>
-                @foreach (var att in Model.Attachments)
-                {
+            @if (Model.Attachments != null)
+            {
+                <td>
+                    @foreach (var att in Model.Attachments)
+                    {
 
-                    <table>
-                        <tr>
-                            <td>
+                        <table>
+                            <tr>
+                                <td>
 
-                                <a href="@Url.Content(att.Url)" download="@Url.Content(att.Name)">
-                                    @Url.Content(att.Name)
-                                </a>
+                                    <a href="@Url.Content(att.Url)" download="@Url.Content(att.Name)">
+                                        @Url.Content(att.Name)
+                                    </a>
 
-                            </td>
-                        </tr>
-                    </table>
+                                </td>
+                            </tr>
+                        </table>
 
-                }
-            </td>
-        }
-        else
-        {
-            <td>NO ATTACHMENTS</td>
-        }
-    </tr>
-    <tr>
-        <th>
-            Expire Time
-        </th>
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO ATTACHMENTS</td>
+            }
+        </tr>
+        <tr>
+            <th>
+                Expire Time
+            </th>
 
 
-        @if (Model.Due != null)
-        {
-            <td>
-                @Html.DisplayFor(model => model.Due)
-            </td>
-        }
-        else
-        {
-            <td>No Expire time</td>
-        }
-    </tr>
-</table>
+            @if (Model.Due != null)
+            {
+                <td>
+                    @Html.DisplayFor(model => model.Due)
+                </td>
+            }
+            else
+            {
+                <td>No Expire time</td>
+            }
+        </tr>
+    </table>
 
-<button id="btnCom" type="button" class="btn btn-warning">WRITE A COMMENT</button>
-<br />
-<div class="input-group" id="AddCom" style="display: none">
+    <button id="btnCom" type="button" class="btn btn-warning">WRITE A COMMENT</button>
+    <br />
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-        <span class="input-group-btn">
-            <button class="btn btn-default" id="btnSub" type="submit">ADD COMMENT</button>
-        </span>
-        <input type="text" class="form-control" name="CommentTemp" placeholder="Wite here your comment...">
+        <div class="input-group" id="AddCom" style="display: none">
+            <span class="input-group-btn">
+                <button class="btn btn-default" id="btnSub" type="submit">ADD COMMENT</button>
+            </span>
+            <input type="text" class="form-control" name="CommentTemp" placeholder="Wite here your comment...">
+        </div>
     }
-    </div>
+    <br />
+    @Html.ActionLink("PRINT PDF", "ExportPDFp", new { id = Model.Id }, new { @class = "btn btn-danger btn-large" })
+    @Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report", new { @class = "btn btn-success btn-large" })
 
-<br />
-@Html.ActionLink("PRINT PDF", "ExportPDFp", new { id = Model.Id }, new { @class = "btn btn-danger btn-large" })
-@Html.ActionLink("PRINT EXCEL", "ExportExcel", "Report", new { @class = "btn btn-success btn-large" })
-@*@Html.ActionLink("commento", "Prova", new { id = Model.Id, commentoProva = }, new { @class = "btn btn-primary btn-large" })*@
-
-<br />
-<br />
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <br />
+    <br />
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            }
+        </script>
+    }
+</body>

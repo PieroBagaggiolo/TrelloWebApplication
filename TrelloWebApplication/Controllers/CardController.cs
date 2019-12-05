@@ -94,13 +94,14 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
-            var searchTerm = card.CommentTemp;
+            var searchTerm = pro.CommentTemp;
             if (searchTerm!=null)
             {
                 Api.AddComment(searchTerm, pro);
+                ViewBag.Message = "Comment added succesfully";
                 return View("Details", card);
             }
-
+            ViewBag.Message = "Write something";
             return View("Details", card);
         }
 
