@@ -45,7 +45,7 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Cells[recordIndex, 2].Value = model.Id;
             workSheet.Cells[recordIndex, 3].Value = model.IdList;
             workSheet.Cells[recordIndex, 4].Value = labels;
-            
+
             workSheet.Cells[recordIndex, 5].Value = model.ChekedLists;
             workSheet.Cells[recordIndex, 6].Value = model.Attachments;
             workSheet.Cells[recordIndex, 7].Value = model.Due;
@@ -88,7 +88,29 @@ namespace TrelloWebApplication.Utiliti
             ws.Cells[1, 2].Value = "Name";
 
             int index = 2;
+            foreach (var item in CardList)
+            {
+                ws.Cells[index, 1].Value = (index - 1).ToString();
+                ws.Cells[index, 2].Value = item.Name;
+                index++;
+            }
 
+            ws.Column(1).AutoFit();
+            ws.Column(2).AutoFit();
+
+            string title = "List";
+            using (var memoryStream = new MemoryStream())
+            {
+
+                HttpContext cor = HttpContext.Current;
+                cor.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                cor.Response.AddHeader("content-disposition", "attachment; filename=" + title + ".xlsx");
+                pack.SaveAs(memoryStream);
+                memoryStream.WriteTo(cor.Response.OutputStream);
+                cor.Response.Flush();
+                cor.Response.End();
+
+            }
         }
     }
 }
