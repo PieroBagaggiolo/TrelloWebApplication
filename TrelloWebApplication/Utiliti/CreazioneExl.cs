@@ -15,7 +15,7 @@ namespace TrelloWebApplication.Utiliti
             {
                 HttpContext cur = HttpContext.Current;
                 cur.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                cur.Response.AddHeader("content-disposition", "attachment; filename=" + title + ".xlsx");
+                //cur.Response.AddHeader("content-disposition", "attachment; filename=" + title + ".xlsx");
                 ex.SaveAs(memoryStream);
                 memoryStream.WriteTo(cur.Response.OutputStream);
                 cur.Response.Flush();

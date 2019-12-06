@@ -40,8 +40,6 @@ namespace TrelloWebApplication.Controllers
             return result;
         }
         
-
-
         public ActionResult Details(string id = null)
         {
             Card card = null;

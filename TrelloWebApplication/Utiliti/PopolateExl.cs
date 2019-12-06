@@ -39,7 +39,7 @@ namespace TrelloWebApplication.Utiliti
             if (model.Labels.Count > 0)
                 foreach (var item in model.Labels)
                 {
-                    workSheet.Cells[i, 5].Value = item.Name + "(" + item.Color + ")";
+                    workSheet.Cells[i, 5].Value = item.Name + " (" + item.Color + ")";
                     i++;
                 }
             else
@@ -56,7 +56,7 @@ namespace TrelloWebApplication.Utiliti
                     foreach (var sol in item.CheckItems)
                     {
 
-                        workSheet.Cells[i, 7].Value = sol.Name + "(" + sol.State + ")  ";
+                        workSheet.Cells[i, 7].Value = sol.Name + " (" + sol.State + ")  ";
                         i++;
                     }
                 }
@@ -68,7 +68,7 @@ namespace TrelloWebApplication.Utiliti
             if (model.Attachments != null)
                 foreach (var item in model.Attachments)
                 {
-                    workSheet.Cells[i, 8].Value = item.Name + "Url :(" + item.Url + ")";
+                    workSheet.Cells[i, 8].Value = item.Name + " Url: ( " + item.Url + " )";
                     i++;
                 }
             else

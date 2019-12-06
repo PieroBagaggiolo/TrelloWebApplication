@@ -40,7 +40,7 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Column(9).AutoFit();
 
             string title = "Total";
-            CreazioneFile(ex, title);
+            CreazioneExl.CreazioneFile(ex, title);
             return ex;
         }
 
@@ -64,7 +64,7 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Column(9).AutoFit();
 
             string title = model.Name;
-            CreazioneFile(ex, title);
+            CreazioneExl.CreazioneFile(ex, title);
             return ex;
         }
 

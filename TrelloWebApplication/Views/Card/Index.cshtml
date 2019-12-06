@@ -38,11 +38,11 @@
     }
 </table>
 
-    @Html.ActionLink("PRINT PDF", "ExportPDF", "Card", new { @class = "btn btn-danger btn-large" })
+    @Html.ActionLink("PRINT PDF", "ExportPDF", "Card", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
 
 
 
-    @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", "Card", new { @class = "btn btn-success btn-large" })
+    @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", "Card", new {@id="btnEx",  @class = "btn btn-success btn-large" })
 
 
 

@@ -5,7 +5,6 @@
     height: 100%;
     background-image: url("/Content/img/sfondo.jpg");
     background-size:cover;
-
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -59,8 +58,32 @@ a{
 
 #tb1 {
     width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 #tb2 {
     width: 58%;
+    margin-left: 21%;
+    margin-right: 21%;
+}
+
+h1, h2 {text-align:center;
+    font-size:42px;
+}
+
+p{
+    text-align:center;
+    font-size:16px;
+}
+
+#btnPdf{
+    margin-left: 35%;
+}
+#btnEx{
+    margin-left: 10%;
+}
+
+#btnCom {
+    margin-left: 42%;
 }
