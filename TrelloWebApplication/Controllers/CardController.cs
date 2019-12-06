@@ -1,6 +1,5 @@
 
 ﻿using OfficeOpenXml;
-using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,11 +32,8 @@ namespace TrelloWebApplication.Controllers
 
         public ActionResult ExportPDF()
         {
-            ActionAsPdf result = new ActionAsPdf("Index")
-            {
-                FileName = Server.MapPath("../Content/Details.pdf")
-            };
-            return result;
+            ReportMethods.ExportListPDF();
+            return View("Index", model);
         }
         
 
@@ -71,35 +67,13 @@ namespace TrelloWebApplication.Controllers
         }
         public ActionResult ExcelExIndex()
         {
-          
             ReportMethods.ExportExcelTotal(myApi);
             return View();
         }
 
-        public ActionResult ExportPDFp(string id=null)
-        {
-            Card card = null;
-            foreach (var item in model)
-            {
-                if (item.Id == id)
-
-                {
-                    card = item;
-                }
-            }
-            ActionAsPdf result = new ActionAsPdf("Details",card)
-            {
-                FileName = Server.MapPath("../Content/Details.pdf")
-            };
-            return result;
-        }
-
-
-
         [HttpPost]
         public ActionResult Details(Card pro)
-        {         
-            
+        {
             Card card = null;
             foreach (var item in model)
             {

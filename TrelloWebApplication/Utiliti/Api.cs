@@ -26,43 +26,40 @@ namespace TrelloWebApplication.Utiliti
         }
         public  List<Card> GetCard()
         {
-            string cardN = ChiamtaApi(urlBoards + idBrod + "/cards?key=" + key + "&token=" + token,"GET");
-            string cardArchiviate = ChiamtaApi(urlBoards + idBrod + "/cards/closed?key=" + key + "&token=" + token,"GET");        
+            string cardN = ChiamataApi(urlBoards + idBrod + "/cards?key=" + key + "&token=" + token,"GET");
+            string cardArchiviate = ChiamataApi(urlBoards + idBrod + "/cards/closed?key=" + key + "&token=" + token,"GET");        
             var Cardtot = serializer.Deserialize<List<Card>>(cardN);
             Cardtot.AddRange(serializer.Deserialize<List<Card>>(cardArchiviate));
             return Cardtot;
         }
         public  List<List> GetState()
         {
-            string nomeList = ChiamtaApi(urlBoards + idBrod + "/lists?key=" + key + "&token=" + token,"GET");
+            string nomeList = ChiamataApi(urlBoards + idBrod + "/lists?key=" + key + "&token=" + token,"GET");
             var listC = serializer.Deserialize<List<List>>(nomeList);
             return listC;
         }
 
         public  List<Attachment> GetAttachment(string cardId)
         {
-            string url = ChiamtaApi(urlCard + cardId + "/attachments?key=" + key + "&token=" + token,"GET");
+            string url = ChiamataApi(urlCard + cardId + "/attachments?key=" + key + "&token=" + token,"GET");
             var allegato = serializer.Deserialize<List<Attachment>>(url);
             return allegato;
         }
 
         public  List<ChekedList> GetCheckedList(string cardId)
         {
-            string check = ChiamtaApi(urlCard + cardId + "/checklists?key=" + key + "&token=" + token,"GET");
+            string check = ChiamataApi(urlCard + cardId + "/checklists?key=" + key + "&token=" + token,"GET");
             var checklist = serializer.Deserialize<List<ChekedList>>(check);
             return checklist;
         }
 
-      
-
-
         public  void AddComment(string comment, Card model)
         {
             string url = urlCard + model.Id+"/actions/comments?text="+comment+ "&key=" + key + "&token=" + token;
-            ChiamtaApi(url,"POST");
+            ChiamataApi(url,"POST");
         }
 
-        private static string ChiamtaApi(string prov,string metodo)
+        public static string ChiamataApi(string prov,string metodo)
         {
             WebRequest requestObj = WebRequest.Create(prov);
             requestObj.Method =metodo;

@@ -20,7 +20,6 @@ namespace TrelloServices
             // Set a "base url" or file path so that images, javascript and CSS can be loaded 
             var file = details.RenderHtmlAsPdf("");
             file.SaveAs("details.pdf");
-
         }
     
 

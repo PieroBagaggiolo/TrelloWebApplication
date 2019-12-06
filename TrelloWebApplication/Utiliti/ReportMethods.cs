@@ -1,11 +1,10 @@
 ﻿using OfficeOpenXml;
-using OfficeOpenXml.Style;
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using TrelloWebApplication.Models;
+using IronPdf;
 
 namespace TrelloWebApplication.Utiliti
 {
@@ -28,7 +27,7 @@ namespace TrelloWebApplication.Utiliti
                 PopoateExl.Popola(card, workSheet, recordIndex);
                 recordIndex += 9;
             }
-            
+
 
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();
@@ -79,7 +78,6 @@ namespace TrelloWebApplication.Utiliti
 
         private static void CreazioneFile(ExcelPackage ex, string title)
         {
-      
             using (var memoryStream = new MemoryStream())
             {
 
@@ -93,5 +91,27 @@ namespace TrelloWebApplication.Utiliti
 
             }
         }
+        public static void GeneratePDF()
+        {
+
+        }
+        public static void ExportListPDF()
+        {
+            string code = Api.ChiamataApi("http://localhost:53250/card ", "GET");
+            var List = new HtmlToPdf();
+            var pdf = List.RenderHtmlAsPdf(code);
+            DateTime date = DateTime.Now;
+            var name = "CardList.pdf";
+            pdf.SaveAs(name);
+            
+
+        }
+
+        //public static void ExportDetailsPDF()
+        //{
+        //    HtmlToPdf List = new HtmlToPdf();
+        //    var pdf = List.RenderHtmlAsPdf(code);
+        //    pdf.SaveAs("Details.pdf");
+        //}
     }
 }
