@@ -12,14 +12,13 @@ namespace TrelloWebApplication.Utiliti
     public static class ReportMethods
     {
 
-
         public static void ExportExcelTotal()
         {
             List<Card> model = PopolateModel.Popola();
             //creazione di un foglio EXCEL
-            ExcelPackage ex;
-            ExcelWorksheet workSheet;
-            CreazioneFoglio(out ex, out workSheet);
+            var sheetName = "Foglio1";
+            ExcelPackage ex = CreazioneFoglio2(sheetName);
+            var workSheet = ex.Workbook.Worksheets[sheetName];
             int recordIndex = 1;
             //int chek = 0;
 
@@ -92,6 +91,15 @@ namespace TrelloWebApplication.Utiliti
             workSheet = ex.Workbook.Worksheets.Add("Sheet1");
             workSheet.TabColor = System.Drawing.Color.Black;
             workSheet.DefaultRowHeight = 12;
+        }
+
+        private static ExcelPackage CreazioneFoglio2(string sheetName)
+        {
+            ExcelPackage ex = new ExcelPackage();
+            var worksheet = ex.Workbook.Worksheets.Add(sheetName);
+            worksheet.TabColor = System.Drawing.Color.Black;
+            worksheet.DefaultRowHeight = 12;
+            return ex;
         }
 
         private static void CreazioneFile(ExcelPackage ex, string title)
