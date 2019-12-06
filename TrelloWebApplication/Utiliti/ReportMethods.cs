@@ -99,12 +99,16 @@ namespace TrelloWebApplication.Utiliti
         {
             string code = Api.ChiamataApi("http://localhost:53250/card ", "GET");
             var List = new HtmlToPdf();
+            List.PrintOptions.CreatePdfFormsFromHtml = false;
+            List.PrintOptions.EnableJavaScript = true;
+            List.PrintOptions.CssMediaType = PdfPrintOptions.PdfCssMediaType.Screen;
             var pdf = List.RenderHtmlAsPdf(code);
-            DateTime date = DateTime.Now;
+            
             var name = "CardList.pdf";
             pdf.SaveAs(name);
 
             System.Diagnostics.Process.Start(name);
+            //Renderer.PrintOptions.CssMediaType = PdfPrintOptions.PdfCssMediaType.Print;
         }
 
         //public static void ExportDetailsPDF()
