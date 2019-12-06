@@ -101,7 +101,7 @@ namespace TrelloWebApplication.Utiliti
             var List = new HtmlToPdf();
             List.PrintOptions.CreatePdfFormsFromHtml = false;
             List.PrintOptions.EnableJavaScript = true;
-            List.PrintOptions.CssMediaType = PdfPrintOptions.PdfCssMediaType.Screen;
+            List.PrintOptions.CssMediaType = PdfPrintOptions.PdfCssMediaType.Print;
             var pdf = List.RenderHtmlAsPdf(code);
             
             var name = "CardList.pdf";
