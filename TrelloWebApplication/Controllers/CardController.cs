@@ -16,10 +16,14 @@ using TrelloWebApplication.Controllers;
 
 namespace TrelloWebApplication.Controllers
 {
-
     public class CardController : Controller
     {
-        List<Card> model = PopolateModel.Popola();
+        static string Key = "9936fabac5fdc5f00e46ff3a454e9feb";
+        static string Token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
+        static string IdBoard = "5ddd5dad735c842669b7b819";
+
+        static Api myApi = new Api(Key, Token, IdBoard);
+        List<Card> model = PopolateModel.Popola(myApi);
         
         public ActionResult Index()
         {
@@ -36,6 +40,7 @@ namespace TrelloWebApplication.Controllers
             return result;
         }
         
+
 
         public ActionResult Details(string id = null)
         {
@@ -62,13 +67,14 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
-            ReportMethods.ExportSingleExcel(card);
+            ExcelPackage ex = ReportMethods.ExportSingleExcel(card);
+            CreazioneExl.CreazioneFile(ex, "foglio1");
             return View(card);
         }
         public ActionResult ExcelExIndex()
-        {
-          
-            ReportMethods.ExportExcelTotal();
+        { 
+            ExcelPackage ex = ReportMethods.ExportExcelTotal(myApi);
+            CreazioneExl.CreazioneFile(ex, "foglio1");
             return View();
         }
 
@@ -106,7 +112,7 @@ namespace TrelloWebApplication.Controllers
             var searchTerm = pro.CommentTemp;
             if (searchTerm!=null)
             {
-                Api.AddComment(searchTerm, pro);
+                myApi.AddComment(searchTerm, pro);
                 ViewBag.Message = "Comment added succesfully";
                 return View("Details", card);
             }

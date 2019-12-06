@@ -11,10 +11,10 @@ namespace TrelloWebApplication.Utiliti
 {
     public class PopolateModel
     {
-        public static List<Card> Popola()
+        public static List<Card> Popola(Api myApi)
         {
-            var cardtot = Api.Card();
-            var listC = Api.List();
+            var cardtot = myApi.GetCard();
+            var listC = myApi.GetList();
             foreach (var card in cardtot)
             {
                 foreach (var list in listC)
@@ -27,14 +27,14 @@ namespace TrelloWebApplication.Utiliti
                 if (card.Badges.Attachments != "0")
                 {
 
-                    var allegato = Api.Img(card.Id);
+                    var allegato = myApi.GetAttachment(card.Id);
 
                     card.Attachments = allegato;
                 }
                 int m = Int32.Parse(card.Badges.CheckItems);
                 if (m > 0)
                 {
-                    var checklist = Api.Checked(card.Id);
+                    var checklist = myApi.GetChecked(card.Id);
                     card.ChekedLists = checklist;
 
                 }
