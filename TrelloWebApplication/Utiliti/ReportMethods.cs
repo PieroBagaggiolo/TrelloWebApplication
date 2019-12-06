@@ -11,8 +11,6 @@ namespace TrelloWebApplication.Utiliti
 {
     public static class ReportMethods
     {
-
-
         public static void ExportExcelTotal()
         {
             List<Card> model = PopolateModel.Popola();
@@ -102,7 +100,6 @@ namespace TrelloWebApplication.Utiliti
       
             using (var memoryStream = new MemoryStream())
             {
-
                 HttpContext cur = HttpContext.Current;
                 cur.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                 cur.Response.AddHeader("content-disposition", "attachment; filename=" + title + ".xlsx");
@@ -110,7 +107,6 @@ namespace TrelloWebApplication.Utiliti
                 memoryStream.WriteTo(cur.Response.OutputStream);
                 cur.Response.Flush();
                 cur.Response.End();
-
             }
         }
 
