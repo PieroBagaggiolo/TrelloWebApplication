@@ -61,14 +61,17 @@ namespace TrelloWebApplication.Utiliti
             CreazioneFile(ex, title);
         }
 
-        public static void ExportSingleExcel(Card model)
-        {
-            //creazione di un foglio EXCEL
-            ExcelPackage ex;
-            ExcelWorksheet workSheet;
-            CreazioneFoglio(out ex, out workSheet);
-            int recordIndex = 1;
-            Riempimento(model, workSheet, recordIndex);
+
+            //Corpo della table
+            int recordIndex = 3;
+            workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
+            workSheet.Cells[recordIndex, 2].Value = model.Id;
+            workSheet.Cells[recordIndex, 3].Value = model.IdList;
+            workSheet.Cells[recordIndex, 4].Value = labels;
+
+            workSheet.Cells[recordIndex, 5].Value = model.ChekedLists;
+            workSheet.Cells[recordIndex, 6].Value = model.Attachments;
+            workSheet.Cells[recordIndex, 7].Value = model.Due;
 
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();
@@ -119,6 +122,7 @@ namespace TrelloWebApplication.Utiliti
             }
         }
 
+
         private static void Riempimento(Card model, ExcelWorksheet workSheet,int recordIndex)
         {
             //intestazione
@@ -156,14 +160,39 @@ namespace TrelloWebApplication.Utiliti
                 workSheet.Cells[i, 5].Value = "no Labels";
             }
 
-            i = recordIndex;
 
-            if (model.ChekedLists != null)
-                foreach (var item in model.ChekedLists)
-                {
-                    workSheet.Cells[i, 6].Value = item.Name;
-                    foreach (var sol in item.CheckItems)
-                    {
+    private static void Riempimento(Card model, ExcelWorksheet workSheet, int recordIndex)
+    {
+        //intestazione
+        workSheet.Row(recordIndex).Height = 20;
+        workSheet.Row(recordIndex).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        workSheet.Row(recordIndex).Style.Font.Bold = true;
+        //Corpo della table
+        workSheet.Cells[recordIndex, 1].Value = "#";
+        workSheet.Cells[recordIndex, 2].Value = "ID";
+        workSheet.Cells[recordIndex, 3].Value = "NAME CARD";
+        workSheet.Cells[recordIndex, 4].Value = "STATO";
+        workSheet.Cells[recordIndex, 5].Value = "LABEL";
+        workSheet.Cells[recordIndex, 6].Value = "CHECKLIST";
+        workSheet.Cells[recordIndex + 1, 6].Value = "Titolo";
+        workSheet.Cells[recordIndex + 1, 7].Value = "Opzioni";
+        workSheet.Cells[recordIndex, 8].Value = "ATTACHMENTS";
+        workSheet.Cells[recordIndex, 9].Value = "EXPIRE TIME";
+        recordIndex += 3;
+        int i = recordIndex;
+        workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
+        workSheet.Cells[recordIndex, 2].Value = model.Id;
+        workSheet.Cells[recordIndex, 3].Value = model.Name;
+        workSheet.Cells[recordIndex, 4].Value = model.IdList;
+        if (model.Labels.Count > 0)
+            foreach (var item in model.Labels)
+            {
+                workSheet.Cells[i, 5].Value = item.Name + "(" + item.Color + ")";
+                i++;
+            }
+
+        i = recordIndex;
+
 
                         workSheet.Cells[i, 7].Value = sol.Name + "(" + sol.State + ")  ";
                         i++;
@@ -176,8 +205,7 @@ namespace TrelloWebApplication.Utiliti
             i = recordIndex;
             if (model.Attachments != null)
                 foreach (var item in model.Attachments)
-                {
-                    workSheet.Cells[i, 8].Value = item.Name + "Url :(" + item.Url + ")";
+                 workSheet.Cells[i, 7].Value = sol.Name + "(" + sol.State + ")  ";
                     i++;
                 }
             else
@@ -185,7 +213,6 @@ namespace TrelloWebApplication.Utiliti
                 workSheet.Cells[i, 8].Value = "no Attachments";
             }
 
-            workSheet.Cells[recordIndex, 9].Value = model.Due;
         }
     }
 }
