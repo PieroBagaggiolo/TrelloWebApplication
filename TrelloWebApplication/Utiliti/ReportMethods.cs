@@ -103,8 +103,8 @@ namespace TrelloWebApplication.Utiliti
             DateTime date = DateTime.Now;
             var name = "CardList.pdf";
             pdf.SaveAs(name);
-            
 
+            System.Diagnostics.Process.Start(name);
         }
 
         //public static void ExportDetailsPDF()
