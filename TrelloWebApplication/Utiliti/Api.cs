@@ -9,52 +9,72 @@ using TrelloWebApplication.Models;
 
 namespace TrelloWebApplication.Utiliti
 {
-    public class Api
+    public  class Api
     {
-        static string key = "9936fabac5fdc5f00e46ff3a454e9feb";
-        static string token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
-        static string idBrod = "5ddd5dad735c842669b7b819";
-        static JavaScriptSerializer serializer = new JavaScriptSerializer();
+        public  string key ;
+        public  string token ;
+        public  string idBrod;
+        public string IdWebhook;
+        public string urlBoards = " https://api.trello.com/1/boards/";
+        public string urlCard = "https://api.trello.com/1/cards/";
+        public static JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-        public static List<Card> Card()
+        public  Api(string key, string token, string idBrod)
         {
-            string cardN = ChiamtaApi(" https://api.trello.com/1/boards/" + idBrod + "/cards?key=" + key + "&token=" + token,"GET");
-            string cardArchiviate = ChiamtaApi("https://trello.com/1/boards/" + idBrod + "/cards/closed?key=" + key + "&token=" + token,"GET");        
+            this.key = key;
+            this.idBrod = idBrod;
+            this.token = token;
+            //var Id = CreateWebhook();
+            //foreach (var item in Id)
+            //{
+            //    this.IdWebhook = item.Id;
+            //}
+        }
+        public  List<Card> GetCard()
+        {
+            string cardN = ChiamtaApi(urlBoards + idBrod + "/cards?key=" + key + "&token=" + token,"GET");
+            string cardArchiviate = ChiamtaApi(urlBoards + idBrod + "/cards/closed?key=" + key + "&token=" + token,"GET");        
             var Cardtot = serializer.Deserialize<List<Card>>(cardN);
             Cardtot.AddRange(serializer.Deserialize<List<Card>>(cardArchiviate));
             return Cardtot;
         }
-        public static List<List> List()
+        public  List<List> GetState()
         {
-            string nomeList = ChiamtaApi("https://api.trello.com/1/boards/" + idBrod + "/lists?key=" + key + "&token=" + token,"GET");
+            string nomeList = ChiamtaApi(urlBoards + idBrod + "/lists?key=" + key + "&token=" + token,"GET");
             var listC = serializer.Deserialize<List<List>>(nomeList);
             return listC;
         }
 
-        public static List<Attachment> Img(string cardId)
+        public  List<Attachment> GetAttachment(string cardId)
         {
-            string url = ChiamtaApi("https://api.trello.com/1/cards/" + cardId + "/attachments?key=" + key + "&token=" + token,"GET");
+            string url = ChiamtaApi(urlCard + cardId + "/attachments?key=" + key + "&token=" + token,"GET");
             var allegato = serializer.Deserialize<List<Attachment>>(url);
             return allegato;
         }
 
-        public static List<ChekedList> Checked(string cardId)
+        public  List<ChekedList> GetCheckedList(string cardId)
         {
-            string check = ChiamtaApi("https://api.trello.com/1/cards/" + cardId + "/checklists?key=" + key + "&token=" + token,"GET");
+            string check = ChiamtaApi(urlCard + cardId + "/checklists?key=" + key + "&token=" + token,"GET");
             var checklist = serializer.Deserialize<List<ChekedList>>(check);
             return checklist;
         }
 
       
-
-
-        public static void AddComment(string comment, Card model)
+        public List<Webhook> CreateWebhook()
         {
-            string url = "https://api.trello.com/1/cards/"+model.Id+"/actions/comments?text="+comment+ "&key=" + key + "&token=" + token;
+            string url = ("https://api.trello.com/1/webhooks/?idModel=" + idBrod + "&description='MyW'&callbackURL=http://localhost:53250/");
+            string webh = ChiamtaApi(url, "POST");
+            var webhook = serializer.Deserialize<List<Webhook>>(webh);
+            return webhook;
+        }
+
+        public  void AddComment(string comment, Card model)
+        {
+            string url = urlCard + model.Id+"/actions/comments?text="+comment+ "&key=" + key + "&token=" + token;
             ChiamtaApi(url,"POST");
         }
 
-        public static string ChiamtaApi(string prov,string metodo)
+        private static string ChiamtaApi(string prov,string metodo)
         {
             WebRequest requestObj = WebRequest.Create(prov);
             requestObj.Method =metodo;
@@ -64,11 +84,11 @@ namespace TrelloWebApplication.Utiliti
             using (Stream stream = responseObj.GetResponseStream())
             {
                 StreamReader sr = new StreamReader(stream);
-                if (metodo=="GET")
-                {
-                    result = sr.ReadToEnd();
-                }
-               
+                //if (metodo=="GET")
+                //{
+                //    result = sr.ReadToEnd();
+                //}
+                result = sr.ReadToEnd();
                 sr.Close();
             }
             return result;

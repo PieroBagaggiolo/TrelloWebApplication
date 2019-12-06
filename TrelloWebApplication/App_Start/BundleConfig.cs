@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace TrelloWebApplication
+namespace TrelloWebApp
 {
     public class BundleConfig
     {

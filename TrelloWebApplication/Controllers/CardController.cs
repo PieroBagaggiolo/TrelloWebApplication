@@ -9,21 +9,25 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
-using TrelloWebApplication.Controllers;
-
 
 namespace TrelloWebApplication.Controllers
 {
 
     public class CardController : Controller
     {
-        List<Card> model = PopolateModel.Popola();
-        
+
+        static string key = "9936fabac5fdc5f00e46ff3a454e9feb";
+        static string token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
+        static string idBrod = "5ddd5dad735c842669b7b819";
+        static Api myApi = new Api(key, token, idBrod);
+        List<Card> model = PopolateModel.Popola(myApi);
+
         public ActionResult Index()
         {
-             
+           
             return View(model);
         }
 
@@ -68,7 +72,7 @@ namespace TrelloWebApplication.Controllers
         public ActionResult ExcelExIndex()
         {
           
-            ReportMethods.ExportExcelTotal();
+            ReportMethods.ExportExcelTotal(myApi);
             return View();
         }
 
@@ -108,7 +112,7 @@ namespace TrelloWebApplication.Controllers
             var searchTerm = pro.CommentTemp;
             if (searchTerm!=null)
             {
-                Api.AddComment(searchTerm, pro);
+                myApi.AddComment(searchTerm, pro);
                 ViewBag.Message = "Comment added succesfully";
                 return View("Details", card);
             }

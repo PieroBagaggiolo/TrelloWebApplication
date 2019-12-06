@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace TrelloWebApplication
+namespace TrelloWebApp
 {
     public class FilterConfig
     {
