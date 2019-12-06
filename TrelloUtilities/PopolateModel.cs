@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Script.Serialization;
+using System.Text;
+using System.Threading.Tasks;
 using TrelloWebApplication.Models;
 
-namespace TrelloWebApplication.Utiliti
+namespace TrelloUtilities
 {
     public class PopolateModel
     {
@@ -63,7 +61,7 @@ namespace TrelloWebApplication.Utiliti
                 }
             }
 
-         return cardtot;           
+            return cardtot;
         }
 
     }

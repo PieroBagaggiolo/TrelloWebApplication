@@ -10,9 +10,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using TrelloWebApplication.Models;
-using TrelloWebApplication.Utiliti;
 using TrelloWebApplication.Controllers;
-
+using TrelloUtilities;
 
 namespace TrelloWebApplication.Controllers
 {

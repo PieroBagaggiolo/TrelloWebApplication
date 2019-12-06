@@ -1,13 +1,12 @@
-﻿using OfficeOpenXml;
-using OfficeOpenXml.Style;
-using System;
-using System.IO;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
+using OfficeOpenXml;
 using TrelloWebApplication.Models;
 
-namespace TrelloWebApplication.Utiliti
+namespace TrelloUtilities
 {
     public static class ReportMethods
     {
@@ -24,11 +23,11 @@ namespace TrelloWebApplication.Utiliti
 
             foreach (var card in model)
             {
-               
+
                 PopolateExl.Riempimento(card, workSheet, recordIndex);
                 recordIndex += 9;
             }
-            
+
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();
             workSheet.Column(3).AutoFit();

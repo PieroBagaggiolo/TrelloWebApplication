@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 
-namespace TrelloWebApplication.Utiliti
+namespace TrelloUtilities
 {
     public static class CreazioneExl
     {
@@ -23,5 +25,5 @@ namespace TrelloWebApplication.Utiliti
             }
         }
 
-    }
+    }   
 }
