@@ -19,10 +19,18 @@ namespace TrelloWebApplication.Utiliti
             {
                 foreach (var list in listC)
                 {
-                    if (list.Id == card.IdList)
+                    if (card.Closed=="False")
                     {
-                        card.IdList = list.Name;
+                        if (list.Id == card.IdList)
+                        {
+                            card.IdList = list.Name;
+                        }
                     }
+                    else
+                    {
+                        card.IdList = "archiviata";
+                    }
+                       
                 }
                 if (card.Badges.Attachments != "0")
                 {
@@ -47,7 +55,6 @@ namespace TrelloWebApplication.Utiliti
                         {
                             break;
                         }
-
                         if (temp.ToString() != "T")
                         {
                             newData = newData + temp.ToString();
@@ -56,13 +63,10 @@ namespace TrelloWebApplication.Utiliti
                         {
                             newData = newData + " Alle ore : ";
                         }
-
                     }
-
                     card.Due = newData;
                 }
             }
-
             return cardtot;
         }
 

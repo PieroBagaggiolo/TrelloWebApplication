@@ -1,19 +1,11 @@
 
-﻿using OfficeOpenXml;
+using OfficeOpenXml;
 using Rotativa;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using TrelloWebApplication.Models;
-using TrelloWebApplication.Controllers;
 using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
-using IronPdf;
 
 namespace TrelloWebApplication.Controllers
 {
