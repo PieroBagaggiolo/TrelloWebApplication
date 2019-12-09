@@ -24,7 +24,6 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna una view</returns>
         public ActionResult Index()
         {
-             
             return View(model);
         }
         /// <summary>
