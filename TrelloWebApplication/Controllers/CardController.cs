@@ -98,17 +98,6 @@ namespace TrelloWebApplication.Controllers
         }
 
 
-        public void ExportDetPDF(string url, string name)
-        {
-            var List = new HtmlToPdf();
-            List.PrintOptions.CreatePdfFormsFromHtml = false;
-            List.PrintOptions.EnableJavaScript = true;
-            List.PrintOptions.CssMediaType = PdfPrintOptions.PdfCssMediaType.Screen;
-            var pdf = List.RenderHtmlAsPdf(url);           
-            pdf.SaveAs(name);
-            System.Diagnostics.Process.Start(name);
-        }
-
     public ActionResult ExportPDFDetalis(string id=null)
         {
             Card card = null;
