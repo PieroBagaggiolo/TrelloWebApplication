@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TrelloWebApplication.Models.Card>
+@{
+    ViewBag.Title = "pdf";
+}
+@{
+    Layout = "";
+}
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            margin-left: 33%;
+        }
+
+        table, th, td, tr {
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+</head>
+<h1>PDF Cards List </h1>
+<table class="table" id="tb1"  borde="1">
+    <tr>
+        <th colspan="2">
+            TRELLO'S CARDS LIST
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                Stato (@Html.DisplayFor(modelItem => item.IdList))
+            </td>
+        </tr>
+    }
+</table>
