@@ -69,13 +69,6 @@ namespace TrelloWebApplication.Utiliti
         //    return webhook;
         //}
 
-        public string html(string aggiunta)
-        {
-            string url = "http://localhost:53250/card/Pdf" + aggiunta;
-            string ris = ChiamtaApi(url, "GET");
-            return ris;
-        }
-
         public void AddComment(string comment, Card model)
         {
             string url = urlCard + model.Id + "/actions/comments?text=" + comment + "&key=" + key + "&token=" + token;

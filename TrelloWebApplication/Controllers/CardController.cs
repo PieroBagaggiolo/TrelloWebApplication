@@ -38,18 +38,13 @@ namespace TrelloWebApplication.Controllers
         }
 
 
-        public ActionResult ExportPDF()
+        public ActionResult ExportPDFIndex()
         {
-            string url = myApi.html("Index");
             ActionAsPdf result = new ActionAsPdf("PdfIndex",model)
             {
                 FileName = Server.MapPath("../Content/Details.pdf")
             };
             return result;
-
-
-            //ExportDetPDF(url,"Index.pdf");
-            //return View("Index", model);
         }
         
         public ActionResult Details(string id = null)
@@ -114,7 +109,7 @@ namespace TrelloWebApplication.Controllers
             System.Diagnostics.Process.Start(name);
         }
 
-    public ActionResult ExportPDFp(string id=null)
+    public ActionResult ExportPDFDetalis(string id=null)
         {
             Card card = null;
             foreach (var item in model)
@@ -125,9 +120,11 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
-            string url = myApi.html("Details/" + card.Id);
-            ExportDetPDF(url, "dettagliCard.pdf");
-            return View("Details",card);
+            ActionAsPdf result = new ActionAsPdf("PdfDetails", card)
+            {
+                FileName = Server.MapPath("../Content/Details.pdf")
+            };
+            return result;
         }
 
         [HttpPost]
