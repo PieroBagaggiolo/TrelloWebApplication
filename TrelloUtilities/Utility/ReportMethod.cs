@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using OfficeOpenXml;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
@@ -40,7 +42,7 @@ namespace TrelloUtilities
             workSheet.Column(9).AutoFit();
 
             string title = "Total";
-            CreazioneExl.CreazioneFile(ex, title);
+            //CreazioneFile(ex, title);
             return ex;
         }
 
@@ -64,7 +66,6 @@ namespace TrelloUtilities
             workSheet.Column(9).AutoFit();
 
             string title = model.Name;
-            CreazioneExl.CreazioneFile(ex, title);
             return ex;
         }
 
@@ -75,6 +76,19 @@ namespace TrelloUtilities
             workSheet.TabColor = System.Drawing.Color.Black;
             workSheet.DefaultRowHeight = 12;
             return ex;
+        }
+        public static void CreazioneFile(ExcelPackage ex, string title)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                HttpContext cur = HttpContext.Current;
+                cur.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                cur.Response.AddHeader("content-disposition", "attachment ; filename=" + title + ".xlsx");
+                ex.SaveAs(memoryStream);
+                memoryStream.WriteTo(cur.Response.OutputStream);
+                cur.Response.Flush();
+                cur.Response.End();
+            }
         }
 
     }

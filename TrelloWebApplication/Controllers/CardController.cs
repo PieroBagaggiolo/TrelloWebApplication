@@ -87,13 +87,13 @@ namespace TrelloWebApplication.Controllers
                 }
             }
             ExcelPackage ex = ReportMethods.ExportSingleExcel(card);
-            CreazioneExl.CreazioneFile(ex, "foglio1.xlsx");
+            CreazioneExl.CreazioneFile(ex, "Details");
             return View(card);
         }
         public ActionResult ExcelExIndex()
         { 
             ExcelPackage ex = ReportMethods.ExportExcelTotal(myApi);
-            CreazioneExl.CreazioneFile(ex, "foglio1.xlsx");
+            CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
 
