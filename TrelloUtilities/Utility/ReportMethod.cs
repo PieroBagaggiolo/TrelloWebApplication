@@ -64,7 +64,6 @@ namespace TrelloUtilities
             workSheet.Column(7).AutoFit();
             workSheet.Column(8).AutoFit();
             workSheet.Column(9).AutoFit();
-
             string title = model.Name;
             return ex;
         }
