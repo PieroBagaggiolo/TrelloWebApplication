@@ -76,19 +76,7 @@ namespace TrelloUtilities
             workSheet.DefaultRowHeight = 12;
             return ex;
         }
-        public static void CreazioneFile(ExcelPackage ex, string title)
-        {
-            using (var memoryStream = new MemoryStream())
-            {
-                HttpContext cur = HttpContext.Current;
-                cur.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                cur.Response.AddHeader("content-disposition", "attachment ; filename=" + title + ".xlsx");
-                ex.SaveAs(memoryStream);
-                memoryStream.WriteTo(cur.Response.OutputStream);
-                cur.Response.Flush();
-                cur.Response.End();
-            }
-        }
+        
 
     }
 }
