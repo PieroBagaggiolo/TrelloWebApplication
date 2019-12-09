@@ -61,8 +61,11 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Column(7).AutoFit();
             workSheet.Column(8).AutoFit();
             workSheet.Column(9).AutoFit();
+<<<<<<< Updated upstream:TrelloWebApplication/Utiliti/ReportMethods.cs
 
 
+=======
+>>>>>>> Stashed changes:TrelloUtilities/Utility/ReportMethod.cs
             string title = model.Name;
             CreazioneFile(ex, title);
         }
