@@ -10,34 +10,58 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using TrelloWebApplication.Models;
-using TrelloWebApplication.Utiliti;
 using TrelloWebApplication.Controllers;
-
+using TrelloUtilities;
+using TrelloWebApplication.Utiliti;
+using IronPdf;
 
 namespace TrelloWebApplication.Controllers
 {
-
     public class CardController : Controller
     {
-        List<Card> model = PopolateModel.Popola();
+        static string Key = "9936fabac5fdc5f00e46ff3a454e9feb";
+        static string Token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
+        static string IdBoard = "5ddd5dad735c842669b7b819";
+
+        static Api myApi = new Api(Key, Token, IdBoard);
+        List<Card> model = PopolateModel.Popola(myApi);
         
         public ActionResult Index()
         {
              
             return View(model);
         }
-
-        public ActionResult ExportPDF()
+        public ActionResult PdfIndex()
         {
-            ActionAsPdf result = new ActionAsPdf("Index")
+
+            return View(model);
+        }
+
+
+        public ActionResult ExportPDFIndex()
+        {
+            ActionAsPdf result = new ActionAsPdf("PdfIndex",model)
             {
                 FileName = Server.MapPath("../Content/Details.pdf")
             };
             return result;
         }
         
-
         public ActionResult Details(string id = null)
+        {
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+
+                {
+                    card = item;
+                }
+            }
+
+            return View(card);
+        }
+        public ActionResult PdfDetails(string id = null)
         {
             Card card = null;
             foreach (var item in model)
@@ -62,17 +86,19 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
-            ReportMethods.ExportSingleExcel(card);
+            ExcelPackage ex = ReportMethods.ExportSingleExcel(card);
+            CreazioneExl.CreazioneFile(ex, "Details");
             return View(card);
         }
         public ActionResult ExcelExIndex()
-        {
-          
-            ReportMethods.ExportExcelTotal();
+        { 
+            ExcelPackage ex = ReportMethods.ExportExcelTotal(myApi);
+            CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
 
-        public ActionResult ExportPDFp(string id=null)
+
+    public ActionResult ExportPDFDetalis(string id=null)
         {
             Card card = null;
             foreach (var item in model)
@@ -83,12 +109,37 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
-            ActionAsPdf result = new ActionAsPdf("Details",card)
+            ActionAsPdf result = new ActionAsPdf("PdfDetails", card)
             {
                 FileName = Server.MapPath("../Content/Details.pdf")
             };
             return result;
         }
+
+        [HttpPost]
+        public ActionResult Details(Card pro)
+        {         
+            
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == pro.Id)
+
+                {
+                    card = item;
+                }
+            }
+            var searchTerm = pro.CommentTemp;
+            if (searchTerm!=null)
+            {
+                myApi.AddComment(searchTerm, pro);
+                ViewBag.Message = "Comment added succesfully";
+                return View("Details", card);
+            }
+            ViewBag.Message = "Write something";
+            return View("Details", card);
+        }
+
     }
 
 }

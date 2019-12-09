@@ -1,34 +1,35 @@
-﻿using OfficeOpenXml;
-using OfficeOpenXml.Style;
-using System;
-using System.IO;
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
+using OfficeOpenXml;
 using TrelloWebApplication.Models;
+using TrelloWebApplication.Utiliti;
 
-namespace TrelloWebApplication.Utiliti
+namespace TrelloUtilities
 {
     public static class ReportMethods
     {
 
-        public static void ExportExcelTotal(Api myApi)
+        public static ExcelPackage ExportExcelTotal(Api myApi)
         {
             List<Card> model = PopolateModel.Popola(myApi);
             //creazione di un foglio EXCEL
-            var sheetName = "Foglio";
-            ExcelPackage ex = CreazioneFoglio(sheetName);
-            var workSheet = ex.Workbook.Worksheets[sheetName];
+            var SheetName = "Foglio";
+            ExcelPackage ex = CreazioneFoglio(SheetName);
+            var workSheet = ex.Workbook.Worksheets[SheetName];
             int recordIndex = 1;
             //int chek = 0;
 
             foreach (var card in model)
             {
 
-                PopoateExl.Popola(card, workSheet, recordIndex);
+                PopolateExl.Riempimento(card, workSheet, recordIndex);
                 recordIndex += 9;
             }
-            
 
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();
@@ -41,17 +42,18 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Column(9).AutoFit();
 
             string title = "Total";
-            CreazioneFile(ex, title);
+            //CreazioneFile(ex, title);
+            return ex;
         }
 
-        public static void ExportSingleExcel(Card model)
+        public static ExcelPackage ExportSingleExcel(Card model)
         {
             //creazione di un foglio EXCEL
-            var sheetName = "Foglio";
-            ExcelPackage ex = CreazioneFoglio(sheetName);
+            var SheetName = "Foglio";
+            ExcelPackage ex = CreazioneFoglio(SheetName);
+            var workSheet = ex.Workbook.Worksheets[SheetName];
             int recordIndex = 1;
-            var workSheet = ex.Workbook.Worksheets[sheetName];
-            PopoateExl.Popola(model, workSheet, recordIndex);
+            PopolateExl.Riempimento(model, workSheet, recordIndex);
 
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();
@@ -62,36 +64,31 @@ namespace TrelloWebApplication.Utiliti
             workSheet.Column(7).AutoFit();
             workSheet.Column(8).AutoFit();
             workSheet.Column(9).AutoFit();
-
-
             string title = model.Name;
-            CreazioneFile(ex, title);
+            return ex;
         }
 
         private static ExcelPackage CreazioneFoglio(string sheetName)
         {
             ExcelPackage ex = new ExcelPackage();
-            var worksheet = ex.Workbook.Worksheets.Add(sheetName);
-            worksheet.TabColor = System.Drawing.Color.Black;
-            worksheet.DefaultRowHeight = 12;
+            var workSheet = ex.Workbook.Worksheets.Add(sheetName);
+            workSheet.TabColor = System.Drawing.Color.Black;
+            workSheet.DefaultRowHeight = 12;
             return ex;
         }
-
-        private static void CreazioneFile(ExcelPackage ex, string title)
+        public static void CreazioneFile(ExcelPackage ex, string title)
         {
-      
             using (var memoryStream = new MemoryStream())
             {
-
                 HttpContext cur = HttpContext.Current;
                 cur.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                cur.Response.AddHeader("content-disposition", "attachment; filename=" + title + ".xlsx");
+                cur.Response.AddHeader("content-disposition", "attachment ; filename=" + title + ".xlsx");
                 ex.SaveAs(memoryStream);
                 memoryStream.WriteTo(cur.Response.OutputStream);
                 cur.Response.Flush();
                 cur.Response.End();
-
             }
         }
+
     }
 }

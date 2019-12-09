@@ -48,6 +48,9 @@
     <Reference Include="EPPlus, Version=4.5.3.2, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.5.3.2\lib\net40\EPPlus.dll</HintPath>
     </Reference>
+    <Reference Include="IronPdf, Version=2019.8.9.21868, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
+      <HintPath>..\packages\IronPdf.2019.8.9\lib\net40\IronPdf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -169,22 +172,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CardController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Attachment.cs" />
-    <Compile Include="Models\Badge.cs" />
-    <Compile Include="Models\Card.cs" />
-    <Compile Include="Models\CheckItem.cs" />
-    <Compile Include="Models\ChekedList.cs" />
-    <Compile Include="Models\Label.cs" />
-    <Compile Include="Models\List.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utiliti\Api.cs" />
-    <Compile Include="Utiliti\ReportMethods.cs" />
-    <Compile Include="Utiliti\PopolateModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -227,22 +218,15 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Card\Index.cshtml" />
     <Content Include="Views\Card\Details.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Card\PdfIndex.cshtml" />
+    <Content Include="Views\Card\PdfDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
-=======
-
     <Folder Include="Content\img\" />
-    <Folder Include="Views\Report\" />
-
->>>>>>> df0c4e5458359539ae5a69118e7765a5c056f45c
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -256,6 +240,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrelloUtilities\TrelloUtilities.csproj">
+      <Project>{ed66f349-6724-432b-a4dd-fd48d2dc141b}</Project>
+      <Name>TrelloUtilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
