@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace TrelloWebApp
+namespace TrelloWebApplication
 {
     public static class WebApiConfig
     {

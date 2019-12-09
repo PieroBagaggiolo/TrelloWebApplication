@@ -3,14 +3,15 @@ using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using TrelloWebApplication.Models;
 
-namespace TrelloWebApplication.Utiliti
+namespace TrelloUtilities
 {
-    public class PopoateExl
+    public class PopolateExl
     {
-        public static void Popola(Card model, ExcelWorksheet workSheet, int recordIndex)
+        public static void Riempimento(Card model, ExcelWorksheet workSheet, int recordIndex)
         {
             //intestazione
             workSheet.Row(recordIndex).Height = 20;
@@ -39,7 +40,7 @@ namespace TrelloWebApplication.Utiliti
             if (model.Labels.Count > 0)
                 foreach (var item in model.Labels)
                 {
-                    workSheet.Cells[i, 5].Value = item.Name + "(" + item.Color + ")";
+                    workSheet.Cells[i, 5].Value = item.Name + " (" + item.Color + ")";
                     i++;
                 }
             else
@@ -56,7 +57,7 @@ namespace TrelloWebApplication.Utiliti
                     foreach (var sol in item.CheckItems)
                     {
 
-                        workSheet.Cells[i, 7].Value = sol.Name + "(" + sol.State + ")  ";
+                        workSheet.Cells[i, 7].Value = sol.Name + " (" + sol.State + ")  ";
                         i++;
                     }
                 }
@@ -68,7 +69,7 @@ namespace TrelloWebApplication.Utiliti
             if (model.Attachments != null)
                 foreach (var item in model.Attachments)
                 {
-                    workSheet.Cells[i, 8].Value = item.Name + "Url :(" + item.Url + ")";
+                    workSheet.Cells[i, 8].Value = item.Name + " Url: ( " + item.Url + " )";
                     i++;
                 }
             else
