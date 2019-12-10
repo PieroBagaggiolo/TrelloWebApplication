@@ -56,26 +56,12 @@ namespace TrelloWebApplication.Utiliti
 
                 }
                 //controllo che la data di scadenza ci sia o nemo 
-                // nel che ci sia gestisco la stringa rendendola più leggibile 
+                // nel che ci sia gestisco la stringa rendendola datatime ed formatandola meglio
                 if (card.Due != null)
                 {
-                    string newData = "";
-                    foreach (var temp in card.Due)
-                    {
-                        if (temp.ToString() == ".")
-                        {
-                            break;
-                        }
-                        if (temp.ToString() != "T")
-                        {
-                            newData = newData + temp.ToString();
-                        }
-                        else
-                        {
-                            newData = newData + " Alle ore : ";
-                        }
-                    }
-                    card.Due = newData;
+                    DateTime newDATA = DateTime.Parse(card.Due);
+                    string newDue = newDATA.ToString("F");
+                    card.Due = newDue;
                 }
             }
             //ritorno la lista di card con le modifiche 
