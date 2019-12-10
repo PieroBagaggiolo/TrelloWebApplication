@@ -164,7 +164,6 @@ namespace TrelloWebApplication.Controllers
                 ViewBag.Message = "Comment added succesfully";
                 return View("Details", card);
             }
-            ViewBag.Message = "Write something";
             return View("Details", card);
         }
 
