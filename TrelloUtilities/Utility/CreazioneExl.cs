@@ -1,10 +1,5 @@
 ﻿using OfficeOpenXml;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace TrelloUtilities
@@ -17,7 +12,7 @@ namespace TrelloUtilities
             {
                 HttpContext cur = HttpContext.Current;
                 cur.Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                //cur.Response.AddHeader("content-disposition", "attachment; filename=" + title + ".xlsx");
+               cur.Response.AddHeader("content-disposition", "attachment ; filename=" + title + ".xlsx");
                 ex.SaveAs(memoryStream);
                 memoryStream.WriteTo(cur.Response.OutputStream);
                 cur.Response.Flush();

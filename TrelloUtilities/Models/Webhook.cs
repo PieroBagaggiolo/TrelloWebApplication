@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary1
+namespace TrelloUtilities.Models
 {
-    public class Class1
+    class Webhook
     {
+        public string Id { get; set; }
+        public bool active { get; set; }
     }
 }

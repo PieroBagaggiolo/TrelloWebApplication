@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using OfficeOpenXml;
 using TrelloWebApplication.Models;
+using TrelloWebApplication.Utiliti;
 
 namespace TrelloUtilities
 {
@@ -19,15 +16,12 @@ namespace TrelloUtilities
             ExcelPackage ex = CreazioneFoglio(SheetName);
             var workSheet = ex.Workbook.Worksheets[SheetName];
             int recordIndex = 1;
-            //int chek = 0;
-
             foreach (var card in model)
             {
 
                 PopolateExl.Riempimento(card, workSheet, recordIndex);
                 recordIndex += 9;
             }
-
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();
             workSheet.Column(3).AutoFit();
@@ -37,9 +31,6 @@ namespace TrelloUtilities
             workSheet.Column(7).AutoFit();
             workSheet.Column(8).AutoFit();
             workSheet.Column(9).AutoFit();
-
-            string title = "Total";
-            CreazioneExl.CreazioneFile(ex, title);
             return ex;
         }
 
@@ -51,7 +42,6 @@ namespace TrelloUtilities
             var workSheet = ex.Workbook.Worksheets[SheetName];
             int recordIndex = 1;
             PopolateExl.Riempimento(model, workSheet, recordIndex);
-
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();
             workSheet.Column(3).AutoFit();
@@ -61,9 +51,6 @@ namespace TrelloUtilities
             workSheet.Column(7).AutoFit();
             workSheet.Column(8).AutoFit();
             workSheet.Column(9).AutoFit();
-
-            string title = model.Name;
-            CreazioneExl.CreazioneFile(ex, title);
             return ex;
         }
 
@@ -75,5 +62,6 @@ namespace TrelloUtilities
             workSheet.DefaultRowHeight = 12;
             return ex;
         }
+
     }
 }

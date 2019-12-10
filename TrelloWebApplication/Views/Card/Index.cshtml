@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
+
 <div class="jumbotron">
     <h1 style="text-align:center">TRELLO REPORTER APP</h1>
 </div>
@@ -24,7 +25,6 @@
         </th>
         <th></th>
     </tr>
-
     @foreach (var item in Model)
     {
         <tr>
@@ -37,12 +37,7 @@
         </tr>
     }
 </table>
+@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Card", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
 
-    @Html.ActionLink("PRINT PDF", "ExportPDF", "Card", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
-
-
-
-    @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", "Card", new {@id="btnEx",  @class = "btn btn-success btn-large" })
-
-
+@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })
 

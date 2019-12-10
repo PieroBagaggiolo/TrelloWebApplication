@@ -1,6 +1,18 @@
 @model TrelloWebApplication.Models.Card
 
-
+@if (Model.CommentTemp != null)
+{
+    <div id="alert1">
+        <div class="alert-box">
+            <div class="alert-message">
+                Comment added succesfully.
+            </div><!-- .alert-message -->
+            <div class="alert-buttons">
+                @Html.ActionLink("Ok", "Details", new { id = Model.Id })
+            </div><!-- .alert-buttons -->
+        </div><!-- .alert-box -->
+    </div><!-- #alert1 -->
+}
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     @{ViewBag.Title = "Details";}
@@ -10,6 +22,7 @@
 
 
     <h2>Card: @Html.DisplayFor(model => model.Name) - Details</h2>
+
     <br />
 
 
@@ -162,13 +175,13 @@
         @Html.ValidationSummary(true)
         <div class="input-group" id="AddCom" style="display: none">
             <span class="input-group-btn">
-                <button class="btn btn-default" id="btnSub" type="submit">ADD COMMENT</button>
+                <button class="btn btn-default" id="btnSub" type="submit" href="#alert1">ADD COMMENT</button>
             </span>
-            <input type="text" class="form-control" name="CommentTemp" placeholder="Write here your comment...">
+            <input type="text" class="form-control" name="CommentTemp" placeholder="Write here your comment..." required>
         </div>
     }
     <br />
-    @Html.ActionLink("PRINT PDF", "ExportPDFp", new { id = Model.Id }, new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
+    @Html.ActionLink("PRINT PDF", "ExportPDFDetalis", new { id = Model.Id }, new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
     @Html.ActionLink("PRINT EXCEL", "ExcelEx", new { id = Model.Id }, new { @id = "btnEx", @class = "btn btn-success btn-large" })
 
     <br />
