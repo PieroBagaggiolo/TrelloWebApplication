@@ -164,12 +164,12 @@
             <span class="input-group-btn">
                 <button class="btn btn-default" id="btnSub" type="submit">ADD COMMENT</button>
             </span>
-            <input type="text" class="form-control" name="CommentTemp" placeholder="Wite here your comment...">
+            <input type="text" class="form-control" name="CommentTemp" placeholder="Write here your comment...">
         </div>
     }
     <br />
-    @Html.ActionLink("PRINT PDF", "ExportPDFp", new { id = Model.Id }, new { @class = "btn btn-danger btn-large" })
-    @Html.ActionLink("PRINT EXCEL", "ExcelEx", new { id = Model.Id }, new { @class = "btn btn-success btn-large" })
+    @Html.ActionLink("PRINT PDF", "ExportPDFDetalis", new { id = Model.Id }, new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
+    @Html.ActionLink("PRINT EXCEL", "ExcelEx", new { id = Model.Id }, new { @id = "btnEx", @class = "btn btn-success btn-large" })
 
     <br />
     <br />

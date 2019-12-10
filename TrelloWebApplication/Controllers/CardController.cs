@@ -1,5 +1,6 @@
 
 ﻿using OfficeOpenXml;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,36 +9,59 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-
 using TrelloWebApplication.Models;
+using TrelloWebApplication.Controllers;
+using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
+using IronPdf;
 
 namespace TrelloWebApplication.Controllers
 {
-
     public class CardController : Controller
     {
+        static string Key = "9936fabac5fdc5f00e46ff3a454e9feb";
+        static string Token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
+        static string IdBoard = "5ddd5dad735c842669b7b819";
 
-        static string key = "9936fabac5fdc5f00e46ff3a454e9feb";
-        static string token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
-        static string idBrod = "5ddd5dad735c842669b7b819";
-        static Api myApi = new Api(key, token, idBrod);
+        static Api myApi = new Api(Key, Token, IdBoard);
         List<Card> model = PopolateModel.Popola(myApi);
-
+        
         public ActionResult Index()
         {
-           
+             
+            return View(model);
+        }
+        public ActionResult PdfIndex()
+        {
+
             return View(model);
         }
 
-        public ActionResult ExportPDF()
+
+        public ActionResult ExportPDFIndex()
         {
-            ReportMethods.ExportListPDF();
-            return View("Index", model);
+            ActionAsPdf result = new ActionAsPdf("PdfIndex",model)
+            {
+                FileName = Server.MapPath("../Content/Details.pdf")
+            };
+            return result;
         }
         
-
         public ActionResult Details(string id = null)
+        {
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+
+                {
+                    card = item;
+                }
+            }
+
+            return View(card);
+        }
+        public ActionResult PdfDetails(string id = null)
         {
             Card card = null;
             foreach (var item in model)
@@ -62,18 +86,40 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
-            ReportMethods.ExportSingleExcel(card);
+            ExcelPackage ex = ReportMethods.ExportSingleExcel(card);
+            CreazioneExl.CreazioneFile(ex, "Details");
             return View(card);
         }
         public ActionResult ExcelExIndex()
-        {
-            ReportMethods.ExportExcelTotal(myApi);
+        { 
+            ExcelPackage ex = ReportMethods.ExportExcelTotal(myApi);
+            CreazioneExl.CreazioneFile(ex, "Index");
             return View();
+        }
+
+
+    public ActionResult ExportPDFDetalis(string id=null)
+        {
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+
+                {
+                    card = item;
+                }
+            }
+            ActionAsPdf result = new ActionAsPdf("PdfDetails", card)
+            {
+                FileName = Server.MapPath("../Content/Details.pdf")
+            };
+            return result;
         }
 
         [HttpPost]
         public ActionResult Details(Card pro)
-        {
+        {         
+            
             Card card = null;
             foreach (var item in model)
             {

@@ -14,6 +14,7 @@ namespace TrelloWebApplication.Utiliti
         public  string key ;
         public  string token ;
         public  string idBrod;
+        public string IdWebhook;
         public string urlBoards = " https://api.trello.com/1/boards/";
         public string urlCard = "https://api.trello.com/1/cards/";
         public static JavaScriptSerializer serializer = new JavaScriptSerializer();
@@ -23,43 +24,57 @@ namespace TrelloWebApplication.Utiliti
             this.key = key;
             this.idBrod = idBrod;
             this.token = token;
+            //var Id = CreateWebhook();
+            //foreach (var item in Id)
+            //{
+            //    this.IdWebhook = item.Id;
+            //}
         }
         public  List<Card> GetCard()
         {
-            string cardN = ChiamataApi(urlBoards + idBrod + "/cards?key=" + key + "&token=" + token,"GET");
-            string cardArchiviate = ChiamataApi(urlBoards + idBrod + "/cards/closed?key=" + key + "&token=" + token,"GET");        
+            string cardN = ChiamtaApi(urlBoards + idBrod + "/cards?key=" + key + "&token=" + token,"GET");
+            string cardArchiviate = ChiamtaApi(urlBoards + idBrod + "/cards/closed?key=" + key + "&token=" + token,"GET");        
             var Cardtot = serializer.Deserialize<List<Card>>(cardN);
             Cardtot.AddRange(serializer.Deserialize<List<Card>>(cardArchiviate));
             return Cardtot;
         }
         public  List<List> GetState()
         {
-            string nomeList = ChiamataApi(urlBoards + idBrod + "/lists?key=" + key + "&token=" + token,"GET");
+            string nomeList = ChiamtaApi(urlBoards + idBrod + "/lists?key=" + key + "&token=" + token,"GET");
             var listC = serializer.Deserialize<List<List>>(nomeList);
             return listC;
         }
 
         public  List<Attachment> GetAttachment(string cardId)
         {
-            string url = ChiamataApi(urlCard + cardId + "/attachments?key=" + key + "&token=" + token,"GET");
+            string url = ChiamtaApi(urlCard + cardId + "/attachments?key=" + key + "&token=" + token,"GET");
             var allegato = serializer.Deserialize<List<Attachment>>(url);
             return allegato;
         }
 
         public  List<ChekedList> GetCheckedList(string cardId)
         {
-            string check = ChiamataApi(urlCard + cardId + "/checklists?key=" + key + "&token=" + token,"GET");
+            string check = ChiamtaApi(urlCard + cardId + "/checklists?key=" + key + "&token=" + token,"GET");
             var checklist = serializer.Deserialize<List<ChekedList>>(check);
             return checklist;
+        }
+
+      
+        public List<Webhook> CreateWebhook()
+        {
+            string url = ("https://api.trello.com/1/webhooks/?idModel=" + idBrod + "&description='MyW'&callbackURL=http://localhost:53250/");
+            string webh = ChiamtaApi(url, "POST");
+            var webhook = serializer.Deserialize<List<Webhook>>(webh);
+            return webhook;
         }
 
         public  void AddComment(string comment, Card model)
         {
             string url = urlCard + model.Id+"/actions/comments?text="+comment+ "&key=" + key + "&token=" + token;
-            ChiamataApi(url,"POST");
+            ChiamtaApi(url,"POST");
         }
 
-        public static string ChiamataApi(string prov,string metodo)
+        private static string ChiamtaApi(string prov,string metodo)
         {
             WebRequest requestObj = WebRequest.Create(prov);
             requestObj.Method =metodo;
@@ -69,11 +84,11 @@ namespace TrelloWebApplication.Utiliti
             using (Stream stream = responseObj.GetResponseStream())
             {
                 StreamReader sr = new StreamReader(stream);
-                if (metodo=="GET")
-                {
-                    result = sr.ReadToEnd();
-                }
-               
+                //if (metodo=="GET")
+                //{
+                //    result = sr.ReadToEnd();
+                //}
+                result = sr.ReadToEnd();
                 sr.Close();
             }
             return result;
