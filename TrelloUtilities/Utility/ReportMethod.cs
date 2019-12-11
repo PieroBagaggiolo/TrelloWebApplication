@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using OfficeOpenXml;
+using OfficeOpenXml.Style;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
 
@@ -77,18 +79,22 @@ namespace TrelloUtilities
             return ex;
         }
 
-        private static ExcelPackage CreazioneFoglio(string sheetName)
+        private static ExcelPackage CreazioneFoglio(string sheetName, int maxDim)
         {
             ExcelPackage ex = new ExcelPackage();
             var workSheet = ex.Workbook.Worksheets.Add(sheetName);
             workSheet.TabColor = System.Drawing.Color.Black;
             workSheet.DefaultRowHeight = 12;
-            using (ExcelRange Rng = workSheet.Cells[2, 2, 2, 2])
+            using (ExcelRange Rng = workSheet.Cells[1, 1, 9, maxDim])
             {
-                Rng.Value = "Welcome to Everyday be coding - tutorials for beginners";
-                Rng.Style.Font.Size = 16;
-                Rng.Style.Font.Bold = true;
-                Rng.Style.Font.Italic = true;
+                Rng.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                Rng.Style.Border.Top.Color.SetColor(Color.Red);
+                Rng.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                Rng.Style.Border.Left.Color.SetColor(Color.Green);
+                Rng.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                Rng.Style.Border.Right.Color.SetColor(Color.Green);
+                Rng.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                Rng.Style.Border.Bottom.Color.SetColor(Color.AliceBlue);
             }
             return ex;
         }
