@@ -1,6 +1,6 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
-using System;
+using System.Drawing;
 using TrelloWebApplication.Models;
 
 namespace TrelloUtilities
@@ -33,6 +33,12 @@ namespace TrelloUtilities
             workSheet.Cells[recordIndex + 1, 7].Value = "Opzioni";
             workSheet.Cells[recordIndex, 8].Value = "ATTACHMENTS";
             workSheet.Cells[recordIndex, 9].Value = "EXPIRE TIME";
+            using (ExcelRange Titles = workSheet.Cells[recordIndex,1,recordIndex+1,9])
+            {
+                Titles.Style.Border.Bottom.Style = ExcelBorderStyle.MediumDashed;
+               Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
+            }
+
             recordIndex += 3;
             int i = recordIndex;
             workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
