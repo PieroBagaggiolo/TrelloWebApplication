@@ -220,7 +220,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Card\Index.cshtml" />
     <Content Include="Views\Card\Details.cshtml" />
-    <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Card\PdfIndex.cshtml" />
     <Content Include="Views\Card\PdfDetails.cshtml" />
   </ItemGroup>
