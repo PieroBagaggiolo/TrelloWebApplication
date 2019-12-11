@@ -1,5 +1,6 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using System;
 using TrelloWebApplication.Models;
 
 namespace TrelloUtilities
@@ -70,7 +71,9 @@ namespace TrelloUtilities
             if (model.Attachments != null)
                 foreach (var item in model.Attachments)
                 {
-                    workSheet.Cells[i, 8].Value = item.Name + " Url: ( " + item.Url + " )";
+                    workSheet.Cells[i, 8].Value = item.Name;
+                    Uri url = new Uri(item.Url);
+                    workSheet.Cells[i, 8].Hyperlink = url;
                     i++;
                 }
             else
