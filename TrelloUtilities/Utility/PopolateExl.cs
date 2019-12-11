@@ -32,10 +32,10 @@ namespace TrelloUtilities
             workSheet.Cells[recordIndex + 1, 7].Value = "Opzioni";
             workSheet.Cells[recordIndex, 8].Value = "ATTACHMENTS";
             workSheet.Cells[recordIndex, 9].Value = "EXPIRE TIME";
-            using (ExcelRange Titles = workSheet.Cells[recordIndex, 9])
+            using (ExcelRange Titles = workSheet.Cells[recordIndex,1,recordIndex+1,9])
             {
                 Titles.Style.Border.Bottom.Style = ExcelBorderStyle.MediumDashed;
-                Titles.Style.Border.Top.Color.SetColor(Color.Black);
+               Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
             }
             recordIndex += 3;
             int i = recordIndex;

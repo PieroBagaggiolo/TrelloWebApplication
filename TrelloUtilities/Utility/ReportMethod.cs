@@ -96,7 +96,7 @@ namespace TrelloUtilities
             var workSheet = ex.Workbook.Worksheets.Add(sheetName);
             workSheet.TabColor = System.Drawing.Color.Black;
             workSheet.DefaultRowHeight = 12;
-            using (ExcelRange Rng = workSheet.Cells[1, 2, fullDim, 9])
+            using (ExcelRange Rng = workSheet.Cells[1, 1, fullDim, 9])
             {
                 Rng.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                 Rng.Style.Border.Top.Color.SetColor(Color.Black);
