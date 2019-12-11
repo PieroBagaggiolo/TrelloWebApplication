@@ -27,18 +27,19 @@ namespace TrelloUtilities
                 LisTit.Value = "CHECKLIST";
                 LisTit.Merge = true;
             }
-                
-
             workSheet.Cells[recordIndex + 1, 6].Value = "Titolo";
             workSheet.Cells[recordIndex + 1, 7].Value = "Opzioni";
             workSheet.Cells[recordIndex, 8].Value = "ATTACHMENTS";
             workSheet.Cells[recordIndex, 9].Value = "EXPIRE TIME";
             using (ExcelRange Titles = workSheet.Cells[recordIndex,1,recordIndex+1,9])
             {
+                Titles.Style.Border.Right.Style = ExcelBorderStyle.MediumDashed;
+                Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
                 Titles.Style.Border.Bottom.Style = ExcelBorderStyle.MediumDashed;
-               Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
+                Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
+                Titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                Titles.Style.Fill.BackgroundColor.SetColor(Color.Gray);
             }
-
             recordIndex += 3;
             int i = recordIndex;
             workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
