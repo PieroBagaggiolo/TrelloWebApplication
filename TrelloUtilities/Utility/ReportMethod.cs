@@ -51,7 +51,6 @@ namespace TrelloUtilities
             try
             {
                 NumberAttachment = Int32.Parse(card.Badges.Attachments);
-
             }
             catch (FormatException)
             {
@@ -81,8 +80,6 @@ namespace TrelloUtilities
             
             return recordIndex;
         }
-
-
         public static ExcelPackage ExportSingleExcel(Card model)
         {
             //creazione di un foglio EXCEL
@@ -106,12 +103,12 @@ namespace TrelloUtilities
         }
 
         private static ExcelPackage CreazioneFoglio(string sheetName, int fullDim)
-
         {
             ExcelPackage ex = new ExcelPackage();
             var workSheet = ex.Workbook.Worksheets.Add(sheetName);
             workSheet.TabColor = System.Drawing.Color.Black;
             workSheet.DefaultRowHeight = 12;
+
             //using (ExcelRange Rng = workSheet.Cells[1, 1, fullDim, 9])
             //{
             //    Rng.Style.Border.Top.Style = ExcelBorderStyle.Medium;
@@ -123,6 +120,7 @@ namespace TrelloUtilities
             //    Rng.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
             //    Rng.Style.Border.Bottom.Color.SetColor(Color.White);
             //}
+
 
             return ex;
         }
