@@ -7,6 +7,7 @@
     <style>
         .tabSecondaria {
             width: 100%;
+
         }
         table {
             border-collapse: collapse;
@@ -41,6 +42,7 @@
         <th>
             STATO
         </th>
+
         <td>
             @Html.DisplayFor(model => model.IdList)
         </td>
@@ -95,6 +97,7 @@
             <td colspan="2">
                 @foreach (var m in Model.ChekedLists)
                 {
+
                     <table class="tabSecondaria">
                         <tr>
                             <th>
@@ -104,7 +107,9 @@
                         @foreach (var chk in m.CheckItems)
                         {
                             <tr>
+
                                 <td>
+
                                     @Html.DisplayFor(modelchk => chk.Name) -
                                     (@Html.DisplayFor(modelchk => chk.State))
                                 </td>
@@ -133,6 +138,7 @@
                                 <a href="@Url.Content(att.Url)" download="@Url.Content(att.Name)">
                                     @Url.Content(att.Name)
                                 </a>
+
                             </td>
                         </tr>
                     </table>
@@ -161,3 +167,4 @@
         }
     </tr>
 </table>
+

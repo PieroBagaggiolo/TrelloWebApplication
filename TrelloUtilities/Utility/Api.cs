@@ -36,8 +36,8 @@ namespace TrelloWebApplication.Utiliti
         /// Manda le api alla funzione crea gli oggetti con quelle informazioni tramite il json deserializato
         /// </summary>
         /// <returns>Ritorna una lista completa di card comprese le archiviate</returns>
-        public List<Card> GetCards()
 
+        public List<Card> GetCards()
         {
             //craazione stringhe json
             string cardN = ChiamtaApi(urlBoards + idBrod + "/cards?key=" + key + "&token=" + token, "GET");

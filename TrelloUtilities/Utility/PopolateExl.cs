@@ -21,7 +21,13 @@ namespace TrelloUtilities
             workSheet.Cells[recordIndex, 3].Value = "NAME CARD";
             workSheet.Cells[recordIndex, 4].Value = "STATO";
             workSheet.Cells[recordIndex, 5].Value = "LABEL";
-            workSheet.Cells[recordIndex, 6].Value = "CHECKLIST";
+            using (ExcelRange LisTit = workSheet.Cells[recordIndex, 6, recordIndex, 7])
+            {
+                LisTit.Value = "CHECKLIST";
+                LisTit.Merge = true;
+            }
+                
+
             workSheet.Cells[recordIndex + 1, 6].Value = "Titolo";
             workSheet.Cells[recordIndex + 1, 7].Value = "Opzioni";
             workSheet.Cells[recordIndex, 8].Value = "ATTACHMENTS";
@@ -71,7 +77,6 @@ namespace TrelloUtilities
             {
                 workSheet.Cells[i, 8].Value = "no Attachments";
             }
-
             workSheet.Cells[recordIndex, 9].Value = model.Due;
         }
     }
