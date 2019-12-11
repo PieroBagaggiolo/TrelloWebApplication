@@ -98,13 +98,13 @@ namespace TrelloUtilities
             workSheet.DefaultRowHeight = 12;
             using (ExcelRange Rng = workSheet.Cells[1, 1, fullDim, 9])
             {
-                Rng.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+                Rng.Style.Border.Top.Style = ExcelBorderStyle.Medium;
                 Rng.Style.Border.Top.Color.SetColor(Color.Red);
-                Rng.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+                Rng.Style.Border.Left.Style = ExcelBorderStyle.Medium;
                 Rng.Style.Border.Left.Color.SetColor(Color.Green);
-                Rng.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+                Rng.Style.Border.Right.Style = ExcelBorderStyle.Medium;
                 Rng.Style.Border.Right.Color.SetColor(Color.Green);
-                Rng.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+                Rng.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
                 Rng.Style.Border.Bottom.Color.SetColor(Color.AliceBlue);
             }
             return ex;
