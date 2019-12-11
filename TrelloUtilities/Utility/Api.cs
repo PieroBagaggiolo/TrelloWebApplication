@@ -37,6 +37,7 @@ namespace TrelloWebApplication.Utiliti
         /// </summary>
         /// <returns>Ritorna una lista completa di card comprese le archiviate</returns>
         public List<Card> GetCards()
+
         {
             //craazione stringhe json
             string cardN = ChiamtaApi(urlBoards + idBrod + "/cards?key=" + key + "&token=" + token, "GET");
@@ -56,6 +57,7 @@ namespace TrelloWebApplication.Utiliti
             var listC = serializer.Deserialize<List<List>>(nomeList);
             return listC;
         }
+
         /// <summary>
         /// Manda le api alla funzione crea gli oggetti con quelle informazioni tramite il json deserializato
         /// </summary>
@@ -66,6 +68,7 @@ namespace TrelloWebApplication.Utiliti
             var allegato = serializer.Deserialize<List<Attachment>>(url);
             return allegato;
         }
+
         /// <summary>
         /// Manda le api alla funzione crea gli oggetti con quelle informazioni tramite il json deserializato
         /// </summary>
@@ -97,6 +100,7 @@ namespace TrelloWebApplication.Utiliti
             string url = urlCard + model.Id + "/actions/comments?text=" + comment + "&key=" + key + "&token=" + token;
             ChiamtaApi(url, "POST");
         }
+
         /// <summary>
         /// Chiamata alle api trello con il salvataggio al interno di una stringa di un json contente tutte le informazioni della risposta alla richiesta 
         /// </summary>

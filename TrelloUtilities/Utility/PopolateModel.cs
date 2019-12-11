@@ -15,6 +15,7 @@ namespace TrelloWebApplication.Utiliti
         {
             //lista di card presenti
             var cardtot = myApi.GetCards();
+
             //lista di stati delle card
             var listC = myApi.GetState();
             //giro la lista per sistemare uno alla volta tutte le card
@@ -25,6 +26,7 @@ namespace TrelloWebApplication.Utiliti
                 {
                     //controllo se closed ovvero l'atributo che fa capire se una chat è archiavita o meno nel caso che sia archoviata assegno alla 
                     //varibaile Idlist il valore "archiviata"
+
                   
                         if (list.Id == card.IdList)
                         {

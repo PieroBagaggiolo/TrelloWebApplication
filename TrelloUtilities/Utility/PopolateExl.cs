@@ -71,6 +71,7 @@ namespace TrelloUtilities
             {
                 workSheet.Cells[i, 8].Value = "no Attachments";
             }
+
             workSheet.Cells[recordIndex, 9].Value = model.Due;
         }
     }

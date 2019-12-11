@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using OfficeOpenXml;
@@ -21,6 +22,7 @@ namespace TrelloUtilities
             {
 
                 PopolateExl.Riempimento(card, workSheet, recordIndex);
+
                 int NumberAttachment ;
                 try
                 {
@@ -44,6 +46,7 @@ namespace TrelloUtilities
                     recordIndex += NumberAttachment;
                 }
                 recordIndex+=4;
+
             }
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();
