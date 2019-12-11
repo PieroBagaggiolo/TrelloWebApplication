@@ -25,18 +25,10 @@ namespace TrelloWebApplication.Utiliti
                 {
                     //controllo se closed ovvero l'atributo che fa capire se una chat è archiavita o meno nel caso che sia archoviata assegno alla 
                     //varibaile Idlist il valore "archiviata"
-                    if (card.Closed=="False")
-                    {
                         if (list.Id == card.IdList)
                         {
                             card.IdList = list.Name;
-                        }
-                    }
-                    else
-                    {
-                        card.IdList = "archiviata";
-                    }
-                       
+                        } 
                 }
                 //controllo se sono presnti allegati 
                 if (card.Badges.Attachments != "0")
