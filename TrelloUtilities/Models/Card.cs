@@ -18,5 +18,35 @@ namespace TrelloWebApplication.Models
         public List<Attachment> Attachments { get; set; }
         public List<ChekedList> ChekedLists { get; set; }
         public string CommentTemp { get; set; }
+        public int NumberLabels
+        {
+            get
+            {
+                int i = 0;
+                foreach (var label in Labels)
+                {
+                    i++;
+                }
+                return i;
+            }
+        }
+        public int NumberChekItem
+        {
+            get
+            {
+                int i = 0;
+                if (ChekedLists!=null)
+                {
+                    foreach (var cheked in ChekedLists)
+                    {
+                        foreach (var chekedItem in cheked.CheckItems)
+                        {
+                            i++;
+                        }
+                    }
+                }
+                return i;
+            }
+        }
     }
 }
