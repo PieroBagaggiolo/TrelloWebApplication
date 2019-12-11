@@ -42,7 +42,6 @@ namespace TrelloWebApplication.Controllers
         /// <returns></returns>
         public ActionResult PdfIndex()
         {
-
             return View(model);
         }
 

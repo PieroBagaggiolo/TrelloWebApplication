@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+
+﻿using System;
+using System.Collections.Generic;
 using OfficeOpenXml;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
@@ -20,7 +22,31 @@ namespace TrelloUtilities
             {
 
                 PopolateExl.Riempimento(card, workSheet, recordIndex);
-                recordIndex += 9;
+
+                int NumberAttachment ;
+                try
+                {
+                     NumberAttachment = Int32.Parse(card.Badges.Attachments);
+                 
+                }
+                catch (FormatException)
+                {
+                    NumberAttachment = 0;
+                }
+                if (card.NumberChekItem>=card.NumberLabels && card.NumberChekItem>=NumberAttachment)
+                {
+                    recordIndex += card.NumberChekItem;
+                }
+                else if (card.NumberLabels>NumberAttachment)
+                {
+                    recordIndex += card.NumberLabels;
+                }
+                else
+                {
+                    recordIndex += NumberAttachment;
+                }
+                recordIndex+=4;
+
             }
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();
