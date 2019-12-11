@@ -38,12 +38,19 @@ namespace TrelloUtilities
 
             using (ExcelRange Titles = workSheet.Cells[recordIndex,1,recordIndex+1,9])
             {
-                Titles.Style.Border.Right.Style = ExcelBorderStyle.MediumDashed;
-                Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
-                Titles.Style.Border.Bottom.Style = ExcelBorderStyle.MediumDashed;
-                Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
+                //Titles.Style.Border.Right.Style = ExcelBorderStyle.MediumDashed;
+                //Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
+                //Titles.Style.Border.Bottom.Style = ExcelBorderStyle.MediumDashed;
+                //Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
                 Titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
-                Titles.Style.Fill.BackgroundColor.SetColor(Color.Gray);
+                Titles.Style.Fill.BackgroundColor.SetColor(Color.DarkGreen);
+                Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
+                Titles.Style.Border.Right.Color.SetColor(Color.Black);
+                Titles.Style.Border.Top.Style = ExcelBorderStyle.Medium;
+                Titles.Style.Border.Top.Color.SetColor(Color.Black);
+                Titles.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
+                Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
+                Titles.Style.Font.Color.SetColor(Color.WhiteSmoke);
             }
 
             recordIndex += 3;
@@ -94,14 +101,16 @@ namespace TrelloUtilities
                 workSheet.Cells[i, 8].Value = "no Attachments";
             }
             workSheet.Cells[recordIndex, 9].Value = model.Due;
-            using (ExcelRange Titles = workSheet.Cells[inizio, 1, fine , 9])
+            using (ExcelRange Titles = workSheet.Cells[inizio+2, 1, fine , 9])
             {
-                Titles.Style.Border.Right.Style = ExcelBorderStyle.MediumDashed;
+                Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
                 Titles.Style.Border.Right.Color.SetColor(Color.Black);
-                Titles.Style.Border.Top.Style = ExcelBorderStyle.MediumDashed;
+                Titles.Style.Border.Top.Style = ExcelBorderStyle.Medium;
                 Titles.Style.Border.Top.Color.SetColor(Color.Black);
-                Titles.Style.Border.Bottom.Style = ExcelBorderStyle.MediumDashed;
+                Titles.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
                 Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
+                Titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                Titles.Style.Fill.BackgroundColor.SetColor(Color.LightGreen);
             }
         }
     }

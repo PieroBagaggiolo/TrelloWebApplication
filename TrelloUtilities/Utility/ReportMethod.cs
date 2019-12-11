@@ -17,12 +17,8 @@ namespace TrelloUtilities
             //creazione di un foglio EXCEL
             var SheetName = "Foglio";
 
-            int maxDim = 1;
-            foreach (var card in model)
-            {
-                maxDim = CalcolateDimensionMax(maxDim, card);
-            }
-            ExcelPackage ex = CreazioneFoglio(SheetName, maxDim);
+           
+            ExcelPackage ex = CreazioneFoglio(SheetName);
 
             var workSheet = ex.Workbook.Worksheets[SheetName];
             int recordIndex = 1;
@@ -85,8 +81,8 @@ namespace TrelloUtilities
             //creazione di un foglio EXCEL
             var SheetName = "Foglio";
 
-            int maxGrow = CalcolateDimensionMax(1, model);
-            ExcelPackage ex = CreazioneFoglio(SheetName, maxGrow - 1);
+            int maxGrow = CalcolateDimensionMax(1, model)+2;
+            ExcelPackage ex = CreazioneFoglio(SheetName);
             var workSheet = ex.Workbook.Worksheets[SheetName];
             int recordIndex = 1;
             PopolateExl.Riempimento(model, workSheet, recordIndex,maxGrow);
@@ -102,7 +98,7 @@ namespace TrelloUtilities
             return ex;
         }
 
-        private static ExcelPackage CreazioneFoglio(string sheetName, int fullDim)
+        private static ExcelPackage CreazioneFoglio(string sheetName)
         {
             ExcelPackage ex = new ExcelPackage();
             var workSheet = ex.Workbook.Worksheets.Add(sheetName);
