@@ -83,6 +83,13 @@ namespace TrelloUtilities
             var workSheet = ex.Workbook.Worksheets.Add(sheetName);
             workSheet.TabColor = System.Drawing.Color.Black;
             workSheet.DefaultRowHeight = 12;
+            using (ExcelRange Rng = workSheet.Cells[2, 2, 2, 2])
+            {
+                Rng.Value = "Welcome to Everyday be coding - tutorials for beginners";
+                Rng.Style.Font.Size = 16;
+                Rng.Style.Font.Bold = true;
+                Rng.Style.Font.Italic = true;
+            }
             return ex;
         }
 
