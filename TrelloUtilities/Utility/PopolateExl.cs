@@ -1,10 +1,5 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TrelloWebApplication.Models;
 
 namespace TrelloUtilities
@@ -76,7 +71,6 @@ namespace TrelloUtilities
             {
                 workSheet.Cells[i, 8].Value = "no Attachments";
             }
-
             workSheet.Cells[recordIndex, 9].Value = model.Due;
         }
     }
