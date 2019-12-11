@@ -1,5 +1,6 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using System;
 using System.Drawing;
 using TrelloWebApplication.Models;
 
@@ -7,7 +8,7 @@ namespace TrelloUtilities
 {
     public class PopolateExl
     {
-        public static void Riempimento(Card model, ExcelWorksheet workSheet, int recordIndex)
+        public static void Riempimento(Card model, ExcelWorksheet workSheet, int recordIndex,int fine)
         {
             //intestazione
             workSheet.Row(recordIndex).Height = 20;
@@ -31,6 +32,10 @@ namespace TrelloUtilities
             workSheet.Cells[recordIndex + 1, 7].Value = "Opzioni";
             workSheet.Cells[recordIndex, 8].Value = "ATTACHMENTS";
             workSheet.Cells[recordIndex, 9].Value = "EXPIRE TIME";
+
+          
+            int inizio = recordIndex;
+
             using (ExcelRange Titles = workSheet.Cells[recordIndex,1,recordIndex+1,9])
             {
                 Titles.Style.Border.Right.Style = ExcelBorderStyle.MediumDashed;
@@ -40,6 +45,7 @@ namespace TrelloUtilities
                 Titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.Gray);
             }
+
             recordIndex += 3;
             int i = recordIndex;
             workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
@@ -88,6 +94,15 @@ namespace TrelloUtilities
                 workSheet.Cells[i, 8].Value = "no Attachments";
             }
             workSheet.Cells[recordIndex, 9].Value = model.Due;
+            using (ExcelRange Titles = workSheet.Cells[inizio, 1, fine , 9])
+            {
+                Titles.Style.Border.Right.Style = ExcelBorderStyle.MediumDashed;
+                Titles.Style.Border.Right.Color.SetColor(Color.Black);
+                Titles.Style.Border.Top.Style = ExcelBorderStyle.MediumDashed;
+                Titles.Style.Border.Top.Color.SetColor(Color.Black);
+                Titles.Style.Border.Bottom.Style = ExcelBorderStyle.MediumDashed;
+                Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
+            }
         }
     }
 }
