@@ -27,41 +27,43 @@
 
 
     <table class="table" id="tb2">
-
         <tr>
             <th id="primo">
                 ID
             </th>
             <td>
-
                 @Html.DisplayFor(model => model.Id)
-
             </td>
         </tr>
-
         <tr>
             <th>
                 STATO
             </th>
+            <td>
+                @Html.DisplayFor(model => model.IdList)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                ARCHIVIATA
+            </th>
             @if (Model.Closed == "False")
             {
                 <td>
-                    @Html.DisplayFor(model => model.IdList)
+                    NO
                 </td>
             }
             else
             {
                 <td>
-                    CARD ARCHIVIATA
+                    SI
                 </td>
             }
         </tr>
-
         <tr>
             <th>
                 LABEL
             </th>
-
             @if (Model.Labels.Count > 0)
             {
                 <td>
@@ -75,7 +77,6 @@
                                     (@Html.DisplayFor(modelm => m.Color))
                                 </td>
                             </tr>
-
                         </table>
                     }
                 </td>
@@ -118,7 +119,6 @@
         </tr>
         <tr>
             <th>ATTACHMENTS</th>
-
             @if (Model.Attachments != null)
             {
                 <td>
@@ -129,11 +129,9 @@
                             <tr>
                                 <td>
 
-
                                     <a href="@Url.Content(att.Url)" download="@Url.Content(att.Name)">
                                         @Url.Content(att.Name)
                                     </a>
-
 
                                 </td>
                             </tr>
@@ -151,7 +149,6 @@
             <th>
                 Expire Time
             </th>
-
 
             @if (Model.Due != null)
             {
@@ -198,4 +195,3 @@
         </script>
     }
 </body>
-

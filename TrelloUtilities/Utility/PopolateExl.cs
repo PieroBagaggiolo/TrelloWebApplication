@@ -1,6 +1,5 @@
 ﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
-using System;
 using System.Drawing;
 using TrelloWebApplication.Models;
 
@@ -28,6 +27,8 @@ namespace TrelloUtilities
                 LisTit.Value = "CHECKLIST";
                 LisTit.Merge = true;
             }
+                
+
             workSheet.Cells[recordIndex + 1, 6].Value = "Titolo";
             workSheet.Cells[recordIndex + 1, 7].Value = "Opzioni";
             workSheet.Cells[recordIndex, 8].Value = "ATTACHMENTS";
@@ -37,6 +38,7 @@ namespace TrelloUtilities
                 Titles.Style.Border.Bottom.Style = ExcelBorderStyle.MediumDashed;
                Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
             }
+
             recordIndex += 3;
             int i = recordIndex;
             workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
@@ -75,9 +77,7 @@ namespace TrelloUtilities
             if (model.Attachments != null)
                 foreach (var item in model.Attachments)
                 {
-                    workSheet.Cells[i, 8].Value = item.Name;
-                    Uri uri = new Uri(item.Url);
-                    workSheet.Cells[i, 8].Hyperlink = uri;
+                    workSheet.Cells[i, 8].Value = item.Name + " Url: ( " + item.Url + " )";
                     i++;
                 }
             else
