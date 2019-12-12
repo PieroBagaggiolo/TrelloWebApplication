@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Web.Script.Serialization;
@@ -128,6 +129,17 @@ namespace TrelloWebApplication.Utiliti
         public void PutList(string newList, Card model)
         {
             string url = urlCard + model.Id + "?idList=" + newList + "&key=" + key + "&token=" + token;
+            ChiamtaApi(url, "PUT");
+        }
+        /// <summary>
+        /// modifica stato della card
+        /// </summary>
+        /// <param name="newList">new stato </param>
+        /// <param name="model">card da modificare</param>
+        public void PutDueDate(DateTime newData, Card model)
+        {
+            string mezzo = "%2F";
+            string url = urlCard + model.Id + "?due=" + newData.Month+mezzo+newData.Day+mezzo+newData.Year + "&key=" + key + "&token=" + token;
             ChiamtaApi(url, "PUT");
         }
         /// <summary>

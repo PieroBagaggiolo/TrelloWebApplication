@@ -223,6 +223,7 @@
     <Content Include="Views\Card\PdfIndex.cshtml" />
     <Content Include="Views\Card\PdfDetails.cshtml" />
     <Content Include="Views\Card\Edit.cshtml" />
+    <Content Include="Views\Card\newCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

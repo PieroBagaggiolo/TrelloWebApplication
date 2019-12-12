@@ -138,6 +138,10 @@ namespace TrelloWebApplication.Controllers
                     myApi.PutList(list.Id,card);
                 }
             }
+            if (card.prova!= cardVecchia.prova)
+            {
+                myApi.PutDueDate(card.prova, card);
+            }
             return RedirectToAction("Index",model);
         }
 
