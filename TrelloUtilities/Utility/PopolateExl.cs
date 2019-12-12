@@ -75,7 +75,8 @@ namespace TrelloUtilities
             if (model.ChekedLists != null)
                 foreach (var item in model.ChekedLists)
                 {
-                    workSheet.Cells[i, 6].Value = item.Name;
+                    workSheet.Cells[i, 6, fine, 6].Value = item.Name;
+                    //VerticalTitle(workSheet, fine, i);
                     foreach (var sol in item.CheckItems)
                     {
 
@@ -111,6 +112,15 @@ namespace TrelloUtilities
                 Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
                 Titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.LightGreen);
+            }
+        }
+
+        private static void VerticalTitle(ExcelWorksheet workSheet, int fine, int i)
+        {
+            using (var title = workSheet.Cells[i, 6, fine, 6]) //funzione per unire più celle verticalmente
+            {
+                title.Merge = true;
+                title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
             }
         }
     }
