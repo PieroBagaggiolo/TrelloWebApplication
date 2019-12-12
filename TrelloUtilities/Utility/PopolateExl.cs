@@ -71,18 +71,22 @@ namespace TrelloUtilities
             }
 
             i = recordIndex;
+            var j = 0;
 
             if (model.ChekedLists != null)
                 foreach (var item in model.ChekedLists)
                 {
+                
                     workSheet.Cells[i, 6, fine, 6].Value = item.Name;
-                    //VerticalTitle(workSheet, fine, i);
+                    j = i;
+                    
                     foreach (var sol in item.CheckItems)
                     {
 
                         workSheet.Cells[i, 7].Value = sol.Name + " (" + sol.State + ")  ";
                         i++;
                     }
+                    VerticalTitle(workSheet, i-1, j);
                 }
             else
             {
