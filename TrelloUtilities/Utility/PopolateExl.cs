@@ -101,6 +101,7 @@ namespace TrelloUtilities
                     workSheet.Cells[i, 8].Hyperlink = url;
                     i++;
                 }
+            
             else
             {
                 workSheet.Cells[i, 8].Value = "no Attachments";
@@ -125,8 +126,9 @@ namespace TrelloUtilities
             {
                 title.Merge = true;
                 title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                title.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                
             }
         }
     }
-}
 }
