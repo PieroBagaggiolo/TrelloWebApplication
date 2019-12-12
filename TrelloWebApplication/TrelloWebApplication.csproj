@@ -51,11 +51,9 @@
     <Reference Include="IronPdf, Version=2019.8.9.21868, Culture=neutral, PublicKeyToken=94e1c31412563c75, processorArchitecture=MSIL">
       <HintPath>..\packages\IronPdf.2019.8.9\lib\net40\IronPdf.dll</HintPath>
     </Reference>
-
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
-
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -224,6 +222,7 @@
     <Content Include="Views\Card\Details.cshtml" />
     <Content Include="Views\Card\PdfIndex.cshtml" />
     <Content Include="Views\Card\PdfDetails.cshtml" />
+    <Content Include="Views\Card\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

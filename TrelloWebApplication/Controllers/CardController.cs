@@ -77,6 +77,69 @@ namespace TrelloWebApplication.Controllers
 
             return View(card);
         }
+        /// <summary>
+        /// Pagina di modifica card
+        /// </summary>
+        /// <param name="id">id card </param>
+        /// <returns></returns>
+        public ActionResult Edit(string id = null)
+        {
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+
+                {
+                    card = item;
+                }
+            }
+            var stato=myApi.GetState();
+            ViewBag.Stato = new SelectList(stato, "Id", "Name",card.IdList);
+            return View(card);
+        }
+
+        /// <summary>
+        /// prende i dati di modifica controlla se sono uguali o inseribili e gli inserisce
+        /// </summary>
+        /// <param name="card">card con i nuovi dat</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Card card)
+        {
+            Card cardVecchia = null;
+            foreach (var item in model)
+            {
+                if (item.Id == card.Id)
+
+                {
+                    cardVecchia = item;
+                }
+            }
+            if (cardVecchia.Closed.ToUpper()!=card.Closed.ToUpper())
+            {
+                if (card.Closed.ToUpper()=="TRUE")
+                {
+                    myApi.PutClosed("true",card);
+                }
+                else
+                {
+                    myApi.PutClosed("false",card);
+                }
+            }
+            if (cardVecchia.Name != card.Name)
+            {
+                myApi.PutName(card.Name,card);
+            }
+            foreach (var list in myApi.GetState())
+            {
+                if (card.IdList.ToUpper() == list.Name.ToUpper())
+                {
+                    myApi.PutList(list.Id,card);
+                }
+            }
+            return RedirectToAction("Index",model);
+        }
 
         /// <summary>
         /// crazione di una view senza il css da salvare al interno del file
@@ -172,7 +235,6 @@ namespace TrelloWebApplication.Controllers
             if (searchTerm!=null)
             {
                 myApi.AddComment(searchTerm, pro);
-                return View("Details", card);
             }
             return View("Details", card);
         }
