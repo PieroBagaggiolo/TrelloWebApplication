@@ -100,7 +100,36 @@ namespace TrelloWebApplication.Utiliti
             string url = urlCard + model.Id + "/actions/comments?text=" + comment + "&key=" + key + "&token=" + token;
             ChiamtaApi(url, "POST");
         }
-
+        /// <summary>
+        /// modifica una card da archivata a non o viceversa 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="model"></param>
+        public void PutClosed(string value, Card model)
+        {
+            string url = urlCard + model.Id + "?closed=" + value + "&key=" + key + "&token=" + token;
+            ChiamtaApi(url, "PUT");
+        }
+        /// <summary>
+        /// Modica il nome della card 
+        /// </summary>
+        /// <param name="newName">New name</param>
+        /// <param name="model">card da modificare</param>
+        public void PutName(string newName, Card model)
+        {
+            string url = urlCard + model.Id + "?name=" + newName + "&key=" + key + "&token=" + token;
+            ChiamtaApi(url, "PUT");
+        }
+        /// <summary>
+        /// modifica stato della card
+        /// </summary>
+        /// <param name="newList">new stato </param>
+        /// <param name="model">card da modificare</param>
+        public void PutList(string newList, Card model)
+        {
+            string url = urlCard + model.Id + "?idList=" + newList + "&key=" + key + "&token=" + token;
+            ChiamtaApi(url, "PUT");
+        }
         /// <summary>
         /// Chiamata alle api trello con il salvataggio al interno di una stringa di un json contente tutte le informazioni della risposta alla richiesta 
         /// </summary>

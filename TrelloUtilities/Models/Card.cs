@@ -23,10 +23,14 @@ namespace TrelloWebApplication.Models
             get
             {
                 int i = 0;
-                foreach (var label in Labels)
+                if (Labels!=null)
                 {
-                    i++;
+                    foreach (var label in Labels)
+                    {
+                        i++;
+                    }
                 }
+                
                 return i;
             }
         }
