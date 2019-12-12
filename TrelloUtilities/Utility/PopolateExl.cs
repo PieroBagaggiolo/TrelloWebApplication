@@ -8,7 +8,7 @@ namespace TrelloUtilities
 {
     public class PopolateExl
     {
-        public static void Riempimento(Card model, ExcelWorksheet workSheet, int recordIndex,int fine)
+        public static void Riempimento(Card model, ExcelWorksheet workSheet, int recordIndex, int fine)
         {
             //intestazione
             workSheet.Row(recordIndex).Height = 20;
@@ -33,10 +33,10 @@ namespace TrelloUtilities
             workSheet.Cells[recordIndex, 8].Value = "ATTACHMENTS";
             workSheet.Cells[recordIndex, 9].Value = "EXPIRE TIME";
 
-          
+
             int inizio = recordIndex;
 
-            using (ExcelRange Titles = workSheet.Cells[recordIndex,1,recordIndex+1,9])
+            using (ExcelRange Titles = workSheet.Cells[recordIndex, 1, recordIndex + 1, 9])
             {
                 //Titles.Style.Border.Right.Style = ExcelBorderStyle.MediumDashed;
                 //Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
@@ -71,17 +71,22 @@ namespace TrelloUtilities
             }
 
             i = recordIndex;
+            var j = 0;
 
             if (model.ChekedLists != null)
                 foreach (var item in model.ChekedLists)
                 {
-                    workSheet.Cells[i, 6].Value = item.Name;
+
+                    workSheet.Cells[i, 6, fine, 6].Value = item.Name;
+                    j = i;
+
                     foreach (var sol in item.CheckItems)
                     {
 
                         workSheet.Cells[i, 7].Value = sol.Name + " (" + sol.State + ")  ";
                         i++;
                     }
+                    VerticalTitle(workSheet, i - 1, j);
                 }
             else
             {
@@ -101,7 +106,7 @@ namespace TrelloUtilities
                 workSheet.Cells[i, 8].Value = "no Attachments";
             }
             workSheet.Cells[recordIndex, 9].Value = model.Due;
-            using (ExcelRange Titles = workSheet.Cells[inizio+2, 1, fine , 9])
+            using (ExcelRange Titles = workSheet.Cells[inizio + 2, 1, fine, 9])
             {
                 Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
                 Titles.Style.Border.Right.Color.SetColor(Color.Black);
@@ -113,5 +118,15 @@ namespace TrelloUtilities
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.LightGreen);
             }
         }
+
+        private static void VerticalTitle(ExcelWorksheet workSheet, int fine, int i)
+        {
+            using (var title = workSheet.Cells[i, 6, fine, 6]) //funzione per unire più celle verticalmente
+            {
+                title.Merge = true;
+                title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            }
+        }
     }
+}
 }
