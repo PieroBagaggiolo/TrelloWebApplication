@@ -225,7 +225,9 @@
     <Content Include="Views\Card\PdfDetails.cshtml" />
     <Content Include="Views\Card\Edit.cshtml" />
     <Content Include="Views\Card\newCard.cshtml" />
+
     <Content Include="Views\Select\Filter.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
