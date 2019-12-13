@@ -99,6 +99,7 @@ namespace TrelloUtilities
             else
             {
                 workSheet.Cells[i, 8].Value = "no ChekedLists";
+                VerticalTitle(workSheet, 8, fine, i);
             }
             i = recordIndex;
             if (model.Attachments != null)
@@ -113,6 +114,7 @@ namespace TrelloUtilities
             else
             {
                 workSheet.Cells[i, 9].Value = "no Attachments";
+                VerticalTitle(workSheet, 9, fine, i);
             }
 
             if (model.Due!=null)
