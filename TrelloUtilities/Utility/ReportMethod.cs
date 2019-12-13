@@ -39,6 +39,7 @@ namespace TrelloUtilities
             workSheet.Column(7).AutoFit();
             workSheet.Column(8).AutoFit();
             workSheet.Column(9).AutoFit();
+            workSheet.Column(10).AutoFit();
             return ex;
         }
         public static int CalcolateDimensionMax(int recordIndex, Card card)
@@ -95,6 +96,7 @@ namespace TrelloUtilities
             workSheet.Column(7).AutoFit();
             workSheet.Column(8).AutoFit();
             workSheet.Column(9).AutoFit();
+            workSheet.Column(10).AutoFit();
             return ex;
         }
 

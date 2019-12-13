@@ -32,11 +32,12 @@ namespace TrelloUtilities
             workSheet.Cells[recordIndex + 1, 7].Value = "Opzioni";
             workSheet.Cells[recordIndex, 8].Value = "ATTACHMENTS";
             workSheet.Cells[recordIndex, 9].Value = "EXPIRE TIME";
+            workSheet.Cells[recordIndex, 10].Value = "ARCHIVIATA";
 
 
             int inizio = recordIndex;
 
-            using (ExcelRange Titles = workSheet.Cells[recordIndex, 1, recordIndex + 1, 9])
+            using (ExcelRange Titles = workSheet.Cells[recordIndex, 1, recordIndex + 1, 10])
             {
                 //Titles.Style.Border.Right.Style = ExcelBorderStyle.MediumDashed;
                 //Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
@@ -107,7 +108,8 @@ namespace TrelloUtilities
                 workSheet.Cells[i, 8].Value = "no Attachments";
             }
             workSheet.Cells[recordIndex, 9].Value = model.Due;
-            using (ExcelRange Titles = workSheet.Cells[inizio + 2, 1, fine, 9])
+            workSheet.Cells[recordIndex,10].Value = model.Closed;
+            using (ExcelRange Titles = workSheet.Cells[inizio + 2, 1, fine, 10])
             {
                 Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
                 Titles.Style.Border.Right.Color.SetColor(Color.Black);
