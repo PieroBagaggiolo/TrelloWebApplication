@@ -116,8 +116,6 @@ namespace TrelloUtilities
             //    Rng.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
             //    Rng.Style.Border.Bottom.Color.SetColor(Color.White);
             //}
-
-
             return ex;
         }
 
