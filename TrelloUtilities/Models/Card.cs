@@ -15,7 +15,7 @@ namespace TrelloWebApplication.Models
         public string IdList { get; set; }
         public List<Label> Labels { get; set; }
         public string Name { get; set; }
-        public DateTime prova { get; set; }
+        public DateTime DueDate { get; set; }
         public List<Attachment> Attachments { get; set; }
         public List<ChekedList> ChekedLists { get; set; }
         public string CommentTemp { get; set; }

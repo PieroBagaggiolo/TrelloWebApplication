@@ -59,6 +59,25 @@ namespace TrelloWebApplication.Controllers
             return result;
         }
         /// <summary>
+        /// per eliminare la card
+        /// </summary>
+        /// <param name="id">id della card da eliminare</param>
+        /// <returns></returns>
+        public ActionResult Delete(string id = null)
+        {
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+
+                {
+                    card = item;
+                }
+            }
+            myApi.DelateCard(card);
+            return RedirectToAction("Index", model);
+        }
+        /// <summary>
         /// visualizazione dei dettagli di una card richiesti nella consegna
         /// </summary>
         /// <param name="id">id della card</param>
@@ -77,12 +96,40 @@ namespace TrelloWebApplication.Controllers
 
             return View(card);
         }
-        /// <summary>
-        /// Pagina di modifica card
-        /// </summary>
-        /// <param name="id">id card </param>
-        /// <returns></returns>
-        public ActionResult Edit(string id = null)
+        public ActionResult newCard()
+        {
+            Card card = new Card();           
+            var stato = myApi.GetState();
+            ViewBag.Stato = new SelectList(stato, "Id", "Name", card.IdList);
+            return View(card);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult newCard(Card card)
+        {
+            int i = 0;
+            foreach (var list in myApi.GetState())
+            {
+                if (i==0)
+                {
+                    card.IdList = list.Id;
+                }
+                if (card.IdList.ToUpper() == list.Name.ToUpper())
+                {                   
+                    card.IdList = list.Id;
+                    break;
+                }
+                i++;
+            }
+            myApi.PostCard(card);
+            return RedirectToAction("Index", model);
+        }
+            /// <summary>
+            /// Pagina di modifica card
+            /// </summary>
+            /// <param name="id">id card </param>
+            /// <returns></returns>
+            public ActionResult Edit(string id = null)
         {
             Card card = null;
             foreach (var item in model)
@@ -138,9 +185,9 @@ namespace TrelloWebApplication.Controllers
                     myApi.PutList(list.Id,card);
                 }
             }
-            if (card.prova!= cardVecchia.prova)
+            if (card.DueDate!= cardVecchia.DueDate)
             {
-                myApi.PutDueDate(card.prova, card);
+                myApi.PutDueDate(card.DueDate, card);
             }
             return RedirectToAction("Index",model);
         }

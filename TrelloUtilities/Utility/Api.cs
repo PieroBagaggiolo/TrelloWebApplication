@@ -91,16 +91,7 @@ namespace TrelloWebApplication.Utiliti
         //}
 
 
-        /// <summary>
-        /// funzione che lancia il mettodo post per aggiungere un comento a una card
-        /// </summary>
-        /// <param name="comment">commento da inserire </param>
-        /// <param name="model">card nella quale si deve inserire</param>
-        public void AddComment(string comment, Card model)
-        {
-            string url = urlCard + model.Id + "/actions/comments?text=" + comment + "&key=" + key + "&token=" + token;
-            ChiamtaApi(url, "POST");
-        }
+
         /// <summary>
         /// modifica una card da archivata a non o viceversa 
         /// </summary>
@@ -141,6 +132,35 @@ namespace TrelloWebApplication.Utiliti
             string mezzo = "%2F";
             string url = urlCard + model.Id + "?due=" + newData.Month+mezzo+newData.Day+mezzo+newData.Year + "&key=" + key + "&token=" + token;
             ChiamtaApi(url, "PUT");
+        }
+        /// <summary>
+        /// creazione new card 
+        /// </summary>
+        /// <param name="model"></param>
+        public void PostCard(Card model)
+        {
+            string url = urlCard + "?name="+model.Name+ "&idList="+model.IdList + "&key=" + key + "&token=" + token;
+            ChiamtaApi(url, "POST");
+        }
+        /// <summary>
+        /// funzione che lancia il mettodo post per aggiungere un comento a una card
+        /// </summary>
+        /// <param name="comment">commento da inserire </param>
+        /// <param name="model">card nella quale si deve inserire</param>
+        public void AddComment(string comment, Card model)
+        {
+            string url = urlCard + model.Id + "/actions/comments?text=" + comment + "&key=" + key + "&token=" + token;
+            ChiamtaApi(url, "POST");
+        }
+        /// <summary>
+        /// funzione che lancia il mettodo post per aggiungere un comento a una card
+        /// </summary>
+        /// <param name="comment">commento da inserire </param>
+        /// <param name="model">card nella quale si deve inserire</param>
+        public void DelateCard( Card model)
+        {
+            string url = urlCard + model.Id +"?key=" + key + "&token=" + token;
+            ChiamtaApi(url, "DELETE");
         }
         /// <summary>
         /// Chiamata alle api trello con il salvataggio al interno di una stringa di un json contente tutte le informazioni della risposta alla richiesta 
