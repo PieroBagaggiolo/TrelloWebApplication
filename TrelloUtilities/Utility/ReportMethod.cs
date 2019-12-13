@@ -30,16 +30,17 @@ namespace TrelloUtilities
                 recordIndex = fine;
                 recordIndex += 4;
             }
-            workSheet.Column(1).AutoFit();
-            workSheet.Column(2).AutoFit();
-            workSheet.Column(3).AutoFit();
-            workSheet.Column(4).AutoFit();
-            workSheet.Column(5).AutoFit();
-            workSheet.Column(6).AutoFit();
-            workSheet.Column(7).AutoFit();
-            workSheet.Column(8).AutoFit();
-            workSheet.Column(9).AutoFit();
-            workSheet.Column(10).AutoFit();
+            //workSheet.Column(1).AutoFit();
+            //workSheet.Column(2).AutoFit();
+            //workSheet.Column(3).AutoFit();
+            //workSheet.Column(4).AutoFit();
+            //workSheet.Column(5).AutoFit();
+            //workSheet.Column(6).AutoFit();
+            //workSheet.Column(7).AutoFit();
+            //workSheet.Column(8).AutoFit();
+            //workSheet.Column(9).AutoFit();
+            //workSheet.Column(10).AutoFit();
+            workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
         public static int CalcolateDimensionMax(int recordIndex, Card card)
@@ -87,16 +88,17 @@ namespace TrelloUtilities
             var workSheet = ex.Workbook.Worksheets[SheetName];
             int recordIndex = 1;
             PopolateExl.Riempimento(model, workSheet, recordIndex,maxGrow);
-            workSheet.Column(1).AutoFit();
-            workSheet.Column(2).AutoFit();
-            workSheet.Column(3).AutoFit();
-            workSheet.Column(4).AutoFit();
-            workSheet.Column(5).AutoFit();
-            workSheet.Column(6).AutoFit();
-            workSheet.Column(7).AutoFit();
-            workSheet.Column(8).AutoFit();
-            workSheet.Column(9).AutoFit();
-            workSheet.Column(10).AutoFit();
+            //workSheet.Column(1).AutoFit();
+            //workSheet.Column(2).AutoFit();
+            //workSheet.Column(3).AutoFit();
+            //workSheet.Column(4).AutoFit();
+            //workSheet.Column(5).AutoFit();
+            //workSheet.Column(6).AutoFit();
+            //workSheet.Column(7).AutoFit();
+            //workSheet.Column(8).AutoFit();
+            //workSheet.Column(9).AutoFit();
+            //workSheet.Column(10).AutoFit();
+            workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
 
