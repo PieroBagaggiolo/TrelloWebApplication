@@ -1,8 +1,10 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrelloUtilities;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
 
@@ -35,5 +37,37 @@ namespace TrelloWebApplication.Controllers
             }
             return View(model);
         }
+        /// <summary>
+        /// creazione file exl con i dati di una card
+        /// </summary>
+        /// <param name="id">id della card</param>
+        /// <returns>l view di prima</returns>
+        public ActionResult ExcelEx(string id = null)
+        {
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+                {
+                    card = item;
+                }
+            }
+            ExcelPackage ex = ReportMethods.ExportSingleExcel(card);
+            CreazioneExl.CreazioneFile(ex, "Details");
+            return View(card);
+        }
+
+        /// <summary>
+        /// creazione di un file exl con tutti i datti di tutte le card
+        /// </summary>
+        /// <returns>ritorna la view</returns>
+        public ActionResult ExcelExIndex(string stato)
+        {
+            ExcelPackage ex = ReportMethods.ExportExcelTotal(myApi);
+            CreazioneExl.CreazioneFile(ex, "Index");
+            return View();
+        }
+
     }
+
 }
