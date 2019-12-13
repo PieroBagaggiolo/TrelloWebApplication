@@ -2,7 +2,6 @@
 using OfficeOpenXml.Style;
 using System;
 using System.Drawing;
-
 using TrelloWebApplication.Models;
 
 namespace TrelloUtilities
@@ -34,8 +33,6 @@ namespace TrelloUtilities
             workSheet.Cells[recordIndex + 1, 8].Value = "Opzioni";
             workSheet.Cells[recordIndex, 9].Value = "ATTACHMENTS";
             workSheet.Cells[recordIndex, 10].Value = "EXPIRE TIME";
-            
-
 
             int inizio = recordIndex;
 
@@ -62,7 +59,15 @@ namespace TrelloUtilities
             workSheet.Cells[recordIndex, 2].Value = model.Id;
             workSheet.Cells[recordIndex, 3].Value = model.Name;
             workSheet.Cells[recordIndex, 4].Value = model.IdList;
-            workSheet.Cells[recordIndex, 5].Value = model.Closed;
+
+            if (model.Closed.ToUpper()=="FALSE")
+            {
+                workSheet.Cells[recordIndex, 5].Value = "NO";
+            }
+            else
+            {
+                workSheet.Cells[recordIndex, 5].Value = "SI";
+            }
             if (model.Labels.Count > 0)
                 foreach (var item in model.Labels)
                 {
@@ -80,7 +85,6 @@ namespace TrelloUtilities
             if (model.ChekedLists != null)
                 foreach (var item in model.ChekedLists)
                 {
-
                     workSheet.Cells[i, 7, fine, 7].Value = item.Name;
                     j = i;
 
@@ -105,14 +109,25 @@ namespace TrelloUtilities
                     workSheet.Cells[i, 9].Hyperlink = url;
                     i++;
                 }
-            
+
             else
             {
                 workSheet.Cells[i, 9].Value = "no Attachments";
-                VerticalTitle(workSheet, 9, fine, i);
             }
-            workSheet.Cells[recordIndex, 10].Value = model.Due;
+
+            if (model.Due!=null)
+            {
+                workSheet.Cells[recordIndex, 10].Value = model.Due;
+            }
+            else
+            {
+                workSheet.Cells[recordIndex, 10].Value = "no data di scadenza";
+            }
+
+            
             using (ExcelRange Titles = workSheet.Cells[inizio + 2, 1, fine, 10])
+
+
             {
                 Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
                 Titles.Style.Border.Right.Color.SetColor(Color.Black);
@@ -136,7 +151,7 @@ namespace TrelloUtilities
         private static void VerticalTitle(ExcelWorksheet workSheet, int col, int fine, int i)
         {
             using (var title = workSheet.Cells[i, col, fine, col]) //funzione per unire più celle verticalmente
-            {
+            { 
                 title.Merge = true;
                 title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 title.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;

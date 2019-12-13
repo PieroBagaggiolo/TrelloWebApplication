@@ -38,6 +38,7 @@ namespace TrelloUtilities
             //workSheet.Column(8).AutoFit();
             //workSheet.Column(9).AutoFit();
             //workSheet.Column(10).AutoFit();
+
             workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
@@ -96,6 +97,7 @@ namespace TrelloUtilities
             //workSheet.Column(8).AutoFit();
             //workSheet.Column(9).AutoFit();
             //workSheet.Column(10).AutoFit();
+
             workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
@@ -106,18 +108,6 @@ namespace TrelloUtilities
             var workSheet = ex.Workbook.Worksheets.Add(sheetName);
             workSheet.TabColor = System.Drawing.Color.Black;
             workSheet.DefaultRowHeight = 12;
-
-            //using (ExcelRange Rng = workSheet.Cells[1, 1, fullDim, 9])
-            //{
-            //    Rng.Style.Border.Top.Style = ExcelBorderStyle.Medium;
-            //    Rng.Style.Border.Top.Color.SetColor(Color.Black);
-            //    Rng.Style.Border.Left.Style = ExcelBorderStyle.Medium;
-            //    Rng.Style.Border.Left.Color.SetColor(Color.Black);
-            //    Rng.Style.Border.Right.Style = ExcelBorderStyle.Medium;
-            //    Rng.Style.Border.Right.Color.SetColor(Color.Black);
-            //    Rng.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
-            //    Rng.Style.Border.Bottom.Color.SetColor(Color.White);
-            //}
 
 
             return ex;
