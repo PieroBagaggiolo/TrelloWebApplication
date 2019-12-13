@@ -16,8 +16,6 @@ namespace TrelloUtilities
             List<Card> model = PopolateModel.Popola(myApi);
             //creazione di un foglio EXCEL
             var SheetName = "Foglio";
-
-           
             ExcelPackage ex = CreazioneFoglio(SheetName);
 
             var workSheet = ex.Workbook.Worksheets[SheetName];

@@ -29,7 +29,6 @@ namespace TrelloUtilities
                 LisTit.Value = "CHECKLIST";
                 LisTit.Merge = true;
             }
-
             workSheet.Cells[recordIndex + 1, 7].Value = "Titolo";
             workSheet.Cells[recordIndex + 1, 8].Value = "Opzioni";
             workSheet.Cells[recordIndex, 9].Value = "ATTACHMENTS";
@@ -60,6 +59,7 @@ namespace TrelloUtilities
             workSheet.Cells[recordIndex, 2].Value = model.Id;
             workSheet.Cells[recordIndex, 3].Value = model.Name;
             workSheet.Cells[recordIndex, 4].Value = model.IdList;
+
             if (model.Closed.ToUpper()=="FALSE")
             {
                 workSheet.Cells[recordIndex, 5].Value = "NO";
@@ -85,10 +85,7 @@ namespace TrelloUtilities
             if (model.ChekedLists != null)
                 foreach (var item in model.ChekedLists)
                 {
-
-
                     workSheet.Cells[i, 7, fine, 7].Value = item.Name;
-
                     j = i;
 
                     foreach (var sol in item.CheckItems)
@@ -97,11 +94,12 @@ namespace TrelloUtilities
                         workSheet.Cells[i, 8].Value = sol.Name + " (" + sol.State + ")  ";
                         i++;
                     }
-                    VerticalTitle(workSheet, i - 1, j);
+                    VerticalTitle(workSheet, 7, i - 1, j);
                 }
             else
             {
                 workSheet.Cells[i, 8].Value = "no ChekedLists";
+                VerticalTitle(workSheet, 8, fine, i);
             }
             i = recordIndex;
             if (model.Attachments != null)
@@ -116,6 +114,7 @@ namespace TrelloUtilities
             else
             {
                 workSheet.Cells[i, 9].Value = "no Attachments";
+                VerticalTitle(workSheet, 9, fine, i);
             }
 
             if (model.Due!=null)
@@ -142,27 +141,22 @@ namespace TrelloUtilities
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.LightGreen);
             }
             
+            VerticalTitle(workSheet, 1, fine, i);
+            VerticalTitle(workSheet, 2, fine, i);
+            VerticalTitle(workSheet, 3, fine, i);
+            VerticalTitle(workSheet, 4, fine, i);
+            VerticalTitle(workSheet, 5, fine, i);
+            VerticalTitle(workSheet, 6, fine, i);
+            VerticalTitle(workSheet, 10, fine, i);
         }
 
-        private static void VerticalTitle(ExcelWorksheet workSheet, int fine, int i)
+        private static void VerticalTitle(ExcelWorksheet workSheet, int col, int fine, int i)
         {
-            using (var title = workSheet.Cells[i, 7, fine, 7]) //funzione per unire più celle verticalmente
-            {
+            using (var title = workSheet.Cells[i, col, fine, col]) //funzione per unire più celle verticalmente
+            { 
                 title.Merge = true;
                 title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 title.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-            }
-        }
-
-        private static void VerticalTitle(ExcelWorksheet workSheet, int fine, int i)
-        {
-            using (var title = workSheet.Cells[i, 6, fine, 6]) //funzione per unire più celle verticalmente
-            {
-                title.Merge = true;
-                title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-
-                title.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                
             }
         }
     }
