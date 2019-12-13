@@ -2,6 +2,7 @@
 using OfficeOpenXml.Style;
 using System;
 using System.Drawing;
+
 using TrelloWebApplication.Models;
 
 namespace TrelloUtilities
@@ -34,14 +35,11 @@ namespace TrelloUtilities
             workSheet.Cells[recordIndex, 9].Value = "ATTACHMENTS";
             workSheet.Cells[recordIndex, 10].Value = "EXPIRE TIME";
 
+
             int inizio = recordIndex;
 
             using (ExcelRange Titles = workSheet.Cells[recordIndex, 1, recordIndex + 1, 10])
-            {
-                //Titles.Style.Border.Right.Style = ExcelBorderStyle.MediumDashed;
-                //Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
-                //Titles.Style.Border.Bottom.Style = ExcelBorderStyle.MediumDashed;
-                //Titles.Style.Border.Bottom.Color.SetColor(Color.Black);
+            {              
                 Titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.DarkGreen);
                 Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
@@ -85,6 +83,7 @@ namespace TrelloUtilities
             if (model.ChekedLists != null)
                 foreach (var item in model.ChekedLists)
                 {
+
                     workSheet.Cells[i, 7, fine, 7].Value = item.Name;
                     j = i;
 
@@ -110,13 +109,12 @@ namespace TrelloUtilities
                     workSheet.Cells[i, 9].Hyperlink = url;
                     i++;
                 }
-
+            
             else
             {
                 workSheet.Cells[i, 9].Value = "no Attachments";
                 VerticalTitle(workSheet, 9, fine, i);
             }
-
             if (model.Due!=null)
             {
                 workSheet.Cells[recordIndex, 10].Value = model.Due;
@@ -125,11 +123,8 @@ namespace TrelloUtilities
             {
                 workSheet.Cells[recordIndex, 10].Value = "no data di scadenza";
             }
-
             
             using (ExcelRange Titles = workSheet.Cells[inizio + 2, 1, fine, 10])
-
-
             {
                 Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
                 Titles.Style.Border.Right.Color.SetColor(Color.Black);
