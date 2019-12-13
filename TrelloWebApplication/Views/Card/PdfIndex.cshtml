@@ -10,7 +10,7 @@
         #divTable {
             page-break-inside: avoid;
         }
-
+      
         .tabSecondaria {
             width: 100%;
         }
@@ -38,9 +38,8 @@
 </head>
 <h1>PDF Cards List </h1>
 @*<table class="table" id="tb1" borde="1">*@
-@foreach (var item in Model)
-
-{<div id="divTable">
+@foreach (var item in Model){
+   <div id="divTable">
         <table class="table print-friendly" id="tb2">
             <tr>
                 <th id="primo" colspan="2">
