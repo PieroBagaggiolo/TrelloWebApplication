@@ -16,8 +16,6 @@ namespace TrelloUtilities
             List<Card> model = PopolateModel.Popola(myApi);
             //creazione di un foglio EXCEL
             var SheetName = "Foglio";
-
-           
             ExcelPackage ex = CreazioneFoglio(SheetName);
 
             var workSheet = ex.Workbook.Worksheets[SheetName];
@@ -25,7 +23,7 @@ namespace TrelloUtilities
             int fine = 0;
             foreach (var card in model)
             {
-                fine = CalcolateDimensionMax(recordIndex, card)+2;
+                fine = CalcolateDimensionMax(recordIndex, card)+1;
                 PopolateExl.Riempimento(card, workSheet, recordIndex,fine);
                 recordIndex = fine;
                 recordIndex += 4;
@@ -83,7 +81,7 @@ namespace TrelloUtilities
             //creazione di un foglio EXCEL
             var SheetName = "Foglio";
 
-            int maxGrow = CalcolateDimensionMax(1, model)+2;
+            int maxGrow = CalcolateDimensionMax(1, model)+1;
             ExcelPackage ex = CreazioneFoglio(SheetName);
             var workSheet = ex.Workbook.Worksheets[SheetName];
             int recordIndex = 1;

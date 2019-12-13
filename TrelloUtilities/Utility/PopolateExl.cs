@@ -23,17 +23,18 @@ namespace TrelloUtilities
             workSheet.Cells[recordIndex, 2].Value = "ID";
             workSheet.Cells[recordIndex, 3].Value = "NAME CARD";
             workSheet.Cells[recordIndex, 4].Value = "STATO";
-            workSheet.Cells[recordIndex, 5].Value = "LABEL";
-            using (ExcelRange LisTit = workSheet.Cells[recordIndex, 6, recordIndex, 7])
+            workSheet.Cells[recordIndex, 5].Value = "ARCHIVIATA";
+            workSheet.Cells[recordIndex, 6].Value = "LABEL";
+            using (ExcelRange LisTit = workSheet.Cells[recordIndex, 7, recordIndex, 8])
             {
                 LisTit.Value = "CHECKLIST";
                 LisTit.Merge = true;
             }
-            workSheet.Cells[recordIndex + 1, 6].Value = "Titolo";
-            workSheet.Cells[recordIndex + 1, 7].Value = "Opzioni";
-            workSheet.Cells[recordIndex, 8].Value = "ATTACHMENTS";
-            workSheet.Cells[recordIndex, 9].Value = "EXPIRE TIME";
-            workSheet.Cells[recordIndex, 10].Value = "ARCHIVIATA";
+            workSheet.Cells[recordIndex + 1, 7].Value = "Titolo";
+            workSheet.Cells[recordIndex + 1, 8].Value = "Opzioni";
+            workSheet.Cells[recordIndex, 9].Value = "ATTACHMENTS";
+            workSheet.Cells[recordIndex, 10].Value = "EXPIRE TIME";
+            
 
 
             int inizio = recordIndex;
@@ -55,21 +56,22 @@ namespace TrelloUtilities
                 Titles.Style.Font.Color.SetColor(Color.WhiteSmoke);
             }
 
-            recordIndex += 3;
+            recordIndex += 2;
             int i = recordIndex;
             workSheet.Cells[recordIndex, 1].Value = (recordIndex - 1).ToString();
             workSheet.Cells[recordIndex, 2].Value = model.Id;
             workSheet.Cells[recordIndex, 3].Value = model.Name;
             workSheet.Cells[recordIndex, 4].Value = model.IdList;
+            workSheet.Cells[recordIndex, 5].Value = model.Closed;
             if (model.Labels.Count > 0)
                 foreach (var item in model.Labels)
                 {
-                    workSheet.Cells[i, 5].Value = item.Name + " (" + item.Color + ")";
+                    workSheet.Cells[i, 6].Value = item.Name + " (" + item.Color + ")";
                     i++;
                 }
             else
             {
-                workSheet.Cells[i, 5].Value = "no Labels";
+                workSheet.Cells[i, 6].Value = "no Labels";
             }
 
             i = recordIndex;
@@ -79,37 +81,37 @@ namespace TrelloUtilities
                 foreach (var item in model.ChekedLists)
                 {
 
-                    workSheet.Cells[i, 6, fine, 6].Value = item.Name;
+                    workSheet.Cells[i, 7, fine, 7].Value = item.Name;
                     j = i;
 
                     foreach (var sol in item.CheckItems)
                     {
 
-                        workSheet.Cells[i, 7].Value = sol.Name + " (" + sol.State + ")  ";
+                        workSheet.Cells[i, 8].Value = sol.Name + " (" + sol.State + ")  ";
                         i++;
                     }
-                    VerticalTitle(workSheet, i - 1, j);
+                    VerticalTitle(workSheet, 7, i - 1, j);
                 }
             else
             {
-                workSheet.Cells[i, 7].Value = "no ChekedLists";
+                workSheet.Cells[i, 8].Value = "no ChekedLists";
             }
             i = recordIndex;
             if (model.Attachments != null)
                 foreach (var item in model.Attachments)
                 {
-                    workSheet.Cells[i, 8].Value = item.Name;
+                    workSheet.Cells[i, 9].Value = item.Name;
                     Uri url = new Uri(item.Url);
-                    workSheet.Cells[i, 8].Hyperlink = url;
+                    workSheet.Cells[i, 9].Hyperlink = url;
                     i++;
                 }
             
             else
             {
-                workSheet.Cells[i, 8].Value = "no Attachments";
+                workSheet.Cells[i, 9].Value = "no Attachments";
+                VerticalTitle(workSheet, 9, fine, i);
             }
-            workSheet.Cells[recordIndex, 9].Value = model.Due;
-            workSheet.Cells[recordIndex,10].Value = model.Closed;
+            workSheet.Cells[recordIndex, 10].Value = model.Due;
             using (ExcelRange Titles = workSheet.Cells[inizio + 2, 1, fine, 10])
             {
                 Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
@@ -122,11 +124,18 @@ namespace TrelloUtilities
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.LightGreen);
             }
             
+            VerticalTitle(workSheet, 1, fine, i);
+            VerticalTitle(workSheet, 2, fine, i);
+            VerticalTitle(workSheet, 3, fine, i);
+            VerticalTitle(workSheet, 4, fine, i);
+            VerticalTitle(workSheet, 5, fine, i);
+            VerticalTitle(workSheet, 6, fine, i);
+            VerticalTitle(workSheet, 10, fine, i);
         }
 
-        private static void VerticalTitle(ExcelWorksheet workSheet, int fine, int i)
+        private static void VerticalTitle(ExcelWorksheet workSheet, int col, int fine, int i)
         {
-            using (var title = workSheet.Cells[i, 6, fine, 6]) //funzione per unire più celle verticalmente
+            using (var title = workSheet.Cells[i, col, fine, col]) //funzione per unire più celle verticalmente
             {
                 title.Merge = true;
                 title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
