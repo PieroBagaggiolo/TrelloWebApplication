@@ -119,6 +119,7 @@ namespace TrelloUtilities
                 Titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.LightGreen);
             }
+            
         }
 
         private static void VerticalTitle(ExcelWorksheet workSheet, int fine, int i)
@@ -128,7 +129,6 @@ namespace TrelloUtilities
                 title.Merge = true;
                 title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 title.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
-                
             }
         }
     }
