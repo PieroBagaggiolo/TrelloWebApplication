@@ -25,7 +25,7 @@ namespace TrelloUtilities
             int fine = 0;
             foreach (var card in model)
             {
-                fine = CalcolateDimensionMax(recordIndex, card)+2;
+                fine = CalcolateDimensionMax(recordIndex, card)+1;
                 PopolateExl.Riempimento(card, workSheet, recordIndex,fine);
                 recordIndex = fine;
                 recordIndex += 4;
@@ -40,6 +40,7 @@ namespace TrelloUtilities
             //workSheet.Column(8).AutoFit();
             //workSheet.Column(9).AutoFit();
             //workSheet.Column(10).AutoFit();
+
             workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
@@ -83,7 +84,7 @@ namespace TrelloUtilities
             //creazione di un foglio EXCEL
             var SheetName = "Foglio";
 
-            int maxGrow = CalcolateDimensionMax(1, model)+2;
+            int maxGrow = CalcolateDimensionMax(1, model)+1;
             ExcelPackage ex = CreazioneFoglio(SheetName);
             var workSheet = ex.Workbook.Worksheets[SheetName];
             int recordIndex = 1;
@@ -98,6 +99,7 @@ namespace TrelloUtilities
             //workSheet.Column(8).AutoFit();
             //workSheet.Column(9).AutoFit();
             //workSheet.Column(10).AutoFit();
+
             workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
@@ -108,18 +110,6 @@ namespace TrelloUtilities
             var workSheet = ex.Workbook.Worksheets.Add(sheetName);
             workSheet.TabColor = System.Drawing.Color.Black;
             workSheet.DefaultRowHeight = 12;
-
-            //using (ExcelRange Rng = workSheet.Cells[1, 1, fullDim, 9])
-            //{
-            //    Rng.Style.Border.Top.Style = ExcelBorderStyle.Medium;
-            //    Rng.Style.Border.Top.Color.SetColor(Color.Black);
-            //    Rng.Style.Border.Left.Style = ExcelBorderStyle.Medium;
-            //    Rng.Style.Border.Left.Color.SetColor(Color.Black);
-            //    Rng.Style.Border.Right.Style = ExcelBorderStyle.Medium;
-            //    Rng.Style.Border.Right.Color.SetColor(Color.Black);
-            //    Rng.Style.Border.Bottom.Style = ExcelBorderStyle.Medium;
-            //    Rng.Style.Border.Bottom.Color.SetColor(Color.White);
-            //}
 
 
             return ex;
