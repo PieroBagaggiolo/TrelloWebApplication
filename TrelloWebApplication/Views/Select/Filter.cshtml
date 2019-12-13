@@ -1,0 +1,55 @@
+﻿@model IEnumerable<TrelloWebApplication.Models.Card>
+
+@{
+    ViewBag.Title = "Filter";
+}
+
+<div class="jumbotron">
+    <h1 style="text-align:center">TRELLO REPORTER APP</h1>
+</div>
+<h1>Trello's Board Cards List</h1>
+<p>
+    Lista dell cards presenti nella bacheca di Trello
+</p>
+<p>
+    - Clicca su Details per vedere il loro status, le loro checklist, eventuali scadenze, eventuali allegati e le loro label.
+</p>
+<p>
+    - Per scaricare gli eventuali allegati recarsi su Details e seguire le istruzioni.
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Stato: @Html.DropDownList("Stato", "ALL")
+        <input type="submit" value="Filter" />
+    </p>
+}
+
+<table class="table" id="tb1">
+    <tr>
+        <th style="text-align:center">
+            TRELLO'S CARDS LIST
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdList)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Closed)
+            </td>
+        </tr>
+    }
+</table>
+@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Card", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
+
+@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })
+
