@@ -118,22 +118,9 @@ namespace TrelloWebApplication.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult newCard(Card card)
+        public ActionResult newCard(Card card,string stato)
         {
-            int i = 0;
-            foreach (var list in myApi.GetState())
-            {
-                if (i==0)
-                {
-                    card.IdList = list.Id;
-                }
-                if (card.IdList.ToUpper() == list.Name.ToUpper())
-                {                   
-                    card.IdList = list.Id;
-                    break;
-                }
-                i++;
-            }
+            card.IdList = stato;
             myApi.PostCard(card);
             return RedirectToAction("Index", model);
         }
@@ -165,7 +152,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Card card)
+        public ActionResult Edit(Card card, string stato)
         {
             Card cardVecchia = null;
             foreach (var item in model)
@@ -187,17 +174,7 @@ namespace TrelloWebApplication.Controllers
                     myApi.PutClosed("false",card);
                 }
             }
-            if (cardVecchia.Name != card.Name)
-            {
-                myApi.PutName(card.Name,card);
-            }
-            foreach (var list in myApi.GetState())
-            {
-                if (card.IdList.ToUpper() == list.Name.ToUpper())
-                {
-                    myApi.PutList(list.Id,card);
-                }
-            }
+            myApi.PutList(stato, card);
             if (card.DueDate!= cardVecchia.DueDate)
             {
                 myApi.PutDueDate(card.DueDate, card);
