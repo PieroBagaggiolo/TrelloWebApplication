@@ -30,6 +30,17 @@ namespace TrelloUtilities
                 recordIndex = fine;
                 recordIndex += 4;
             }
+            //workSheet.Column(1).AutoFit();
+            //workSheet.Column(2).AutoFit();
+            //workSheet.Column(3).AutoFit();
+            //workSheet.Column(4).AutoFit();
+            //workSheet.Column(5).AutoFit();
+            //workSheet.Column(6).AutoFit();
+            //workSheet.Column(7).AutoFit();
+            //workSheet.Column(8).AutoFit();
+            //workSheet.Column(9).AutoFit();
+            //workSheet.Column(10).AutoFit();
+
             workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
@@ -78,6 +89,17 @@ namespace TrelloUtilities
             var workSheet = ex.Workbook.Worksheets[SheetName];
             int recordIndex = 1;
             PopolateExl.Riempimento(model, workSheet, recordIndex,maxGrow);
+            //workSheet.Column(1).AutoFit();
+            //workSheet.Column(2).AutoFit();
+            //workSheet.Column(3).AutoFit();
+            //workSheet.Column(4).AutoFit();
+            //workSheet.Column(5).AutoFit();
+            //workSheet.Column(6).AutoFit();
+            //workSheet.Column(7).AutoFit();
+            //workSheet.Column(8).AutoFit();
+            //workSheet.Column(9).AutoFit();
+            //workSheet.Column(10).AutoFit();
+
             workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
@@ -88,6 +110,7 @@ namespace TrelloUtilities
             var workSheet = ex.Workbook.Worksheets.Add(sheetName);
             workSheet.TabColor = System.Drawing.Color.Black;
             workSheet.DefaultRowHeight = 12;
+
 
             return ex;
         }
