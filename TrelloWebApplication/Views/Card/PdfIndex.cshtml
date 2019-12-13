@@ -7,18 +7,20 @@
 }
 <head>
     <style>
+        #divTable {
+            page-break-inside: avoid;
+        }
         .tabSecondaria {
             width: 100%;
         }
 
         table {
             border-collapse: collapse;
-            page-break-inside: auto
         }
-        tr {
+        /*tr {
             page-break-inside: avoid;
             page-break-after: auto
-        }
+        }*/
         h1 {
             text-align: center;
         }
@@ -37,144 +39,145 @@
 @*<table class="table" id="tb1" borde="1">*@
 @foreach (var item in Model)
 
-{
-<table class="table print-friendly" id="tb2">
-    <tr>
-        <th id="primo" colspan="2">
-            @Html.DisplayFor(model => item.Name)
-        </th>
-    </tr>
-    <tr>
-        <th id="primo">
-            ID
-        </th>
-        <td>
-            @Html.DisplayFor(model => item.Id)
-        </td>
-    </tr>
-    <tr>
-        <th>
-            STATO
-        </th>
-        <td>
-            @Html.DisplayFor(model => item.IdList)
-        </td>
-    </tr>
-    <tr>
-        <th>
-            ARCHIVIATA
-        </th>
-        @if (item.Closed == "False")
-        {
+{<div id="divTable">
+    <table class="table print-friendly" id="tb2">
+        <tr>
+            <th id="primo" colspan="2">
+                @Html.DisplayFor(model => item.Name)
+            </th>
+        </tr>
+        <tr>
+            <th id="primo">
+                ID
+            </th>
             <td>
-                NO
+                @Html.DisplayFor(model => item.Id)
             </td>
-        }
-        else
-        {
+        </tr>
+        <tr>
+            <th>
+                STATO
+            </th>
             <td>
-                SI
+                @Html.DisplayFor(model => item.IdList)
             </td>
-        }
-    </tr>
-    <tr>
-        <th>
-            LABEL
-        </th>
-        @if (item.Labels.Count > 0)
-        {
-            <td>
-                @foreach (var m in item.Labels)
-                {
-                    <table class="tabSecondaria">
-                        @*tab secondaria*@
-                        <tr>
-                            <td style="padding-left: 0px" colspan="2">
-                                @Html.DisplayFor(modelm => m.Name) -
-                                (@Html.DisplayFor(modelm => m.Color))
-                            </td>
-                        </tr>
-                    </table>
-                }
-            </td>
-        }
-        else
-        {
-            <td>NO LABELS</td>
-        }
-    </tr>
-    <tr>
-        <th>CHECKLISTS</th>
-        @if (item.ChekedLists != null)
-        {
-            <td colspan="2">
-                @foreach (var m in item.ChekedLists)
-                {
-                    <table class="tabSecondaria">
-                        <tr>
-                            <th>
-                                - @Html.DisplayFor(modelm => m.Name)
-                            </th>
-                        </tr>
-                        @foreach (var chk in m.CheckItems)
-                        {
+        </tr>
+        <tr>
+            <th>
+                ARCHIVIATA
+            </th>
+            @if (item.Closed == "False")
+            {
+                <td>
+                    NO
+                </td>
+            }
+            else
+            {
+                <td>
+                    SI
+                </td>
+            }
+        </tr>
+        <tr>
+            <th>
+                LABEL
+            </th>
+            @if (item.Labels.Count > 0)
+            {
+                <td>
+                    @foreach (var m in item.Labels)
+                    {
+                        <table class="tabSecondaria">
+                            @*tab secondaria*@
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelchk => chk.Name) -
-                                    (@Html.DisplayFor(modelchk => chk.State))
+                                <td style="padding-left: 0px" colspan="2">
+                                    @Html.DisplayFor(modelm => m.Name) -
+                                    (@Html.DisplayFor(modelm => m.Color))
                                 </td>
                             </tr>
-                        }
-                    </table>
-                }
-            </td>
-        }
-        else
-        {
-            <td>NO CHECKLISTS</td>
-        }
-    </tr>
-    <tr>
-        <th>ATTACHMENTS</th>
-        @if (item.Attachments != null)
-        {
-            <td>
-                @foreach (var att in item.Attachments)
-                {
+                        </table>
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO LABELS</td>
+            }
+        </tr>
+        <tr>
+            <th>CHECKLISTS</th>
+            @if (item.ChekedLists != null)
+            {
+                <td colspan="2">
+                    @foreach (var m in item.ChekedLists)
+                    {
+                        <table class="tabSecondaria">
+                            <tr>
+                                <th>
+                                    - @Html.DisplayFor(modelm => m.Name)
+                                </th>
+                            </tr>
+                            @foreach (var chk in m.CheckItems)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelchk => chk.Name) -
+                                        (@Html.DisplayFor(modelchk => chk.State))
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO CHECKLISTS</td>
+            }
+        </tr>
+        <tr>
+            <th>ATTACHMENTS</th>
+            @if (item.Attachments != null)
+            {
+                <td>
+                    @foreach (var att in item.Attachments)
+                    {
 
-                    <table>
-                        <tr>
-                            <td>
-                                <a href="@Url.Content(att.Url)" download="@Url.Content(att.Name)">
-                                    @Url.Content(att.Name)
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="@Url.Content(att.Url)" download="@Url.Content(att.Name)">
+                                        @Url.Content(att.Name)
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
 
-                }
-            </td>
-        }
-        else
-        {
-            <td>NO ATTACHMENTS</td>
-        }
-    </tr>
-    <tr>
-        <th>
-            Expire Time
-        </th>
-        @if (item.Due != null)
-        {
-            <td>
-                @Html.DisplayFor(model => item.Due)
-            </td>
-        }
-        else
-        {
-            <td>No Expire time</td>
-        }
-    </tr>
-</table>
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO ATTACHMENTS</td>
+            }
+        </tr>
+        <tr>
+            <th>
+                Expire Time
+            </th>
+            @if (item.Due != null)
+            {
+                <td>
+                    @Html.DisplayFor(model => item.Due)
+                </td>
+            }
+            else
+            {
+                <td>No Expire time</td>
+            }
+        </tr>
+    </table>
+</div>
 <br /> 
 }
