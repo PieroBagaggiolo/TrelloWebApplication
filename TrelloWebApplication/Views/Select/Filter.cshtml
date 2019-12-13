@@ -1,0 +1,82 @@
+﻿@model TrelloWebApplication.Models.Card
+
+@{
+    ViewBag.Title = "Filter";
+}
+
+<h2>Filter</h2>
+
+<div>
+    <h4>Card</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Closed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Closed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Due)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Due)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdList)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdList)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentTemp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentTemp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberLabels)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberLabels)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberChekItem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberChekItem)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
