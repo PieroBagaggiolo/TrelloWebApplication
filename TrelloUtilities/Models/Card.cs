@@ -15,6 +15,7 @@ namespace TrelloWebApplication.Models
         public string IdList { get; set; }
         public List<Label> Labels { get; set; }
         public string Name { get; set; }
+        public DateTime DueDate { get; set; }
         public List<Attachment> Attachments { get; set; }
         public List<ChekedList> ChekedLists { get; set; }
         public string CommentTemp { get; set; }
@@ -23,10 +24,14 @@ namespace TrelloWebApplication.Models
             get
             {
                 int i = 0;
-                foreach (var label in Labels)
+                if (Labels!=null)
                 {
-                    i++;
+                    foreach (var label in Labels)
+                    {
+                        i++;
+                    }
                 }
+                
                 return i;
             }
         }
