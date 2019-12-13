@@ -2,7 +2,6 @@
 using OfficeOpenXml.Style;
 using System;
 using System.Drawing;
-
 using TrelloWebApplication.Models;
 
 namespace TrelloUtilities
@@ -40,6 +39,7 @@ namespace TrelloUtilities
 
             using (ExcelRange Titles = workSheet.Cells[recordIndex, 1, recordIndex + 1, 10])
             {              
+
                 Titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.DarkGreen);
                 Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
@@ -83,7 +83,9 @@ namespace TrelloUtilities
                 foreach (var item in model.ChekedLists)
                 {
 
+
                     workSheet.Cells[i, 7, fine, 7].Value = item.Name;
+
                     j = i;
 
                     foreach (var sol in item.CheckItems)
@@ -107,11 +109,12 @@ namespace TrelloUtilities
                     workSheet.Cells[i, 9].Hyperlink = url;
                     i++;
                 }
-            
+
             else
             {
                 workSheet.Cells[i, 9].Value = "no Attachments";
             }
+
             if (model.Due!=null)
             {
                 workSheet.Cells[recordIndex, 10].Value = model.Due;
@@ -122,6 +125,7 @@ namespace TrelloUtilities
             }
             
             using (ExcelRange Titles = workSheet.Cells[inizio + 2, 1, fine, 10])
+
             {
                 Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
                 Titles.Style.Border.Right.Color.SetColor(Color.Black);
@@ -142,6 +146,18 @@ namespace TrelloUtilities
                 title.Merge = true;
                 title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
                 title.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            }
+        }
+
+        private static void VerticalTitle(ExcelWorksheet workSheet, int fine, int i)
+        {
+            using (var title = workSheet.Cells[i, 6, fine, 6]) //funzione per unire più celle verticalmente
+            {
+                title.Merge = true;
+                title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+
+                title.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                
             }
         }
     }

@@ -91,7 +91,6 @@ namespace TrelloWebApplication.Utiliti
         //}
 
 
-
         /// <summary>
         /// modifica una card da archivata a non o viceversa 
         /// </summary>
@@ -152,6 +151,7 @@ namespace TrelloWebApplication.Utiliti
             string url = urlCard + model.Id + "/actions/comments?text=" + comment + "&key=" + key + "&token=" + token;
             ChiamtaApi(url, "POST");
         }
+
         /// <summary>
         /// funzione che lancia il mettodo post per aggiungere un comento a una card
         /// </summary>

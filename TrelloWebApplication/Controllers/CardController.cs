@@ -59,6 +59,7 @@ namespace TrelloWebApplication.Controllers
             return result;
         }
         /// <summary>
+
         /// per eliminare la card
         /// </summary>
         /// <param name="id">id della card da eliminare</param>
@@ -78,6 +79,7 @@ namespace TrelloWebApplication.Controllers
             return RedirectToAction("Index", model);
         }
         /// <summary>
+
         /// visualizazione dei dettagli di una card richiesti nella consegna
         /// </summary>
         /// <param name="id">id della card</param>
