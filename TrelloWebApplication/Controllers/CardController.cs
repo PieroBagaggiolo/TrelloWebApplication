@@ -33,8 +33,22 @@ namespace TrelloWebApplication.Controllers
         /// visualizzia la lista di card predenti nella pagina trello
         /// </summary>
         /// <returns>ritorna una view</returns>
-        public ActionResult Index()
+        public ActionResult Index(string categorie)
         {
+            List<Card> cards = new  List<Card>();
+            ViewBag.Categorie = new SelectList(myApi.GetState(), "Name", "Name");
+            if (categorie!=null && categorie!="")
+            {
+                foreach (var card in model)
+                {
+                    if (card.IdList==categorie)
+                    {
+                        cards.Add(card);
+                    }
+                }
+                return View(cards);
+            }
+            
             return View(model);
         }
         /// <summary>
