@@ -53,7 +53,7 @@ namespace TrelloWebApplication.Utiliti
                 if (card.Due != null)
                 {
                     DateTime newDATA = DateTime.Parse(card.Due);
-                    card.prova = newDATA;
+                    card.DueDate = newDATA;
                     string newDue = newDATA.ToString("F");
                     card.Due = newDue;
                 }

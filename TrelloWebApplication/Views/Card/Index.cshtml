@@ -17,7 +17,10 @@
 <p>
     - Per scaricare gli eventuali allegati recarsi su Details e seguire le istruzioni.
 </p>
-<br />
+
+<p>
+    @Html.ActionLink("newCard", "newCard")
+</p>
 <table class="table" id="tb1">
     <tr>
         <th style="text-align:center">
@@ -33,7 +36,8 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "Details", new { id = item.Id })|
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })|
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
