@@ -67,6 +67,7 @@ a{
     width: 58%;
     margin-left: 21%;
     margin-right: 21%;
+    text-align:center;
 }
 
 h1, h2 {text-align:center;
@@ -151,12 +152,18 @@ body{
     height: 125%;
     background: rgba(0, 0, 0, 0.75);
 }
-
-p > select {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+#Stato{
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+select > option {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
 }
