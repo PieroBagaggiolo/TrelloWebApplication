@@ -9,5 +9,6 @@ namespace TrelloWebApplication.Models
     {
         public string CheckItems { get; set; }
         public string Attachments { get; set; }
+        public string Select { get; set; }
     }
 }
