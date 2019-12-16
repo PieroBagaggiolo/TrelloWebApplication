@@ -266,10 +266,12 @@ namespace TrelloWebApplication.Controllers
             }
             return View("Details", card);
         }
-        public ActionResult Filter(string stato, List<Card> prov)
+        [HttpGet]
+        public ActionResult Filter(string stato)
         {
             List<Card> cards = new List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
+
             if (stato != null && stato != "")
             {
                 foreach (var card in model)
@@ -288,9 +290,10 @@ namespace TrelloWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(List<Card> cards)
+        public ActionResult Filter(List<Card> cards,string stato, IEnumerable<bool> Chbxs )
         {
-
+            
+           
             return RedirectToAction("Filter", model);
         }
 

@@ -8,6 +8,7 @@
 </div>
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     <p>
 
         Stato: @Html.DropDownList("Stato", "ALL")
@@ -28,7 +29,8 @@
         {
 
 
-
+            @Html.HiddenFor(modelItem => item.Id)
+            @Html.HiddenFor(modelItem => item.Name)
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -41,10 +43,12 @@
                 </td>
                 @*@Html.EditorFor("SI" => item.Badges.Select)*@
                 <td>
-                    @Html.CheckBoxFor(modelItem => item.Badges.Select)
+                    @Html.CheckBoxFor(modelItem => item.nonVaUnCazzo)
+                    @Html.LabelFor(modelItem => item.nonVaUnCazzo, "Monday")
+
                 </td>
             </tr>
-            
+
         }
     </table>
 
@@ -61,4 +65,8 @@
 
     <input type="submit" value="Create" class="btn btn-default" />
 
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }
