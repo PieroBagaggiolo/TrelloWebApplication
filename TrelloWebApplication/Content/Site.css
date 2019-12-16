@@ -160,7 +160,6 @@ body{
     cursor: pointer;
 }
 select > option {
-    background-color: #4CAF50;
     color: black;
     padding: 16px;
     font-size: 16px;
