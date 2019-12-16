@@ -20,7 +20,7 @@ namespace TrelloWebApplication.Controllers
         //creazione del modello di liste di card
         List<Card> model = PopolateModel.Popola(myApi);
         // GET: Select
-        public ActionResult Filter(string stato)
+        public ActionResult Filter(string stato,List<Card> prov)
         {
             List<Card> cards = new List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
@@ -35,7 +35,17 @@ namespace TrelloWebApplication.Controllers
                 }
                 return View(cards);
             }
+  
             return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(List<Card> cards)
+        {
+            
+            return RedirectToAction("Filter", model);
         }
         /// <summary>
         /// creazione file exl con i dati di una card
@@ -62,24 +72,25 @@ namespace TrelloWebApplication.Controllers
         /// </summary>
         /// <returns>ritorna la view</returns>
 
-        public ActionResult ExcelExIndex(string stato)
+        public ActionResult ExcelExIndex(string id=null)
         {
-            ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
+            
             List<Card> cards = new List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
-            if (stato != null)
+            if (id != null)
             {
                 foreach (var card in model)
                 {
-                    if (card.Badges.Select == "Si")
+                    if (card.IdList == id)
                     {
                         cards.Add(card);
                     }
                 }
-                ex = ReportMethods.ExportExcelTotal(cards);
+                ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
+                CreazioneExl.CreazioneFile(ex, "Index");
             }
 
-            CreazioneExl.CreazioneFile(ex, "Index");
+            
             
             return View();
         }

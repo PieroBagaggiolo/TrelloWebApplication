@@ -266,6 +266,33 @@ namespace TrelloWebApplication.Controllers
             }
             return View("Details", card);
         }
+        public ActionResult Filter(string stato, List<Card> prov)
+        {
+            List<Card> cards = new List<Card>();
+            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
+            if (stato != null && stato != "")
+            {
+                foreach (var card in model)
+                {
+                    if (card.IdList == stato)
+                    {
+                        cards.Add(card);
+                    }
+                }
+                return View(cards);
+            }
+
+            return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(List<Card> cards)
+        {
+
+            return RedirectToAction("Filter", model);
+        }
 
     }
 
