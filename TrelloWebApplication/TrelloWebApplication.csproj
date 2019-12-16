@@ -225,13 +225,14 @@
     <Content Include="Views\Card\PdfDetails.cshtml" />
     <Content Include="Views\Card\Edit.cshtml" />
     <Content Include="Views\Card\newCard.cshtml" />
-
     <Content Include="Views\Select\Filter.cshtml" />
-
+    <Content Include="Views\Card\Filter.cshtml" />
+    <Content Include="Views\Card\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
