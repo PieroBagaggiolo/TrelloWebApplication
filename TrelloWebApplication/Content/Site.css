@@ -67,6 +67,7 @@ a{
     width: 58%;
     margin-left: 21%;
     margin-right: 21%;
+    text-align:center;
 }
 
 h1, h2 {text-align:center;
@@ -154,6 +155,8 @@ body{
 p > select {
     position: relative;
     display: inline-block;
+    width:100%;
+    color:black;
 }
 select > option {
     display: none;
