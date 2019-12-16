@@ -23,7 +23,9 @@ namespace TrelloWebApplication.Controllers
         public ActionResult Filter(string stato)
         {
             List<Card> cards = new List<Card>();
+            
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
+            
             if (stato != null && stato != "")
             {
                 foreach (var card in model)
