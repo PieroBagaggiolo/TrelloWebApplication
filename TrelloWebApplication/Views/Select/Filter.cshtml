@@ -8,10 +8,32 @@
 </div>
 @using (Html.BeginForm())
 {
-    <p>
-            Stato: @Html.DropDownList("Stato", "ALL" )
-            <input type="submit" value="Filter" class="btn btn-info" />
-    </p>
+
+    <table class="table" id="tb2">
+        <h5>Filtra le card per:</h5>
+        <tr>
+            <th style="text-align:center">
+                <h6>CAMPO</h6>
+            </th>
+            <th>
+                <h6>VALORE</h6>
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <th>
+              
+            </th>
+            <th>
+                @Html.DropDownList("Stato", "ALL")
+            </th>
+            <th>
+                <input type="submit" value="Filter" class="btn btn-info" />
+            </th>
+        </tr>
+    </table>
+            
+            
 
 
 <table class="table" id="tb1">
