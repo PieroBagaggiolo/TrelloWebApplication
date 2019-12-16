@@ -11,9 +11,9 @@ namespace TrelloUtilities
     public static class ReportMethods
     {
 
-        public static ExcelPackage ExportExcelTotal(Api myApi)
+        public static ExcelPackage ExportExcelTotal(List<Card> model)
         {
-            List<Card> model = PopolateModel.Popola(myApi);
+            
             //creazione di un foglio EXCEL
             var SheetName = "Foglio";
             ExcelPackage ex = CreazioneFoglio(SheetName);
