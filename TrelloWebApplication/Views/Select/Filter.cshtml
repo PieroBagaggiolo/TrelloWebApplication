@@ -15,7 +15,7 @@
                 <h6>CAMPO</h6>
             </th>*@
             <th>
-                <h5>VALORE</h5>
+                <h5>STATO</h5>
             </th>
             <th></th>
         </tr>
@@ -38,7 +38,7 @@
 <table class="table" id="tb1">
     <tr>
         <th style="text-align:center">
-            TRELLO'S CARDS LIST
+            TRELLO'S CARDS LIST AVE MARIA PIENA DI GRAZIA
         </th>
         <th>STATO</th>
         <th>ARCHIVIATA</th>
@@ -68,7 +68,7 @@
     @*@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", Model, null)*@
 
     @Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
-
+ 
     foreach (var item in Model)
     {
         @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { id = item.IdList }, new { @id = "btnEx", @class = "btn btn-success btn-large" });

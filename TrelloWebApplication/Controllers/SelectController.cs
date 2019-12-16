@@ -20,7 +20,7 @@ namespace TrelloWebApplication.Controllers
         //creazione del modello di liste di card
         List<Card> model = PopolateModel.Popola(myApi);
         // GET: Select
-        public ActionResult Filter(string stato,List<Card> prov)
+        public ActionResult Filter(string stato)
         {
             List<Card> cards = new List<Card>();
             
@@ -74,9 +74,8 @@ namespace TrelloWebApplication.Controllers
         /// </summary>
         /// <returns>ritorna la view</returns>
 
-        public ActionResult ExcelExIndex(string id=null)
-        {
-            
+        public ActionResult ExcelExIndex(string id=null, string stato=null)
+        { 
             List<Card> cards = new List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
             if (id != null)
@@ -91,12 +90,8 @@ namespace TrelloWebApplication.Controllers
                 ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
                 CreazioneExl.CreazioneFile(ex, "Index");
             }
-
-            
-            
             return View();
         }
-
     }
 
 }

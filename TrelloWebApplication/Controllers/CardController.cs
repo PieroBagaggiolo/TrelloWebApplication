@@ -266,36 +266,7 @@ namespace TrelloWebApplication.Controllers
             }
             return View("Details", card);
         }
-        [HttpGet]
-        public ActionResult Filter(string stato)
-        {
-            List<Card> cards = new List<Card>();
-            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
 
-            if (stato != null && stato != "")
-            {
-                foreach (var card in model)
-                {
-                    if (card.IdList == stato)
-                    {
-                        cards.Add(card);
-                    }
-                }
-                return View(cards);
-            }
-
-            return View(model);
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Filter(List<Card> cards,string stato, IEnumerable<bool> Chbxs )
-        {
-            
-           
-            return RedirectToAction("Filter", model);
-        }
 
     }
 
