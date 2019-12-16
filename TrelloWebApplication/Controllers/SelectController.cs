@@ -64,6 +64,21 @@ namespace TrelloWebApplication.Controllers
         public ActionResult ExcelExIndex(string stato)
         {
             ExcelPackage ex = ReportMethods.ExportExcelTotal(myApi);
+            List<Card> cards = new List<Card>();
+            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
+            if (stato != null && stato != "")
+            {
+                foreach (var card in model)
+                {
+                    if (card.IdList == stato)
+                    {
+                        cards.Add(card);
+                    }
+                }
+                return View(cards);
+            }
+            return View(model);
+           
             CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
