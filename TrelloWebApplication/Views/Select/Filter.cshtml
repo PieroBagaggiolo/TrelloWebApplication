@@ -23,6 +23,7 @@
     <p>
         Stato: @Html.DropDownList("Stato", "ALL")
         <input type="submit" value="Filter" />
+
     </p>
 
 
@@ -54,7 +55,7 @@
 
     @*@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", Model, null)*@
 
-    @Html.ActionLink("PRINT PDF", "ExportPDFIndex","Filter", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
 
+    @Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
     @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", "Filter", new { @id = "btnEx", @class = "btn btn-success btn-large" })
 }

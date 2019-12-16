@@ -1,11 +1,9 @@
 ﻿using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Xml.Serialization;
 using TrelloUtilities;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
@@ -24,23 +22,6 @@ namespace TrelloWebApplication.Controllers
         // GET: Select
         public ActionResult Filter(string stato)
         {
-
-
-
-            List<Card> elenco = new List<Card>();
-
-            elenco = model;
-
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Card>));
-
-            // Save
-            using (FileStream fs = File.OpenWrite("elenco.txt"))
-            {
-                using (BinaryWriter writer = new BinaryWriter(fs))
-                {
-                    serializer.Serialize(fs, elenco);
-                }
-            }
             List<Card> cards = new List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
             if (stato != null && stato != "")
@@ -85,18 +66,18 @@ namespace TrelloWebApplication.Controllers
         {
             ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
             List<Card> cards = new List<Card>();
-            //ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
-            //if (Model != null )
-            //{
-            //    foreach (var card in model)
-            //    {
-            //        if (card.Badges.Select=="Si")
-            //        {
-            //            cards.Add(card);
-            //        }
-            //    }
-            //    ex = ReportMethods.ExportExcelTotal(cards);
-            //}
+            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
+            if (stato != null)
+            {
+                foreach (var card in model)
+                {
+                    if (card.Badges.Select == "Si")
+                    {
+                        cards.Add(card);
+                    }
+                }
+                ex = ReportMethods.ExportExcelTotal(cards);
+            }
 
             CreazioneExl.CreazioneFile(ex, "Index");
             
