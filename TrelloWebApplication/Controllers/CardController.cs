@@ -34,20 +34,7 @@ namespace TrelloWebApplication.Controllers
         /// </summary>
         /// <returns>ritorna una view</returns>
         public ActionResult Index(string stato)
-        {
-            List<Card> cards = new  List<Card>();
-            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
-            if (stato != null && stato != "")
-            {
-                foreach (var card in model)
-                {
-                    if (card.IdList== stato)
-                    {
-                        cards.Add(card);
-                    }
-                }
-                return View(cards);
-            }           
+        {          
             return View(model);
         }
         /// <summary>
@@ -226,7 +213,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna la view</returns>
         public ActionResult ExcelExIndex()
         { 
-            ExcelPackage ex = ReportMethods.ExportExcelTotal(myApi);
+            ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
             CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
