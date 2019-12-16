@@ -154,10 +154,11 @@ body{
 }
 #Stato{
     color: black;
-    padding: 16px;
+    padding: 4px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    width:100%;
 }
 select > option {
     color: black;
