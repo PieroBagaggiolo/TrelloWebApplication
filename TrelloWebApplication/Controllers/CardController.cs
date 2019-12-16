@@ -290,7 +290,7 @@ namespace TrelloWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Filter(List<Card> cards,string stato, IEnumerable<bool> Chbxs )
+        public ActionResult Filter(List<Card> model,string stato, IEnumerable<bool> Chbx,Card pro )
         {
             
            

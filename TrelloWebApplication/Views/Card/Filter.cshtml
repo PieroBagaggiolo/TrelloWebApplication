@@ -43,9 +43,10 @@
                 </td>
                 @*@Html.EditorFor("SI" => item.Badges.Select)*@
                 <td>
-                    @Html.CheckBoxFor(modelItem => item.nonVaUnCazzo)
-                    @Html.LabelFor(modelItem => item.nonVaUnCazzo, "Monday")
-
+                    @Html.CheckBoxFor(modelItem => item.prova200)
+                    @Html.LabelFor(modelItem => item.prova200, "Seleziona")
+                    @*@Html.CheckBoxFor(modelItem => item.Badges.Select)
+                    @Html.LabelFor(modelItem => item.Badges.Select, "Seleziona")*@
                 </td>
             </tr>
 
