@@ -26,6 +26,11 @@
                 border: none;
                 cursor: pointer;
             }
+        #tb2{
+            background-color:transparent;
+            opacity:1;
+            color:black;
+        }
 
     </style>
 </head>
@@ -42,9 +47,11 @@
                     <h6>CAMPO</h6>
                 </th>*@
             <th>
-                <h5>STATO</h5>
+                <h4>STATO</h4>
             </th>
-            <th></th>
+            <th>
+                <h4>ARCHIVIATO</h4>
+            </th>
             <th></th>
         </tr>
         <tr>
@@ -52,10 +59,10 @@
             @Html.DropDownList("Campo", "ALL")
         </th>*@
             <th>
-                @Html.DropDownList("Stato", "ALL LIST")
+                @Html.DropDownList("Stato", "ALL ")
             </th>
             <th>
-                @Html.DropDownList("Closed", "ALL CLOSED")
+                @Html.DropDownList("Closed", "ALL ")
             </th>
             <th>
                 <input type="submit" value="Filter" class="btn btn-info" />
@@ -63,7 +70,7 @@
         </tr>
     </table>
 
-
+    <br />
 
 
     <table class="table" id="tb1">
