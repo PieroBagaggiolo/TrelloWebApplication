@@ -111,12 +111,30 @@ namespace TrelloWebApplication.Controllers
             myApi.PostCard(card);
             return RedirectToAction("Index", model);
         }
-            /// <summary>
-            /// Pagina di modifica card
-            /// </summary>
-            /// <param name="id">id card </param>
-            /// <returns></returns>
-            public ActionResult Edit(string id = null)
+
+
+        public ActionResult View()
+        {
+            List<Badge> card = new List<Badge>();
+            Badge p = new Badge();
+            card.Add(p);
+            card.Add(new Badge());
+            var stato = myApi.GetState();
+            return View(card);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult View(List<Badge> card, string stato)
+        {
+            
+            return RedirectToAction("Index", model);
+        }
+        /// <summary>
+        /// Pagina di modifica card
+        /// </summary>
+        /// <param name="id">id card </param>
+        /// <returns></returns>
+        public ActionResult Edit(string id = null)
         {
             Card card = null;
             foreach (var item in model)
@@ -266,48 +284,7 @@ namespace TrelloWebApplication.Controllers
             }
             return View("Details", card);
         }
-        [HttpGet]
-        public ActionResult Filter(string stato)
-        {
-            List<Card> cards = new List<Card>();
-            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
 
-            if (stato != null && stato != "")
-            {
-                foreach (var card in model)
-                {
-                    if (card.IdList == stato)
-                    {
-                        cards.Add(card);
-                    }
-                }
-                return View(cards);
-            }
-
-            return View(model);
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Filter(List<Card> model,string stato, IEnumerable<bool> Chbx,Card pro )
-        {
-            List<Card> cards = new List<Card>();
-
-            if (stato != null && stato != "")
-            {
-                foreach (var card in model)
-                {
-                    if (card.IdList == stato)
-                    {
-                        cards.Add(card);
-                    }
-                }
-                return View("Filter",cards);
-            }
-
-            return View("Filter",model);
-        }
 
     }
 

@@ -173,10 +173,31 @@ body {
     width: 100%;
 }
 
-Stato.option {
+    #Stato > option {
+        color: black;
+        padding: 16px;
+        font-size: 16px;
+        background-color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+#Closed {
     color: black;
-    padding: 16px;
+    padding: 4px;
     font-size: 16px;
+    font-style: italic;
     border: none;
+    border-radius: 15px;
     cursor: pointer;
+    width: 100%;
 }
+
+    #Closed > option {
+        color: black;
+        padding: 16px;
+        font-size: 16px;
+        background-color: white;
+        border: none;
+        cursor: pointer;
+    }

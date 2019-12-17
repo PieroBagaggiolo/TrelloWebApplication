@@ -6,26 +6,7 @@
 <head>
     <style type="text/css">
 
-        #Stato {
-            color: black;
-            padding: 4px;
-            font-size: 16px;
-            font-style: italic;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-            #Stato > option {
-                color: black;
-                padding: 16px;
-                font-size: 16px;
-                background-color: white;
-                border: none;
-                cursor: pointer;
-               
-            }
+        
         #Closed {
             color: black;
             padding: 4px;
@@ -64,16 +45,17 @@
                 <h5>STATO</h5>
             </th>
             <th></th>
+            <th></th>
         </tr>
         <tr>
             @*<th>
             @Html.DropDownList("Campo", "ALL")
         </th>*@
             <th>
-                @Html.DropDownList("Stato", "ALL")
+                @Html.DropDownList("Stato", "ALL LIST")
             </th>
             <th>
-                @Html.DropDownList("Closed", "ALL")
+                @Html.DropDownList("Closed", "ALL CLOSED")
             </th>
             <th>
                 <input type="submit" value="Filter" class="btn btn-info" />
@@ -89,8 +71,9 @@
             <th style="text-align:center">
                 TRELLO'S CARDS LIST
             </th>
-            <th>STATO</th>
-            <th>ARCHIVIATA</th>
+            <th>LIST</th>
+            <th>CLOSED</th>
+            <th></th>
         </tr>
 
         @foreach (var item in Model)

@@ -45,7 +45,6 @@ namespace TrelloWebApplication.Controllers
                  }
                 return View(cards);
             }
-  
             return View(model);
         }
 
