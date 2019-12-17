@@ -45,7 +45,7 @@ namespace TrelloWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(List<Card> cards)
+        public ActionResult Filter(List<Card> cards,string lstString)
         {
             
             return RedirectToAction("Filter", model);
