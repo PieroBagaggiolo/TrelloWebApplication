@@ -72,11 +72,8 @@
 
     @Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
 
-    foreach (var item in Model)
-    {
-        @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { id = item.IdList }, new { @id = "btnEx", @class = "btn btn-success btn-large" });
-        break;
-    }
+        @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new {  prova = Model}, new { @id = "btnEx", @class = "btn btn-success btn-large" });
+     
 
 
     <input type="submit" value="Create" class="btn btn-default" />

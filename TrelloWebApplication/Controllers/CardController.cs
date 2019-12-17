@@ -292,9 +292,21 @@ namespace TrelloWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Filter(List<Card> model,string stato, IEnumerable<bool> Chbx,Card pro )
         {
-            
-           
-            return RedirectToAction("Filter", model);
+            List<Card> cards = new List<Card>();
+
+            if (stato != null && stato != "")
+            {
+                foreach (var card in model)
+                {
+                    if (card.IdList == stato)
+                    {
+                        cards.Add(card);
+                    }
+                }
+                return View("Filter",cards);
+            }
+
+            return View("Filter",model);
         }
 
     }

@@ -74,23 +74,23 @@ namespace TrelloWebApplication.Controllers
         /// </summary>
         /// <returns>ritorna la view</returns>
 
-        public ActionResult ExcelExIndex(string id=null)
+        public ActionResult ExcelExIndex(List<Card> prova=null)
         {
             
             List<Card> cards = new List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
-            if (id != null)
-            {
-                foreach (var card in model)
-                {
-                    if (card.IdList == id)
-                    {
-                        cards.Add(card);
-                    }
-                }
-                ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
-                CreazioneExl.CreazioneFile(ex, "Index");
-            }
+            //if (id != null)
+            //{
+            //    foreach (var card in model)
+            //    {
+            //        if (card.IdList == id)
+            //        {
+            //            cards.Add(card);
+            //        }
+            //    }
+            //    ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
+            //    CreazioneExl.CreazioneFile(ex, "Index");
+            //}
 
             
             
