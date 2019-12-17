@@ -8,12 +8,16 @@
 </div>
 @using (Html.BeginForm())
 {
-    <table class="table" id="tb2">
-        <h5>Filtra le card per:</h5>
+    <p id="head">
+        <h5>STATO</h5>
+        @Html.DropDownList("Stato", "ALL")
+        <input type="submit" value="Filter" class="btn btn-info" />
+    </p>
+    @*<table class="table" id="tb2">
         <tr>
             @*<th style="text-align:center">
                 <h6>CAMPO</h6>
-            </th>*@
+            </th>
             <th>
                 <h5>STATO</h5>
             </th>
@@ -22,7 +26,7 @@
         <tr>
             @*<th>
                 @Html.DropDownList("Campo", "ALL")
-            </th>*@
+            </th>
             <th>
                 @Html.DropDownList("Stato", "ALL")
             </th>
@@ -30,7 +34,7 @@
                 <input type="submit" value="Filter" class="btn btn-info" />
             </th>
         </tr>
-    </table>
+    </table>*@
             
             
 
@@ -38,7 +42,7 @@
 <table class="table" id="tb1">
     <tr>
         <th style="text-align:center">
-            TRELLO'S CARDS LIST AVE MARIA PIENA DI GRAZIA
+            TRELLO'S CARDS LIST 
         </th>
         <th>STATO</th>
         <th>ARCHIVIATA</th>
