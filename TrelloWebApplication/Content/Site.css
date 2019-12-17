@@ -156,13 +156,14 @@ body{
     color: black;
     padding: 4px;
     font-size: 16px;
+    font-style: italic;
     border: none;
     border-radius:15px;
     cursor: pointer;
     width:100%;
     
 }
-select > option {
+Stato.option {
     color: black;
     padding: 16px;
     font-size: 16px;
