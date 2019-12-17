@@ -3,6 +3,51 @@
 @{
     ViewBag.Title = "Filter";
 }
+<head>
+    <style type="text/css">
+
+        #Stato {
+            color: black;
+            padding: 4px;
+            font-size: 16px;
+            font-style: italic;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            #Stato > option {
+                color: black;
+                padding: 16px;
+                font-size: 16px;
+                background-color: white;
+                border: none;
+                cursor: pointer;
+               
+            }
+        #Closed {
+            color: black;
+            padding: 4px;
+            font-size: 16px;
+            font-style: italic;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            #Closed > option {
+                color: black;
+                padding: 16px;
+                font-size: 16px;
+                background-color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+    </style>
+</head>
 <div class="jumbotron">
     <h1 style="text-align:center">TRELLO REPORTER APP</h1>
 </div>
@@ -10,22 +55,25 @@
 {
     @Html.AntiForgeryToken()
     <table class="table" id="tb2">
-        <h5>Filtra le card per:</h5>
+     
         <tr>
             @*<th style="text-align:center">
                     <h6>CAMPO</h6>
                 </th>*@
             <th>
-                <h5>VALORE</h5>
+                <h5>STATO</h5>
             </th>
             <th></th>
         </tr>
         <tr>
             @*<th>
-                    @Html.DropDownList("Campo", "ALL")
-                </th>*@
+            @Html.DropDownList("Campo", "ALL")
+        </th>*@
             <th>
                 @Html.DropDownList("Stato", "ALL")
+            </th>
+            <th>
+                @Html.DropDownList("Closed", "ALL")
             </th>
             <th>
                 <input type="submit" value="Filter" class="btn btn-info" />
@@ -63,9 +111,26 @@
                 @*@Html.EditorFor("SI" => item.Badges.Select)*@
                 <td>
                     @Html.CheckBoxFor(modelItem => item.Badges.Select)
+
+                    @*<div class="form-group">
+                        @Html.LabelFor(modelItem => item.Badges.Select, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @Html.EditorFor(modelItem => item.Badges.Select)
+                                @Html.ValidationMessageFor(modelItem => item.Badges.Select, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(modelItem => item.Badges.Select, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>*@
                 </td>
             </tr>
             idList.Add(item.Id);
+
+
+
+
+
+
         }
     </table>
 
@@ -79,4 +144,11 @@
 
     <input type="submit" value="Create" class="btn btn-default" />
 
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }

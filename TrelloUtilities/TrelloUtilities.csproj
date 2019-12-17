@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Closed.cs" />
     <Compile Include="Models\Webhook.cs" />
     <Compile Include="Utility\Api.cs" />
     <Compile Include="Utility\CreazioneExl.cs" />

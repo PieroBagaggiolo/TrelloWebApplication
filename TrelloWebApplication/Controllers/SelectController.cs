@@ -21,21 +21,28 @@ namespace TrelloWebApplication.Controllers
         //creazione del modello di liste di card
         List<Card> model = PopolateModel.Popola(myApi);
         // GET: Select
-        public ActionResult Filter(string stato,List<Card> prov)
+        public ActionResult Filter(string stato,List<Card> prov,string closed)
         {
             List<Card> cards = new List<Card>();
-            
+             
+            List<Closed> closedList = new List<Closed>();
+            closedList.Add(new Closed("False"));
+            closedList.Add(new Closed("True"));
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
-            
-            if (stato != null && stato != "")
+            ViewBag.Closed = new SelectList(closedList, "Id", "Name");
+
+            if ((stato != null && stato != "")||(closed!=null && closed!=""))
             {
-                foreach (var card in model)
-                {
-                    if (card.IdList == stato)
-                    {
-                        cards.Add(card);
-                    }
-                }
+                 foreach (var card in model)
+                 {
+                      if (card.IdList == stato || stato=="")
+                      {
+                           if (card.Closed == closed|| closed=="")
+                           {
+                                  cards.Add(card);
+                           }
+                      }
+                 }
                 return View(cards);
             }
   
@@ -45,7 +52,7 @@ namespace TrelloWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Filter(List<Card> cards,string lstString)
+        public ActionResult m(List<Card> cards,string lstString)
         {
             
             return RedirectToAction("Filter", model);
@@ -100,6 +107,19 @@ namespace TrelloWebApplication.Controllers
             ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
             CreazioneExl.CreazioneFile(ex, "Index");
             return View();
+        }
+        public ActionResult View()
+        {
+            Card card = new Card();
+            var stato = myApi.GetState();
+            return View(card);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult View(Card card, string stato)
+        {
+            
+            return RedirectToAction("Index", model);
         }
 
     }
