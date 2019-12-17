@@ -51,9 +51,9 @@ namespace TrelloWebApplication.Controllers
             return RedirectToAction("Filter", model);
         }
 
-        public ActionResult ExportPDFIndex(string lstString)
+        public ActionResult PdfIndex(string newModel)
         {
-            List<String> result = System.Web.Helpers.Json.Decode<List<String>>(lstString);
+            List<String> result = System.Web.Helpers.Json.Decode<List<String>>(newModel);
             List<Card> cards = new List<Card>();
             foreach (var card in model)
             {
@@ -65,7 +65,14 @@ namespace TrelloWebApplication.Controllers
                     }
                 }
             }
-            ActionAsPdf ris = new ActionAsPdf("PdfIndex", cards)
+            return View(cards);
+        }
+
+
+        public ActionResult ExportPDFIndex(string lstString)
+        {
+        
+            ActionAsPdf ris = new ActionAsPdf("PdfIndex", new { newModel= lstString })
             {
                 FileName = Server.MapPath("Index.pdf")
             };
