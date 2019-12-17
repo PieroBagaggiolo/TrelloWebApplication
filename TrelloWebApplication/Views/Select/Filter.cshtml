@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<TrelloWebApplication.Models.Card>
-
+@{List<String> idList = new List<String>();}
 @{
     ViewBag.Title = "Filter";
 }
@@ -64,15 +64,15 @@
                     @Html.CheckBoxFor(modelItem => item.Badges.Select)
                 </td>
             </tr>
-            
+            idList.Add(item.Id);
         }
     </table>
 
     @*@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", Model, null)*@
 
-    @Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
+    @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
 
-        @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new {  prova = Model}, new { @id = "btnEx", @class = "btn btn-success btn-large" });
+        @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnEx", @class = "btn btn-success btn-large" });
      
 
 

@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,51 +50,48 @@ namespace TrelloWebApplication.Controllers
             
             return RedirectToAction("Filter", model);
         }
-        /// <summary>
-        /// creazione file exl con i dati di una card
-        /// </summary>
-        /// <param name="id">id della card</param>
-        /// <returns>l view di prima</returns>
-        public ActionResult ExcelEx(string id = null)
+
+        public ActionResult ExportPDFIndex(string lstString)
         {
-            Card card = null;
-            foreach (var item in model)
+            List<String> result = System.Web.Helpers.Json.Decode<List<String>>(lstString);
+            List<Card> cards = new List<Card>();
+            foreach (var card in model)
             {
-                if (item.Id == id)
+                foreach (var value in result)
                 {
-                    card = item;
+                    if (value == card.Id)
+                    {
+                        cards.Add(card);
+                    }
                 }
             }
-            ExcelPackage ex = ReportMethods.ExportSingleExcel(card);
-            CreazioneExl.CreazioneFile(ex, "Details");
-            return View(card);
+            ActionAsPdf ris = new ActionAsPdf("PdfIndex", cards)
+            {
+                FileName = Server.MapPath("Index.pdf")
+            };
+            return ris;
         }
-
         /// <summary>
         /// creazione di un file exl con tutti i datti di tutte le card
         /// </summary>
         /// <returns>ritorna la view</returns>
 
-        public ActionResult ExcelExIndex(List<Card> prova=null)
+        public ActionResult ExcelExIndex(string lstString)
         {
-            
+            List<String> result = System.Web.Helpers.Json.Decode<List<String>>(lstString);
             List<Card> cards = new List<Card>();
-            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
-            //if (id != null)
-            //{
-            //    foreach (var card in model)
-            //    {
-            //        if (card.IdList == id)
-            //        {
-            //            cards.Add(card);
-            //        }
-            //    }
-            //    ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
-            //    CreazioneExl.CreazioneFile(ex, "Index");
-            //}
-
-            
-            
+            foreach (var card in model)
+            {
+                foreach (var value in result)
+                {
+                    if (value==card.Id)
+                    {
+                        cards.Add(card);
+                    }
+                }
+            }
+            ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
+            CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
 

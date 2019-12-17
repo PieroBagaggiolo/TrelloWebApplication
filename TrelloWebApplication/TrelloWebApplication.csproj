@@ -228,6 +228,7 @@
     <Content Include="Views\Select\Filter.cshtml" />
     <Content Include="Views\Card\Filter.cshtml" />
     <Content Include="Views\Card\View.cshtml" />
+    <Content Include="Views\Select\PdfIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
