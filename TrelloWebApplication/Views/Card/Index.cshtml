@@ -19,16 +19,19 @@
 </p>
 @Html.ActionLink("Select", "Filter", "Select")
 <table class="table" id="tb1">
+
     <tr>
         <th style="text-align:center">
             TRELLO'S CARDS LIST
         </th>
+
+        <th>STATO</th>
+        <th>ARCHIVIATA</th>
         <th>
             @Html.ActionLink("CREATE A NEW CARD", "newCard", "Card")
         </th>
-        <th></th>
-        <th></th>
     </tr>
+    
     @foreach (var item in Model)
     {
         <tr>

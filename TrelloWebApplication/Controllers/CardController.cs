@@ -267,6 +267,7 @@ namespace TrelloWebApplication.Controllers
             return View("Details", card);
         }
 
+
     }
 
 }

@@ -20,6 +20,7 @@ namespace TrelloWebApplication.Utiliti
             //giro la lista per sistemare uno alla volta tutte le card
             foreach (var card in cardtot)
             {
+                
                 //gioro la lista di stati per assegare alla card il suo stato tramite idlist  
                 foreach (var list in listC)
                 {

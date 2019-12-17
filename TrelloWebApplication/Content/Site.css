@@ -153,15 +153,15 @@ body{
     background: rgba(0, 0, 0, 0.75);
 }
 #Stato{
-    color: white;
-    padding: 16px;
+    color: black;
+    padding: 4px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    width:100%;
 }
 select > option {
-    background-color: #4CAF50;
-    color: white;
+    color: black;
     padding: 16px;
     font-size: 16px;
     border: none;

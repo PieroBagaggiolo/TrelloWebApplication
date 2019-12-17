@@ -37,7 +37,17 @@ namespace TrelloWebApplication.Controllers
                 }
                 return View(cards);
             }
+  
             return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(List<Card> cards)
+        {
+            
+            return RedirectToAction("Filter", model);
         }
         /// <summary>
         /// creazione file exl con i dati di una card
@@ -64,28 +74,24 @@ namespace TrelloWebApplication.Controllers
         /// </summary>
         /// <returns>ritorna la view</returns>
 
-        public ActionResult ExcelExIndex(string stato)
-        {
-            ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
+        public ActionResult ExcelExIndex(string id=null, string stato=null)
+        { 
             List<Card> cards = new List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
-            if (stato != null)
+            if (id != null)
             {
                 foreach (var card in model)
                 {
-                    if (card.Badges.Select == "Si")
+                    if (card.IdList == id)
                     {
                         cards.Add(card);
                     }
                 }
-                ex = ReportMethods.ExportExcelTotal(cards);
+                ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
+                CreazioneExl.CreazioneFile(ex, "Index");
             }
-
-            CreazioneExl.CreazioneFile(ex, "Index");
-            
             return View();
         }
-
     }
 
 }
