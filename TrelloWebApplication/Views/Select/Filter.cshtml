@@ -6,7 +6,7 @@
 <head>
     <style type="text/css">
 
-        
+
         #Closed {
             color: black;
             padding: 4px;
@@ -26,12 +26,12 @@
                 border: none;
                 cursor: pointer;
             }
-        #tb2{
-            background-color:transparent;
-            opacity:1;
-            color:black;
-        }
 
+        #tb2 {
+            background-color: transparent;
+            opacity: 1;
+            color: black;
+        }
     </style>
 </head>
 <div class="jumbotron">
@@ -41,7 +41,7 @@
 {
     @Html.AntiForgeryToken()
     <table class="table" id="tb2">
-     
+
         <tr>
             @*<th style="text-align:center">
                     <h6>CAMPO</h6>
@@ -56,8 +56,8 @@
         </tr>
         <tr>
             @*<th>
-            @Html.DropDownList("Campo", "ALL")
-        </th>*@
+                    @Html.DropDownList("Campo", "ALL")
+                </th>*@
             <th>
                 @Html.DropDownList("Stato", "ALL ")
             </th>
@@ -71,7 +71,8 @@
     </table>
 
     <br />
-
+    @Html.DropDownList("Stato", (MultiSelectList)ViewBag.Categories, new { multiple = "multiple" })
+    @Html.ListBox("Stato", (MultiSelectList)ViewBag.Categories)
 
     <table class="table" id="tb1">
         <tr>
@@ -100,21 +101,22 @@
                 </td>
                 @*@Html.EditorFor("SI" => item.Badges.Select)*@
                 <td>
-                    @Html.CheckBoxFor(modelItem => item.Badges.Select)
+                    @*@Html.CheckBoxFor(modelItem => item.Badges.Select)*@
 
-                    @*<div class="form-group">
-                        @Html.LabelFor(modelItem => item.Badges.Select, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            <div class="checkbox">
-                                @Html.EditorFor(modelItem => item.Badges.Select)
-                                @Html.ValidationMessageFor(modelItem => item.Badges.Select, "", new { @class = "text-danger" })
-                                @Html.ValidationMessageFor(modelItem => item.Badges.Select, "", new { @class = "text-danger" })
-                            </div>
+                    @Html.LabelFor(modelItem => item.Badges.Select, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(modelItem => item.Badges.Select)
+                            @Html.ValidationMessageFor(modelItem => item.Badges.Select, "", new { @class = "text-danger" })
                         </div>
-                    </div>*@
+                    </div>
                 </td>
             </tr>
-            idList.Add(item.Id);
+            if (item.Badges.Select)
+            {
+                idList.Add(item.Id);
+            }
+            //idList.Add(item.Id);
 
 
 

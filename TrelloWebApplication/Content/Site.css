@@ -162,42 +162,33 @@ body {
     background: rgba(0, 0, 0, 0.75);
 }
 
-#Stato {
+#Stato{
+
     color: black;
     padding: 4px;
     font-size: 16px;
     font-style: italic;
     border: none;
-    border-radius: 15px;
+    border-radius:15px 15px 10px;
     cursor: pointer;
-    width: 100%;
+    width:100%;
+    
 }
-
-    #Stato > option {
-        color: black;
-        padding: 16px;
-        font-size: 16px;
-        background-color: white;
-        border: none;
-        cursor: pointer;
-    }
-
-#Closed {
+#Stato.option {
     color: black;
-    padding: 4px;
+    padding: 16px;
     font-size: 16px;
-    font-style: italic;
+    font-style: initial;
+
     border: none;
     border-radius: 15px;
     cursor: pointer;
-    width: 100%;
-}
 
-    #Closed > option {
-        color: black;
-        padding: 16px;
-        font-size: 16px;
-        background-color: white;
-        border: none;
-        cursor: pointer;
-    }
+}
+#head {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}

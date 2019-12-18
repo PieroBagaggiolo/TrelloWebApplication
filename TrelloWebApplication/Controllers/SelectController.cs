@@ -21,7 +21,7 @@ namespace TrelloWebApplication.Controllers
         //creazione del modello di liste di card
         List<Card> model = PopolateModel.Popola(myApi);
         // GET: Select
-        public ActionResult Filter(string stato,List<Card> prov,string closed)
+        public ActionResult prova(string stato,List<Card> prov,string closed)
         {
             List<Card> cards = new List<Card>();
              
@@ -51,10 +51,11 @@ namespace TrelloWebApplication.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult m(List<Card> cards,string lstString)
+        public JavaScriptResult ProvaRequestUpdateListino( string lstString)
         {
-            
-            return RedirectToAction("Filter", model);
+
+            var script = string.Format("PageReload()");
+            return JavaScript(script);
         }
 
         public ActionResult PdfIndex(string newModel)
@@ -89,9 +90,11 @@ namespace TrelloWebApplication.Controllers
         /// </summary>
         /// <returns>ritorna la view</returns>
 
+
         public ActionResult ExcelExIndex(string lstString)
         {
             List<String> result = System.Web.Helpers.Json.Decode<List<String>>(lstString);
+
             List<Card> cards = new List<Card>();
             foreach (var card in model)
             {
@@ -103,6 +106,7 @@ namespace TrelloWebApplication.Controllers
                     }
                 }
             }
+
             ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
             CreazioneExl.CreazioneFile(ex, "Index");
             return View();
@@ -120,6 +124,7 @@ namespace TrelloWebApplication.Controllers
             
             return RedirectToAction("Index", model);
         }
+
 
     }
 
