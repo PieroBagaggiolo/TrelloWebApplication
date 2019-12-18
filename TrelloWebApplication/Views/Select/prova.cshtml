@@ -1,7 +1,7 @@
 ﻿@using TrelloWebApplication.Models;
 @model IEnumerable<TrelloWebApplication.Models.Card>
 @{
-    ViewBag.Title = "Gestine Listino";
+    ViewBag.Title = "Gestione Listino";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -45,72 +45,63 @@
 @Html.DropDownList("Stato", null, new { @id = "StatoId" });
 
 
-<!-- Listbox relativo ai prodotti -->
-<div style="text-align: right; float: left; width: 45%; margin-top: 20px">
-    <div class="title1">Prodotti in Fatto</div>
-    <div>
-        @{
 
-            List<Card> products = Model.ToList();
+<table id="tb2">
+    <tr>
+        <th>
+            <!-- Listbox relativo ai prodotti -->
+            <h3>Prodotti in Fatto</h3>
+        </th>
+        <th></th>
+        <th>
+            <h3>Prodotti in Esecuzione</h3>
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @{
+                List<Card> products = Model.ToList();
+                @*rimuove dalla lista dei prodotti quelli gi' presenti all'interno del listino*@
+                <div style="display: none">
+                    @Html.ListBox("lbprodid", new MultiSelectList(Model.Select(g => g.Id).ToList()))
+                </div>
+                @Html.ListBox("lbproducts", new MultiSelectList(products.Select(g => g.Name).ToList()), new { @class = "list" })
+            }
+        </td>
+        <th>
+            <!-- Bottoni Add e Remove -->
+            <input type="button" id="BtnAdd" name="AddProduct" value="&gt;" class="button1 btn btn-success" onclick="Add()" /><br />
+            <input type="button" id="BtnRemove" name="RemoveProduct" value="&lt;" class="button1 btn btn-danger" onclick="Remove()" />
+        </th>
+        <td>
+            @{
+                List<Card> prova = new List<Card>();
+                @*rimuove dalla lista dei prodotti quelli gi' presenti all'interno del listino*@
+            }
+            <div>
+                <!-- Listbox relativo al listino -->
+                @*//int ll = ViewBag.Listino;*@
+                @Html.ListBox("lbprodpl", new MultiSelectList(prova.Select(g => g.Name).ToList()), new { @class = "list" })
+                @*@Html.ListBox("lbprodpl", new MultiSelectList(Model.Proddata.Products.Select(g => g.codice).ToList()), new {@class = "list"})*@
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="text-align:center">
+            <input type="button" id="BtnSave" name="UpdatePricelist" value="Salva listino" style="width: 200px" />
+        </td>
+    </tr>
+</table>
 
-            @*rimuove dalla lista dei prodotti quelli gi' presenti all'interno del listino*@
 
-        }
-        <div style="display: none">
-            @Html.ListBox("lbprodid", new MultiSelectList(Model.Select(g => g.Id).ToList()))
-        </div>
-        @Html.ListBox("lbproducts", new MultiSelectList(products.Select(g => g.Name).ToList()), new { @class = "list" })
-    </div>
-</div>
-<!-- Bottoni Add e Remove -->
-<div style="text-align: center; float: left; width: 10%; margin-top: 140px">
-    <div>
-        @*@using (Html.BeginForm("Add"))
-            {*@
-        <input type="button" id="BtnAdd" name="AddProduct" value="&gt;" class="button1" onclick="Add()" />
-        @*}*@
-    </div>
-    <div>
-        @*@using (Html.BeginForm("Remove"))
-            {*@
-        <input type="button" id="BtnRemove" name="RemoveProduct" value="&lt;" class="button1" onclick="Remove()" />
-        @*}*@
-    </div>
-</div>
-<!-- Listbox relativo al listino -->
-
-<div style="text-align: left; float: right; width: 45%; margin-top: 20px">
-    <div class="title2">Prodotti In esecuzione</div>
-    <div>
         <div style="display: none">
             @*// mantienbe due liste parallele, contenenti rispettivamente gli id di prodotto, e i codici di prodotto relativi al listino specifico
                 // la prirma lista e' hidden*@
-
-
-
-            @{
-                List<Card> prova = new List<Card>();
-
-                @*rimuove dalla lista dei prodotti quelli gi' presenti all'interno del listino*@
-
-            }
             @Html.ListBox("lbprodplid", new MultiSelectList(prova.Select(g => g.Id).ToList()))
             @*@Html.ListBox("lbprodplid", new MultiSelectList(Model.Proddata.Products.Select(g => g.id).ToList()))*@
         </div>
-        <div>
-            @*//int ll = ViewBag.Listino;*@
-            @Html.ListBox("lbprodpl", new MultiSelectList(prova.Select(g => g.Name).ToList()), new { @class = "list" })
-            @*@Html.ListBox("lbprodpl", new MultiSelectList(Model.Proddata.Products.Select(g => g.codice).ToList()), new {@class = "list"})*@
-        </div>
-        @*@using (Html.BeginForm("Update"))
-            {*@
-        <div style="padding: 5px 0 0 0px; clear: left; width: 200px">
-            <input type="button" id="BtnSave" name="UpdatePricelist" value="Salva listino" style="width: 200px" />
-        </div>
-        @*}*@
-    </div>
-</div>
+ 
 <p>
-    @Html.ActionLink("Back to List", "Index","Card")
+    @Html.ActionLink("Back to List", "Index","Card", new { @class = "btn btn-primary" })
 
 </p>
