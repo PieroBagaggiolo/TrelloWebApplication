@@ -17,6 +17,33 @@ $('#btnCom').click(function () {
     $('#AddCom').show();
 });
 
+
+
+$("#BtnSave").click(function () {
+    var path = window.location.pathname; 		// e' l'ultima parte del path, compreso il carattere "/" iniziale
+    var basepath = SetupBaseRoute(path);
+    if (basepath.indexOf("Select") != -1) {
+        // soltanto se e' listino,
+        var newpath = basepath + "/RequestUpdateListino";
+   
+
+    //var idl = document.getElementById("idlistino").innerHTML;
+
+    var s2 = document.getElementById("lbprodplid");     // listbox degli id relativi ai prodotti contenuti nel listino (hidden) 
+    var idtosend = [];
+    var numel = s2.options.length;
+
+    for (var i = 0; i < numel; i++) {
+        idtosend.push(s2.options[i].text);
+    }
+
+    // serializza l'oggetto
+    var jsonlist = JSON.stringify(idtosend);
+
+    $.post(newpath, { jsonids: jsonlist })
+
+});
+
 ( function( global, factory ) {
 
 	"use strict";
