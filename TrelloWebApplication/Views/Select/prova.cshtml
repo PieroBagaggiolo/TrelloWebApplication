@@ -7,24 +7,29 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <style type="text/css">
-        
-    </style>
 </head>
-@Html.DropDownList("Stato", null, new { @id = "StatoId" });
 
 
+    <h1 style="margin:20px">SPOSTA LE CARD IN UN'ALTRA LISTA</h1>
 
-<table id="tb2">
+<table id="tb2" class="table">
     <tr>
         <th>
+            <h3>SPOSTA IN</h3>
+        </th>
+        <th colspan="2" style="text-align:center">
+            @Html.DropDownList("Stato", null, new { @id = "StatoId" })
+        </th>
+    </TR>
+    <tr>
+        <td>
             <!-- Listbox relativo ai prodotti -->
             <h3>Prodotti in Fatto</h3>
-        </th>
-        <th></th>
-        <th>
+        </td>
+        <td></td>
+        <td>
             <h3>Prodotti in Esecuzione</h3>
-        </th>
+        </td>
     </tr>
     <tr>
         <td>
@@ -57,7 +62,7 @@
     </tr>
     <tr>
         <td colspan="3" style="text-align:center">
-            <input type="button" id="BtnSave" name="UpdatePricelist" value="Salva listino" style="width: 200px" />
+            <input type="button" id="BtnSave" name="UpdatePricelist" value="Salva listino" />
         </td>
     </tr>
 </table>
@@ -71,6 +76,6 @@
         </div>
  
 <p>
-    @Html.ActionLink("Back to List", "Index","Card", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Back to List", "Index","Card", new { @class = "btn btn-primary"})
 
 </p>
