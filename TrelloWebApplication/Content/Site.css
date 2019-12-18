@@ -4,15 +4,14 @@
     width: 100%;
     height: 100%;
     background-image: url("/Content/img/sfondo.jpg");
-    background-size:cover;
-    overflow-x:hidden;
+    background-size: cover;
+    overflow-x: hidden;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-   
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -28,30 +27,34 @@ select,
 textarea {
     max-width: 280px;
 }
+
 tr > td, th {
     padding: 7px 0px 7px 25px;
-    
 }
-.table-striped >tr > th 
-{
-    text-align:center;
+
+.table-striped > tr > th {
+    text-align: center;
 }
-.tabSecondaria   th {
+
+.tabSecondaria th {
     padding: 0 0 0 15px;
-    
 }
+
 .tabSecondaria td {
     padding: 5px 0 5px 30px;
 }
+
 .table {
     background-color: black;
     color: white;
     border-radius: 15px;
     opacity: 0.8;
-}   
-a{
-    color:white;
 }
+
+a {
+    color: white;
+}
+
 #tb1 tr:hover {
     background-color: rgba(128, 128, 128, 0.90);
     color: white;
@@ -67,28 +70,31 @@ a{
     width: 58%;
     margin-left: 21%;
     margin-right: 21%;
-    text-align:center;
+    text-align: center;
 }
 
-h1, h2 {text-align:center;
-    font-size:42px;
+h1, h2 {
+    text-align: center;
+    font-size: 42px;
 }
 
-p{
-    text-align:center;
-    font-size:16px;
+p {
+    text-align: center;
+    font-size: 16px;
 }
 
-#btnPdf{
+#btnPdf {
     margin-left: 35%;
 }
-#btnEx{
+
+#btnEx {
     margin-left: 10%;
 }
 
 #btnCom {
     margin-left: 42%;
 }
+
 #AddCom {
     margin-left: 32%;
 }
@@ -111,9 +117,11 @@ p{
     padding: 30px;
     width: 100%;
 }
-body{
-    position:absolute;
+
+body {
+    position: absolute;
 }
+
 .alert-buttons {
     border-top: thin solid #ddd;
     text-align: center;
@@ -144,6 +152,7 @@ body{
     width: 100%;
     text-align: center;
 }
+
 #alert1 {
     z-index: 1;
     position: absolute;
@@ -152,7 +161,9 @@ body{
     height: 125%;
     background: rgba(0, 0, 0, 0.75);
 }
+
 #Stato{
+
     color: black;
     padding: 4px;
     font-size: 16px;
@@ -168,8 +179,13 @@ body{
     padding: 16px;
     font-size: 16px;
     border: none;
+    border-radius: 15px;
     cursor: pointer;
 }
-#moveTo {
-    
+#head {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }

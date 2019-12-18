@@ -1,7 +1,10 @@
 ﻿using OfficeOpenXml;
+using Rotativa;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using TrelloUtilities;
@@ -20,78 +23,126 @@ namespace TrelloWebApplication.Controllers
         //creazione del modello di liste di card
         List<Card> model = PopolateModel.Popola(myApi);
         // GET: Select
-        public ActionResult Filter(string stato)
+        public ActionResult prova(string stato,List<Card> prov,string closed)
         {
             List<Card> cards = new List<Card>();
-            
+             
+            List<Closed> closedList = new List<Closed>();
+            closedList.Add(new Closed("False"));
+            closedList.Add(new Closed("True"));
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
-            
-            if (stato != null && stato != "")
+            ViewBag.Closed = new SelectList(closedList, "Id", "Name");
+
+            if ((stato != null && stato != "")||(closed!=null && closed!=""))
             {
-                foreach (var card in model)
+                 foreach (var card in model)
+                 {
+                      if (card.IdList == stato || stato=="")
+                      {
+                           if (card.Closed == closed|| closed=="")
+                           {
+                                  cards.Add(card);
+                           }
+                      }
+                 }
+                return View(cards);
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public JavaScriptResult RequestUpdateListino(string idlistino, string jsonids)
+        {
+            UnicodeEncoding uniEncoding = new UnicodeEncoding();
+            MemoryStream stream = new MemoryStream(uniEncoding.GetBytes(jsonids));
+            stream.Position = 0;
+            List<String> result = System.Web.Helpers.Json.Decode<List<String>>(jsonids);
+            List<Card> cards = new List<Card>();          
+            foreach (var value in result)
+            {
+                cards.AddRange(model.Where(g => g.Id == value));
+            }
+            string idList = "";
+            foreach (var item in myApi.GetState())
+            {
+                if (item.Name==idlistino)
                 {
-                    if (card.IdList == stato)
+                    idList = item.Id;
+                }
+            }
+            myApi.PutMassa(cards, idList);
+            var script = string.Format("PageReload()");
+            return JavaScript(script);
+        }
+
+        public ActionResult PdfIndex(string newModel)
+        {
+            List<String> result = System.Web.Helpers.Json.Decode<List<String>>(newModel);
+            List<Card> cards = new List<Card>();
+            foreach (var card in model)
+            {
+                foreach (var value in result)
+                {
+                    if (value == card.Id)
                     {
                         cards.Add(card);
                     }
                 }
-                return View(cards);
             }
-  
-            return View(model);
+            return View(cards);
         }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(List<Card> cards)
+        public ActionResult ExportPDFIndex(string lstString)
         {
-            
-            return RedirectToAction("Filter", model);
-        }
-        /// <summary>
-        /// creazione file exl con i dati di una card
-        /// </summary>
-        /// <param name="id">id della card</param>
-        /// <returns>l view di prima</returns>
-        public ActionResult ExcelEx(string id = null)
-        {
-            Card card = null;
-            foreach (var item in model)
+        
+            ActionAsPdf ris = new ActionAsPdf("PdfIndex", new { newModel= lstString })
             {
-                if (item.Id == id)
-                {
-                    card = item;
-                }
-            }
-            ExcelPackage ex = ReportMethods.ExportSingleExcel(card);
-            CreazioneExl.CreazioneFile(ex, "Details");
-            return View(card);
+                FileName = Server.MapPath("Index.pdf")
+            };
+            return ris;
         }
-
         /// <summary>
         /// creazione di un file exl con tutti i datti di tutte le card
         /// </summary>
         /// <returns>ritorna la view</returns>
 
-        public ActionResult ExcelExIndex(string id=null, string stato=null)
-        { 
+
+        public ActionResult ExcelExIndex(string lstString)
+        {
+            List<String> result = System.Web.Helpers.Json.Decode<List<String>>(lstString);
+
             List<Card> cards = new List<Card>();
-            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
-            if (id != null)
+            foreach (var card in model)
             {
-                foreach (var card in model)
+                foreach (var value in result)
                 {
-                    if (card.IdList == id)
+                    if (value==card.Id)
                     {
                         cards.Add(card);
                     }
                 }
-                ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
-                CreazioneExl.CreazioneFile(ex, "Index");
             }
+
+            ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
+            CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
+        public ActionResult View()
+        {
+            Card card = new Card();
+            var stato = myApi.GetState();
+            return View(card);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult View(Card card, string stato)
+        {
+            
+            return RedirectToAction("Index", model);
+        }
+
+
     }
 
 }

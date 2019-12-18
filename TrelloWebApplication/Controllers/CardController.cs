@@ -111,12 +111,30 @@ namespace TrelloWebApplication.Controllers
             myApi.PostCard(card);
             return RedirectToAction("Index", model);
         }
-            /// <summary>
-            /// Pagina di modifica card
-            /// </summary>
-            /// <param name="id">id card </param>
-            /// <returns></returns>
-            public ActionResult Edit(string id = null)
+
+
+        public ActionResult View()
+        {
+            List<Badge> card = new List<Badge>();
+            Badge p = new Badge();
+            card.Add(p);
+            card.Add(new Badge());
+            var stato = myApi.GetState();
+            return View(card);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult View(List<Badge> card, string stato)
+        {
+            
+            return RedirectToAction("Index", model);
+        }
+        /// <summary>
+        /// Pagina di modifica card
+        /// </summary>
+        /// <param name="id">id card </param>
+        /// <returns></returns>
+        public ActionResult Edit(string id = null)
         {
             Card card = null;
             foreach (var item in model)

@@ -1,0 +1,73 @@
+﻿@model IEnumerable<TrelloWebApplication.Models.Card>
+
+@{
+    ViewBag.Title = "Filter";
+}
+<div class="jumbotron">
+    <h1 style="text-align:center">TRELLO REPORTER APP</h1>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+
+        Stato: @Html.DropDownList("Stato", "ALL")
+        <input type="submit" value="Filter" class="btn btn-info" />
+
+    </p>
+
+
+    <table class="table" id="tb1">
+        <tr>
+            <th style="text-align:center">
+                TRELLO'S CARDS LIST
+            </th>
+            <th>STATO</th>
+            <th>ARCHIVIATA</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+
+
+            @Html.HiddenFor(modelItem => item.Id)
+            @Html.HiddenFor(modelItem => item.Name)
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdList)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Closed)
+                </td>
+                @*@Html.EditorFor("SI" => item.Badges.Select)*@
+                <td>
+                    @Html.CheckBoxFor(modelItem => item.prova200)
+                    @Html.LabelFor(modelItem => item.prova200, "Seleziona")
+                    @*@Html.CheckBoxFor(modelItem => item.Badges.Select)
+                    @Html.LabelFor(modelItem => item.Badges.Select, "Seleziona")*@
+                </td>
+            </tr>
+
+        }
+    </table>
+
+    @*@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", Model, null)*@
+
+    @Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
+
+    foreach (var item in Model)
+    {
+        @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { id = item.IdList }, new { @id = "btnEx", @class = "btn btn-success btn-large" });
+        break;
+    }
+
+
+    <input type="submit" value="Create" class="btn btn-default" />
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

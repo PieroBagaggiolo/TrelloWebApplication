@@ -1,54 +1,94 @@
 ﻿@model IEnumerable<TrelloWebApplication.Models.Card>
-
+@{List<String> idList = new List<String>();}
 @{
     ViewBag.Title = "Filter";
 }
+<head>
+    <style type="text/css">
+
+
+        #Closed {
+            color: black;
+            padding: 4px;
+            font-size: 16px;
+            font-style: italic;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            #Closed > option {
+                color: black;
+                padding: 16px;
+                font-size: 16px;
+                background-color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+        #tb2 {
+            background-color: transparent;
+            opacity: 1;
+            color: black;
+        }
+    </style>
+</head>
 <div class="jumbotron">
     <h1 style="text-align:center">TRELLO REPORTER APP</h1>
 </div>
 @using (Html.BeginForm())
 {
-    <p id="head">
-        <h5>STATO</h5>
-        @Html.DropDownList("Stato", "ALL")
-        <input type="submit" value="Filter" class="btn btn-info" />
-    </p>
-    @*<table class="table" id="tb2">
+    @Html.AntiForgeryToken()
+    <table class="table" id="tb2">
+
         <tr>
             @*<th style="text-align:center">
-                <h6>CAMPO</h6>
+                    <h6>CAMPO</h6>
+                </th>*@
+            <th>
+                <h4>STATO</h4>
             </th>
             <th>
-                <h5>STATO</h5>
+                <h4>ARCHIVIATO</h4>
             </th>
             <th></th>
         </tr>
         <tr>
             @*<th>
-                @Html.DropDownList("Campo", "ALL")
+                    @Html.DropDownList("Campo", "ALL")
+                </th>*@
+            <th>
+                @Html.DropDownList("Stato", "ALL ")
             </th>
             <th>
-                @Html.DropDownList("Stato", "ALL")
+                @Html.DropDownList("Closed", "ALL ")
             </th>
             <th>
                 <input type="submit" value="Filter" class="btn btn-info" />
             </th>
         </tr>
-    </table>*@
-            
-            
+    </table>
 
+    <br />
+    @Html.DropDownList("Stato", (MultiSelectList)ViewBag.Categories, new { multiple = "multiple" })
+    @Html.ListBox("Stato", (MultiSelectList)ViewBag.Categories)
 
-<table class="table" id="tb1">
-    <tr>
-        <th style="text-align:center">
-            TRELLO'S CARDS LIST 
-        </th>
-        <th>STATO</th>
-        <th>ARCHIVIATA</th>
-    </tr>
+    <table class="table" id="tb1">
+        <tr>
+            <th style="text-align:center">
+                TRELLO'S CARDS LIST
+            </th>
+            <th>LIST</th>
+            <th>CLOSED</th>
+            <th></th>
+        </tr>
+
         @foreach (var item in Model)
         {
+
+
+
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -61,23 +101,46 @@
                 </td>
                 @*@Html.EditorFor("SI" => item.Badges.Select)*@
                 <td>
-                    @Html.CheckBoxFor(modelItem => item.Badges.Select)
+                    @*@Html.CheckBoxFor(modelItem => item.Badges.Select)*@
+
+                    @Html.LabelFor(modelItem => item.Badges.Select, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(modelItem => item.Badges.Select)
+                            @Html.ValidationMessageFor(modelItem => item.Badges.Select, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
                 </td>
             </tr>
+            if (item.Badges.Select)
+            {
+                idList.Add(item.Id);
+            }
+            //idList.Add(item.Id);
+
+
+
+
+
+
         }
     </table>
 
     @*@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", Model, null)*@
 
-    @Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
- 
-    foreach (var item in Model)
-    {
-        @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { id = item.IdList }, new { @id = "btnEx", @class = "btn btn-success btn-large" });
-        break;
-    }
+    @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
+
+    @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnEx", @class = "btn btn-success btn-large" });
+
 
 
     <input type="submit" value="Create" class="btn btn-default" />
 
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 }

@@ -187,5 +187,12 @@ namespace TrelloWebApplication.Utiliti
             }
             return result;
         }
+        public void PutMassa(List<Card> cards,string statoId)
+        {
+            foreach (var card in cards)
+            {
+                PutList(statoId, card);
+            }
+        }
     }
 }
