@@ -2,7 +2,9 @@
 using Rotativa;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using TrelloUtilities;
@@ -48,12 +50,27 @@ namespace TrelloWebApplication.Controllers
             return View(model);
         }
 
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public JavaScriptResult ProvaRequestUpdateListino( string lstString)
+        public JavaScriptResult RequestUpdateListino(string idlistino, string jsonids)
         {
-
+            UnicodeEncoding uniEncoding = new UnicodeEncoding();
+            MemoryStream stream = new MemoryStream(uniEncoding.GetBytes(jsonids));
+            stream.Position = 0;
+            List<String> result = System.Web.Helpers.Json.Decode<List<String>>(jsonids);
+            List<Card> cards = new List<Card>();          
+            foreach (var value in result)
+            {
+                cards.AddRange(model.Where(g => g.Id == value));
+            }
+            string idList = "";
+            foreach (var item in myApi.GetState())
+            {
+                if (item.Name==idlistino)
+                {
+                    idList = item.Id;
+                }
+            }
+            myApi.PutMassa(cards, idList);
             var script = string.Format("PageReload()");
             return JavaScript(script);
         }

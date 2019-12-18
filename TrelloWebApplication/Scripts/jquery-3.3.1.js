@@ -24,24 +24,23 @@ $("#BtnSave").click(function () {
     var basepath = SetupBaseRoute(path);
     if (basepath.indexOf("Select") != -1) {
         // soltanto se e' listino,
-        var newpath = basepath + "/RequestUpdateListino";
-   
+        var newpath = basepath + "/RequestUpdateListino"; 
+        var e = document.getElementById("StatoId");
+        var strUser = e.options[e.selectedIndex].text;
+        //var idl = document.getElementById("idlistino").innerHTML;
 
-    //var idl = document.getElementById("idlistino").innerHTML;
+        var s2 = document.getElementById("lbprodplid");     // listbox degli id relativi ai prodotti contenuti nel listino (hidden) 
+        var idtosend = [];
+        var numel = s2.options.length;
 
-    var s2 = document.getElementById("lbprodplid");     // listbox degli id relativi ai prodotti contenuti nel listino (hidden) 
-    var idtosend = [];
-    var numel = s2.options.length;
+        for (var i = 0; i < numel; i++) {
+            idtosend.push(s2.options[i].text);
+        }
 
-    for (var i = 0; i < numel; i++) {
-        idtosend.push(s2.options[i].text);
-    }
-
-    // serializza l'oggetto
-    var jsonlist = JSON.stringify(idtosend);
-
-    $.post(newpath, { jsonids: jsonlist })
-
+        // serializza l'oggetto
+        var jsonlist = JSON.stringify(idtosend);
+        $.post(newpath, { idlistino: strUser,jsonids: jsonlist })
+    };
 });
 
 ( function( global, factory ) {

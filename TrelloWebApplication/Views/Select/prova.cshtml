@@ -2,7 +2,7 @@
 @model IEnumerable<TrelloWebApplication.Models.Card>
 @{
     ViewBag.Title = "Gestine Listino";
-Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <head>
@@ -36,8 +36,13 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         .list-disabled {
             color: grey;
         }
+
+        #StatoId {
+            height: 50px;
+        }
     </style>
 </head>
+@Html.DropDownList("Stato", null, new { @id = "StatoId" });
 
 
 <!-- Listbox relativo ai prodotti -->
@@ -45,14 +50,11 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <div class="title1">Prodotti in Fatto</div>
     <div>
         @{
+
             List<Card> products = Model.ToList();
-            string stato = "Fatto";
-            if (stato!=null && stato!="")
-            {
-                 products = Model.Where(g => g.IdList == stato).ToList();
-            }
+
             @*rimuove dalla lista dei prodotti quelli gi' presenti all'interno del listino*@
-                
+
         }
         <div style="display: none">
             @Html.ListBox("lbprodid", new MultiSelectList(Model.Select(g => g.Id).ToList()))
@@ -71,25 +73,24 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <div>
         @*@using (Html.BeginForm("Remove"))
             {*@
-        <input type="button" id="BtnRemove" name="RemoveProduct" value="&lt;" class="button1" onclick="Remove()"/>
+        <input type="button" id="BtnRemove" name="RemoveProduct" value="&lt;" class="button1" onclick="Remove()" />
         @*}*@
     </div>
 </div>
 <!-- Listbox relativo al listino -->
+
 <div style="text-align: left; float: right; width: 45%; margin-top: 20px">
     <div class="title2">Prodotti In esecuzione</div>
     <div>
         <div style="display: none">
             @*// mantienbe due liste parallele, contenenti rispettivamente gli id di prodotto, e i codici di prodotto relativi al listino specifico
-        // la prirma lista e' hidden*@
+                // la prirma lista e' hidden*@
+
+
 
             @{
-                List<Card> prova = Model.ToList();
-                string satto1 = "In esecuzione";
-                if (satto1 != null && satto1 != "")
-                {
-                    prova = Model.Where(g => g.IdList == satto1).ToList();
-                }
+                List<Card> prova = new List<Card>();
+
                 @*rimuove dalla lista dei prodotti quelli gi' presenti all'interno del listino*@
 
             }
@@ -104,12 +105,18 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         @*@using (Html.BeginForm("Update"))
             {*@
         <div style="padding: 5px 0 0 0px; clear: left; width: 200px">
-            <input type="button" id="BtnSave" name="UpdatePricelist" value="Salva listino" style="width: 200px"  />
+            <input type="button" id="BtnSave" name="UpdatePricelist" value="Salva listino" style="width: 200px" />
         </div>
         @*}*@
     </div>
 </div>
-<script >
+
+
+<p>
+    @Html.ActionLink("Back to List", "Index","Card")
+
+</p>
+<script>
     function addLoadEvent(func) {
         var oldonload = window.onload;
         if (typeof window.onload != "function") {
@@ -139,19 +146,19 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     });
 
 
-    function Add () {
+    function Add() {
         // deve leggere gli elementi selezionati della listbox dei prodotti
         // e poi muoverli nella listbox contenente i prodotti per listino.
         var selcode = [];       // array contenente i codici prodotti selezionati dalla listbox
         var selid = [];         // array contnente gli id prodotti relativi ai codici selezionati
         var s = document.getElementById("lbprodid");        // listbox degli id
         var s1 = document.getElementById("lbproducts");     // listbox dei codici
-        var s2 = document.getElementById("lbprodplid");     // listbox degli id relativi ai prodotti contenuti nel listino (hidden) 
+        var s2 = document.getElementById("lbprodplid");     // listbox degli id relativi ai prodotti contenuti nel listino (hidden)
         var s3 = document.getElementById("lbprodpl");       // listbox dei codici relativi ai prodotti del listino
 
         //var s = $("#lbprodid")[0];         // listbox degli id
         //var s1 = $("#lbproducts")[0];      // listbox dei codici
-        //var s2 = $("#lbprodplid")[0];      // listbox degli id relativi ai prodotti contenuti nel listino (hidden) 
+        //var s2 = $("#lbprodplid")[0];      // listbox degli id relativi ai prodotti contenuti nel listino (hidden)
         //var s3 = $("#lbprodpl")[0];        // listbox dei codici relativi ai prodotti del listino
 
 
@@ -193,7 +200,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     };
 
 
-   function Remove() {
+    function Remove() {
         // inverso di BtnAdd
         // deve leggere gli elementi selezionati della listbox  contenente i prodotti per il listino
         // e poi muoverli nelle listbox contenente i prodotti.
@@ -203,12 +210,12 @@ Layout = "~/Views/Shared/_Layout.cshtml";
         var selid = [];         // array contnente gli id prodotti relativi ai codici selezionati
         var s = document.getElementById("lbprodid");        // listbox degli id
         var s1 = document.getElementById("lbproducts");     // listbox dei codici
-        var s2 = document.getElementById("lbprodplid");     // listbox degli id relativi ai prodotti contenuti nel listino (hidden) 
+        var s2 = document.getElementById("lbprodplid");     // listbox degli id relativi ai prodotti contenuti nel listino (hidden)
         var s3 = document.getElementById("lbprodpl");       // listbox dei codici relativi ai prodotti del listino
 
         //var s = $("#lbprodid")[0];        // listbox degli id
         //var s1 = $("#lbproducts")[0];     // listbox dei codici
-        //var s2 = $("#lbprodplid")[0];     // listbox degli id relativi ai prodotti contenuti nel listino (hidden) 
+        //var s2 = $("#lbprodplid")[0];     // listbox degli id relativi ai prodotti contenuti nel listino (hidden)
         //var s3 = $("#lbprodpl")[0];       // listbox dei codici relativi ai prodotti del listino
 
         // in selcode e in selid soltanto i codici e i relativi id selezionati
@@ -242,7 +249,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     };
 
 
- 
+
 
 
 
