@@ -195,3 +195,36 @@ body {
     margin-right: -50%;
     transform: translate(-50%, -50%)
 }
+/*Elementi di filtraggio*/
+select {
+    height: 800px;
+}
+
+.list {
+    height: 300px;
+    width: 200px;
+    padding: 10px;
+    border: 3px solid black;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.list-values {
+    height: 300px;
+    width: 250px;
+    padding: 10px;
+    margin: 0 0 0 10px;
+    border: 3px solid black;
+}
+
+.list-enabled {
+    color: red;
+}
+
+.list-disabled {
+    color: grey;
+}
+
+#StatoId {
+    height: 50px;
+}
