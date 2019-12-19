@@ -17,11 +17,9 @@
 <p>
     - Per scaricare gli eventuali allegati recarsi su Details e seguire le istruzioni.
 </p>
-<p id="Select" class="btn btn-default btn-large">
-    @Html.ActionLink("GO TO FILTER", "Filter", "Select")
-</p>
 
-<table class="table" id="tb1" >
+
+<table class="table" id="tb1">
     <tr>
         <th>
             CARD NAME
@@ -34,33 +32,48 @@
     </tr>
     @foreach (var item in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdList)
-        </td>
-        @if (item.Closed == "True")
-        {
-            <td style="text-align:center">YES</td>
-        }
-        else
-        {
-            <td style="text-align:center">NO</td>
-        }
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdList)
+            </td>
+            @if (item.Closed == "True")
+            {
+                <td style="text-align:center">YES</td>
+            }
+            else
+            {
+                <td style="text-align:center">NO</td>
+            }
 
-        <td>
-            @Html.ActionLink("Details", "Details", new { id = item.Id })|
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id })|
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id })|
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })|
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
     }
 </table>
-@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Card", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
 
-@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })
+<table style="width:80%; margin-left:10%; ">
+    <tr>
+        <th>
+            <p id="Select" class="btn btn-default btn-large">
+                @Html.ActionLink("GO TO FILTER", "Filter", "Select")
+            </p>
+        </th>
+        <th>@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Card", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })</th>
+        <th>@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })</th>
+        <th> @Html.ActionLink("SEND EMAIL", "SendEmail", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })</th>
 
-@Html.ActionLink("SEND EMAIL", "SendEmail", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })
+    </tr>
+</table>
+
+
+
+
+
+
 
