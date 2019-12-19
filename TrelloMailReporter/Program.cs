@@ -29,7 +29,7 @@ namespace TrelloMailReporter
             Msg.To.Add(new MailAddress("pierobagaggiololavoro@gmail.com", "Limi Prova"));
 
             //Imposto oggetto
-            Msg.Subject = "Mail notifiche ";
+            Msg.Subject = "Mail notifiche TrelloReporterApp ";
 
             //Imposto contenuto
             Msg.Body = "Mail automatica di notifiche giornaliera";

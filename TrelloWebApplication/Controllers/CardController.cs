@@ -251,7 +251,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna la view</returns>
         public ActionResult ExcelExIndex()
         { 
-            ExcelPackage ex = ReportMethods.ExportExcelTotal(myApi);
+            ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
             CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
