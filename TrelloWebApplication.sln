@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrelloWebApplication", "Tre
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrelloUtilities", "TrelloUtilities\TrelloUtilities.csproj", "{ED66F349-6724-432B-A4DD-FD48D2DC141B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrelloMailReporter", "TrelloMailReporter\TrelloMailReporter.csproj", "{B6D5BB24-AB3D-4BF3-A619-7199683CA509}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{ED66F349-6724-432B-A4DD-FD48D2DC141B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED66F349-6724-432B-A4DD-FD48D2DC141B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED66F349-6724-432B-A4DD-FD48D2DC141B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D5BB24-AB3D-4BF3-A619-7199683CA509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D5BB24-AB3D-4BF3-A619-7199683CA509}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D5BB24-AB3D-4BF3-A619-7199683CA509}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D5BB24-AB3D-4BF3-A619-7199683CA509}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
