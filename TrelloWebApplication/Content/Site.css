@@ -95,10 +95,10 @@ p {
     margin-left: 42%;
 }
 #Select {
-    margin-left:45%;
-    margin-bottom:1%;
-    background-color:black;
-    opacity:0.8;
+    /*margin-left:45%;*/
+    margin-bottom: 1%;
+    background-color: black;
+    opacity: 0.8;
 }
 
 #AddCom {
@@ -231,6 +231,7 @@ select {
     color:black;
     width:100%;
     height:25px;
+    margin-top:5px;
 }
 #BtnAdd {
     margin-top:250px;

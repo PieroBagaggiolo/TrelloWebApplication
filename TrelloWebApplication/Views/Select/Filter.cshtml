@@ -47,10 +47,10 @@
                     <h6>CAMPO</h6>
                 </th>*@
             <th>
-                <h4>STATO</h4>
+                <h4>LIST</h4>
             </th>
             <th>
-                <h4>ARCHIVIATO</h4>
+                <h4>ARCHVIED</h4>
             </th>
             <th></th>
         </tr>
@@ -124,17 +124,30 @@
 
         }
     </table>
+    <table style="width:80%; margin-left:10%; ">
+        <tr>
+            <th>
+            <p id="Select" class="btn btn-default btn-large">
+                    @Html.ActionLink("GO TO INDEX", "Index", "Card")
+            </p>
+            </th>
+            <th> @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-danger btn-large" })</th>
+            <th>@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-success btn-large" })</th>
+            <th> @Html.ActionLink("Sposta", "Sposta", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-primary btn-large" })</th>
+
+        </tr>
+    </table>
 
     @*@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", Model, null)*@
 
-    @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
+   
 
-    @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnEx", @class = "btn btn-success btn-large" })
+    
 
 
 
     <p style="margin-left:90%">
-        @Html.ActionLink("Sposta", "Sposta", new { lstString = Json.Encode(idList) }, new { @id = "btnPdf", @class = "btn btn-primary btn-large" })
+       
     </p>
 
 
