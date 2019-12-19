@@ -1,8 +1,7 @@
 ﻿@using TrelloWebApplication.Models;
 @model IEnumerable<TrelloWebApplication.Models.Card>
 @{
-    ViewBag.Title = "Gestione Listino";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Spostamento Card";
 }
 
 <head>
@@ -56,7 +55,7 @@
     </tr>
     <tr>
         <td colspan="3" style="text-align:center">
-            <input type="button" id="BtnSave" name="UpdatePricelist" value="Salva listino" />
+            <input type="button" id="BtnSave" name="UpdatePricelist" value="SPOSTA CARD" class="btn btn-default btn-large"/>
         </td>
     </tr>
 </table>

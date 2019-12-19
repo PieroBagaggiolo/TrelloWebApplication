@@ -78,8 +78,8 @@
                 TRELLO'S CARDS LIST
             </th>
             <th>LIST</th>
-            <th>CLOSED</th>
-            <th></th>
+            <th>ARCHVIED</th>
+            <th>Expiration date</th>
         </tr>
 
         @foreach (var item in Model)
@@ -91,10 +91,28 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.IdList)
                 </td>
+                @if (item.Closed=="True")
+                {
+                    <td>YES</td>
+                }
+                else
+                {
+                    <td>NO</td>
+                }
+                
+                @if (item.Due!=null)
+                {
                 <td>
-                    @Html.DisplayFor(modelItem => item.Closed)
+                    @Html.DisplayFor(modelItem => item.Due)
                 </td>
+                }
+                else
+                {
+                <td>
 
+                   Not Present
+                </td>
+                }
             </tr>
 
             idList.Add(item.Id);
