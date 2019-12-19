@@ -13,23 +13,17 @@
     <h1 style="margin:20px">SPOSTA LE CARD IN UN'ALTRA LISTA</h1>
 
 <table id="tb2" class="table">
-    <tr>
+ <tr>
         <th>
-            <h3>SPOSTA IN</h3>
-        </th>
-        <th colspan="2" style="text-align:center">
-            @Html.DropDownList("Stato", null, new { @id = "StatoId" })
-        </th>
-    </TR>
-    <tr>
-        <td>
             <!-- Listbox relativo ai prodotti -->
-            <h3>Prodotti in Fatto</h3>
-        </td>
-        <td></td>
+            <h3 style="padding-top:5%; text-align:center;">Lista card</h3>
+        </th>
         <td>
-            <h3>Prodotti in Esecuzione</h3>
+            
         </td>
+        <th>
+            <h3>Sposta in :</h3> @Html.DropDownList("Stato", null, new { @id = "StatoId" })
+        </th>
     </tr>
     <tr>
         <td>
@@ -76,6 +70,6 @@
         </div>
  
 <p>
-    @Html.ActionLink("Back to List", "Index","Card", new { @class = "btn btn-primary"})
+    @Html.ActionLink("Back to List", "Filter","Select", new { @class = "btn btn-primary"})
 
 </p>

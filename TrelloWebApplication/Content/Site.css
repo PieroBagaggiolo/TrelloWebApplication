@@ -176,8 +176,11 @@ body {
     border: none;
     border-radius:15px;
     cursor: pointer;
-    width:100%;
+    height:25px;
     
+}
+#Closed {
+    height: 25px;
 }
 #Stato.option {
     color: black;
