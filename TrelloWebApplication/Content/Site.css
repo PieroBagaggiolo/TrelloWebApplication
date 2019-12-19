@@ -230,6 +230,7 @@ select {
     height:25px;
 }
 #BtnAdd {
+    margin-top:250px;
     margin-bottom: 2px;
 }
 #lbproducts, #lbprodpl {
