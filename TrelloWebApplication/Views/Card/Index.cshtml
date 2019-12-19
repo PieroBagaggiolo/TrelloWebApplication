@@ -20,7 +20,9 @@
 <p id="Select" class="btn btn-default btn-large">
     @Html.ActionLink("GO TO FILTER", "Filter", "Select")
 
+
 </p>
+
 <table class="table" id="tb1">
     <tr>
         <th style="text-align:center">
@@ -56,3 +58,8 @@
 @Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Card", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
 
 @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })
+
+
+@Html.ActionLink("SEND EMAIL", "SendEmail", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })
+
+
