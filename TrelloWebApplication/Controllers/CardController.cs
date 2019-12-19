@@ -6,8 +6,6 @@ using TrelloWebApplication.Models;
 using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
 using TrelloMailReporter;
-using Quartz;
-
 namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
@@ -36,7 +34,20 @@ namespace TrelloWebApplication.Controllers
         /// </summary>
         /// <returns>ritorna una view</returns>
         public ActionResult Index(string stato)
-        {          
+        {
+            List<Card> cards = new  List<Card>();
+            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
+            if (stato != null && stato != "")
+            {
+                foreach (var card in model)
+                {
+                    if (card.IdList== stato)
+                    {
+                        cards.Add(card);
+                    }
+                }
+                return View(cards);
+            }           
             return View(model);
         }
         /// <summary>
@@ -107,36 +118,31 @@ namespace TrelloWebApplication.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult newCard(Card card,string stato)
+        public ActionResult newCard(Card card)
         {
-            card.IdList = stato;
+            int i = 0;
+            foreach (var list in myApi.GetState())
+            {
+                if (i==0)
+                {
+                    card.IdList = list.Id;
+                }
+                if (card.IdList.ToUpper() == list.Name.ToUpper())
+                {                   
+                    card.IdList = list.Id;
+                    break;
+                }
+                i++;
+            }
             myApi.PostCard(card);
             return RedirectToAction("Index", model);
         }
-
-
-        public ActionResult View()
-        {
-            List<Badge> card = new List<Badge>();
-            Badge p = new Badge();
-            card.Add(p);
-            card.Add(new Badge());
-            var stato = myApi.GetState();
-            return View(card);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult View(List<Badge> card, string stato)
-        {
-            
-            return RedirectToAction("Index", model);
-        }
-        /// <summary>
-        /// Pagina di modifica card
-        /// </summary>
-        /// <param name="id">id card </param>
-        /// <returns></returns>
-        public ActionResult Edit(string id = null)
+            /// <summary>
+            /// Pagina di modifica card
+            /// </summary>
+            /// <param name="id">id card </param>
+            /// <returns></returns>
+            public ActionResult Edit(string id = null)
         {
             Card card = null;
             foreach (var item in model)
@@ -159,7 +165,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Card card, string stato)
+        public ActionResult Edit(Card card)
         {
             Card cardVecchia = null;
             foreach (var item in model)
@@ -181,7 +187,17 @@ namespace TrelloWebApplication.Controllers
                     myApi.PutClosed("false",card);
                 }
             }
-            myApi.PutList(stato, card);
+            if (cardVecchia.Name != card.Name)
+            {
+                myApi.PutName(card.Name,card);
+            }
+            foreach (var list in myApi.GetState())
+            {
+                if (card.IdList.ToUpper() == list.Name.ToUpper())
+                {
+                    myApi.PutList(list.Id,card);
+                }
+            }
             if (card.DueDate!= cardVecchia.DueDate)
             {
                 myApi.PutDueDate(card.DueDate, card);
@@ -292,6 +308,5 @@ namespace TrelloWebApplication.Controllers
             Program.SendEmail();
             return View("Index",model);
         }
-
     }
 }
