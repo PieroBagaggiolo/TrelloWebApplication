@@ -24,12 +24,11 @@ $("#BtnSave").click(function () {
     var basepath = SetupBaseRoute(path);
     if (basepath.indexOf("Select") != -1) {
         // soltanto se e' listino,
-        var newpath = basepath + "/SpostaApi"; 
-        var e = document.getElementById("StatoId");
+        var newpath = basepath + "/SpostaCard"; 
+        var e = document.getElementById("StatoId");     //stato in cui spostare le card selezionate
         var strUser = e.options[e.selectedIndex].text;
-        //var idl = document.getElementById("idlistino").innerHTML;
 
-        var s2 = document.getElementById("lbprodplid");     // listbox degli id relativi ai prodotti contenuti nel listino (hidden) 
+        var s2 = document.getElementById("lbprodplid");     // listbox degli id relativo alle card da spostare 
         var idtosend = [];
         var numel = s2.options.length;
 
@@ -75,21 +74,16 @@ $(function () {
 
 function Add() {
     // deve leggere gli elementi selezionati della listbox dei prodotti
-    // e poi muoverli nella listbox contenente i prodotti per listino.
+    // e poi muoverli nella listbox contenente le card da spostare.
     var selcode = [];       // array contenente i codici prodotti selezionati dalla listbox
     var selid = [];         // array contnente gli id prodotti relativi ai codici selezionati
     var s = document.getElementById("lbprodid");        // listbox degli id
-    var s1 = document.getElementById("lbproducts");     // listbox dei codici
-    var s2 = document.getElementById("lbprodplid");     // listbox degli id relativi ai prodotti contenuti nel listino (hidden)
-    var s3 = document.getElementById("lbprodpl");       // listbox dei codici relativi ai prodotti del listino
-
-    //var s = $("#lbprodid")[0];         // listbox degli id
-    //var s1 = $("#lbproducts")[0];      // listbox dei codici
-    //var s2 = $("#lbprodplid")[0];      // listbox degli id relativi ai prodotti contenuti nel listino (hidden)
-    //var s3 = $("#lbprodpl")[0];        // listbox dei codici relativi ai prodotti del listino
+    var s1 = document.getElementById("lbproducts");     // listbox dei nomi
+    var s2 = document.getElementById("lbprodplid");     // listbox degli id relativi alle card da spostare.
+    var s3 = document.getElementById("lbprodpl");       // listbox i nomi relativi delle card da spostare.
 
 
-    // in selcode e in selid soltanto i codici e i relativi id selezionati
+    // in selcode e in selid soltanto i nomi e i relativi id selezionati
     var numel = s1.options.length;
     var i;
     for (i = 0; i < numel; i++) {
@@ -98,15 +92,8 @@ function Add() {
             selid.push(s.options[i].text);
         }
     }
-    // traduzione -> jquery
-    //$("#lbproducts > option").each(function (index) {
-    //    if (this.selected) {
-    //        selcode.push(this.text);
-    //        selid.push(s.options[index].text);
-    //    }
-    //});
 
-    // aggiunge i prodotti al listino, toglie dalla lista dei prodotti disponibili
+    // aggiunge le card allo stato selezionato, toglie dalla lista delle card disponibili
     for (i = 0; i < selid.length; i++) {
         var option = document.createElement("option");
         var option1 = document.createElement("option");

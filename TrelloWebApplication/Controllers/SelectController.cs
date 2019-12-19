@@ -128,7 +128,7 @@ namespace TrelloWebApplication.Controllers
 
 
         [HttpPost]
-        public JavaScriptResult SpostaApi(string idlistino, string jsonids)
+        public JavaScriptResult SpostaCard(string idlistino, string jsonids)
         {
             UnicodeEncoding uniEncoding = new UnicodeEncoding();
             MemoryStream stream = new MemoryStream(uniEncoding.GetBytes(jsonids));
