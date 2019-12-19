@@ -38,6 +38,7 @@ namespace TrelloMailReporter
             Msg.Body = "Mail automatica di notifiche giornaliera";
             Msg.IsBodyHtml = true;
 
+            
 
             //Imposto il Server Smtp
             SmtpClient Smtp = new SmtpClient("smtp.live.com", 25);

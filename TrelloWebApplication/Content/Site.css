@@ -250,3 +250,6 @@ select {
     width: 200px;
     color: black
 }
+.centered{
+    text-align:center;
+}
