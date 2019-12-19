@@ -34,6 +34,7 @@ namespace TrelloMailReporter
             Msg.Subject = "Mail notifiche ";
 
             //Imposto contenuto
+
             Msg.Body = "Mail automatica di notifiche giornaliera";
             Msg.IsBodyHtml = true;
 
