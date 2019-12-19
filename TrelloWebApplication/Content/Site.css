@@ -65,7 +65,12 @@ a {
     margin-left: 10%;
     margin-right: 10%;
 }
-
+#tb3 {
+    width: 34%;
+    margin-left: 33%;
+    margin-right: 33%;
+    text-align: center;
+}
 #tb2 {
     width: 58%;
     margin-left: 21%;
