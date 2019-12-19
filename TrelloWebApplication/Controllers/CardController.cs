@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using TrelloWebApplication.Models;
 using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
+using TrelloMailReporter;
+using Quartz;
 
 namespace TrelloWebApplication.Controllers
 {
@@ -35,6 +37,21 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna una view</returns>
         public ActionResult Index(string stato)
         {
+
+            // define the job and tie it to our SendMailJob class
+            IJobDetail job = JobBuilder.Create<SendMailJob>()
+                .WithIdentity("job1", "group1")
+                .Build();
+
+            // Trigger the job to run now, and then repeat every 24 hours
+            ITrigger trigger = TriggerBuilder.Create()
+                .WithIdentity("trigger1", "group1")
+                .StartNow()
+                .WithSimpleSchedule(x => x
+                    .WithIntervalInHours(24)
+                    .RepeatForever())
+                .Build();
+
             List<Card> cards = new  List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
             if (stato != null && stato != "")
@@ -303,6 +320,10 @@ namespace TrelloWebApplication.Controllers
             return View("Details", card);
         }
 
+        public ActionResult SendEmail()
+        {
+            Program.SendEmail();
+            return View("Index",model);
+        }
     }
-
 }
