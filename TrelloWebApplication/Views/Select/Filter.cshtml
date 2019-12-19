@@ -71,9 +71,6 @@
     </table>
 
     <br />
-    @Html.DropDownList("Stato", (MultiSelectList)ViewBag.Categories, new { multiple = "multiple" })
-    @Html.ListBox("Stato", (MultiSelectList)ViewBag.Categories)
-
     <table class="table" id="tb1">
         <tr>
             <th style="text-align:center">
@@ -86,9 +83,6 @@
 
         @foreach (var item in Model)
         {
-
-
-
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -117,12 +111,6 @@
                 idList.Add(item.Id);
             }
             //idList.Add(item.Id);
-
-
-
-
-
-
         }
     </table>
 
@@ -131,9 +119,6 @@
     @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
 
     @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnEx", @class = "btn btn-success btn-large" });
-
-
-
     <input type="submit" value="Create" class="btn btn-default" />
 
 }
