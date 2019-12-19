@@ -12,6 +12,7 @@
 //{
 //    public class SendMailJob : IJob
 //    {
+
         
 
 //        //public Task Execute(IJobExecutionContext context)
@@ -67,5 +68,6 @@
 //        //            .RepeatForever())
 //        //        .Build();
 //        //}
+
 //    }
 //}
