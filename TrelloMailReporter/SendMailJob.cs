@@ -12,8 +12,6 @@ namespace TrelloMailReporter
 {
     public class SendMailJob : IJob
     {
-        
-
         public Task Execute(IJobExecutionContext context)
         {           
            
