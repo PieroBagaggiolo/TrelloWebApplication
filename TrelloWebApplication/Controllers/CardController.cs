@@ -6,8 +6,6 @@ using TrelloWebApplication.Models;
 using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
 using TrelloMailReporter;
-using Quartz;
-
 namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
