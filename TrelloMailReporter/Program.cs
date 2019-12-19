@@ -44,7 +44,7 @@ namespace TrelloMailReporter
             Msg.Subject = "Inviare Mail con C#";
 
             //Imposto contenuto
-            Msg.Body = "Mail inviata DIO PORCOOOOOOO   xD xD xD     :) :) :)         :D :D :D!";
+            Msg.Body = "Mail inviata";
             Msg.IsBodyHtml = true;
 
             //aggiunta allegato alla mail
