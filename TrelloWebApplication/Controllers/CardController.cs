@@ -5,6 +5,8 @@ using System.Web.Mvc;
 using TrelloWebApplication.Models;
 using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
+using TrelloMailReporter;
+using Quartz;
 
 namespace TrelloWebApplication.Controllers
 {
@@ -285,7 +287,11 @@ namespace TrelloWebApplication.Controllers
             return View("Details", card);
         }
 
+        public ActionResult SendEmail()
+        {
+            Program.SendEmail();
+            return View("Index",model);
+        }
 
     }
-
 }

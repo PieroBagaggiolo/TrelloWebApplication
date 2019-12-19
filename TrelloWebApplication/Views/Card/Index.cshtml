@@ -18,9 +18,11 @@
     - Per scaricare gli eventuali allegati recarsi su Details e seguire le istruzioni.
 </p>
 <p id="Select" class="btn btn-default btn-large">
-    @Html.ActionLink("GO TO FILTER", "prova", "Select")
+    @Html.ActionLink("GO TO FILTER", "Filter", "Select")
+
 
 </p>
+
 <table class="table" id="tb1">
     <tr>
         <th style="text-align:center">
@@ -32,7 +34,7 @@
             @Html.ActionLink("CREATE A NEW CARD", "newCard", "Card")
         </th>
     </tr>
-    
+
     @foreach (var item in Model)
     {
         <tr>
@@ -56,4 +58,8 @@
 @Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Card", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
 
 @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })
+
+
+@Html.ActionLink("SEND EMAIL", "SendEmail", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })
+
 

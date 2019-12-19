@@ -56,6 +56,10 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PresentationCore" />
+    <Reference Include="Quartz, Version=3.0.7.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Bin\Quartz.dll</HintPath>
+    </Reference>
     <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
     </Reference>
@@ -226,10 +230,8 @@
     <Content Include="Views\Card\Edit.cshtml" />
     <Content Include="Views\Card\newCard.cshtml" />
     <Content Include="Views\Select\Filter.cshtml" />
-    <Content Include="Views\Card\View.cshtml" />
     <Content Include="Views\Select\PdfIndex.cshtml" />
-    <Content Include="Views\Select\View.cshtml" />
-    <Content Include="Views\Select\prova.cshtml" />
+    <Content Include="Views\Select\Sposta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -250,6 +252,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TrelloMailReporter\TrelloMailReporter.csproj">
+      <Project>{b6d5bb24-ab3d-4bf3-a619-7199683ca509}</Project>
+      <Name>TrelloMailReporter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TrelloUtilities\TrelloUtilities.csproj">
       <Project>{ed66f349-6724-432b-a4dd-fd48d2dc141b}</Project>
       <Name>TrelloUtilities</Name>

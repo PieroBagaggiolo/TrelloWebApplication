@@ -71,6 +71,7 @@
     </table>
 
     <br />
+
     <table class="table" id="tb1">
         <tr>
             <th style="text-align:center">
@@ -93,24 +94,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Closed)
                 </td>
-                @*@Html.EditorFor("SI" => item.Badges.Select)*@
-                <td>
-                    @*@Html.CheckBoxFor(modelItem => item.Badges.Select)*@
 
-                    @Html.LabelFor(modelItem => item.Badges.Select, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(modelItem => item.Badges.Select)
-                            @Html.ValidationMessageFor(modelItem => item.Badges.Select, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                </td>
             </tr>
-            if (item.Badges.Select)
-            {
-                idList.Add(item.Id);
-            }
-            //idList.Add(item.Id);
+
+            idList.Add(item.Id);
+
+
+
+
+
+
         }
     </table>
 
@@ -118,8 +111,14 @@
 
     @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
 
-    @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnEx", @class = "btn btn-success btn-large" });
-    <input type="submit" value="Create" class="btn btn-default" />
+    @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnEx", @class = "btn btn-success btn-large" })
+
+
+
+    <p style="margin-left:90%">
+        @Html.ActionLink("Sposta", "Sposta", new { lstString = Json.Encode(idList) }, new { @id = "btnPdf", @class = "btn btn-primary btn-large" })
+    </p>
+
 
 }
 
