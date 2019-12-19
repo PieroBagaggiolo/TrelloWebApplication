@@ -4,14 +4,14 @@
     ViewBag.Title = "newCard";
 }
 
-<h2>newCard</h2>
+<h2>Create a new card</h2>
 
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
+<div class="form-horizontal" id="tb2">
     <h4>Card</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -32,13 +32,6 @@
         </div>
       
     </div>
-
-
-
-
-  
-
-
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-default" />
