@@ -17,6 +17,7 @@ namespace TrelloMailReporter
 {
     public class Program
     {
+
         public static void SendEmail()
         {
             MailMessage Msg = new MailMessage();
@@ -24,9 +25,10 @@ namespace TrelloMailReporter
             //Imposta il mittente
             Msg.From = new MailAddress("trelloreporterapp@hotmail.com", "Limi");
 
+
             //La proprietà .To è una collezione di destinatari,
             //quindi possiamo addizionare quanti destinatari vogliamo.
-            Msg.To.Add(new MailAddress("pierobagaggiololavoro@gmail.com", "Limi Prova"));
+            Msg.To.Add(new MailAddress("pierobagaggiololavoro@gmail.com", "Piero prova"));
 
             //Imposto oggetto
             Msg.Subject = "Mail notifiche TrelloReporterApp ";
@@ -34,6 +36,7 @@ namespace TrelloMailReporter
             //Imposto contenuto
             Msg.Body = "Mail automatica di notifiche giornaliera";
             Msg.IsBodyHtml = true;
+
 
             //Imposto il Server Smtp
             SmtpClient Smtp = new SmtpClient("smtp.live.com", 25);
@@ -45,7 +48,9 @@ namespace TrelloMailReporter
             //Alcuni Server SMTP richiedono l'accesso autenticato
             Smtp.UseDefaultCredentials = false;
             NetworkCredential Credential = new
+
             NetworkCredential("trelloreporterapp@hotmail.com", "Trello123");
+
             Smtp.Credentials = Credential;
 
             //Certificato SSL
