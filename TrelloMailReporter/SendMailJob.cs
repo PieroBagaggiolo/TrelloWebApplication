@@ -1,20 +1,20 @@
 
-﻿using OfficeOpenXml;
-using Quartz;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using TrelloUtilities;
-using TrelloWebApplication.Models;
-using TrelloWebApplication.Utiliti;
+//﻿using OfficeOpenXml;
+//using Quartz;
+//using System.Collections.Generic;
+//using System.Net;
+//using System.Net.Mail;
+//using System.Threading.Tasks;
+//using TrelloUtilities;
+//using TrelloWebApplication.Models;
+//using TrelloWebApplication.Utiliti;
 
-namespace TrelloMailReporter
-{
-    public class SendMailJob : IJob
-    {
-        public Task Execute(IJobExecutionContext context)
-        {           
+//namespace TrelloMailReporter
+//{
+//    public class SendMailJob : IJob
+//    {
+//        public Task Execute(IJobExecutionContext context)
+//        {           
            
 //        //    MailMessage Msg = new MailMessage();
 
