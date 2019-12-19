@@ -6,6 +6,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Quartz;
+using Quartz.Impl;
+using TrelloMailReporter;
 
 namespace TrelloWebApplication
 {
@@ -18,6 +21,10 @@ namespace TrelloWebApplication
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //All'avvio dell'applicazione parte anche il job scheduler che invia la mail
+            JobScheduler.Start();
         }
     }
 }
+

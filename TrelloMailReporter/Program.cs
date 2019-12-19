@@ -9,10 +9,6 @@ using TrelloUtilities;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
 
-//using Quartz;
-//using Quartz.Impl;
-//using Quartz.Logging;
-
 namespace TrelloMailReporter
 {
     public class Program
