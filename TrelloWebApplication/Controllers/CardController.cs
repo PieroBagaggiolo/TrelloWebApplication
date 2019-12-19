@@ -36,35 +36,7 @@ namespace TrelloWebApplication.Controllers
         /// </summary>
         /// <returns>ritorna una view</returns>
         public ActionResult Index(string stato)
-        {
-
-            // define the job and tie it to our SendMailJob class
-            IJobDetail job = JobBuilder.Create<SendMailJob>()
-                .WithIdentity("job1", "group1")
-                .Build();
-
-            // Trigger the job to run now, and then repeat every 24 hours
-            ITrigger trigger = TriggerBuilder.Create()
-                .WithIdentity("trigger1", "group1")
-                .StartNow()
-                .WithSimpleSchedule(x => x
-                    .WithIntervalInHours(24)
-                    .RepeatForever())
-                .Build();
-
-            List<Card> cards = new  List<Card>();
-            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
-            if (stato != null && stato != "")
-            {
-                foreach (var card in model)
-                {
-                    if (card.IdList== stato)
-                    {
-                        cards.Add(card);
-                    }
-                }
-                return View(cards);
-            }           
+        {          
             return View(model);
         }
         /// <summary>
@@ -135,31 +107,36 @@ namespace TrelloWebApplication.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult newCard(Card card)
+        public ActionResult newCard(Card card,string stato)
         {
-            int i = 0;
-            foreach (var list in myApi.GetState())
-            {
-                if (i==0)
-                {
-                    card.IdList = list.Id;
-                }
-                if (card.IdList.ToUpper() == list.Name.ToUpper())
-                {                   
-                    card.IdList = list.Id;
-                    break;
-                }
-                i++;
-            }
+            card.IdList = stato;
             myApi.PostCard(card);
             return RedirectToAction("Index", model);
         }
-            /// <summary>
-            /// Pagina di modifica card
-            /// </summary>
-            /// <param name="id">id card </param>
-            /// <returns></returns>
-            public ActionResult Edit(string id = null)
+
+
+        public ActionResult View()
+        {
+            List<Badge> card = new List<Badge>();
+            Badge p = new Badge();
+            card.Add(p);
+            card.Add(new Badge());
+            var stato = myApi.GetState();
+            return View(card);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult View(List<Badge> card, string stato)
+        {
+            
+            return RedirectToAction("Index", model);
+        }
+        /// <summary>
+        /// Pagina di modifica card
+        /// </summary>
+        /// <param name="id">id card </param>
+        /// <returns></returns>
+        public ActionResult Edit(string id = null)
         {
             Card card = null;
             foreach (var item in model)
@@ -182,7 +159,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Card card)
+        public ActionResult Edit(Card card, string stato)
         {
             Card cardVecchia = null;
             foreach (var item in model)
@@ -204,17 +181,7 @@ namespace TrelloWebApplication.Controllers
                     myApi.PutClosed("false",card);
                 }
             }
-            if (cardVecchia.Name != card.Name)
-            {
-                myApi.PutName(card.Name,card);
-            }
-            foreach (var list in myApi.GetState())
-            {
-                if (card.IdList.ToUpper() == list.Name.ToUpper())
-                {
-                    myApi.PutList(list.Id,card);
-                }
-            }
+            myApi.PutList(stato, card);
             if (card.DueDate!= cardVecchia.DueDate)
             {
                 myApi.PutDueDate(card.DueDate, card);
@@ -266,7 +233,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna la view</returns>
         public ActionResult ExcelExIndex()
         { 
-            ExcelPackage ex = ReportMethods.ExportExcelTotal(myApi);
+            ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
             CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
@@ -325,5 +292,6 @@ namespace TrelloWebApplication.Controllers
             Program.SendEmail();
             return View("Index",model);
         }
+
     }
 }
