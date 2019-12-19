@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CardController.cs" />
+    <Compile Include="Controllers\SelectController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -228,10 +229,14 @@
     <Content Include="Views\Card\PdfDetails.cshtml" />
     <Content Include="Views\Card\Edit.cshtml" />
     <Content Include="Views\Card\newCard.cshtml" />
+    <Content Include="Views\Select\Filter.cshtml" />
+    <Content Include="Views\Select\PdfIndex.cshtml" />
+    <Content Include="Views\Select\Sposta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\img\" />
+    <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

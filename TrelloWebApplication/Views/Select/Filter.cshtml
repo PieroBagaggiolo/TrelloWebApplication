@@ -1,0 +1,130 @@
+﻿@model IEnumerable<TrelloWebApplication.Models.Card>
+@{List<String> idList = new List<String>();}
+@{
+    ViewBag.Title = "Filter";
+}
+<head>
+    <style type="text/css">
+
+
+        #Closed {
+            color: black;
+            padding: 4px;
+            font-size: 16px;
+            font-style: italic;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            #Closed > option {
+                color: black;
+                padding: 16px;
+                font-size: 16px;
+                background-color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+        #tb2 {
+            background-color: transparent;
+            opacity: 1;
+            color: black;
+        }
+    </style>
+</head>
+<div class="jumbotron">
+    <h1 style="text-align:center">TRELLO REPORTER APP</h1>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <table class="table" id="tb2">
+
+        <tr>
+            @*<th style="text-align:center">
+                    <h6>CAMPO</h6>
+                </th>*@
+            <th>
+                <h4>STATO</h4>
+            </th>
+            <th>
+                <h4>ARCHIVIATO</h4>
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            @*<th>
+                    @Html.DropDownList("Campo", "ALL")
+                </th>*@
+            <th>
+                @Html.DropDownList("Stato", "ALL ")
+            </th>
+            <th>
+                @Html.DropDownList("Closed", "ALL ")
+            </th>
+            <th>
+                <input type="submit" value="Filter" class="btn btn-info" />
+            </th>
+        </tr>
+    </table>
+
+    <br />
+
+    <table class="table" id="tb1">
+        <tr>
+            <th style="text-align:center">
+                TRELLO'S CARDS LIST
+            </th>
+            <th>LIST</th>
+            <th>CLOSED</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdList)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Closed)
+                </td>
+
+            </tr>
+
+            idList.Add(item.Id);
+
+
+
+
+
+
+        }
+    </table>
+
+    @*@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", Model, null)*@
+
+    @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
+
+    @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnEx", @class = "btn btn-success btn-large" })
+
+
+
+    <p style="margin-left:90%">
+        @Html.ActionLink("Sposta", "Sposta", new { lstString = Json.Encode(idList) }, new { @id = "btnPdf", @class = "btn btn-primary btn-large" })
+    </p>
+
+
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
