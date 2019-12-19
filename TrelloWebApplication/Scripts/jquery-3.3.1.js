@@ -24,7 +24,7 @@ $("#BtnSave").click(function () {
     var basepath = SetupBaseRoute(path);
     if (basepath.indexOf("Select") != -1) {
         // soltanto se e' listino,
-        var newpath = basepath + "/RequestUpdateListino"; 
+        var newpath = basepath + "/SpostaApi"; 
         var e = document.getElementById("StatoId");
         var strUser = e.options[e.selectedIndex].text;
         //var idl = document.getElementById("idlistino").innerHTML;

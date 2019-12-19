@@ -226,10 +226,8 @@
     <Content Include="Views\Card\Edit.cshtml" />
     <Content Include="Views\Card\newCard.cshtml" />
     <Content Include="Views\Select\Filter.cshtml" />
-    <Content Include="Views\Card\View.cshtml" />
     <Content Include="Views\Select\PdfIndex.cshtml" />
-    <Content Include="Views\Select\View.cshtml" />
-    <Content Include="Views\Select\prova.cshtml" />
+    <Content Include="Views\Select\Sposta.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

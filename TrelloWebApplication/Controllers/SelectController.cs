@@ -23,57 +23,36 @@ namespace TrelloWebApplication.Controllers
         //creazione del modello di liste di card
         List<Card> model = PopolateModel.Popola(myApi);
         // GET: Select
-        public ActionResult prova(string stato,List<Card> prov,string closed)
+        public ActionResult Filter(string stato, List<Card> prov, string closed)
         {
             List<Card> cards = new List<Card>();
-             
+
             List<Closed> closedList = new List<Closed>();
             closedList.Add(new Closed("False"));
             closedList.Add(new Closed("True"));
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
             ViewBag.Closed = new SelectList(closedList, "Id", "Name");
 
-            if ((stato != null && stato != "")||(closed!=null && closed!=""))
+            if ((stato != null && stato != "") || (closed != null && closed != ""))
             {
-                 foreach (var card in model)
-                 {
-                      if (card.IdList == stato || stato=="")
-                      {
-                           if (card.Closed == closed|| closed=="")
-                           {
-                                  cards.Add(card);
-                           }
-                      }
-                 }
+                foreach (var card in model)
+                {
+                    if (card.IdList == stato || stato == "")
+                    {
+                        if (card.Closed == closed || closed == "")
+                        {
+                            cards.Add(card);
+                        }
+                    }
+                }
                 return View(cards);
             }
             return View(model);
         }
 
-        [HttpPost]
-        public JavaScriptResult RequestUpdateListino(string idlistino, string jsonids)
-        {
-            UnicodeEncoding uniEncoding = new UnicodeEncoding();
-            MemoryStream stream = new MemoryStream(uniEncoding.GetBytes(jsonids));
-            stream.Position = 0;
-            List<String> result = System.Web.Helpers.Json.Decode<List<String>>(jsonids);
-            List<Card> cards = new List<Card>();          
-            foreach (var value in result)
-            {
-                cards.AddRange(model.Where(g => g.Id == value));
-            }
-            string idList = "";
-            foreach (var item in myApi.GetState())
-            {
-                if (item.Name==idlistino)
-                {
-                    idList = item.Id;
-                }
-            }
-            myApi.PutMassa(cards, idList);
-            var script = string.Format("PageReload()");
-            return JavaScript(script);
-        }
+
+      
+
 
         public ActionResult PdfIndex(string newModel)
         {
@@ -128,20 +107,50 @@ namespace TrelloWebApplication.Controllers
             CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
-        public ActionResult View()
+
+        public ActionResult Sposta(string lstString)
         {
-            Card card = new Card();
-            var stato = myApi.GetState();
-            return View(card);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult View(Card card, string stato)
-        {
-            
-            return RedirectToAction("Index", model);
+            List<String> result = System.Web.Helpers.Json.Decode<List<String>>(lstString);
+            List<Card> cards = new List<Card>();
+            foreach (var card in model)
+            {
+                foreach (var value in result)
+                {
+                    if (value == card.Id)
+                    {
+                        cards.Add(card);
+                    }
+                }
+            }
+            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
+            return View(cards);
         }
 
+
+        [HttpPost]
+        public JavaScriptResult SpostaApi(string idlistino, string jsonids)
+        {
+            UnicodeEncoding uniEncoding = new UnicodeEncoding();
+            MemoryStream stream = new MemoryStream(uniEncoding.GetBytes(jsonids));
+            stream.Position = 0;
+            List<String> result = System.Web.Helpers.Json.Decode<List<String>>(jsonids);
+            List<Card> cards = new List<Card>();
+            foreach (var value in result)
+            {
+                cards.AddRange(model.Where(g => g.Id == value));
+            }
+            string idList = "";
+            foreach (var item in myApi.GetState())
+            {
+                if (item.Name == idlistino)
+                {
+                    idList = item.Id;
+                }
+            }
+            myApi.PutMassa(cards, idList);
+            var script = string.Format("PageReload()");
+            return JavaScript(script);
+        }
 
     }
 
