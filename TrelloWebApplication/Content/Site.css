@@ -182,8 +182,16 @@ body {
     cursor: pointer;
     height:25px;
 }
-#Closed {
+#closed {
+    color: black;
+    padding: 4px;
+    font-size: 16px;
+    font-style: italic;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
     height: 25px;
+    width:100px;
 }
 #Stato.option {
     color: black;
