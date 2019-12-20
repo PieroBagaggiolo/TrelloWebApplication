@@ -1,15 +1,11 @@
 ﻿using Quartz;
 using Quartz.Impl;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TrelloMailReporter
+namespace TrelloMailReporter.MailScheduledJob
 {
     public class JobScheduler
     {
+        //Questo metodo verrà chiamato sul metodo start di global.asax cosi' quando lanciamo l'app parte la funzione
         public static void Start()
         {
             //IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
@@ -22,13 +18,13 @@ namespace TrelloMailReporter
 
             ITrigger trigger = TriggerBuilder.Create()
                 .WithDailyTimeIntervalSchedule
+                //scelgo ogni quanto eseguire il job ed a che ora farlo partire
                   (s =>
-                     s.WithIntervalInSeconds(20)
+                     s.WithIntervalInHours(24)
                     .OnEveryDay()
                     .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(9, 35))
                   )
                 .Build();
-
             scheduler.ScheduleJob(job, trigger);
         }
     }

@@ -1,11 +1,9 @@
 ﻿using Quartz;
-using Quartz.Impl;
-using System;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 
-namespace TrelloMailReporter
+namespace TrelloMailReporter.MailScheduledJob
 {
     public class SendMailJob : IJob
     {
@@ -20,7 +18,6 @@ namespace TrelloMailReporter
             //Imposta il mittente
             Msg.From = new MailAddress("trelloreporterapp@hotmail.com", "Limi");
 
-
             //La proprietà .To è una collezione di destinatari,
             //quindi possiamo addizionare quanti destinatari vogliamo.
             Msg.To.Add(new MailAddress("nunzio22598@gmail.com", "Piero prova"));
@@ -32,6 +29,10 @@ namespace TrelloMailReporter
             Msg.Body = "Mail automatica di notifiche giornaliera";
             Msg.IsBodyHtml = true;
 
+            //Path allegato
+            var filePath = @"C:\Users\derjaj\Downloads\Index.xlsx";
+            //Aggiungo l'allegato tramite il suo path
+            Msg.Attachments.Add(new System.Net.Mail.Attachment(filePath));
 
             //Imposto il Server Smtp
             SmtpClient Smtp = new SmtpClient("smtp.live.com", 25);
@@ -42,10 +43,7 @@ namespace TrelloMailReporter
 
             //Alcuni Server SMTP richiedono l'accesso autenticato
             Smtp.UseDefaultCredentials = false;
-            NetworkCredential Credential = new
-
-            NetworkCredential("trelloreporterapp@hotmail.com", "Trello123");
-
+            NetworkCredential Credential = new NetworkCredential("trelloreporterapp@hotmail.com", "Trello123");
             Smtp.Credentials = Credential;
 
             //Certificato SSL

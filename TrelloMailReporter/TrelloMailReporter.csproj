@@ -52,9 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JobScheduler.cs" />
-    <Compile Include="SendMailJob.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="MailScheduledJob\JobScheduler.cs" />
+    <Compile Include="MailScheduledJob\SendMailJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
