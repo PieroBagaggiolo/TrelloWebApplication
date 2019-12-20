@@ -11,9 +11,8 @@
 {
 
     @Html.AntiForgeryToken()
-    <h4>Card</h4>
 
-    <table class="table" id="tb3" style="text-align:center;">
+    <table class="table" id="tb3" style="margin-top:5%">
         <tr>
             <th>
                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -55,43 +54,11 @@
 
 
     <p>
-        @Html.ActionLink("Back to List", "Filter", "Select", new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to List", "Index", "Card", new { @class = "btn btn-primary" })
 
     </p>
-    @*<div class="form-horizontal table" id="tb2" style="text-align:center;">
-
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
-
-
-
-        <div class="form-group">
-
-            <div class="col-md-10">
-            </div>
-        </div>
-
-        <div class="form-group">
-
-            <div class="col-md-10">
-
-
-            </div>
-        </div>*@
-
-
-
-
-
-
-
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
