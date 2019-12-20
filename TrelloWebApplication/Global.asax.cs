@@ -17,7 +17,7 @@ namespace TrelloWebApplication
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //All'avvio dell'applicazione parte anche il job scheduler che invia la mail
-            JobScheduler.Start();
+            //JobScheduler.Start();
         }
     }
 }

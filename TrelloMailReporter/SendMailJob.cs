@@ -49,7 +49,7 @@ namespace TrelloMailReporter.MailScheduledJob
             Msg.IsBodyHtml = true;
 
             //Path allegato
-            var filePath = @"C:\Users\sava\Downloads\EmailXml.xlsx";
+            var filePath = @"C:\Users\bagaggiolo\Downloads\Index.xlsx";
             //Aggiungo l'allegato tramite il suo path
             Msg.Attachments.Add(new System.Net.Mail.Attachment(filePath));
 
