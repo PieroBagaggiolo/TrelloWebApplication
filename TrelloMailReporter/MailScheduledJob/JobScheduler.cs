@@ -5,26 +5,27 @@ namespace TrelloMailReporter.MailScheduledJob
 {
     public class JobScheduler
     {
-        //Questo metodo verrà chiamato sul metodo start di global.asax cosi' quando lanciamo l'app parte la funzione
+        /// <summary>
+        /// Questo metodo verrà chiamato sul metodo start di global.asax cosi' quando lanciamo l'app parte la funzione in background in automatico
+        /// </summary>
         public static void Start()
         {
-            //IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
-            //scheduler.Start();
             IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler().GetAwaiter().GetResult();
-            //IScheduler scheduler = StdSchedulerFactory.GetDefaultScheduler();
             scheduler.Start();
 
             IJobDetail job = JobBuilder.Create<SendMailJob>().Build();
 
+            //Creo il trigger che imposta come programmare il job SendMail
             ITrigger trigger = TriggerBuilder.Create()
                 .WithDailyTimeIntervalSchedule
                 //scelgo ogni quanto eseguire il job ed a che ora farlo partire
                   (s =>
-                     s.WithIntervalInHours(24)
+                     s.WithIntervalInSeconds(24)
                     .OnEveryDay()
-                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(9, 35))
+                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(13, 11))
                   )
                 .Build();
+            //passo allo scheduler il job e ogni quanto eseguirlo (trigger)
             scheduler.ScheduleJob(job, trigger);
         }
     }
