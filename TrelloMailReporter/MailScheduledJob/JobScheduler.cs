@@ -18,7 +18,11 @@ namespace TrelloMailReporter.MailScheduledJob
             //Creo il trigger che imposta come programmare il job SendMail
             ITrigger trigger = TriggerBuilder.Create()
                 .WithDailyTimeIntervalSchedule
+<<<<<<< HEAD
                   //scelgo ogni quanto eseguire il job ed a che ora farlo partire
+=======
+                //scelgo ogni quanto eseguire il job ed a che ora farlo partire
+>>>>>>> Viste
                   (s =>
                      s.WithIntervalInSeconds(24)
                     .OnEveryDay()

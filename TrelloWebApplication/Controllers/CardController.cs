@@ -21,16 +21,6 @@ namespace TrelloWebApplication.Controllers
         //creazione del modello di liste di card
         List<Card> model = PopolateModel.Popola(myApi);
 
-        //public ActionResult DownloadAdTemplate(string pathCode)
-        //{
-        //    var imgPath = Server.MapPath(service.GetTemplatePath(pathCode));
-        //    Response.AddHeader("Content-Disposition", "attachment; filename=\"filenamehere.png\"");
-        //    Response.WriteFile(imgPath);
-        //    Response.End();
-        //    return null;
-        //}
-
-
         /// <summary>
         /// visualizzia la lista di card predenti nella pagina trello
         /// </summary>

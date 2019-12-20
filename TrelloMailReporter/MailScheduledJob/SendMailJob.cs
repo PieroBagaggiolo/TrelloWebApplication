@@ -23,11 +23,19 @@ namespace TrelloMailReporter.MailScheduledJob
         public void SendMail()
         {
             // elementi neccessari per fare le chiamate in caso di neccessita di potrebbe fare una view che le chieda al utente
+<<<<<<< HEAD
             string Key = "9936fabac5fdc5f00e46ff3a454e9feb";
             string Token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
             string IdBoard = "5ddd5dad735c842669b7b819";
             // creazione del mio modello di api per le chiamate
             Api myApi = new Api(Key, Token, IdBoard);
+=======
+             string Key = "9936fabac5fdc5f00e46ff3a454e9feb";
+             string Token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
+             string IdBoard = "5ddd5dad735c842669b7b819";
+            // creazione del mio modello di api per le chiamate
+             Api myApi = new Api(Key, Token, IdBoard);
+>>>>>>> Viste
             //creazione del modello di liste di card
             List<Card> model = PopolateModel.Popola(myApi);
 
@@ -52,7 +60,11 @@ namespace TrelloMailReporter.MailScheduledJob
             Msg.IsBodyHtml = true;
 
             //Path allegato
+<<<<<<< HEAD
             var filePath = @"C:\Users\sava\Downloads\EmailXml.xlsx";
+=======
+            var filePath = @"C:\Users\derjaj\Downloads\EmailXml.xlsx";
+>>>>>>> Viste
             //Aggiungo l'allegato tramite il suo path
             Msg.Attachments.Add(new System.Net.Mail.Attachment(filePath));
 
@@ -77,4 +89,8 @@ namespace TrelloMailReporter.MailScheduledJob
             File.Delete(@"C:\Users\derjaj\Downloads\EmailXml.xlsx");
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Viste
