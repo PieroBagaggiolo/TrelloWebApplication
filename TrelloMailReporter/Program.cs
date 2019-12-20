@@ -16,6 +16,8 @@ namespace TrelloMailReporter
 
         public static void SendEmail()
         {
+            var filePath= @"C:\Users\derjaj\Downloads\Index.xlsx";
+
             MailMessage Msg = new MailMessage();
 
             //Imposta il mittente
@@ -33,6 +35,8 @@ namespace TrelloMailReporter
             Msg.Body = "Mail automatica di notifiche giornaliera";
             Msg.IsBodyHtml = true;
 
+            //Aggiungo l'allegato
+            Msg.Attachments.Add(new System.Net.Mail.Attachment(filePath));
 
             //Imposto il Server Smtp
             SmtpClient Smtp = new SmtpClient("smtp.live.com", 25);

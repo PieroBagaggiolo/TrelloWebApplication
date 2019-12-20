@@ -23,9 +23,9 @@ namespace TrelloMailReporter
             ITrigger trigger = TriggerBuilder.Create()
                 .WithDailyTimeIntervalSchedule
                   (s =>
-                     s.WithIntervalInHours(24)
+                     s.WithIntervalInSeconds(20)
                     .OnEveryDay()
-                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(16, 10))
+                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(9, 35))
                   )
                 .Build();
 
