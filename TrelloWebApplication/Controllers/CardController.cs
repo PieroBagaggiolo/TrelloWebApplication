@@ -21,16 +21,6 @@ namespace TrelloWebApplication.Controllers
         //creazione del modello di liste di card
         List<Card> model = PopolateModel.Popola(myApi);
 
-        //public ActionResult DownloadAdTemplate(string pathCode)
-        //{
-        //    var imgPath = Server.MapPath(service.GetTemplatePath(pathCode));
-        //    Response.AddHeader("Content-Disposition", "attachment; filename=\"filenamehere.png\"");
-        //    Response.WriteFile(imgPath);
-        //    Response.End();
-        //    return null;
-        //}
-
-
         /// <summary>
         /// visualizzia la lista di card predenti nella pagina trello
         /// </summary>
@@ -49,7 +39,7 @@ namespace TrelloWebApplication.Controllers
                     }
                 }
                 return View(cards);
-            }           
+            }
             return View(model);
         }
         /// <summary>
@@ -113,7 +103,7 @@ namespace TrelloWebApplication.Controllers
         }
         public ActionResult newCard()
         {
-            Card card = new Card();           
+            Card card = new Card();
             var stato = myApi.GetState();
             ViewBag.Stato = new SelectList(stato, "Id", "Name", card.IdList);
             return View(card);
@@ -130,7 +120,7 @@ namespace TrelloWebApplication.Controllers
                     card.IdList = list.Id;
                 }
                 if (card.IdList.ToUpper() == list.Name.ToUpper())
-                {                   
+                {
                     card.IdList = list.Id;
                     break;
                 }
@@ -201,7 +191,7 @@ namespace TrelloWebApplication.Controllers
                     {
                         myApi.PutList(stato, card);
                     }
-                    
+
                 }
             }
             if (card.DueDate!= cardVecchia.DueDate)
@@ -254,14 +244,14 @@ namespace TrelloWebApplication.Controllers
         /// </summary>
         /// <returns>ritorna la view</returns>
         public ActionResult ExcelExIndex()
-        { 
+        {
             ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
             CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
 
         /// <summary>
-        /// creazione di un file pdf con i dettagli di una card 
+        /// creazione di un file pdf con i dettagli di una card
         /// </summary>
         /// <param name="id">id card</param>
         /// <returns>file pdf</returns>
@@ -283,14 +273,14 @@ namespace TrelloWebApplication.Controllers
             return result;
         }
         /// <summary>
-        /// invio commento sulla card selezionata 
+        /// invio commento sulla card selezionata
         /// </summary>
         /// <param name="pro">modello della card selezionata</param>
         /// <returns>ritorna alla stessa pagina con un alert di successo o insucesso del operazione</returns>
         [HttpPost]
         public ActionResult Details(Card pro)
-        {         
-            
+        {
+
             Card card = null;
             foreach (var item in model)
             {
