@@ -14,8 +14,8 @@
     padding-right: 15px;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
 */
 .dl-horizontal dt {
     white-space: normal;
@@ -45,10 +45,9 @@ tr > td, th {
 }
 
 .table {
-    background-color: black;
+    background: rgba(0, 0, 0, 0.8);
     color: white;
     border-radius: 15px;
-    opacity: 0.8;
 }
 
 a {
@@ -180,8 +179,19 @@ body {
     border: none;
     border-radius: 15px;
     cursor: pointer;
+    height:25px;
+    width:100%;
+
+}
+#stato {
+    color: black;
+    padding: 4px;
+    font-size: 16px;
+    font-style: italic;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
     height: 25px;
-    width: 80%;
 }
 #closed {
     color: black;
