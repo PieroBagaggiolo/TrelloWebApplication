@@ -30,7 +30,7 @@ namespace TrelloWebApplication.Controllers
             List<Closed> closedList = new List<Closed>();
             closedList.Add(new Closed("False"));
             closedList.Add(new Closed("True"));
-            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
+            ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
             ViewBag.closed = new SelectList(closedList, "Id", "Name");
 
             if ((stato != null && stato != "") || (closed != null && closed != ""))

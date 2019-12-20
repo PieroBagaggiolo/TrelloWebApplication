@@ -40,29 +40,18 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <table class="table" id="tb2">
+    <table  id="tb2">
 
-        <tr>
-            @*<th style="text-align:center">
-                    <h6>CAMPO</h6>
-                </th>*@
-            <th>
-                <h4>LIST</h4>
-            </th>
-            <th>
-                <h4>ARCHVIED</h4>
-            </th>
-            <th></th>
-        </tr>
+       
         <tr>
             @*<th>
                     @Html.DropDownList("Campo", "ALL")
                 </th>*@
             <th>
-                @Html.DropDownList("Stato", "ALL ")
+                <h4> LIST : @Html.DropDownList("stato", "ALL ")</h4>
             </th>
             <th>
-                @Html.DropDownList("closed", "ALL ")
+                <h4>ARCHVIED : @Html.DropDownList("closed", "ALL ")</h4>
             </th>
             <th>
                 <input type="submit" value="Filter" class="btn btn-info" />

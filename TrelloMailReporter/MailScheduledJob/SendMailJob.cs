@@ -11,13 +11,16 @@ using TrelloWebApplication.Utiliti;
 
 namespace TrelloMailReporter.MailScheduledJob
 {
-    public class SendMailJobb
+    public class SendMailJob : IJob
     {
-        
+        public Task Execute(IJobExecutionContext context)
+        {
+            return Task.Factory.StartNew(() => SendMail());
+        }
         /// <summary>
         /// metodo per l'invio di una mail
         /// </summary>
-        public static void SendMail()
+        public void SendMail()
         {
             // elementi neccessari per fare le chiamate in caso di neccessita di potrebbe fare una view che le chieda al utente
             string Key = "9936fabac5fdc5f00e46ff3a454e9feb";

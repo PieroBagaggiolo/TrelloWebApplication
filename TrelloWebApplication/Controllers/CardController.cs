@@ -6,6 +6,8 @@ using TrelloWebApplication.Models;
 using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
 using TrelloMailReporter;
+using TrelloMailReporter.MailScheduledJob;
+
 namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
@@ -165,7 +167,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Card card)
+        public ActionResult Edit(Card card,string stato)
         {
             Card cardVecchia = null;
             foreach (var item in model)
@@ -193,9 +195,13 @@ namespace TrelloWebApplication.Controllers
             }
             foreach (var list in myApi.GetState())
             {
-                if (card.IdList.ToUpper() == list.Name.ToUpper())
+                if (stato==list.Id)
                 {
-                    myApi.PutList(list.Id,card);
+                    if (cardVecchia.IdList!=list.Name)
+                    {
+                        myApi.PutList(stato, card);
+                    }
+                    
                 }
             }
             if (card.DueDate!= cardVecchia.DueDate)
@@ -305,7 +311,7 @@ namespace TrelloWebApplication.Controllers
 
         public ActionResult SendEmail()
         {
-            Program.SendEmail();
+            SendMailJobb.SendMail();
             return View("Index",model);
         }
     }
