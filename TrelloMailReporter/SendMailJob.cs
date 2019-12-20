@@ -13,7 +13,7 @@ namespace TrelloMailReporter.MailScheduledJob
 {
     public class SendMailJobb
     {
-        
+
         /// <summary>
         /// metodo per l'invio di una mail
         /// </summary>
