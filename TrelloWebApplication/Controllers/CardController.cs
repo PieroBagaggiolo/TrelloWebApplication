@@ -8,6 +8,13 @@ using TrelloWebApplication.Utiliti;
 using TrelloMailReporter;
 using TrelloMailReporter.MailScheduledJob;
 
+
+using System;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Web;
+
 namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
@@ -135,7 +142,8 @@ namespace TrelloWebApplication.Controllers
             /// <param name="id">id card </param>
             /// <returns></returns>
             public ActionResult Edit(string id = null)
-        {
+            {
+            string inzio = "";
             Card card = null;
             foreach (var item in model)
             {
@@ -143,9 +151,11 @@ namespace TrelloWebApplication.Controllers
 
                 {
                     card = item;
+                    inzio = item.IdList;
                 }
             }
-            var stato=myApi.GetState();
+            var stato = myApi.GetState().Where(g => g.Name == inzio).ToList();
+            stato.AddRange(myApi.GetState().Where(g => g.Name != inzio).ToList());
             ViewBag.Stato = new SelectList(stato, "Id", "Name",card.IdList);
             return View(card);
         }

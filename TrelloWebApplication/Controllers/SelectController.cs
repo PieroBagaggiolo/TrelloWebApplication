@@ -137,6 +137,7 @@ namespace TrelloWebApplication.Controllers
             stream.Position = 0;
             List<String> result = System.Web.Helpers.Json.Decode<List<String>>(jsonids);
             List<Card> cards = new List<Card>();
+            
             foreach (var value in result)
             {
                 cards.AddRange(model.Where(g => g.Id == value));
@@ -153,25 +154,6 @@ namespace TrelloWebApplication.Controllers
             var script = string.Format("PageReload()");
             return JavaScript(script);
         }
-
-
-        [HttpPost]
-        public ActionResult Prova(string idlistino)
-        {
-
-            List<Card> cards = model.Where(g => g.IdList == idlistino).ToList();
-            List<String> prova = new List<string>();
-            foreach (var item in cards)
-            {
-                prova.Add(item.Id);
-            }
-            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
-            ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
-
-           
-            return RedirectToAction("Sposta", new { lstString = JsonConvert.SerializeObject(prova) });
-        }
-
     }
 
 }
