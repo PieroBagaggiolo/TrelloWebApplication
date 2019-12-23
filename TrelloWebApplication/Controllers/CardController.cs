@@ -6,6 +6,8 @@ using TrelloWebApplication.Models;
 using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
 using TrelloMailReporter;
+using TrelloMailReporter.MailScheduledJob;
+
 namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
@@ -25,6 +27,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna una view</returns>
         public ActionResult Index(string stato)
         {
+
             List<Card> cards = new  List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
             if (stato != null && stato != "")
