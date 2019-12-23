@@ -1,4 +1,5 @@
-﻿using OfficeOpenXml;
+﻿using Newtonsoft.Json;
+using OfficeOpenXml;
 using Rotativa;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace TrelloWebApplication.Controllers
         //creazione del modello di liste di card
         List<Card> model = PopolateModel.Popola(myApi);
         // GET: Select
-        public ActionResult Filter(string stato, List<Card> prov, string closed)
+        public ActionResult Filter(string stato, List<Card> cards1, string closed)
         {
             List<Card> cards = new List<Card>();
 
@@ -123,6 +124,7 @@ namespace TrelloWebApplication.Controllers
                 }
             }
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
+            ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
             return View(cards);
         }
 
@@ -150,6 +152,24 @@ namespace TrelloWebApplication.Controllers
             myApi.PutMassa(cards, idList);
             var script = string.Format("PageReload()");
             return JavaScript(script);
+        }
+
+
+        [HttpPost]
+        public ActionResult Prova(string idlistino)
+        {
+
+            List<Card> cards = model.Where(g => g.IdList == idlistino).ToList();
+            List<String> prova = new List<string>();
+            foreach (var item in cards)
+            {
+                prova.Add(item.Id);
+            }
+            ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
+            ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
+
+           
+            return RedirectToAction("Sposta", new { lstString = JsonConvert.SerializeObject(prova) });
         }
 
     }

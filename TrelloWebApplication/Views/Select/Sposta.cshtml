@@ -13,10 +13,12 @@
 
 <table id="tb2" class="table">
  <tr>
-        <th>
-            <!-- Listbox relativo ai prodotti -->
-            <h3 style="padding-top:5%; text-align:center;">Lista card</h3>
-        </th>
+     <th>
+         <!-- Listbox relativo ai prodotti -->
+         @Html.DropDownList("stato", null, new { @id = "stato" })
+         <input type="button" id="Filtra" name="prov" value="&gt;" class="button1 btn btn-success" />
+         <h3 style="padding-top:5%; text-align:center;">Lista card</h3>
+     </th>
         <td>
             
         </td>
@@ -70,5 +72,4 @@
  
 <p>
     @Html.ActionLink("Back to List", "Filter","Select", new { @class = "btn btn-primary"})
-
 </p>
