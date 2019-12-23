@@ -19,17 +19,17 @@ namespace TrelloMailReporter.MailScheduledJob
         /// </summary>
         public static void SendMail()
         {
-            // elementi neccessari per fare le chiamate in caso di neccessita di potrebbe fare una view che le chieda al utente
-            string Key = "9936fabac5fdc5f00e46ff3a454e9feb";
-            string Token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
-            string IdBoard = "5ddd5dad735c842669b7b819";
-            // creazione del mio modello di api per le chiamate
-            Api myApi = new Api(Key, Token, IdBoard);
-            //creazione del modello di liste di card
-            List<Card> model = PopolateModel.Popola(myApi);
+            //// elementi neccessari per fare le chiamate in caso di neccessita di potrebbe fare una view che le chieda al utente
+            //string Key = "9936fabac5fdc5f00e46ff3a454e9feb";
+            //string Token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
+            //string IdBoard = "5ddd5dad735c842669b7b819";
+            //// creazione del mio modello di api per le chiamate
+            //Api myApi = new Api(Key, Token, IdBoard);
+            ////creazione del modello di liste di card
+            //List<Card> model = PopolateModel.Popola(myApi);
 
-            ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
-            CreazioneExl.CreazioneFile(ex, "EmailXml");
+            //ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
+            //CreazioneExl.CreazioneFile(ex, "EmailXml");
 
             //Crea oggetto di tipo MailMessage
             MailMessage Msg = new MailMessage();
@@ -51,7 +51,7 @@ namespace TrelloMailReporter.MailScheduledJob
             //Path allegato
             var filePath = @"C:\Users\bagaggiolo\Downloads\Index.xlsx";
             //Aggiungo l'allegato tramite il suo path
-            Msg.Attachments.Add(new System.Net.Mail.Attachment(filePath));
+            //Msg.Attachments.Add(new System.Net.Mail.Attachment(filePath));
 
             //Imposto il Server Smtp
             SmtpClient Smtp = new SmtpClient("smtp.live.com", 25);
@@ -71,7 +71,7 @@ namespace TrelloMailReporter.MailScheduledJob
             //Spediamo la mail
             Smtp.Send(Msg);
 
-            File.Delete(@"C:\Users\derjaj\Downloads\EmailXml.xlsx");
+           // File.Delete(@"C:\Users\derjaj\Downloads\EmailXml.xlsx");
         }
     }
 }
