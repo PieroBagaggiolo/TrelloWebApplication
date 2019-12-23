@@ -46,6 +46,20 @@ $("#BtnSave").click(function () {
 });
 
 
+$("#Filtra").click(function () {
+    var path = window.location.pathname; 		// e' l'ultima parte del path, compreso il carattere "/" iniziale
+    var basepath = SetupBaseRoute(path);
+    if (basepath.indexOf("Select") != -1) {
+        // soltanto se e' listino,
+        var newpath = basepath + "/Prova";
+        var e = document.getElementById("stato");     //stato in cui spostare le card selezionate
+        var strUser = e.options[e.selectedIndex].text;
+    
+        $.post(newpath, { idlistino: strUser })
+    };
+});
+
+
 function addLoadEvent(func) {
     var oldonload = window.onload;
     if (typeof window.onload != "function") {

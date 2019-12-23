@@ -6,6 +6,15 @@ using TrelloWebApplication.Models;
 using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
 using TrelloMailReporter;
+using TrelloMailReporter.MailScheduledJob;
+
+
+using System;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Web;
+
 namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
@@ -18,16 +27,6 @@ namespace TrelloWebApplication.Controllers
         static Api myApi = new Api(Key, Token, IdBoard);
         //creazione del modello di liste di card
         List<Card> model = PopolateModel.Popola(myApi);
-
-        //public ActionResult DownloadAdTemplate(string pathCode)
-        //{
-        //    var imgPath = Server.MapPath(service.GetTemplatePath(pathCode));
-        //    Response.AddHeader("Content-Disposition", "attachment; filename=\"filenamehere.png\"");
-        //    Response.WriteFile(imgPath);
-        //    Response.End();
-        //    return null;
-        //}
-
 
         /// <summary>
         /// visualizzia la lista di card predenti nella pagina trello
@@ -47,7 +46,7 @@ namespace TrelloWebApplication.Controllers
                     }
                 }
                 return View(cards);
-            }           
+            }
             return View(model);
         }
         /// <summary>
@@ -111,7 +110,7 @@ namespace TrelloWebApplication.Controllers
         }
         public ActionResult newCard()
         {
-            Card card = new Card();           
+            Card card = new Card();
             var stato = myApi.GetState();
             ViewBag.Stato = new SelectList(stato, "Id", "Name", card.IdList);
             return View(card);
@@ -128,7 +127,7 @@ namespace TrelloWebApplication.Controllers
                     card.IdList = list.Id;
                 }
                 if (card.IdList.ToUpper() == list.Name.ToUpper())
-                {                   
+                {
                     card.IdList = list.Id;
                     break;
                 }
@@ -143,7 +142,8 @@ namespace TrelloWebApplication.Controllers
             /// <param name="id">id card </param>
             /// <returns></returns>
             public ActionResult Edit(string id = null)
-        {
+            {
+            string inzio = "";
             Card card = null;
             foreach (var item in model)
             {
@@ -151,9 +151,11 @@ namespace TrelloWebApplication.Controllers
 
                 {
                     card = item;
+                    inzio = item.IdList;
                 }
             }
-            var stato=myApi.GetState();
+            var stato = myApi.GetState().Where(g => g.Name == inzio).ToList();
+            stato.AddRange(myApi.GetState().Where(g => g.Name != inzio).ToList());
             ViewBag.Stato = new SelectList(stato, "Id", "Name",card.IdList);
             return View(card);
         }
@@ -165,7 +167,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Card card)
+        public ActionResult Edit(Card card,string stato)
         {
             Card cardVecchia = null;
             foreach (var item in model)
@@ -193,9 +195,13 @@ namespace TrelloWebApplication.Controllers
             }
             foreach (var list in myApi.GetState())
             {
-                if (card.IdList.ToUpper() == list.Name.ToUpper())
+                if (stato==list.Id)
                 {
-                    myApi.PutList(list.Id,card);
+                    if (cardVecchia.IdList!=list.Name)
+                    {
+                        myApi.PutList(stato, card);
+                    }
+
                 }
             }
             if (card.DueDate!= cardVecchia.DueDate)
@@ -248,14 +254,14 @@ namespace TrelloWebApplication.Controllers
         /// </summary>
         /// <returns>ritorna la view</returns>
         public ActionResult ExcelExIndex()
-        { 
+        {
             ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
             CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
 
         /// <summary>
-        /// creazione di un file pdf con i dettagli di una card 
+        /// creazione di un file pdf con i dettagli di una card
         /// </summary>
         /// <param name="id">id card</param>
         /// <returns>file pdf</returns>
@@ -277,14 +283,14 @@ namespace TrelloWebApplication.Controllers
             return result;
         }
         /// <summary>
-        /// invio commento sulla card selezionata 
+        /// invio commento sulla card selezionata
         /// </summary>
         /// <param name="pro">modello della card selezionata</param>
         /// <returns>ritorna alla stessa pagina con un alert di successo o insucesso del operazione</returns>
         [HttpPost]
         public ActionResult Details(Card pro)
-        {         
-            
+        {
+
             Card card = null;
             foreach (var item in model)
             {
@@ -305,7 +311,7 @@ namespace TrelloWebApplication.Controllers
 
         public ActionResult SendEmail()
         {
-            Program.SendEmail();
+            SendMailJobb.SendMail();
             return View("Index",model);
         }
     }
