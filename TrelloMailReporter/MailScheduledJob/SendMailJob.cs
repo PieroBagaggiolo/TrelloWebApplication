@@ -38,6 +38,7 @@ namespace TrelloMailReporter.MailScheduledJob
             {
 
                 ex.SaveAs(memoryStream);
+                memoryStream.Position = 0;
 
             //Crea oggetto di tipo MailMessage
             MailMessage Msg = new MailMessage();
