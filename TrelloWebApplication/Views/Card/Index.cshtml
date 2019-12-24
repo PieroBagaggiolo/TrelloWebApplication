@@ -18,7 +18,10 @@
     - Per scaricare gli eventuali allegati recarsi su Details e seguire le istruzioni.
 </p>
 
-
+<p class="btn btn-primary btn-large" style="margin-left:46%; margin-bottom:1%">
+    @Html.ActionLink("GO TO FILTER", "Filter", "Select")
+</p>
+<br />
 <table class="table" id="tb1">
     <tr>
         <th>
@@ -57,16 +60,13 @@
     }
 </table>
 
-<table style="width:80%; margin-left:10%; ">
+<table style="width:80%; margin-left:12%; ">
     <tr>
         <th>
-            <p id="Select" class="btn btn-default btn-large">
-                @Html.ActionLink("GO TO FILTER", "Filter", "Select")
-            </p>
+
         </th>
         <th>@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Card", new { @id = "btnPdf", @class = "btn btn-danger btn-large" })</th>
         <th>@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })</th>
-        <th> @Html.ActionLink("SEND EMAIL", "SendEmail", "Card", new { @id = "btnEx", @class = "btn btn-success btn-large" })</th>
 
     </tr>
 </table>
