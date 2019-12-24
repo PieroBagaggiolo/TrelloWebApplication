@@ -5,15 +5,7 @@ using System.Web.Mvc;
 using TrelloWebApplication.Models;
 using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
-using TrelloMailReporter;
-using TrelloMailReporter.MailScheduledJob;
-
-
-using System;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Web;
 
 namespace TrelloWebApplication.Controllers
 {
@@ -34,6 +26,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna una view</returns>
         public ActionResult Index(string stato)
         {
+
             List<Card> cards = new  List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
             if (stato != null && stato != "")
@@ -309,10 +302,5 @@ namespace TrelloWebApplication.Controllers
             return View("Details", card);
         }
 
-        public ActionResult SendEmail()
-        {
-            SendMailJobb.SendMail();
-            return View("Index",model);
-        }
     }
 }
