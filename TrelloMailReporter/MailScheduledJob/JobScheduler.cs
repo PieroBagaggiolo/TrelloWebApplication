@@ -22,9 +22,10 @@ namespace TrelloMailReporter.MailScheduledJob
                   (s =>
                      s.WithIntervalInSeconds(24)
                     .OnEveryDay()
-                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(13, 11))
+                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(16, 51))
                   )
                 .Build();
+
             //passo allo scheduler il job e ogni quanto eseguirlo (trigger)
             scheduler.ScheduleJob(job, trigger);
         }
