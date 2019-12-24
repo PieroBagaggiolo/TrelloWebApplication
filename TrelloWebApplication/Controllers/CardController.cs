@@ -310,10 +310,5 @@ namespace TrelloWebApplication.Controllers
             return View("Details", card);
         }
 
-        public ActionResult SendEmail()
-        {
-            SendMailJobb.SendMail();
-            return View("Index",model);
-        }
     }
 }

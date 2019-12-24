@@ -55,7 +55,6 @@
     <Compile Include="MailScheduledJob\JobScheduler.cs" />
     <Compile Include="MailScheduledJob\SendMailJob.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SendMailJob.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
