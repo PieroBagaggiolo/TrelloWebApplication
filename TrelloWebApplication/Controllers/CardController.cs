@@ -5,15 +5,7 @@ using System.Web.Mvc;
 using TrelloWebApplication.Models;
 using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
-using TrelloMailReporter;
-using TrelloMailReporter.MailScheduledJob;
-
-
-using System;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Web;
 
 namespace TrelloWebApplication.Controllers
 {
