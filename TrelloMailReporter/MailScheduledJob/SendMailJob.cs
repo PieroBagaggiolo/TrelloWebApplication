@@ -40,49 +40,48 @@ namespace TrelloMailReporter.MailScheduledJob
                 ex.SaveAs(memoryStream);
                 memoryStream.Position = 0;
 
-            //Crea oggetto di tipo MailMessage
-            MailMessage Msg = new MailMessage();
+                //Crea oggetto di tipo MailMessage
+                MailMessage Msg = new MailMessage();
 
-            //Imposta il mittente
-            Msg.From = new MailAddress("trelloreporterapp@hotmail.com", "Limi");
+                //Imposta il mittente
+                Msg.From = new MailAddress("trelloreporterapp@hotmail.com", "Limi");
 
-            //La proprietà .To è una collezione di destinatari,
-            //quindi possiamo addizionare quanti destinatari vogliamo.
-            Msg.To.Add(new MailAddress("nunzio22598@gmail.com", "Nunzio prova"));
-            Msg.To.Add(new MailAddress("pierobagaggiololavoro@gmail.com", "Piero prova"));
+                //La proprietà .To è una collezione di destinatari,
+                //quindi possiamo addizionare quanti destinatari vogliamo.
+                Msg.To.Add(new MailAddress("nunzio22598@gmail.com", "Nunzio prova"));
+                Msg.To.Add(new MailAddress("pierobagaggiololavoro@gmail.com", "Piero prova"));
 
-            //Imposto oggetto
-            Msg.Subject = "Mail notifiche TrelloReporterApp ";
+                //Imposto oggetto
+                Msg.Subject = "Mail notifiche TrelloReporterApp ";
 
-            //Imposto contenuto
-            Msg.Body = "Mail automatica di notifiche giornaliera";
-            Msg.IsBodyHtml = true;
+                //Imposto contenuto
+                Msg.Body = "Mail automatica di notifiche giornaliera";
+                Msg.IsBodyHtml = true;
 
-            //Path allegato
-            //var filePath = @"C:\Users\derjaj\Downloads\EmailXml.xlsx";
-            //Aggiungo l'allegato tramite il suo path
-            Msg.Attachments.Add(new System.Net.Mail.Attachment(memoryStream, "EmailXml.xlsx"));
+                //Path allegato
+                //var filePath = @"C:\Users\derjaj\Downloads\EmailXml.xlsx";
+                //Aggiungo l'allegato tramite il suo path
+                Msg.Attachments.Add(new System.Net.Mail.Attachment(memoryStream, "EmailXml.xlsx"));
 
-            //Imposto il Server Smtp
-            SmtpClient Smtp = new SmtpClient("smtp.live.com", 25);
+                //Imposto il Server Smtp
+                SmtpClient Smtp = new SmtpClient("smtp.live.com", 25);
 
-            //Possiamo impostare differenti metodi di spedizione.
-            //Imposta consegna diretta.
-            Smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //Possiamo impostare differenti metodi di spedizione.
+                //Imposta consegna diretta.
+                Smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
 
-            //Alcuni Server SMTP richiedono l'accesso autenticato
-            Smtp.UseDefaultCredentials = false;
-            NetworkCredential Credential = new NetworkCredential("trelloreporterapp@hotmail.com", "Trello123");
-            Smtp.Credentials = Credential;
+                //Alcuni Server SMTP richiedono l'accesso autenticato
+                Smtp.UseDefaultCredentials = false;
+                NetworkCredential Credential = new NetworkCredential("trelloreporterapp@hotmail.com", "Trello123");
+                Smtp.Credentials = Credential;
 
-            //Certificato SSL
-            Smtp.EnableSsl = true;
+                //Certificato SSL
+                Smtp.EnableSsl = true;
 
-            //Spediamo la mail
-            Smtp.Send(Msg);
+                //Spediamo la mail
+                Smtp.Send(Msg);
 
             }
-            //File.Delete(@"C:\Users\derjaj\Downloads\EmailXml.xlsx");
         }
     }
 }
