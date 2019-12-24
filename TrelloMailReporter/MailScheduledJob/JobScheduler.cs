@@ -22,7 +22,7 @@ namespace TrelloMailReporter.MailScheduledJob
                   (s =>
                      s.WithIntervalInSeconds(24)
                     .OnEveryDay()
-                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(16, 51))
+                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(10, 30))
                   )
                 .Build();
 
