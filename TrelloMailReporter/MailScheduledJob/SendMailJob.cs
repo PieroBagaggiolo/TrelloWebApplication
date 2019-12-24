@@ -35,11 +35,13 @@ namespace TrelloMailReporter.MailScheduledJob
             //creazione allegato excel prima di inviare la mail
             ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
             using (var memoryStream = new MemoryStream())
+
             {              
                 ex.SaveAs(memoryStream);
                 memoryStream.Position = 0;
                 //Crea oggetto di tipo MailMessage
                 MailMessage Msg = new MailMessage();
+
 
                 //Imposta il mittente
                 Msg.From = new MailAddress("trelloreporterapp@hotmail.com", "Limi");

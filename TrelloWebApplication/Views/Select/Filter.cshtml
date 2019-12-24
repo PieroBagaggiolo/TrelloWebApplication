@@ -40,29 +40,18 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <table class="table" id="tb2">
+    <table  id="tb2">
 
-        <tr>
-            @*<th style="text-align:center">
-                    <h6>CAMPO</h6>
-                </th>*@
-            <th>
-                <h4>STATO</h4>
-            </th>
-            <th>
-                <h4>ARCHIVIATO</h4>
-            </th>
-            <th></th>
-        </tr>
+       
         <tr>
             @*<th>
                     @Html.DropDownList("Campo", "ALL")
                 </th>*@
             <th>
-                @Html.DropDownList("Stato", "ALL ")
+                <h4> LIST : @Html.DropDownList("stato", "ALL ")</h4>
             </th>
             <th>
-                @Html.DropDownList("Closed", "ALL ")
+                <h4>ARCHVIED : @Html.DropDownList("closed", "ALL ")</h4>
             </th>
             <th>
                 <input type="submit" value="Filter" class="btn btn-info" />
@@ -78,8 +67,8 @@
                 TRELLO'S CARDS LIST
             </th>
             <th>LIST</th>
-            <th>CLOSED</th>
-            <th></th>
+            <th>ARCHVIED</th>
+            <th>Expiration date</th>
         </tr>
 
         @foreach (var item in Model)
@@ -91,10 +80,28 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.IdList)
                 </td>
+                @if (item.Closed=="True")
+                {
+                    <td>YES</td>
+                }
+                else
+                {
+                    <td>NO</td>
+                }
+                
+                @if (item.Due!=null)
+                {
                 <td>
-                    @Html.DisplayFor(modelItem => item.Closed)
+                    @Html.DisplayFor(modelItem => item.Due)
                 </td>
+                }
+                else
+                {
+                <td>
 
+                   Not Present
+                </td>
+                }
             </tr>
 
             idList.Add(item.Id);
@@ -106,17 +113,30 @@
 
         }
     </table>
+    <table style="width:80%; margin-left:10%; ">
+        <tr>
+            <th>
+            <p id="Select" class="btn btn-default btn-large">
+                    @Html.ActionLink("GO TO INDEX", "Index", "Card")
+            </p>
+            </th>
+            <th> @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-danger btn-large" })</th>
+            <th>@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-success btn-large" })</th>
+            <th> @Html.ActionLink("Sposta", "Sposta", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-primary btn-large" })</th>
+
+        </tr>
+    </table>
 
     @*@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", Model, null)*@
 
-    @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnPdf", @class = "btn btn-danger btn-large" })
+   
 
-    @Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new { @id = "btnEx", @class = "btn btn-success btn-large" })
+    
 
 
 
     <p style="margin-left:90%">
-        @Html.ActionLink("Sposta", "Sposta", new { lstString = Json.Encode(idList) }, new { @id = "btnPdf", @class = "btn btn-primary btn-large" })
+       
     </p>
 
 
