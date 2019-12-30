@@ -95,8 +95,8 @@ namespace TrelloWebApplication.Utiliti
         /// <summary>
         /// modifica una card da archivata a non o viceversa 
         /// </summary>
-        /// <param name="value"></param>
-        /// <param name="model"></param>
+        /// <param name="value">stringa contente true o false in base a se è arrchiviata o meno</param>
+        /// <param name="model">card model dovre fare l'aggionrameento</param>
         public void PutClosed(string value, Card model)
         {
             string url = urlCard + model.Id + "?closed=" + value + "&key=" + key + "&token=" + token;
@@ -136,7 +136,7 @@ namespace TrelloWebApplication.Utiliti
         /// <summary>
         /// creazione new card 
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">modello base da creare</param>
         public void PostCard(Card model)
         {
             string url = urlCard + "?name="+model.Name+ "&idList="+model.IdList + "&key=" + key + "&token=" + token;
@@ -187,6 +187,11 @@ namespace TrelloWebApplication.Utiliti
             }
             return result;
         }
+        /// <summary>
+        /// Spostamnto di massa di card in diverso stato 
+        /// </summary>
+        /// <param name="cards">lista di card da spostare</param>
+        /// <param name="statoId">stao in cui spostarle</param>
         public void PutMassa(List<Card> cards,string statoId)
         {
             foreach (var card in cards)

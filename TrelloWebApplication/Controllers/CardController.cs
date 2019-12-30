@@ -5,8 +5,7 @@ using System.Web.Mvc;
 using TrelloWebApplication.Models;
 using TrelloUtilities;
 using TrelloWebApplication.Utiliti;
-using TrelloMailReporter;
-using TrelloMailReporter.MailScheduledJob;
+using System.Linq;
 
 namespace TrelloWebApplication.Controllers
 {
@@ -27,6 +26,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna una view</returns>
         public ActionResult Index(string stato)
         {
+
             List<Card> cards = new  List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
             if (stato != null && stato != "")
@@ -135,7 +135,8 @@ namespace TrelloWebApplication.Controllers
             /// <param name="id">id card </param>
             /// <returns></returns>
             public ActionResult Edit(string id = null)
-        {
+            {
+            string inzio = "";
             Card card = null;
             foreach (var item in model)
             {
@@ -143,9 +144,11 @@ namespace TrelloWebApplication.Controllers
 
                 {
                     card = item;
+                    inzio = item.IdList;
                 }
             }
-            var stato=myApi.GetState();
+            var stato = myApi.GetState().Where(g => g.Name == inzio).ToList();
+            stato.AddRange(myApi.GetState().Where(g => g.Name != inzio).ToList());
             ViewBag.Stato = new SelectList(stato, "Id", "Name",card.IdList);
             return View(card);
         }
@@ -299,10 +302,5 @@ namespace TrelloWebApplication.Controllers
             return View("Details", card);
         }
 
-        public ActionResult SendEmail()
-        {
-            SendMailJobb.SendMail();
-            return View("Index",model);
-        }
     }
 }
