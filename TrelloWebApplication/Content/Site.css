@@ -127,10 +127,6 @@ p {
     width: 100%;
 }
 
-body {
-    position: absolute;
-}
-
 .alert-buttons {
     border-top: thin solid #ddd;
     text-align: center;
