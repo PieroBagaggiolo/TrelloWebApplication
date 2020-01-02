@@ -46,7 +46,7 @@ namespace TrelloMailReporter.MailScheduledJob
 
                 //La proprietà .To è una collezione di destinatari,
                 //quindi possiamo addizionare quanti destinatari vogliamo.
-                Msg.To.Add(new MailAddress("nunzio22598@gmail.com", "Nunzio prova"));
+                Msg.To.Add(new MailAddress("myslim.derjaj@euris.it", "Nunzio prova"));
                 Msg.To.Add(new MailAddress("pierobagaggiololavoro@gmail.com", "Piero prova"));
 
                 //Imposto oggetto
