@@ -110,22 +110,9 @@ namespace TrelloWebApplication.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult newCard(Card card)
+        public ActionResult newCard(Card card,string Stato)
         {
-            int i = 0;
-            foreach (var list in myApi.GetState())
-            {
-                if (i==0)
-                {
-                    card.IdList = list.Id;
-                }
-                if (card.IdList.ToUpper() == list.Name.ToUpper())
-                {
-                    card.IdList = list.Id;
-                    break;
-                }
-                i++;
-            }
+            card.IdList = Stato;
             myApi.PostCard(card);
             return RedirectToAction("Index", model);
         }
