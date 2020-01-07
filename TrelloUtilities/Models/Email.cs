@@ -14,7 +14,10 @@ namespace TrelloUtilities.Models
         /// <summary>
         /// Email's properties
         /// </summary>
+        
         [Key]
+        public int Id { get; set; }
+
         [Required(ErrorMessage = "Sender's email required!")]
         [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string SenderEmail { get; set; }
