@@ -14,15 +14,8 @@ namespace TrelloMailReporter.MailScheduledJob
 {
     public class SendMailJob : IJob
     {
-        // elementi neccessari per fare le chiamate in caso di neccessita di potrebbe fare una view che le chieda al utente
-        static string Key = "9936fabac5fdc5f00e46ff3a454e9feb";
-        static string Token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
-        static string IdBoard = "5ddd5dad735c842669b7b819";
-        // creazione del mio modello di api per le chiamate
-        static Api myApi = new Api(Key, Token, IdBoard);
-        //creazione del modello di liste di card
-        List<Card> model = PopolateModel.Popola(myApi);
 
+        public delegate void Del(ref ExcelPackage fileEx);
         public Task Execute(IJobExecutionContext context)
         {
             return Task.Factory.StartNew(() => SendMail());
@@ -33,21 +26,25 @@ namespace TrelloMailReporter.MailScheduledJob
         public void SendMail()
         {
             //creazione allegato excel prima di inviare la mail
-            ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
+            Del del = ReportMethods.DelegateMethod;
+            ExcelPackage ex = new ExcelPackage();
+            del(ref ex);
             using (var memoryStream = new MemoryStream())
             {
                 ex.SaveAs(memoryStream);
                 memoryStream.Position = 0;
                 //Crea oggetto di tipo MailMessage
                 MailMessage Msg = new MailMessage();
-
+                
                 //Imposta il mittente
                 Msg.From = new MailAddress("trelloreporterapp@hotmail.com", "Limi");
 
                 //La proprietà .To è una collezione di destinatari,
                 //quindi possiamo addizionare quanti destinatari vogliamo.
+
                 Msg.To.Add(new MailAddress("myslim.derjaj@euris.it", "Nunzio prova"));
                 Msg.To.Add(new MailAddress("pierobagaggiololavoro@gmail.com", "Piero prova"));
+
 
                 //Imposto oggetto
                 Msg.Subject = "Mail notifiche TrelloReporterApp ";
@@ -60,8 +57,6 @@ namespace TrelloMailReporter.MailScheduledJob
                 var attachment = new System.Net.Mail.Attachment(memoryStream, "Report.xlsx");
                 attachment.ContentType = new ContentType("application/vnd.ms-excel");
                 Msg.Attachments.Add(attachment);
-
-                //Msg.Attachments.Add(new System.Net.Mail.Attachment(memoryStream, "EmailXml.xlsx"));
 
                 //Imposto il Server Smtp
                 SmtpClient Smtp = new SmtpClient("smtp.live.com", 25);
@@ -79,7 +74,7 @@ namespace TrelloMailReporter.MailScheduledJob
                 Smtp.EnableSsl = true;
 
                 //Spediamo la mail
-                Smtp.Send(Msg);
+                Smtp.Send(Msg);                                     
             }
         }
     }

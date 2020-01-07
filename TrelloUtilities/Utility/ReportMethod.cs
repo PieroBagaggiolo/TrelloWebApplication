@@ -31,6 +31,18 @@ namespace TrelloUtilities
             workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
+        public static void DelegateMethod(ref ExcelPackage ex)
+        {
+            // elementi neccessari per fare le chiamate in caso di neccessita di potrebbe fare una view che le chieda al utente
+             string Key = "9936fabac5fdc5f00e46ff3a454e9feb";
+             string Token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
+             string IdBoard = "5ddd5dad735c842669b7b819";
+            // creazione del mio modello di api per le chiamate
+             Api myApi = new Api(Key, Token, IdBoard);
+            //creazione del modello di liste di card
+            List<Card> model = PopolateModel.Popola(myApi);
+             ex = ReportMethods.ExportExcelTotal(model);
+        }
         public static int CalcolateDimensionMax(int recordIndex, Card card)
         {
             int NumberAttachment;
