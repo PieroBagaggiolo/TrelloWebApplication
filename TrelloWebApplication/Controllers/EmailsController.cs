@@ -38,12 +38,11 @@ namespace TrelloWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 string criptate = SecurityPWD.Encrypt(email.Password);
                 email.Password = criptate;
                 db.Emails.Add(email);
                 db.SaveChanges();
-                string decrypt = SecurityPWD.Decrypt(criptate);
+                
                 return RedirectToAction("Index");
             }
 

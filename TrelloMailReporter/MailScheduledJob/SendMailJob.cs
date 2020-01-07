@@ -9,6 +9,7 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using TrelloUtilities;
 using TrelloUtilities.Models;
+using TrelloUtilities.Utility;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
 
@@ -71,7 +72,8 @@ namespace TrelloMailReporter.MailScheduledJob
 
                     //Alcuni Server SMTP richiedono l'accesso autenticato
                     Smtp.UseDefaultCredentials = false;
-                    NetworkCredential Credential = new NetworkCredential(mailCredentials.SenderEmail, mailCredentials.Password);
+                    string decrypt = SecurityPWD.Decrypt(mailCredentials.Password);
+                    NetworkCredential Credential = new NetworkCredential(mailCredentials.SenderEmail, decrypt);
                     Smtp.Credentials = Credential;
 
                     //Certificato SSL
