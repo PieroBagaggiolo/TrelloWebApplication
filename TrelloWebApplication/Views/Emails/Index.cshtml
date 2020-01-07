@@ -29,15 +29,13 @@
             @Html.DisplayFor(modelItem => item.SenderEmail)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Password)
+            @Html.PasswordFor(modelItem => item.Password)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ReceiverEmail)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.SenderEmail }) |
-            @Html.ActionLink("Details", "Details", new { id = item.SenderEmail }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.SenderEmail })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

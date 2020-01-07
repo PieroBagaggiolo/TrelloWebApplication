@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using TrelloUtilities.Models;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
 
@@ -10,7 +12,7 @@ namespace TrelloUtilities
 {
     public static class ReportMethods
     {
-
+        private static DatabaseContext db = new DatabaseContext();
         public static ExcelPackage ExportExcelTotal(List<Card> model)
         {
             
@@ -33,14 +35,13 @@ namespace TrelloUtilities
         }
         public static void DelegateMethod(ref ExcelPackage ex)
         {
-            // elementi neccessari per fare le chiamate in caso di neccessita di potrebbe fare una view che le chieda al utente
-             string Key = "9936fabac5fdc5f00e46ff3a454e9feb";
-             string Token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
-             string IdBoard = "5ddd5dad735c842669b7b819";
-            // creazione del mio modello di api per le chiamate
-             Api myApi = new Api(Key, Token, IdBoard);
-            //creazione del modello di liste di card
-            List<Card> model = PopolateModel.Popola(myApi);
+              // elementi neccessari per fare le chiamate le informazioni sono prese da db prende la prima sequenza
+             ApiModel[] apiArrey = db.ApiModels.ToArray();
+             ApiModel apiCredentials = apiArrey[0];
+             // creazione del mio modello di api per le chiamate
+             Api myApi = new Api(apiCredentials.Key, apiCredentials.Token, apiCredentials.IdBoard);
+             //creazione del modello di liste di card
+             List<Card> model = PopolateModel.Popola(myApi);
              ex = ReportMethods.ExportExcelTotal(model);
         }
         public static int CalcolateDimensionMax(int recordIndex, Card card)

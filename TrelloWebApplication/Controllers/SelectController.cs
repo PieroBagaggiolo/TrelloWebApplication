@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using TrelloUtilities;
+using TrelloUtilities.Models;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
 
@@ -15,14 +16,17 @@ namespace TrelloWebApplication.Controllers
 {
     public class SelectController : Controller
     {
-        static string Key = "9936fabac5fdc5f00e46ff3a454e9feb";
-        static string Token = "27f3bbdeb9724521082f710e5dafbb9cfb56b315d90b2a27d502a6a391abad01";
-        static string IdBoard = "5ddd5dad735c842669b7b819";
+        // elementi neccessari per fare le chiamate le informazioni sono prese da db prende la prima sequenza
+        private static DatabaseContext db = new DatabaseContext();
+        static ApiModel[] apiArrey = db.ApiModels.ToArray();
+        static ApiModel apiCredentials = apiArrey[0];
+
+
         // creazione del mio modello di api per le chiamate
-        static Api myApi = new Api(Key, Token, IdBoard);
+        static Api myApi = new Api(apiCredentials.Key, apiCredentials.Token, apiCredentials.IdBoard);
         //creazione del modello di liste di card
         List<Card> model = PopolateModel.Popola(myApi);
-        
+
 
         /// <summary>
         /// Pagina di filtraggio dati stato e closed sono le DropDownList dove viene scelto per cosa filtrare
