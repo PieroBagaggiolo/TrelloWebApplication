@@ -50,6 +50,7 @@ namespace TrelloWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Emails.Add(email);
                 db.SaveChanges();
                 return RedirectToAction("Index");

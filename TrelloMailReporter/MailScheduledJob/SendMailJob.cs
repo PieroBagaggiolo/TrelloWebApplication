@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using TrelloUtilities;
+using TrelloUtilities.Models;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
 
