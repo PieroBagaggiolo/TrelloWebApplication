@@ -45,7 +45,7 @@ namespace TrelloWebApplication.Controllers
         }
 
         // POST: Emails/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -53,11 +53,11 @@ namespace TrelloWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 string criptate = SecurityPWD.Encrypt(email.Password);
                 email.Password = criptate;
                 db.Emails.Add(email);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
@@ -80,7 +80,7 @@ namespace TrelloWebApplication.Controllers
         }
 
         // POST: Emails/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
