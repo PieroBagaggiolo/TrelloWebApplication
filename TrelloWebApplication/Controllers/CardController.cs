@@ -12,7 +12,7 @@ namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
     {
-        // elementi neccessari per fare le chiamate in caso di neccessita di potrebbe fare una view che le chieda al utente
+        // elementi neccessari per fare le chiamate le informazioni sono prese da db prende la prima sequenza
         private static DatabaseContext db = new DatabaseContext();
         static ApiModel [] apiArrey = db.ApiModels.ToArray();
         static ApiModel apiCredentials = apiArrey[0];

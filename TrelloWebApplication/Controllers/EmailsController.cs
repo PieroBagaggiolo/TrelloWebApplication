@@ -50,6 +50,7 @@ namespace TrelloWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                email.Id = db.Emails.Count() + 1;
                 db.Emails.Add(email);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -59,9 +60,9 @@ namespace TrelloWebApplication.Controllers
         }
 
         // GET: Emails/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -90,9 +91,9 @@ namespace TrelloWebApplication.Controllers
         }
 
         // GET: Emails/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -107,7 +108,7 @@ namespace TrelloWebApplication.Controllers
         // POST: Emails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Email email = db.Emails.Find(id);
             db.Emails.Remove(email);
