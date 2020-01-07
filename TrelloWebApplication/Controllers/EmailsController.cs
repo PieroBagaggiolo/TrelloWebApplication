@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using TrelloUtilities.Models;
 
 namespace TrelloWebApplication.Controllers
@@ -18,21 +19,6 @@ namespace TrelloWebApplication.Controllers
         public ActionResult Index()
         {
             return View(db.Emails.ToList());
-        }
-
-        // GET: Emails/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Email email = db.Emails.Find(id);
-            if (email == null)
-            {
-                return HttpNotFound();
-            }
-            return View(email);
         }
 
         // GET: Emails/Create
@@ -50,6 +36,7 @@ namespace TrelloWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                string password = FormsAuthentication.HashPasswordForStoringInConfigFile(email.Password, "MD5");
                 email.Id = db.Emails.Count() + 1;
                 db.Emails.Add(email);
                 db.SaveChanges();
@@ -59,36 +46,37 @@ namespace TrelloWebApplication.Controllers
             return View(email);
         }
 
-        // GET: Emails/Edit/5
-        public ActionResult Edit(int id)
-        {
-            if (id == 0)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Email email = db.Emails.Find(id);
-            if (email == null)
-            {
-                return HttpNotFound();
-            }
-            return View(email);
-        }
+        //// GET: Emails/Edit/5
+        //public ActionResult Edit(int id)
+        //{
+        //    if (id == 0)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Email email = db.Emails.Find(id);
+        //    if (email == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(email);
+        //}
 
-        // POST: Emails/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SenderEmail,Password,ReceiverEmail")] Email email)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(email).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(email);
-        }
+        //// POST: Emails/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "SenderEmail,Password,ReceiverEmail")] Email email)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(email).State = EntityState.Modified;
+
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(email);
+        //}
 
         // GET: Emails/Delete/5
         public ActionResult Delete(int id)
