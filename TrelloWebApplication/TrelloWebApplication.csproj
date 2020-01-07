@@ -245,8 +245,6 @@
     <Content Include="Views\ApiModels\Index.cshtml" />
     <Content Include="Views\Emails\Create.cshtml" />
     <Content Include="Views\Emails\Delete.cshtml" />
-    <Content Include="Views\Emails\Details.cshtml" />
-    <Content Include="Views\Emails\Edit.cshtml" />
     <Content Include="Views\Emails\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
