@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TrelloUtilities.Models.ApiModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdBoard)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Token)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Key)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdBoard)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Token)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Key)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.IdBoard }) |
+            @Html.ActionLink("Details", "Details", new { id = item.IdBoard }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard })
+        </td>
+    </tr>
+}
+
+</table>

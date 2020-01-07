@@ -46,8 +46,8 @@ namespace TrelloMailReporter.MailScheduledJob
 
                 //La proprietà .To è una collezione di destinatari,
                 //quindi possiamo addizionare quanti destinatari vogliamo.
-                Msg.To.Add(new MailAddress("nunzio22598@gmail.com", "Nunzio prova"));
-                Msg.To.Add(new MailAddress("pierobagaggiololavoro@gmail.com", "Piero prova"));
+                Msg.To.Add(new MailAddress("salvatore.sava@euris.it", "Nunzio prova"));
+                Msg.To.Add(new MailAddress("piero.bagaggiolo@euris.it", "Piero prova"));
 
                 //Imposto oggetto
                 Msg.Subject = "Mail notifiche TrelloReporterApp ";
@@ -60,8 +60,6 @@ namespace TrelloMailReporter.MailScheduledJob
                 var attachment = new System.Net.Mail.Attachment(memoryStream, "Report.xlsx");
                 attachment.ContentType = new ContentType("application/vnd.ms-excel");
                 Msg.Attachments.Add(attachment);
-
-                //Msg.Attachments.Add(new System.Net.Mail.Attachment(memoryStream, "EmailXml.xlsx"));
 
                 //Imposto il Server Smtp
                 SmtpClient Smtp = new SmtpClient("smtp.live.com", 25);
@@ -79,7 +77,7 @@ namespace TrelloMailReporter.MailScheduledJob
                 Smtp.EnableSsl = true;
 
                 //Spediamo la mail
-                Smtp.Send(Msg);
+                Smtp.Send(Msg);                                     
             }
         }
     }
