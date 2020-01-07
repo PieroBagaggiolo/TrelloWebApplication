@@ -6,9 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-
 using TrelloUtilities;
-
 using TrelloUtilities.Models;
 using TrelloUtilities.Utility;
 using TrelloWebApplication.Utiliti;
@@ -32,7 +30,7 @@ namespace TrelloWebApplication.Controllers
         }
 
         // POST: Emails/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,7 +65,7 @@ namespace TrelloWebApplication.Controllers
         //}
 
         //// POST: Emails/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
         //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         //[HttpPost]
         //[ValidateAntiForgeryToken]
