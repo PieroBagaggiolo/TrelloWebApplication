@@ -6,7 +6,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using TrelloUtilities;
 using TrelloUtilities.Models;
+using TrelloUtilities.Utility;
+using TrelloWebApplication.Utiliti;
 
 namespace TrelloWebApplication.Controllers
 {
@@ -50,8 +53,12 @@ namespace TrelloWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                string criptate = SecurityPWD.Encrypt(email.Password);
+                email.Password = criptate;
                 db.Emails.Add(email);
                 db.SaveChanges();
+                string decrypt = SecurityPWD.Decrypt(criptate);
                 return RedirectToAction("Index");
             }
 

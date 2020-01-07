@@ -78,6 +78,7 @@
     <Compile Include="Utility\PopolateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\ReportMethod.cs" />
+    <Compile Include="Utility\SecurityPWD.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
