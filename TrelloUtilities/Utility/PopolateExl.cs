@@ -149,9 +149,9 @@ namespace TrelloUtilities
         {
             using (var title = workSheet.Cells[i, col, fine, col]) //funzione per unire più celle verticalmente
             { 
-                title.Merge = true;
-                title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
-                title.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+                //title.Merge = true;
+                //title.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+                //title.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             }
         }
     }
