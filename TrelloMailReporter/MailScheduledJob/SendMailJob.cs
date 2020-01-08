@@ -56,7 +56,7 @@ namespace TrelloMailReporter.MailScheduledJob
                     }
                     else
                     {
-                        Msg.To.Add(new MailAddress(mailCredentials.ReceiverEmail, "Nunzio prova"));
+                        Msg.To.Add(new MailAddress(mailCredentials.ReceiverEmail, mailCredentials.ReceiverEmail));
                     }
                 }
                 //Imposto oggetto
