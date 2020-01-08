@@ -16,12 +16,10 @@ namespace TrelloUtilities.Models
         /// </summary>
         [Key]
         [Required(ErrorMessage = "IdBoard is required!")]
-        [StringLength(50, ErrorMessage = "Maximum length is 50 char")]
         public string IdBoard { get; set; }
         [Required(ErrorMessage = "Token is required!")]
         public string Token { get; set; }
         [Required(ErrorMessage = "Key is required!")]
-        [StringLength(50, ErrorMessage = "Maximum length is 50 char")]
         public string Key { get; set; }
 
     }

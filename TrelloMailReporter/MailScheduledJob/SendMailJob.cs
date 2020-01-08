@@ -28,29 +28,40 @@ namespace TrelloMailReporter.MailScheduledJob
         /// </summary>
         public void SendMail()
         {
-            foreach (var mailCredentials in db.Emails.ToArray())
+            int i = db.Emails.Count();
+            if (2<=db.Emails.Count())
             {
-                //creazione allegato excel prima di inviare la mail
-                Del del = ReportMethods.DelegateMethod;
-                ExcelPackage ex = new ExcelPackage();
-                del(ref ex);
+                Email [] p=db.Emails.ToArray();
+                string emailSend = p[0].SenderEmail;
+                string password = p[0].Password;
+                string decrypt = SecurityPWD.Decrypt(password);
                 using (var memoryStream = new MemoryStream())
                 {
+                    //creazione allegato excel prima di inviare la mail
+                    Del del = ReportMethods.DelegateMethod;
+                    ExcelPackage ex = new ExcelPackage();
+                    del(ref ex);
                     ex.SaveAs(memoryStream);
                     memoryStream.Position = 0;
                     //Crea oggetto di tipo MailMessage
                     MailMessage Msg = new MailMessage();
-
                     //Imposta il mittente
                     //Msg.From = new MailAddress("trelloreporterapp@hotmail.com", "Limi");
-                    Msg.From = new MailAddress(mailCredentials.SenderEmail, "Limi");
+                    Msg.From = new MailAddress(emailSend, "Limi");
                     //La proprietà .To è una collezione di destinatari,
                     //quindi possiamo addizionare quanti destinatari vogliamo.
-
-                    Msg.To.Add(new MailAddress(mailCredentials.ReceiverEmail, "Nunzio prova"));
-                    //Msg.To.Add(new MailAddress("pierobagaggiololavoro@gmail.com", "Piero prova"));
-
-
+                    var primo = 0;
+                    foreach (var mailCredentials in db.Emails.ToArray())
+                    {
+                        if (primo==0)
+                        {
+                            primo = 1;
+                        }
+                        else
+                        {
+                            Msg.To.Add(new MailAddress(mailCredentials.ReceiverEmail, mailCredentials.ReceiverEmail));
+                        }
+                    }
                     //Imposto oggetto
                     Msg.Subject = "Mail notifiche TrelloReporterApp ";
 
@@ -72,8 +83,7 @@ namespace TrelloMailReporter.MailScheduledJob
 
                     //Alcuni Server SMTP richiedono l'accesso autenticato
                     Smtp.UseDefaultCredentials = false;
-                    string decrypt = SecurityPWD.Decrypt(mailCredentials.Password);
-                    NetworkCredential Credential = new NetworkCredential(mailCredentials.SenderEmail, decrypt);
+                    NetworkCredential Credential = new NetworkCredential(emailSend, decrypt);
                     Smtp.Credentials = Credential;
 
                     //Certificato SSL
@@ -81,10 +91,10 @@ namespace TrelloMailReporter.MailScheduledJob
 
                     //Spediamo la mail
                     Smtp.Send(Msg);
+
                 }
+
             }
-                                          
-            
         }
     }
 }
