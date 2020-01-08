@@ -27,16 +27,13 @@ namespace TrelloWebApplication.Controllers
 
         
 
-        public ActionResult CreateAdd(int id)
+        public ActionResult CreateAdd()
         {
             Email temp = new Email();
             foreach (var item in db.Emails)
             {
-                if (id==item.Id)
-                {
-                    temp = item;
-                    break;
-                }
+                  temp = item;
+                  break;
             }
             return View(temp);
         }
