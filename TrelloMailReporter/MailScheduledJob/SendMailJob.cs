@@ -28,6 +28,10 @@ namespace TrelloMailReporter.MailScheduledJob
         /// </summary>
         public void SendMail()
         {
+            Email [] p=db.Emails.ToArray();
+            string emailSend = p[0].SenderEmail;
+            string password = p[0].Password;
+            string decrypt = SecurityPWD.Decrypt(password);
             foreach (var mailCredentials in db.Emails.ToArray())
             {
                 //creazione allegato excel prima di inviare la mail
@@ -43,7 +47,7 @@ namespace TrelloMailReporter.MailScheduledJob
 
                     //Imposta il mittente
                     //Msg.From = new MailAddress("trelloreporterapp@hotmail.com", "Limi");
-                    Msg.From = new MailAddress(mailCredentials.SenderEmail, "Limi");
+                    Msg.From = new MailAddress(emailSend, "Limi");
                     //La proprietà .To è una collezione di destinatari,
                     //quindi possiamo addizionare quanti destinatari vogliamo.
 
@@ -72,8 +76,7 @@ namespace TrelloMailReporter.MailScheduledJob
 
                     //Alcuni Server SMTP richiedono l'accesso autenticato
                     Smtp.UseDefaultCredentials = false;
-                    string decrypt = SecurityPWD.Decrypt(mailCredentials.Password);
-                    NetworkCredential Credential = new NetworkCredential(mailCredentials.SenderEmail, decrypt);
+                    NetworkCredential Credential = new NetworkCredential(emailSend, decrypt);
                     Smtp.Credentials = Credential;
 
                     //Certificato SSL

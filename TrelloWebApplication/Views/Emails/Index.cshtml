@@ -5,7 +5,12 @@
 }
 
 <h2>Index</h2>
+@foreach (var item in Model)
+{
 
+    @Html.ActionLink("CreateAdd", "CreateAdd", new { id = item.Id })
+    break;
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -23,21 +28,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SenderEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReceiverEmail)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenderEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiverEmail)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })|
+
+            </td>
+        </tr>
+    }
+    <tr></tr>
 
 </table>
