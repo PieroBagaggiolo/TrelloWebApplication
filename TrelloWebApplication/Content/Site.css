@@ -129,10 +129,10 @@ p {
 #btnCom {
     margin-left: 42%;
 }
-#Select {
+#Select:hover {
     /*margin-left:45%;*/
     margin-bottom: 1%;
-    /*background-color: black;*/
+    background-color: black;
     opacity: 0.8;
 }
 
