@@ -4,40 +4,48 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Email Report</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+    
+</p>*@
+<table class="table"  id="tb2">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SenderEmail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
+        <th style="padding-left:40%">
             @Html.DisplayNameFor(model => model.ReceiverEmail)
         </th>
         <th></th>
     </tr>
+    @{
+        int prima = 0;
+    }
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
+        if (prima == 0)
+        {
+       
+            prima = 1;
+        }
+        else
+        {
+            <tr>
+             
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceiverEmail)
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SenderEmail)
+        <td style="padding-left:45%">
+            @Html.ActionLink("CreateAdd", "CreateAdd")
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReceiverEmail)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
+        <td></td>
     </tr>
-}
 
 </table>
