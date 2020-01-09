@@ -18,6 +18,16 @@
         background-image: url("/Content/img/Email2.png");
     }
 
+.logoFiltro {
+    background-image: url("/Content/img/filtro1.png");
+    width:30px;
+    height:30px;
+}
+
+    .logoFiltro:hover {
+        background-image: url("/Content/img/filtro.png");
+    }
+
 .logoNav {
     background-image: url("/Content/img/logo2.png");
     width: 48px;
