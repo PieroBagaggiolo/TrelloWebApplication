@@ -46,7 +46,7 @@ namespace TrelloMailReporter.MailScheduledJob
                     MailMessage Msg = new MailMessage();
                     //Imposta il mittente
                     //Msg.From = new MailAddress("trelloreporterapp@hotmail.com", "Limi");
-                    Msg.From = new MailAddress(emailSend, "Limi");
+                    Msg.From = new MailAddress(emailSend, "Trello Web App");
                     //La proprietà .To è una collezione di destinatari,
                     //quindi possiamo addizionare quanti destinatari vogliamo.
                     var primo = 0;
