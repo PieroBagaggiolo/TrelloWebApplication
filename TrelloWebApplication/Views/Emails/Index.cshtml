@@ -12,10 +12,9 @@
 </p>*@
 <table class="table"  id="tb2">
     <tr>
-        <th style="padding-left:40%">
+        <th style="text-align:center">
             @Html.DisplayNameFor(model => model.ReceiverEmail)
         </th>
-        <th></th>
     </tr>
     @{
         int prima = 0;
@@ -31,21 +30,25 @@
         else
         {
             <tr>
-             
                 <td>
-                    @Html.DisplayFor(modelItem => item.ReceiverEmail)
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <table>
+                        <tr>
+                            <td style="width:88.99%">
+                                @Html.DisplayFor(modelItem => item.ReceiverEmail)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         }
     }
     <tr>
-        <td style="padding-left:45%">
+        <td  style="text-align:center">
             @Html.ActionLink("CreateAdd", "CreateAdd")
         </td>
-        <td></td>
     </tr>
 
 </table>
