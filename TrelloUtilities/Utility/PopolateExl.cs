@@ -39,7 +39,7 @@ namespace TrelloUtilities
             int inizio = recordIndex;
 
             using (ExcelRange Titles = workSheet.Cells[recordIndex, 1, recordIndex + 1, 10])
-            {              
+            {
                 Titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.DarkGreen);
                 Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
@@ -109,7 +109,7 @@ namespace TrelloUtilities
                     workSheet.Cells[i, 9].Hyperlink = url;
                     i++;
                 }
-            
+
             else
             {
                 workSheet.Cells[i, 9].Value = "no Attachments";
@@ -123,7 +123,7 @@ namespace TrelloUtilities
             {
                 workSheet.Cells[recordIndex, 10].Value = "no data di scadenza";
             }
-            
+
             using (ExcelRange Titles = workSheet.Cells[inizio + 2, 1, fine, 10])
             {
                 Titles.Style.Border.Right.Style = ExcelBorderStyle.Medium;
@@ -135,7 +135,14 @@ namespace TrelloUtilities
                 Titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.LightGreen);
             }
-            
+
+            //VerticalTitle(workSheet, 1, fine, i);
+            //VerticalTitle(workSheet, 2, fine, i);
+            //VerticalTitle(workSheet, 3, fine, i);
+            //VerticalTitle(workSheet, 4, fine, i);
+            //VerticalTitle(workSheet, 5, fine, i);
+            //VerticalTitle(workSheet, 6, fine, i);
+            //VerticalTitle(workSheet, 10, fine, i);
         }
 
         private static void VerticalTitle(ExcelWorksheet workSheet, int col, int fine, int i)
