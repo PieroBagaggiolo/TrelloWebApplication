@@ -20,8 +20,9 @@
 
 .logoFiltro {
     background-image: url("/Content/img/filtro1.png");
-    width:30px;
-    height:30px;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
 }
 
     .logoFiltro:hover {
@@ -30,8 +31,8 @@
 
 .logoNav {
     background-image: url("/Content/img/logo2.png");
-    width: 48px;
-    height: 48px;
+    width: 30px;
+    height: 30px;
     margin-right: 10px;
 }
 
