@@ -23,8 +23,6 @@ namespace TrelloWebApplication.Controllers
             return View(db.Emails.ToList());
         }
 
-
-
         public ActionResult CreateAdd()
         {
             Email temp = new Email();
