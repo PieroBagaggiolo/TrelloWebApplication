@@ -136,13 +136,13 @@ namespace TrelloUtilities
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.LightGreen);
             }
             
-            VerticalTitle(workSheet, 1, fine, i);
-            VerticalTitle(workSheet, 2, fine, i);
-            VerticalTitle(workSheet, 3, fine, i);
-            VerticalTitle(workSheet, 4, fine, i);
-            VerticalTitle(workSheet, 5, fine, i);
-            VerticalTitle(workSheet, 6, fine, i);
-            VerticalTitle(workSheet, 10, fine, i);
+            //VerticalTitle(workSheet, 1, fine, i);
+            //VerticalTitle(workSheet, 2, fine, i);
+            //VerticalTitle(workSheet, 3, fine, i);
+            //VerticalTitle(workSheet, 4, fine, i);
+            //VerticalTitle(workSheet, 5, fine, i);
+            //VerticalTitle(workSheet, 6, fine, i);
+            //VerticalTitle(workSheet, 10, fine, i);
         }
 
         private static void VerticalTitle(ExcelWorksheet workSheet, int col, int fine, int i)

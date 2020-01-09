@@ -28,7 +28,6 @@ namespace TrelloMailReporter.MailScheduledJob
         /// </summary>
         public void SendMail()
         {
-            int i = db.Emails.Count();
             if (2<=db.Emails.Count())
             {
                 Email [] p=db.Emails.ToArray();
