@@ -10,11 +10,10 @@ namespace TrelloUtilities.Utility
 {
     public static class SecurityPWD
     {
-        static string EncKey = string.Empty;
+        static string EncryptionKey = "Giorgio";
 
         public static string Encrypt(string clearText)
         {
-            string EncryptionKey = "Giorgio";
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
             using (Aes encryptor = Aes.Create())
             {
@@ -36,7 +35,6 @@ namespace TrelloUtilities.Utility
 
         public static string Decrypt(string cipherText)
         {
-            string EncryptionKey = "Giorgio";
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             using (Aes encryptor = Aes.Create())
             {
