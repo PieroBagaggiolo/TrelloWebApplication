@@ -7,11 +7,33 @@
     background-size: cover;
     overflow-x: hidden;
 }
+
+.logoEmail {
+    background-image: url("/Content/img/Email.png");
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+    .logoEmail:hover {
+        background-image: url("/Content/img/Email2.png");
+    }
+
+.logoFiltro {
+    background-image: url("/Content/img/filtro1.png");
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+    .logoFiltro:hover {
+        background-image: url("/Content/img/filtro.png");
+    }
+
 .logoNav {
     background-image: url("/Content/img/logo2.png");
-    width:48px;
-    height:48px;
-    margin-right:10px;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
 }
 
 .logoNav:hover {
@@ -110,7 +132,7 @@ p {
 #Select {
     /*margin-left:45%;*/
     margin-bottom: 1%;
-    background-color: black;
+    /*background-color: black;*/
     opacity: 0.8;
 }
 

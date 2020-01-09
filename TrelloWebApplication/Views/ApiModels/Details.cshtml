@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Dettagli Board @Html.DisplayTextFor(model => model.IdBoard)</h2>
 
 <div>
-    <h4>ApiModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -15,7 +14,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Token)
+            @Html.DisplayTextFor(model => model.Token)
         </dd>
 
         <dt>
@@ -23,12 +22,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Key)
+            @Html.DisplayTextFor(model => model.Key)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdBoard }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdBoard, @class = "btn btn-success" }) |
+    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-default" })
 </p>

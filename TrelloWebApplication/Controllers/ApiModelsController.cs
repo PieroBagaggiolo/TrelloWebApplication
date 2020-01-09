@@ -20,20 +20,7 @@ namespace TrelloWebApplication.Controllers
             return View(db.ApiModels.ToList());
         }
 
-        // GET: ApiModels/Details/5
-        public ActionResult Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ApiModel apiModel = db.ApiModels.Find(id);
-            if (apiModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(apiModel);
-        }
+      
 
         // GET: ApiModels/Create
         public ActionResult Create()
@@ -57,38 +44,6 @@ namespace TrelloWebApplication.Controllers
 
             return View(apiModel);
         }
-
-        // GET: ApiModels/Edit/5
-        public ActionResult Edit(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            ApiModel apiModel = db.ApiModels.Find(id);
-            if (apiModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(apiModel);
-        }
-
-        // POST: ApiModels/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdBoard,Token,Key")] ApiModel apiModel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(apiModel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(apiModel);
-        }
-
         // GET: ApiModels/Delete/5
         public ActionResult Delete(string id)
         {

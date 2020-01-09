@@ -23,6 +23,36 @@ namespace TrelloWebApplication.Controllers
             return View(db.Emails.ToList());
         }
 
+
+
+        public ActionResult CreateAdd()
+        {
+            Email temp = new Email();
+            foreach (var item in db.Emails)
+            {
+                  temp = item;
+                  break;
+            }
+            return View(temp);
+        }
+
+        // POST: Emails/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAdd([Bind(Include = "SenderEmail,Password,ReceiverEmail")] Email email)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Emails.Add(email);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(email);
+        }
+
         // GET: Emails/Create
         public ActionResult Create()
         {
@@ -42,49 +72,48 @@ namespace TrelloWebApplication.Controllers
                 email.Password = criptate;
                 db.Emails.Add(email);
                 db.SaveChanges();
-                
+
                 return RedirectToAction("Index");
             }
 
             return View(email);
         }
 
-        //// GET: Emails/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    if (id == 0)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Email email = db.Emails.Find(id);
-        //    if (email == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(email);
-        //}
+        // GET: Emails/Edit/5
+        public ActionResult Edit(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Email email = db.Emails.Find(id);
+            if (email == null)
+            {
+                return HttpNotFound();
+            }
+            return View(email);
+        }
 
-        //// POST: Emails/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "SenderEmail,Password,ReceiverEmail")] Email email)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(email).State = EntityState.Modified;
-
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(email);
-        //}
+        // POST: Emails/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "SenderEmail,Password,ReceiverEmail")] Email email)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(email).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(email);
+        }
 
         // GET: Emails/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            if (id == 0)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -99,7 +128,7 @@ namespace TrelloWebApplication.Controllers
         // POST: Emails/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(string id)
         {
             Email email = db.Emails.Find(id);
             db.Emails.Remove(email);
