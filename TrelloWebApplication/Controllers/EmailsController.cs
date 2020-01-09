@@ -25,6 +25,36 @@ namespace TrelloWebApplication.Controllers
             return View(db.Emails.ToList());
         }
 
+        
+
+        public ActionResult CreateAdd()
+        {
+            Email temp = new Email();
+            foreach (var item in db.Emails)
+            {
+                  temp = item;
+                  break;
+            }
+            return View(temp);
+        }
+
+        // POST: Emails/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAdd([Bind(Include = "SenderEmail,Password,ReceiverEmail")] Email email)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Emails.Add(email);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(email);
+        }
+
         // GET: Emails/Create
         public ActionResult Create()
         {

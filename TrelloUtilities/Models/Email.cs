@@ -23,8 +23,6 @@ namespace TrelloUtilities.Models
         public string SenderEmail { get; set; }
         [Required(ErrorMessage = "Password is required!")]
         public string Password { get; set; }
-        [Required(ErrorMessage = "Receiver's mail is required!")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string ReceiverEmail { get; set; }
     }
 }
