@@ -14,22 +14,22 @@
 
 ///trello App inzio
 
-$("#Dropdown1Id").on('change', function () {
-    var testo = document.getElementById("risultato");
-    testo.innerHTML = "Hello, World!";
-}
 
-//$("#Dropdown1Id").on('change', function () {
-//    $.ajax({
-//        type: "POST",
-//        url: "/Filter.cshtml",
-//        data: { stato: drpdown1, closed: drpdown2 },
-//        success: function (res) {
-//            alert("Messaggio alert");
-//            console.log("messaggio prova console log");
-//        }
-//    })
-//});
+// PROVA AJAX
+
+//var drpdown1 = $("#Dropdown1Id");
+
+//drpdown1.on('change', function () {
+//    var item = $("#Dropdown1Id option:selected").text();
+//        $.ajax({
+//            type: "POST",
+//            url: " /Select/Filter",
+//            data: { data: item},
+//            success: function (res) {
+//            }
+//        })
+//    });
+
 
 $('#btnCom').click(function () {
     $("#btnCom").hide();
