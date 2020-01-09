@@ -116,13 +116,13 @@
     <table style="width:80%; margin-left:10%; ">
         <tr>
             <th>
-            <p id="Select" class="btn btn-default btn-large">
+            <p id="Select" class="btn btn-primary btn-large">
                     @Html.ActionLink("GO TO INDEX", "Index", "Card")
             </p>
             </th>
             <th> @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-danger btn-large" })</th>
             <th>@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-success btn-large" })</th>
-            <th> @Html.ActionLink("Sposta", "Sposta", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-primary btn-large" })</th>
+            <th> @Html.ActionLink("SPOSTA", "Sposta", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-info btn-large" })</th>
 
         </tr>
     </table>
