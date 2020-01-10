@@ -13,7 +13,7 @@
 <div class="jumbotron" style="background:rgba(255, 255, 255, 0.4)">
     <h1 style="text-align:center">TRELLO REPORTER APP</h1>
 </div>
-@using (Html.BeginForm())
+@using (Html.BeginForm(new { id = "frmId"}))
 {
     @Html.AntiForgeryToken()
     <table id="tb2">
@@ -21,11 +21,11 @@
             <th>
                 <h4> LIST : @Html.DropDownList("stato", null, new { @id = "Dropdown1Id" })</h4>
             </th>
-            <th>
+            @*<th>
                 <h4>ARCHVIED : @Html.DropDownList("closed", null, new { @id = "Dropdown2Id" })</h4>
-            </th>
+            </th>*@
             <th>
-                <input type="submit" value="Filter" class="btn btn-info" />
+                <input type="submit" value="Filter" class="btn btn-info" id="submitButton" />
             </th>
         </tr>
     </table>

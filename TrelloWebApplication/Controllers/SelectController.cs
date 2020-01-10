@@ -28,28 +28,22 @@ namespace TrelloWebApplication.Controllers
         List<Card> model = PopolateModel.Popola(myApi);
 
         //PROVA FILTRO PER AJAX
+        public ActionResult Filter(string data)
+        {
+            List<Card> cards = new List<Card>();
+            ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
 
-        //public ActionResult Filter(string data)
-        //{
-        //    List<Card> cards = new List<Card>();
-
-        //    List<Closed> closedList = new List<Closed>();
-        //    closedList.Add(new Closed("False"));
-        //    closedList.Add(new Closed("True"));
-        //    ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
-        //    ViewBag.closed = new SelectList(closedList, "Id", "Name");
-
-        //    if (data != null && data != "")
-        //    {
-        //        foreach (var card in model)
-        //        {
-        //            if (card.IdList == data || data == "")                 
-        //                    cards.Add(card);                                            
-        //        }
-        //        return View(cards);
-        //    }
-        //    return View(model);
-        //}
+            if (data != null && data != "")
+            {
+                foreach (var card in model)
+                {
+                    if (card.IdList == data || data == "")
+                        cards.Add(card);
+                }
+                return View(cards);
+            }
+            return View(model);
+        }
 
         /// <summary>
         /// Pagina di filtraggio dati stato e closed sono le DropDownList dove viene scelto per cosa filtrare
@@ -57,7 +51,7 @@ namespace TrelloWebApplication.Controllers
         /// <param name="stato">DropDownList della lista degli stati </param>
         /// <param name="closed">DropDownList del archivazione se si o no </param>
         /// <returns></returns>
-        public ActionResult Filter(string stato, string closed)
+        public ActionResult Filter1(string stato, string closed)
         {
             List<Card> cards = new List<Card>();
 

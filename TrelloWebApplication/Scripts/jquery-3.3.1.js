@@ -16,16 +16,36 @@
 
 
 // PROVA AJAX
+$("#Dropdown1Id").on('change', function () {
+    console.log("onchange");
+    console.log($("#Dropdown1Id").val());
+    var drpdown1 = $("#Dropdown1Id").val();
+    var submit = $("#submitButton");
+        $.ajax({ // crea una chiamata AJAX
+            data: { data: drpdown1 }, // prendi i dati del form in questo caso del primo dropdown
+            type: "GET", // GET o POST
+            url: "/Select/Filter", // li passa al controller
+            success: function () { // se va con successo esegue il codice seguente
+                submit.click();
+                $("#frmId").submit();
+            },
+            error: function (error) {
+                console.log("error")
+            }
+        });
+    });
+
 
 //var drpdown1 = $("#Dropdown1Id");
-
 //drpdown1.on('change', function () {
-//    var item = $("#Dropdown1Id option:selected").text();
 //        $.ajax({
 //            type: "POST",
 //            url: " /Select/Filter",
-//            data: { data: item},
-//            success: function (res) {
+//            data: { data: $('#Dropdown1Id').val()},
+//            success: function (res) {              
+//            },
+//            error: function () {
+//                alert("error");
 //            }
 //        })
 //    });
