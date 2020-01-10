@@ -21,6 +21,7 @@ namespace TrelloUtilities.Models
         public string Token { get; set; }
         [Required(ErrorMessage = "Key is required!")]
         public string Key { get; set; }
+        public int Primo { get; set; }
 
     }
 }

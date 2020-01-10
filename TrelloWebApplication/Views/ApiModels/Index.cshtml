@@ -22,6 +22,9 @@
         </th>
         <th></th>
     </tr>
+    @{ 
+        var x = 0;
+    }
 
 @foreach (var item in Model) {
     <tr>
@@ -35,7 +38,18 @@
             @Html.DisplayFor(modelItem => item.Key)
         </td>
         <td>
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard })
+            @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard })|
+            @if (x == 0)
+            {
+
+                {
+                    x = 1;
+                }
+            }
+            else
+            {
+                @Html.ActionLink("Primo", "Primo", new { id = item.IdBoard })
+            }
         </td>
     </tr>
 }

@@ -12,16 +12,6 @@ namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
     {
-        // elementi neccessari per fare le chiamate le informazioni sono prese da db prende la prima sequenza
-        private static DatabaseContext db = new DatabaseContext();
-        static ApiModel [] apiArrey = db.ApiModels.ToArray();
-        static ApiModel apiCredentials = apiArrey[0];
-
-       
-        // creazione del mio modello di api per le chiamate
-        static Api myApi = new Api(apiCredentials.Key, apiCredentials.Token, apiCredentials.IdBoard);
-        //creazione del modello di liste di card
-        List<Card> model = PopolateModel.Popola(myApi);
 
         /// <summary>
         /// visualizzia la lista di card predenti nella pagina trello
@@ -29,7 +19,8 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna una view</returns>
         public ActionResult Index(string stato)
         {
-
+            var myApi = PopolateModel.Crea();
+            List<Card> model = PopolateModel.Popola();
             List<Card> cards = new  List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
             if (stato != null && stato != "")
@@ -51,7 +42,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns></returns>
         public ActionResult PdfIndex()
         {
-            return View(model);
+            return View(PopolateModel.Popola());
         }
 
         /// <summary>
@@ -60,7 +51,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns>file pdf</returns>
         public ActionResult ExportPDFIndex()
         {
-            ActionAsPdf result = new ActionAsPdf("PdfIndex",model)
+            ActionAsPdf result = new ActionAsPdf("PdfIndex", PopolateModel.Popola())
             {
                 FileName = Server.MapPath("Index.pdf")
             };
@@ -73,6 +64,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns></returns>
         public ActionResult Delete(string id = null)
         {
+            List<Card> model = PopolateModel.Popola();
             Card card = null;
             foreach (var item in model)
             {
@@ -82,6 +74,7 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
+            var myApi = PopolateModel.Crea();
             myApi.DelateCard(card);
             return RedirectToAction("Index", model);
         }
@@ -92,6 +85,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna una view</returns>
         public ActionResult Details(string id = null)
         {
+            List<Card> model = PopolateModel.Popola();
             Card card = null;
             foreach (var item in model)
             {
@@ -106,6 +100,7 @@ namespace TrelloWebApplication.Controllers
         }
         public ActionResult newCard()
         {
+            var myApi = PopolateModel.Crea();
             Card card = new Card();
             var stato = myApi.GetState();
             ViewBag.Stato = new SelectList(stato, "Id", "Name", card.IdList);
@@ -115,9 +110,10 @@ namespace TrelloWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult newCard(Card card,string Stato)
         {
+            var myApi = PopolateModel.Crea();
             card.IdList = Stato;
             myApi.PostCard(card);
-            return RedirectToAction("Index", model);
+            return RedirectToAction("Index", PopolateModel.Popola());
         }
             /// <summary>
             /// Pagina di modifica card
@@ -128,7 +124,7 @@ namespace TrelloWebApplication.Controllers
             {
             string inzio = "";
             Card card = null;
-            foreach (var item in model)
+            foreach (var item in PopolateModel.Popola())
             {
                 if (item.Id == id)
 
@@ -137,6 +133,7 @@ namespace TrelloWebApplication.Controllers
                     inzio = item.IdList;
                 }
             }
+            var myApi = PopolateModel.Crea();
             var stato = myApi.GetState().Where(g => g.Name == inzio).ToList();
             stato.AddRange(myApi.GetState().Where(g => g.Name != inzio).ToList());
             ViewBag.Stato = new SelectList(stato, "Id", "Name",card.IdList);
@@ -152,6 +149,8 @@ namespace TrelloWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Card card,string stato)
         {
+            var myApi = PopolateModel.Crea();
+            var model = PopolateModel.Popola();
             Card cardVecchia = null;
             foreach (var item in model)
             {
@@ -201,7 +200,7 @@ namespace TrelloWebApplication.Controllers
         public ActionResult PdfDetails(string id = null)
         {
             Card card = null;
-            foreach (var item in model)
+            foreach (var item in PopolateModel.Popola())
             {
                 if (item.Id == id)
 
@@ -220,7 +219,7 @@ namespace TrelloWebApplication.Controllers
         public ActionResult ExcelEx(string id = null)
         {
             Card card = null;
-            foreach (var item in model)
+            foreach (var item in PopolateModel.Popola())
             {
                 if (item.Id == id)
                 {
@@ -238,7 +237,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna la view</returns>
         public ActionResult ExcelExIndex()
         {
-            ExcelPackage ex = ReportMethods.ExportExcelTotal(model);
+            ExcelPackage ex = ReportMethods.ExportExcelTotal(PopolateModel.Popola());
             CreazioneExl.CreazioneFile(ex, "Index");
             return View();
         }
@@ -251,7 +250,7 @@ namespace TrelloWebApplication.Controllers
         public ActionResult ExportPDFDetalis(string id=null)
         {
             Card card = null;
-            foreach (var item in model)
+            foreach (var item in PopolateModel.Popola())
             {
                 if (item.Id == id)
 
@@ -273,9 +272,9 @@ namespace TrelloWebApplication.Controllers
         [HttpPost]
         public ActionResult Details(Card pro)
         {
-
+            var myApi = PopolateModel.Crea();
             Card card = null;
-            foreach (var item in model)
+            foreach (var item in PopolateModel.Popola())
             {
                 if (item.Id == pro.Id)
 

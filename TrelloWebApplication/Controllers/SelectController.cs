@@ -16,16 +16,7 @@ namespace TrelloWebApplication.Controllers
 {
     public class SelectController : Controller
     {
-        // elementi neccessari per fare le chiamate le informazioni sono prese da db prende la prima sequenza
-        private static DatabaseContext db = new DatabaseContext();
-        static ApiModel[] apiArrey = db.ApiModels.ToArray();
-        static ApiModel apiCredentials = apiArrey[0];
-
-
-        // creazione del mio modello di api per le chiamate
-        static Api myApi = new Api(apiCredentials.Key, apiCredentials.Token, apiCredentials.IdBoard);
-        //creazione del modello di liste di card
-        List<Card> model = PopolateModel.Popola(myApi);
+   
 
 
         /// <summary>
@@ -37,7 +28,8 @@ namespace TrelloWebApplication.Controllers
         public ActionResult Filter(string stato,  string closed)
         {
             List<Card> cards = new List<Card>();
-
+            var model = PopolateModel.Popola();
+            var myApi = PopolateModel.Crea();
             List<Closed> closedList = new List<Closed>();
             closedList.Add(new Closed("False"));
             closedList.Add(new Closed("True"));
@@ -75,7 +67,7 @@ namespace TrelloWebApplication.Controllers
             List<String> result = System.Web.Helpers.Json.Decode<List<String>>(newModel);
             List<Card> cards = new List<Card>();
             //popolamento di una lista di card con id uguale a quelli presenti nella varibile result
-            foreach (var card in model)
+            foreach (var card in PopolateModel.Popola())
             {
                 foreach (var value in result)
                 {
@@ -110,7 +102,7 @@ namespace TrelloWebApplication.Controllers
             List<String> result = System.Web.Helpers.Json.Decode<List<String>>(lstString);
 
             List<Card> cards = new List<Card>();
-            foreach (var card in model)
+            foreach (var card in PopolateModel.Popola())
             {
                 foreach (var value in result)
                 {
@@ -134,7 +126,7 @@ namespace TrelloWebApplication.Controllers
         {
             List<String> result = System.Web.Helpers.Json.Decode<List<String>>(lstString);
             List<Card> cards = new List<Card>();
-            foreach (var card in model)
+            foreach (var card in PopolateModel.Popola())
             {
                 foreach (var value in result)
                 {
@@ -144,6 +136,7 @@ namespace TrelloWebApplication.Controllers
                     }
                 }
             }
+            var myApi = PopolateModel.Crea();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
             ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
             return View(cards);
@@ -164,6 +157,8 @@ namespace TrelloWebApplication.Controllers
             stream.Position = 0;
             List<String> result = System.Web.Helpers.Json.Decode<List<String>>(jsonids);
             List<Card> cards = new List<Card>();
+            var model = PopolateModel.Popola();
+            var myApi = PopolateModel.Crea();
             //creazione lista di card con id presennte e con stato differnte al nuovo
             foreach (var value in result)
             {
