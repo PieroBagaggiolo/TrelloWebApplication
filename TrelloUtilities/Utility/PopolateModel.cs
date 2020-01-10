@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using TrelloUtilities.Models;
 using TrelloWebApplication.Models;
 
 namespace TrelloWebApplication.Utiliti
@@ -11,8 +13,9 @@ namespace TrelloWebApplication.Utiliti
         /// </summary>
         /// <param name="myApi">Il mio collegamento con le api trello</param>
         /// <returns>ritorno la lista di card con le opportune modifiche</returns>
-        public static List<Card> Popola(Api myApi)
+        public static List<Card> Popola()
         {
+            var myApi = Crea();
             //lista di card presenti
             var cardtot = myApi.GetCards();
             //lista di stati delle card
@@ -61,6 +64,14 @@ namespace TrelloWebApplication.Utiliti
             }
             //ritorno la lista di card con le modifiche 
             return cardtot;
+        }
+        public static Api Crea()
+        {
+            DatabaseContext db = new DatabaseContext();
+            ApiModel[] apiArrey = db.ApiModels.OrderBy(g => g.Primo).ToArray();
+            ApiModel apiCredentials = apiArrey[0];
+            // creazione del mio modello di api per le chiamate
+            return new Api(apiCredentials.Key, apiCredentials.Token, apiCredentials.IdBoard);
         }
 
     }
