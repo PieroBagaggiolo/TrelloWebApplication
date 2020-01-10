@@ -12,7 +12,7 @@
     background-image: url("/Content/img/Email.png");
     width: 30px;
     height: 30px;
-    margin-right: 10px;
+    margin: 15px;
 }
     .logoEmail:hover {
         background-image: url("/Content/img/Email2.png");
@@ -22,7 +22,7 @@
     background-image: url("/Content/img/filtro1.png");
     width: 30px;
     height: 30px;
-    margin-right: 10px;
+    margin: 15px;
 }
 
     .logoFiltro:hover {

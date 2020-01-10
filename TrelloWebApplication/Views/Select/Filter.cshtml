@@ -42,7 +42,7 @@
     @Html.AntiForgeryToken()
     <table  id="tb2">
 
-       
+
         <tr>
             @*<th>
                     @Html.DropDownList("Campo", "ALL")
@@ -88,7 +88,7 @@
                 {
                     <td>NO</td>
                 }
-                
+
                 @if (item.Due!=null)
                 {
                 <td>
@@ -116,9 +116,9 @@
     <table style="width:80%; margin-left:10%; ">
         <tr>
             <th>
-            <p id="Select" class="btn btn-primary btn-large">
-                    @Html.ActionLink("GO TO INDEX", "Index", "Card")
-            </p>
+                                <a href="/" class="btn btn-primary btn-large">Go To Home</a>
+
+
             </th>
             <th> @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-danger btn-large" })</th>
             <th>@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-success btn-large" })</th>
