@@ -245,6 +245,7 @@
     <Content Include="Views\Emails\Index.cshtml" />
     <Content Include="Views\Emails\CreateAdd.cshtml" />
     <Content Include="Views\ApiModels\Create.cshtml" />
+    <Content Include="Views\Card\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
