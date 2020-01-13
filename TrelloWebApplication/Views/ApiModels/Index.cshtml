@@ -9,16 +9,10 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table" id="tb3">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdBoard)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Token)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key)
+        <th style="text-align:center;">
+            @Html.DisplayNameFor(model => model.NameBord)
         </th>
         <th></th>
     </tr>
@@ -29,16 +23,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.IdBoard)
+            @Html.DisplayFor(modelItem => item.NameBord)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Token)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Key)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard })|
             @if (x == 0)
             {
 
@@ -48,7 +35,12 @@
             }
             else
             {
-                @Html.ActionLink("Primo", "Primo", new { id = item.IdBoard })
+                
+            <div>
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard }) |
+                @Html.ActionLink("Go to", "Primo", new { id = item.IdBoard })
+            </div>
+                
             }
         </td>
     </tr>

@@ -17,11 +17,14 @@ namespace TrelloUtilities.Models
         [Key]
         [Required(ErrorMessage = "IdBoard is required!")]
         public string IdBoard { get; set; }
+      
         [Required(ErrorMessage = "Token is required!")]
         public string Token { get; set; }
         [Required(ErrorMessage = "Key is required!")]
         public string Key { get; set; }
         public int Primo { get; set; }
+
+        public string NameBord { get; set; }
 
     }
 }
