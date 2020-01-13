@@ -26,7 +26,7 @@ $("#Dropdown1Id").on('change', function () {
         type: "GET", // GET o POST
         url: "/Select/Filter", // li passa al controller
         success: function () { // se va con successo esegue il codice seguente
-            $("#divTable").html(drpdown1);
+            //$("#divTable").html(drpdown1);
             submit.click();
         },
         error: function (error) {
