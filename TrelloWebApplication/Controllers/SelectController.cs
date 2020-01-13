@@ -32,7 +32,7 @@ namespace TrelloWebApplication.Controllers
         {
             List<Card> cards = new List<Card>();
             ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
-
+            View(model);
             if (data != null && data != "")
             {
                 foreach (var card in model)
@@ -40,8 +40,9 @@ namespace TrelloWebApplication.Controllers
                     if (card.IdList == data || data == "")
                         cards.Add(card);
                 }
-                return View(cards);
+                return View("Filter",cards);
             }
+            else
             return View(model);
         }
 
