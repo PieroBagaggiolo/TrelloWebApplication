@@ -18,24 +18,7 @@ namespace TrelloWebApplication.Controllers
     {
    
 
-        //PROVA FILTRO PER AJAX
-        public ActionResult Filter(string data)
-        {
-            List<Card> cards = new List<Card>();
-            ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
-            View(model);
-            if (data != null && data != "")
-            {
-                foreach (var card in model)
-                {
-                    if (card.IdList == data || data == "")
-                        cards.Add(card);
-                }
-                return View("Filter",cards);
-            }
-            else
-            return View(model);
-        }
+
 
         /// <summary>
         /// Pagina di filtraggio dati stato e closed sono le DropDownList dove viene scelto per cosa filtrare
@@ -43,7 +26,7 @@ namespace TrelloWebApplication.Controllers
         /// <param name="stato">DropDownList della lista degli stati </param>
         /// <param name="closed">DropDownList del archivazione se si o no </param>
         /// <returns></returns>
-        public ActionResult Filter1(string stato, string closed)
+        public ActionResult Filter(string stato, string closed)
         {
             List<Card> cards = new List<Card>();
             var model = PopolateModel.Popola();
