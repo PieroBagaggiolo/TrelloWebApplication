@@ -6,10 +6,10 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>ApiModel</h4>
         <hr />
@@ -54,6 +54,5 @@
     </div>
 }
 
-<div class="btn btn-primary">
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+<a href="http://localhost:53250/Apimodels" class="btn btn-primary">Back to List</a>
