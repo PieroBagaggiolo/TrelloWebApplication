@@ -238,13 +238,14 @@
     <Content Include="Views\Select\Filter.cshtml" />
     <Content Include="Views\Select\PdfIndex.cshtml" />
     <Content Include="Views\Select\Sposta.cshtml" />
-    <Content Include="Views\ApiModels\Create.cshtml" />
     <Content Include="Views\ApiModels\Delete.cshtml" />
     <Content Include="Views\ApiModels\Index.cshtml" />
     <Content Include="Views\Emails\Create.cshtml" />
     <Content Include="Views\Emails\Delete.cshtml" />
     <Content Include="Views\Emails\Index.cshtml" />
     <Content Include="Views\Emails\CreateAdd.cshtml" />
+    <Content Include="Views\ApiModels\Create.cshtml" />
+    <Content Include="Views\Card\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

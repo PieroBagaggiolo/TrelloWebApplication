@@ -3,41 +3,66 @@
 @{
     ViewBag.Title = "Index";
 }
+<div>
+    <h1>
+        Select Board
+    </h1>
+    <p>
+        Lista delle board selezionabili la prima della lista è quella selezionata
+    </p>
+    <p>
+        - Create New serve a dare le credenziali per una nuova board
+    </p>
+    <p>
+        - Delete per eliminare le credenziali di quella board
+    </p>
+    <p>
+        - Go To per selezionarla
+    </p>
+</div>
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table" id="tb3">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdBoard)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Token)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Key)
+        <th style="text-align:center;">
+            @Html.DisplayNameFor(model => model.NameBord)
         </th>
         <th></th>
     </tr>
+    @{
+        var x = 0;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdBoard)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Token)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Key)
-        </td>
-        <td>
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameBord)
+            </td>
+            <td>
+
+                @if (x == 0)
+                {
+                    if (Model.Count() > 1)
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard })
+                    }
+                    x = 1;
+                }
+                else
+                {
+
+                    <div>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard }) |
+                        @Html.ActionLink("Go to", "Primo", new { id = item.IdBoard })
+                    </div>
+
+                }
+            </td>
+        </tr>
+    }
 
 </table>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

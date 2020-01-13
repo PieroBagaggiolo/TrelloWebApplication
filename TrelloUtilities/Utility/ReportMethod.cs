@@ -41,7 +41,7 @@ namespace TrelloUtilities
              // creazione del mio modello di api per le chiamate
              Api myApi = new Api(apiCredentials.Key, apiCredentials.Token, apiCredentials.IdBoard);
              //creazione del modello di liste di card
-             List<Card> model = PopolateModel.Popola(myApi);
+             List<Card> model = PopolateModel.Popola();
              ex = ReportMethods.ExportExcelTotal(model);
         }
         public static int CalcolateDimensionMax(int recordIndex, Card card)

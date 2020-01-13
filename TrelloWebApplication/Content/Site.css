@@ -8,11 +8,40 @@
     overflow-x: hidden;
 }
 
+#Closed {
+    color: black;
+    padding: 4px;
+    font-size: 16px;
+    font-style: italic;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+    #Closed > option {
+        color: black;
+        padding: 16px;
+        font-size: 16px;
+        background-color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+#tb4 {
+    background-color: transparent;
+    width: 58%;
+    margin-left: 21%;
+    margin-right: 21%;
+    opacity: 1;
+    color: black;
+}
+
 .logoEmail {
     background-image: url("/Content/img/Email.png");
     width: 30px;
     height: 30px;
-    margin-right: 10px;
+    margin: 15px;
 }
     .logoEmail:hover {
         background-image: url("/Content/img/Email2.png");
@@ -22,13 +51,23 @@
     background-image: url("/Content/img/filtro1.png");
     width: 30px;
     height: 30px;
-    margin-right: 10px;
+    margin: 15px;
 }
 
     .logoFiltro:hover {
         background-image: url("/Content/img/filtro.png");
     }
 
+.logoMono {
+    background-image: url("/Content/img/monopattino.png");
+    width: 30px;
+    height: 30px;
+    margin: 15px;
+}
+
+    .logoMono:hover {
+        background-image: url("/Content/img/monopattino2.png");
+    }
 .logoNav {
     background-image: url("/Content/img/logo2.png");
     width: 48px;
@@ -86,11 +125,27 @@ a {
     color: white;
 }
 
-#tb1 tr:hover {
+.rowHover:hover {
     background-color: rgba(128, 128, 128, 0.90);
     color: white;
 }
-
+#tb1 > tbody > tr:first-of-type {
+    background: rgba(0, 0, 0, 0.9);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+#tb1 > tbody > tr:first-of-type>th:first-of-type {
+    border-top-left-radius: 15px;
+}
+#tb1 > tbody > tr:first-of-type> th:last-of-type {
+    border-top-right-radius: 15px;
+}
+.rowHover:last-of-type>td:first-of-type {
+    border-bottom-left-radius: 15px;
+}
+.rowHover:last-of-type > td:last-of-type {
+    border-bottom-right-radius: 15px;
+}
 #tb1 {
     width: 80%;
     margin-left: 10%;
