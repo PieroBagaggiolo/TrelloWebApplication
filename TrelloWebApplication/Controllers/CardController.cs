@@ -74,6 +74,23 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
+            return View( card);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
+        {
+            List<Card> model = PopolateModel.Popola();
+            Card card = null;
+            foreach (var item in model)
+            {
+                if (item.Id == id)
+
+                {
+                    card = item;
+                }
+            }
             var myApi = PopolateModel.Crea();
             myApi.DelateCard(card);
             return RedirectToAction("Index", model);

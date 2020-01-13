@@ -8,6 +8,32 @@
     overflow-x: hidden;
 }
 
+#Closed {
+    color: black;
+    padding: 4px;
+    font-size: 16px;
+    font-style: italic;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+    #Closed > option {
+        color: black;
+        padding: 16px;
+        font-size: 16px;
+        background-color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+#tb2 {
+    background-color: transparent;
+    opacity: 1;
+    color: black;
+}
+
 .logoEmail {
     background-image: url("/Content/img/Email.png");
     width: 30px;

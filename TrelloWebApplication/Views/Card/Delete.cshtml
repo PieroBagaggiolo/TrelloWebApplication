@@ -1,0 +1,158 @@
+﻿@model TrelloWebApplication.Models.Card
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete : @Html.DisplayFor(model => model.Name) </h2>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Card</h4>
+    <hr />
+    <table class="table" id="tb2">
+        <tr>
+            <th id="primo">
+                ID
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.Id)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                STATO
+            </th>
+            <td>
+                @Html.DisplayFor(model => model.IdList)
+            </td>
+        </tr>
+        <tr>
+            <th>
+                ARCHIVIATA
+            </th>
+            @if (Model.Closed == "False")
+            {
+                <td>
+                    NO
+                </td>
+            }
+            else
+            {
+                <td>
+                    SI
+                </td>
+            }
+        </tr>
+        <tr>
+            <th>
+                LABEL
+            </th>
+            @if (Model.Labels.Count > 0)
+            {
+                <td>
+                    @foreach (var m in Model.Labels)
+                    {
+                        <table>
+                            @*tab secondaria*@
+                            <tr>
+                                <td style="padding-left: 0px">
+                                    @Html.DisplayFor(modelm => m.Name) -
+                                    (@Html.DisplayFor(modelm => m.Color))
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO LABELS</td>
+            }
+        </tr>
+        <tr>
+            <th>CHECKLISTS</th>
+            @if (Model.ChekedLists != null)
+            {
+                <td>
+                    @foreach (var m in Model.ChekedLists)
+                    {
+                        <table class="tabSecondaria">
+                            <tr>
+                                <th>
+                                    - @Html.DisplayFor(modelm => m.Name)
+                                </th>
+                            </tr>
+                            @foreach (var chk in m.CheckItems)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelchk => chk.Name) -
+                                        (@Html.DisplayFor(modelchk => chk.State))
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO CHECKLISTS</td>
+            }
+        </tr>
+        <tr>
+            <th>ATTACHMENTS</th>
+            @if (Model.Attachments != null)
+            {
+                <td>
+                    @foreach (var att in Model.Attachments)
+                    {
+
+                        <table>
+                            <tr>
+                                <td>
+
+                                    <a href="@Url.Content(att.Url)" download="@Url.Content(att.Name)">
+                                        @Url.Content(att.Name)
+                                    </a>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    }
+                </td>
+            }
+            else
+            {
+                <td>NO ATTACHMENTS</td>
+            }
+        </tr>
+        <tr>
+            <th>
+                Expire Time
+            </th>
+
+            @if (Model.Due != null)
+            {
+                <td>
+                    @Html.DisplayFor(model => model.Due)
+                </td>
+            }
+            else
+            {
+                <td>No Expire time</td>
+            }
+        </tr>
+    </table>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

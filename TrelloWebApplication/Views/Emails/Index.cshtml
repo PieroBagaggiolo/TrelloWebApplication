@@ -4,8 +4,19 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Email Report</h2>
 
+<div>
+    <h1>Email Report</h1>
+    <p>
+        Lista di email alle quali verrà inviata un mail con l'exel contente tutte le informazioni sulle card
+    </p>
+    <p>
+        - CreateAdd serve a dare nuovi indirizzi email ai quali inviare la mail
+    </p>
+    <p>
+        - Dalete serve a non far più inviare la mail alla seguente email 
+    </p>
+</div>
 @*<p>
     @Html.ActionLink("Create New", "Create")
     
@@ -25,7 +36,11 @@
     {
         if (prima == 0)
         {
-       
+            <tr>
+                <td>
+                    La mail non verà inviata a nessun utente
+                </td>
+            </tr> 
             prima = 1;
         }
         else
