@@ -19,13 +19,14 @@ namespace TrelloWebApplication.Controllers
    
 
 
+
         /// <summary>
         /// Pagina di filtraggio dati stato e closed sono le DropDownList dove viene scelto per cosa filtrare
         /// </summary>
         /// <param name="stato">DropDownList della lista degli stati </param>
         /// <param name="closed">DropDownList del archivazione se si o no </param>
         /// <returns></returns>
-        public ActionResult Filter(string stato,  string closed)
+        public ActionResult Filter(string stato, string closed)
         {
             List<Card> cards = new List<Card>();
             var model = PopolateModel.Popola();
@@ -52,8 +53,6 @@ namespace TrelloWebApplication.Controllers
             }
             return View(model);
         }
-
-
 
 
         /// <summary>

@@ -27,11 +27,6 @@ namespace TrelloWebApplication.Utiliti
             this.key = key;
             this.idBrod = idBrod;
             this.token = token;
-            //var Id = CreateWebhook();
-            //foreach (var item in Id)
-            //{
-            //    this.IdWebhook = item.Id;
-            //}
         }
         /// <summary>
         /// Manda le api alla funzione crea gli oggetti con quelle informazioni tramite il json deserializato
@@ -80,6 +75,7 @@ namespace TrelloWebApplication.Utiliti
             var checklist = serializer.Deserialize<List<ChekedList>>(check);
             return checklist;
         }
+
         // Parte per crare un wobhook che mi averte di variazione nella berdbord
 
         //public  List<Webhook> CreateWebhook()
@@ -89,8 +85,6 @@ namespace TrelloWebApplication.Utiliti
         //    var webhook = serializer.Deserialize<List<Webhook>>(webh);
         //    return webhook;
         //}
-
-
 
         /// <summary>
         /// modifica una card da archivata a non o viceversa 
@@ -102,6 +96,7 @@ namespace TrelloWebApplication.Utiliti
             string url = urlCard + model.Id + "?closed=" + value + "&key=" + key + "&token=" + token;
             ChiamtaApi(url, "PUT");
         }
+
         /// <summary>
         /// Modica il nome della card 
         /// </summary>
@@ -112,6 +107,7 @@ namespace TrelloWebApplication.Utiliti
             string url = urlCard + model.Id + "?name=" + newName + "&key=" + key + "&token=" + token;
             ChiamtaApi(url, "PUT");
         }
+
         /// <summary>
         /// modifica stato della card
         /// </summary>
@@ -122,6 +118,7 @@ namespace TrelloWebApplication.Utiliti
             string url = urlCard + model.Id + "?idList=" + newList + "&key=" + key + "&token=" + token;
             ChiamtaApi(url, "PUT");
         }
+
         /// <summary>
         /// modifica stato della card
         /// </summary>
@@ -133,6 +130,7 @@ namespace TrelloWebApplication.Utiliti
             string url = urlCard + model.Id + "?due=" + newData.Month+mezzo+newData.Day+mezzo+newData.Year + "&key=" + key + "&token=" + token;
             ChiamtaApi(url, "PUT");
         }
+
         /// <summary>
         /// creazione new card 
         /// </summary>
@@ -142,6 +140,7 @@ namespace TrelloWebApplication.Utiliti
             string url = urlCard + "?name="+model.Name+ "&idList="+model.IdList + "&key=" + key + "&token=" + token;
             ChiamtaApi(url, "POST");
         }
+
         /// <summary>
         /// funzione che lancia il mettodo post per aggiungere un comento a una card
         /// </summary>
@@ -152,6 +151,7 @@ namespace TrelloWebApplication.Utiliti
             string url = urlCard + model.Id + "/actions/comments?text=" + comment + "&key=" + key + "&token=" + token;
             ChiamtaApi(url, "POST");
         }
+
         /// <summary>
         /// funzione che lancia il mettodo post per aggiungere un comento a una card
         /// </summary>
@@ -162,6 +162,7 @@ namespace TrelloWebApplication.Utiliti
             string url = urlCard + model.Id +"?key=" + key + "&token=" + token;
             ChiamtaApi(url, "DELETE");
         }
+
         /// <summary>
         /// Chiamata alle api trello con il salvataggio al interno di una stringa di un json contente tutte le informazioni della risposta alla richiesta 
         /// </summary>
@@ -187,6 +188,7 @@ namespace TrelloWebApplication.Utiliti
             }
             return result;
         }
+
         /// <summary>
         /// Spostamnto di massa di card in diverso stato 
         /// </summary>
