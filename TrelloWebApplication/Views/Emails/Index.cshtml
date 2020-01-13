@@ -24,7 +24,8 @@
 <table class="table"  id="tb2">
     <tr>
         <th style="text-align:center">
-            @Html.DisplayNameFor(model => model.ReceiverEmail)
+            @*@Html.DisplayNameFor(model => model.ReceiverEmail)*@
+            Destinatario
         </th>
     </tr>
     @{
@@ -62,7 +63,7 @@
     }
     <tr>
         <td  style="text-align:center">
-            @Html.ActionLink("CreateAdd", "CreateAdd")
+            @Html.ActionLink("Aggiungi destinatario", "CreateAdd")
         </td>
     </tr>
 
