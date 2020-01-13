@@ -41,15 +41,15 @@
             @Html.TextBoxFor(m => m.ReceiverEmail, new { @placeholder = "Email Address *", @type = "email" })
         </div>
     </div>
-
+    <br />
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
+        <div class="col-md-offset-2 col-md-10" id="tb2">
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
-
-<div class="btn btn-primary">
+<br />
+<div class="btn btn-primary" id="tb3">
     @Html.ActionLink("Back to List", "Index")
 </div>
