@@ -45,9 +45,12 @@
         @if (x == 0)
         {
 
+            if (Model.Count() > 1)
             {
-                x = 1;
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard })
             }
+            x = 1;
+
         }
         else
         {
@@ -65,6 +68,4 @@
 
 </table>
 <br />
-<p class="btn btn-info" id="tb3">
-    @Html.ActionLink("Aggiungi Board", "Create")
-</p>
+<a href="http://localhost:53250/Apimodels/Create" class="btn btn-info" id="tb3">Aggiungi Board</a>
