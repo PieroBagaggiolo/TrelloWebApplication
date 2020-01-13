@@ -17,7 +17,7 @@ namespace TrelloWebApplication.Controllers
         // GET: ApiModels
         public ActionResult Index()
         {
-            return View(db.ApiModels.ToList());
+            return View(db.ApiModels.OrderBy(g=>g.Primo).ToList());
         }
 
       
@@ -33,16 +33,46 @@ namespace TrelloWebApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdBoard,Token,Key")] ApiModel apiModel)
+        public ActionResult Create([Bind(Include = "IdBoard,NameBord,Token,Key")] ApiModel apiModel)
         {
             if (ModelState.IsValid)
             {
                 db.ApiModels.Add(apiModel);
+
+                if (db.ApiModels.Count()>0)
+                {
+                    apiModel.Primo = 100;
+                }
+                else
+                {
+                    apiModel.Primo = 0;
+                }               
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(apiModel);
+        }
+        public ActionResult Primo(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            foreach (var apiCred in db.ApiModels.ToList())
+            {
+                if (apiCred.Primo==0)
+                {
+                    apiCred.Primo = 100;
+                    
+                }
+                if (apiCred.IdBoard==id)
+                {
+                    apiCred.Primo = 0;
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index","Card");
         }
         // GET: ApiModels/Delete/5
         public ActionResult Delete(string id)

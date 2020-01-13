@@ -37,6 +37,21 @@
 <div class="jumbotron" style="background:rgba(255, 255, 255, 0.4)">
     <h1 style="text-align:center">TRELLO REPORTER APP</h1>
 </div>
+<div>
+    <h1>Trello's Board Cards List Filter</h1>
+    <p>
+        Lista dell cards presenti nella bacheca di Trello
+    </p>
+    <p>
+        - Per filtrare le card selezionare la list e/o archivied per i quali si vuole filtrare e premere il tasto Filter 
+    </p>
+    <p>
+        - Il tasto sposta serve per andare nella scermata spostamento di massa con le carte filtrate
+    </p>
+    <p>
+        - Go to Home per tornare alla scermata inziale
+    </p>
+</div>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -73,7 +88,7 @@
 
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="rowHover">
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -106,19 +121,14 @@
 
             idList.Add(item.Id);
 
-
-
-
-
-
         }
     </table>
     <table style="width:80%; margin-left:10%; ">
         <tr>
             <th>
-            <p id="Select" class="btn btn-default btn-large">
-                    @Html.ActionLink("GO TO INDEX", "Index", "Card")
-            </p>
+                                <a href="/" class="btn btn-primary btn-large">Go To Home</a>
+            
+
             </th>
             <th> @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-danger btn-large" })</th>
             <th>@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-success btn-large" })</th>

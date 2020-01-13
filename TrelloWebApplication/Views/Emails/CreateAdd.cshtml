@@ -35,8 +35,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ReceiverEmail, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.ReceiverEmail, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.ReceiverEmail, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(m => m.ReceiverEmail, new { @placeholder = "Email Address *", @type = "email" })
         </div>
     </div>
 
