@@ -264,9 +264,35 @@ p {
     cursor: pointer;
     height:25px;
     width:100%;
+}
 
+#Closed {
+    color: black;
+    padding: 4px;
+    font-size: 16px;
+    font-style: italic;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
 }
-#stato {
+
+#Closed > option {
+        color: black;
+        padding: 16px;
+        font-size: 16px;
+        background-color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+#tb2 {
+    background-color: transparent;
+    opacity: 1;
+    color: black;
+}
+
+#Dropdown1Id {
     color: black;
     padding: 4px;
     font-size: 16px;
@@ -276,7 +302,7 @@ p {
     cursor: pointer;
     height: 25px;
 }
-#closed {
+#Dropdown2Id {
     color: black;
     padding: 4px;
     font-size: 16px;
@@ -285,7 +311,7 @@ p {
     border-radius: 15px;
     cursor: pointer;
     height: 25px;
-    width:100px;
+    width: 100px;
 }
 #Stato.option {
     color: black;

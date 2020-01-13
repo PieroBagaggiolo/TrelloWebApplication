@@ -3,7 +3,14 @@
 @{
     ViewBag.Title = "Filter";
 }
-
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/TweenLite.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/jquery.gsap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/plugins/CSSPlugin.min.js"></script>
+    <style type="text/css"></style>
+</head>
+   
 <div class="jumbotron" style="background:rgba(255, 255, 255, 0.4)">
     <h1 style="text-align:center">TRELLO REPORTER APP</h1>
 </div>
@@ -22,92 +29,89 @@
         - Go to Home per tornare alla scermata inziale
     </p>
 </div>
-@using (Html.BeginForm())
+@using (Html.BeginForm(new { id = "frmId" }))
 {
     @Html.AntiForgeryToken()
     <table  id="tb4">
-
-       
         <tr>
+            <th>
+                <h4> LIST : @Html.DropDownList("stato", null, new { @id = "Dropdown1Id" })</h4>
+            </th>
             @*<th>
-                    @Html.DropDownList("Campo", "ALL")
+                    <h4>ARCHVIED : @Html.DropDownList("closed", null, new { @id = "Dropdown2Id" })</h4>
                 </th>*@
             <th>
-                <h4> LIST : @Html.DropDownList("stato", "ALL ")</h4>
-            </th>
-            <th>
-                <h4>ARCHVIED : @Html.DropDownList("closed", "ALL ")</h4>
-            </th>
-            <th>
-                <input type="submit" value="Filter" class="btn btn-info" />
+                <input type="submit" value="Filter" class="btn btn-info" id="submitButton" />
             </th>
         </tr>
     </table>
 
     <br />
-
-    <table class="table" id="tb1">
-        <tr>
-            <th style="text-align:center">
-                TRELLO'S CARDS LIST
-            </th>
-            <th>LIST</th>
-            <th>ARCHVIED</th>
-            <th>Expiration date</th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr class="rowHover">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdList)
-                </td>
-                @if (item.Closed=="True")
-                {
-                    <td>YES</td>
-                }
-                else
-                {
-                    <td>NO</td>
-                }
-                
-                @if (item.Due!=null)
-                {
-                <td>
-                    @Html.DisplayFor(modelItem => item.Due)
-                </td>
-                }
-                else
-                {
-                <td>
-
-                   Not Present
-                </td>
-                }
+    //<div id="risultato"></div>
+    <div id="divTable">
+        <table class="table" id="tb1">
+            <tr>
+                <th style="text-align:center">
+                    TRELLO'S CARDS LIST
+                </th>
+                <th>LIST</th>
+                <th>ARCHVIED</th>
+                <th>Expiration date</th>
             </tr>
 
-            idList.Add(item.Id);
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdList)
+                    </td>
+                    @if (item.Closed == "True")
+                    {
+                        <td>YES</td>
+                    }
+                    else
+                    {
+                        <td>NO</td>
+                    }
 
-        }
-    </table>
-    <table style="width:80%; margin-left:10%; ">
-        <tr>
-            <th>
-                                <a href="/" class="btn btn-primary btn-large">Go To Home</a>
-            
+                    @if (item.Due != null)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Due)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
 
-            </th>
-            <th> @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-danger btn-large" })</th>
-            <th>@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-success btn-large" })</th>
-            <th> @Html.ActionLink("Sposta", "Sposta", new { lstString = Json.Encode(idList) }, new {  @class = "btn btn-primary btn-large" })</th>
+                            Not Present
+                        </td>
+                    }
+                </tr>
 
-        </tr>
-    </table>
-    @*@Html.ActionLink("PRINT PDF", "ExportPDFIndex", "Filter", Model, null)*@
+                idList.Add(item.Id);
+            }
+        </table>
+        <table style="width:80%; margin-left:10%; ">
+            <tr>
+                <th>
+                    <p id="Select" class="btn btn-default btn-large">
+                        @Html.ActionLink("GO TO INDEX", "Index", "Card")
+                    </p>
+                </th>
+                <th> @Html.ActionLink("PRINT PDF", "ExportPDFIndex", new { lstString = Json.Encode(idList) }, new { @class = "btn btn-danger btn-large" })</th>
+                <th>@Html.ActionLink("PRINT EXCEL", "ExcelExIndex", new { lstString = Json.Encode(idList) }, new { @class = "btn btn-success btn-large" })</th>
+                <th> @Html.ActionLink("Sposta", "Sposta", new { lstString = Json.Encode(idList) }, new { @class = "btn btn-primary btn-large" })</th>
+            </tr>
+        </table>
+    </div>
+    
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/Trelloapp.js")
 }
+
