@@ -4,11 +4,9 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista delle Board</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<br />
 <table class="table" id="tb3">
     <tr>
         <th style="text-align:center;">
@@ -16,34 +14,40 @@
         </th>
         <th></th>
     </tr>
-    @{ 
+    @{
         var x = 0;
     }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NameBord)
-        </td>
-        <td>
-            @if (x == 0)
-            {
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NameBord)
+    </td>
+    <td>
+        @if (x == 0)
+        {
 
-                {
-                    x = 1;
-                }
-            }
-            else
             {
-                
+                x = 1;
+            }
+        }
+        else
+        {
+
             <div>
                 @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard }) |
                 @Html.ActionLink("Go to", "Primo", new { id = item.IdBoard })
             </div>
-                
-            }
-        </td>
-    </tr>
+
+        }
+    </td>
+</tr>
+
 }
 
 </table>
+<br />
+<p class="btn btn-info" id="tb3">
+    @Html.ActionLink("Aggiungi Board", "Create")
+</p>
