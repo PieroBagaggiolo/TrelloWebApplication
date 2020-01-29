@@ -39,7 +39,7 @@ namespace TrelloWebApplication.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateAdd([Bind(Include = "SenderEmail,Password,ReceiverEmail")] Email email)
+        public ActionResult CreateAdd([Bind(Include = "Id,Password,ReceiverEmail,SenderEmail")] Email email)
         {
             if (ModelState.IsValid)
             {
