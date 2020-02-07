@@ -11,17 +11,19 @@
         Lista delle board selezionabili la prima della lista è quella selezionata
     </p>
     <p>
-        - Create New serve a dare le credenziali per una nuova board
+        - <b>Aggiungi board</b> serve a dare le credenziali per una nuova board
     </p>
     <p>
-        - Delete per eliminare le credenziali di quella board
+        - <b>Delete</b> per eliminare le credenziali di quella board
     </p>
     <p>
-        - Go To per selezionarla
+        - <b>Go To</b> per selezionarla
     </p>
 </div>
 
+<h3 style="text-align:center">Lista delle Board</h3>
 
+<br />
 <table class="table" id="tb3">
     <tr>
         <th style="text-align:center;">
@@ -35,34 +37,35 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameBord)
-            </td>
-            <td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.NameBord)
+    </td>
+    <td>
+        @if (x == 0)
+        {
 
-                @if (x == 0)
-                {
-                    if (Model.Count() > 1)
-                    {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard })
-                    }
-                    x = 1;
-                }
-                else
-                {
+            if (Model.Count() > 1)
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard })
+            }
+            x = 1;
 
-                    <div>
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard }) |
-                        @Html.ActionLink("Go to", "Primo", new { id = item.IdBoard })
-                    </div>
+        }
+        else
+        {
 
-                }
-            </td>
-        </tr>
-    }
+            <div>
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdBoard }) |
+                @Html.ActionLink("Go to", "Primo", new { id = item.IdBoard })
+            </div>
+
+        }
+    </td>
+</tr>
+
+}
 
 </table>
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<br />
+<a href="http://localhost:53250/Apimodels/Create" class="btn btn-info" id="tb3">Aggiungi Board</a>

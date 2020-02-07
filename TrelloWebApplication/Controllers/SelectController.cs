@@ -27,19 +27,26 @@ namespace TrelloWebApplication.Controllers
             List<Card> cards = new List<Card>();
             var model = PopolateModel.Popola();
             var myApi = PopolateModel.Crea();
+            List<Closed> stateList = new List<Closed>();
+            stateList.Add(new Closed("All"));
+            foreach (var item in myApi.GetState())
+            {
+                stateList.Add(new Closed(item.Name));
+            }
             List<Closed> closedList = new List<Closed>();
+            closedList.Add(new Closed("All"));
             closedList.Add(new Closed("False"));
             closedList.Add(new Closed("True"));
-            ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
-            ViewBag.closed = new SelectList(closedList, "Id", "Name");
+            ViewBag.stato = new SelectList(stateList, "id", "id");
+            ViewBag.closed = new SelectList(closedList, "Id", "id");
 
-            if ((stato != null && stato != "") || (closed != null && closed != ""))
+            if ((stato != null && stato != "All") || (closed != null && closed != "All"))
             {
                 foreach (var card in model)
                 {
-                    if (card.IdList == stato || stato == "")
+                    if (card.IdList == stato || stato == "All")
                     {
-                        if (card.Closed == closed || closed == "")
+                        if (card.Closed == closed || closed == "All")
                         {
                             cards.Add(card);
                         }

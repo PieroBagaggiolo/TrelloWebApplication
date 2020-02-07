@@ -4,22 +4,17 @@
     ViewBag.Title = "Spostamento Card";
 }
 
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-</head>
 
 
-    <h1 style="margin:20px">SPOSTA LE CARD IN UN'ALTRA LISTA</h1>
+<h1 style="margin:20px">SPOSTA LE CARD IN UN'ALTRA LISTA</h1>
 
 <table id="tb2" class="table">
- <tr>
-     <th>
-         <!-- Listbox relativo ai prodotti -->
-         <h3 style="padding-top:5%; text-align:center;">Lista card</h3>
-     </th>
-        <td>
-            
-        </td>
+    <tr>
+        <th>
+            <!-- Listbox relativo ai prodotti -->
+            <h3 style="padding-top:5%; text-align:center;">Lista card</h3>
+        </th>
+        <td></td>
         <th>
             <h3>Sposta in :</h3> @Html.DropDownList("Stato", null, new { @id = "StatoId" })
         </th>
@@ -37,7 +32,7 @@
         </td>
         <th>
             <!-- Bottoni Add e Remove -->
-            <input type="button" id="BtnAdd" name="AddProduct" value="&gt;" class="button1 btn btn-success"  /><br />
+            <input type="button" id="BtnAdd" name="AddProduct" value="&gt;" class="button1 btn btn-success" /><br />
             <input type="button" id="BtnRemove" name="RemoveProduct" value="&lt;" class="button1 btn btn-danger" />
         </th>
         <td>
@@ -55,19 +50,25 @@
     </tr>
     <tr>
         <td colspan="3" style="text-align:center">
-            <input type="button" id="BtnSave" name="UpdatePricelist" value="SPOSTA CARD" class="btn btn-default btn-large"/>
+            <input type="button" id="BtnSave" name="UpdatePricelist" value="SPOSTA CARD" class="btn btn-default btn-large" />
         </td>
     </tr>
 </table>
 
 
-        <div style="display: none">
-            @*// mantienbe due liste parallele, contenenti rispettivamente gli id di prodotto, e i codici di prodotto relativi al listino specifico
-                // la prirma lista e' hidden*@
-            @Html.ListBox("lbprodplid", new MultiSelectList(prova.Select(g => g.Id).ToList()))
-            @*@Html.ListBox("lbprodplid", new MultiSelectList(Model.Proddata.Products.Select(g => g.id).ToList()))*@
-        </div>
- 
+<div style="display: none">
+    @*// mantienbe due liste parallele, contenenti rispettivamente gli id di prodotto, e i codici di prodotto relativi al listino specifico
+        // la prirma lista e' hidden*@
+    @Html.ListBox("lbprodplid", new MultiSelectList(prova.Select(g => g.Id).ToList()))
+    @*@Html.ListBox("lbprodplid", new MultiSelectList(Model.Proddata.Products.Select(g => g.id).ToList()))*@
+</div>
+
 <p>
-    @Html.ActionLink("Back to List", "Filter","Select", new { @class = "btn btn-primary"})
+    @Html.ActionLink("Back to List", "Filter", "Select", new { @class = "btn btn-primary" })
 </p>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/Trelloapp.js")
+}

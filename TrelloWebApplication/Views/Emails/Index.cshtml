@@ -11,20 +11,21 @@
         Lista di email alle quali verrà inviata un mail con l'exel contente tutte le informazioni sulle card
     </p>
     <p>
-        - CreateAdd serve a dare nuovi indirizzi email ai quali inviare la mail
+        - <b>Aggiungi destinatario</b> serve a dare nuovi indirizzi email ai quali inviare la mail
     </p>
     <p>
-        - Dalete serve a non far più inviare la mail alla seguente email 
+        - <b>Dalete</b> serve a non far più inviare la mail alla seguente email 
     </p>
 </div>
 @*<p>
     @Html.ActionLink("Create New", "Create")
     
 </p>*@
-<table class="table"  id="tb2">
+<table class="table" id="tb2">
     <tr>
         <th style="text-align:center">
-            @Html.DisplayNameFor(model => model.ReceiverEmail)
+            @*@Html.DisplayNameFor(model => model.ReceiverEmail)*@
+            Destinatario
         </th>
     </tr>
     @{
@@ -33,16 +34,25 @@
 
     @foreach (var item in Model)
     {
-        if (prima == 0)
+
+        if (Model.Count() == 1)
         {
             <tr>
                 <td>
-                    La mail non verà inviata a nessun utente
+                    <table>
+                        <tr>
+                            <td style="width:88.99%">
+                                La mail non verà inviata a nessun utente
+                            </td>
+                            <td>
+                                @Html.ActionLink("elimina credenziali", "Delete", new { id = item.Id })
+                            </td>
+                        </tr>
+                    </table>
                 </td>
-            </tr> 
-            prima = 1;
+            </tr>
         }
-        else
+        else if (item.ReceiverEmail!=null)
         {
             <tr>
                 <td>
@@ -60,9 +70,17 @@
             </tr>
         }
     }
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Credenzialiali email invio", "Create")
+            </td>
+        </tr>
+    }
     <tr>
-        <td  style="text-align:center">
-            @Html.ActionLink("CreateAdd", "CreateAdd")
+        <td style="text-align:center">
+            @Html.ActionLink("Aggiungi destinatario", "CreateAdd")
         </td>
     </tr>
 
