@@ -19,7 +19,7 @@ namespace TrelloUtilities.Utility
             Tracing modifica = new Tracing();
            
             modifica.id = db.Tracings.Count();
-            modifica.FKboardID = myApi.idBrod;
+            modifica.Board.IdBoard = myApi.idBrod;
             modifica.Event = text;
             //AGGIUNGO IL TRACING PER L'AZIONE DELETE DELLE CARD 
             db.Tracings.Add(modifica);

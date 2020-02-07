@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.id)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IdBoard)
+            ID BOARD
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Event)
@@ -32,7 +32,7 @@
             @Html.DisplayFor(modelItem => item.id)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FKboardID)
+            @Html.DisplayFor(modelItem => item.Board.IdBoard)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Event)

@@ -186,5 +186,4 @@ namespace TrelloWebApplication.Controllers
             return JavaScript(script);
         }
     }
-
 }

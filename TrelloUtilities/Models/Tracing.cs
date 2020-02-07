@@ -13,9 +13,8 @@ namespace TrelloUtilities.Models
     {
         [Key]
         public int id { get; set; }
-        public string FKboardID { get; set; }
         [ForeignKey("FKboardID")]
-        public ApiModel IdBoard { get; set; }
+        public ApiModel Board { get; set; }
         public string Event { get; set; }
         public bool Check { get; set; }
     }
