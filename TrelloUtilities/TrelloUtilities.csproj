@@ -75,6 +75,7 @@
     <Compile Include="Models\ChekedList.cs" />
     <Compile Include="Models\Label.cs" />
     <Compile Include="Models\List.cs" />
+    <Compile Include="Utility\TraceMethod.cs" />
     <Compile Include="Utility\PopolateExl.cs" />
     <Compile Include="Utility\PopolateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
