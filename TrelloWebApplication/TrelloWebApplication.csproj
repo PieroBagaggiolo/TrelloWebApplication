@@ -182,6 +182,7 @@
     <Compile Include="Controllers\CardController.cs" />
     <Compile Include="Controllers\EmailsController.cs" />
     <Compile Include="Controllers\SelectController.cs" />
+    <Compile Include="Controllers\TracingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -247,6 +248,11 @@
     <Content Include="Views\ApiModels\Create.cshtml" />
     <Content Include="Views\Card\Delete.cshtml" />
     <Content Include="Views\Shared\_FilterTable.cshtml" />
+    <Content Include="Views\Tracing\Create.cshtml" />
+    <Content Include="Views\Tracing\Delete.cshtml" />
+    <Content Include="Views\Tracing\Details.cshtml" />
+    <Content Include="Views\Tracing\Edit.cshtml" />
+    <Content Include="Views\Tracing\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,7 +12,10 @@ namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
     {
-
+        /// <summary>
+        /// Connessione al Database
+        /// </summary>
+        private DatabaseContext db = new DatabaseContext();
         /// <summary>
         /// visualizzia la lista di card predenti nella pagina trello
         /// </summary>
@@ -91,7 +94,15 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
-            var myApi = PopolateModel.Crea();
+            var myApi = PopolateModel.Crea();          
+            //Creazione oggetto Tracing con i valori da passare a db
+            Tracing modifica = new Tracing();
+            modifica.id = db.Tracings.Count();
+            modifica.FKboardID = myApi.idBrod;
+            modifica.Event = "Eseguita cancellazione card: " + card.Name;
+            //AGGIUNGO IL TRACING PER L'AZIONE DELETE DELLE CARD 
+            db.Tracings.Add(modifica);
+            db.SaveChanges();
             myApi.DelateCard(card);
             return RedirectToAction("Index", model);
         }
@@ -128,8 +139,17 @@ namespace TrelloWebApplication.Controllers
         public ActionResult newCard(Card card,string Stato)
         {
             var myApi = PopolateModel.Crea();
+            Tracing modifica = new Tracing();
             card.IdList = Stato;
             myApi.PostCard(card);
+
+            //AGGIUNGO IL TRACING DELL'AZIONE CREATE DELLE CARD
+            modifica.id = db.Tracings.Count();
+            modifica.FKboardID = myApi.idBrod;
+            modifica.Event = "Eseguita creazione nuova card: " + card.Name;
+            //AGGIUNGO IL TRACING PER L'AZIONE DELETE DELLE CARD 
+            db.Tracings.Add(modifica);
+            db.SaveChanges();
             return RedirectToAction("Index", PopolateModel.Popola());
         }
             /// <summary>
@@ -167,6 +187,7 @@ namespace TrelloWebApplication.Controllers
         public ActionResult Edit(Card card,string stato)
         {
             var myApi = PopolateModel.Crea();
+            Tracing modifica = new Tracing();
             var model = PopolateModel.Popola();
             Card cardVecchia = null;
             foreach (var item in model)
@@ -207,6 +228,14 @@ namespace TrelloWebApplication.Controllers
             {
                 myApi.PutDueDate(card.DueDate, card);
             }
+
+            //AGGIUNGO IL TRACING DELL'AZIONE CREATE DELLE CARD
+            modifica.id = db.Tracings.Count();
+            modifica.FKboardID = myApi.idBrod;
+            modifica.Event = "Eseguita modifica sulla card: " + card.Name;
+            //AGGIUNGO IL TRACING PER L'AZIONE DELETE DELLE CARD 
+            db.Tracings.Add(modifica);
+            db.SaveChanges();
             return RedirectToAction("Index",model);
         }
 
