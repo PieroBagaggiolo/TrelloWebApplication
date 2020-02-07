@@ -16,17 +16,14 @@
 
 // PROVA AJAX
 $("#Dropdown1Id").on('change', function () {
-    console.log("onchange");
-    console.log($("#Dropdown1Id").val());
     var drpdown1 = $("#Dropdown1Id").val();
     var submit = $("#submitButton");
     $.ajax({ // crea una chiamata AJAX
         datatype: 'json',
-        data: { data: drpdown1 }, // prendi i dati del form in questo caso del primo dropdown
+        data: { stato: drpdown1 }, // prendi i dati del form in questo caso del primo dropdown
         type: "GET", // GET o POST
         url: "/Select/Filter", // li passa al controller
         success: function () { // se va con successo esegue il codice seguente
-            //$("#divTable").html(drpdown1);
             submit.click();
         },
         error: function (error) {
@@ -35,7 +32,22 @@ $("#Dropdown1Id").on('change', function () {
     });
 });
 
-
+$("#Dropdown2Id").on('change', function () {
+    var drpdown2 = $("#Dropdown2Id").val();
+    var submit = $("#submitButton");
+    $.ajax({ // crea una chiamata AJAX
+        datatype: 'json',
+        data: { data: drpdown2 }, // prendi i dati del form in questo caso del primo dropdown
+        type: "GET", // GET o POST
+        url: "/Select/Filter", // li passa al controller
+        success: function () { // se va con successo esegue il codice seguente
+            submit.click();
+        },
+        error: function (error) {
+            console.log("error")
+        }
+    });
+});
 
 $('#btnCom').click(function () {
     $("#btnCom").hide();

@@ -51,55 +51,11 @@
 
     //<div id="risultato"></div>
     <div id="divTable">
-        <table class="table" id="tb1">
-            <tr>
-                <th style="text-align:center">
-                    TRELLO'S CARDS LIST
-                </th>
-                <th>LIST</th>
-                <th>ARCHVIED</th>
-                <th>Expiration date</th>
 
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdList)
-                    </td>
-                    @if (item.Closed == "True")
-                    {
-                        <td>YES</td>
-                    }
-                    else
-                    {
-                        <td>NO</td>
-                    }
-
-
-                    @if (item.Due != null)
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Due)
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-
-                            Not Present
-                        </td>
-                    }
-                </tr>
-
-
-                idList.Add(item.Id);
-            }
-        </table>
+        <div id="dropDownsDiv">
+            @Html.Partial("_FilterTable", Model)
+        </div>
+    </div>
         <table style="width:80%; margin-left:10%; ">
             <tr>
                 <th>
@@ -110,7 +66,6 @@
                 <th> @Html.ActionLink("Sposta", "Sposta", new { lstString = Json.Encode(idList) }, new { @class = "btn btn-primary btn-large" })</th>
             </tr>
         </table>
-    </div>
     
 }
 @section Scripts {

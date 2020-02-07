@@ -16,10 +16,6 @@ namespace TrelloWebApplication.Controllers
 {
     public class SelectController : Controller
     {
-   
-
-
-
         /// <summary>
         /// Pagina di filtraggio dati stato e closed sono le DropDownList dove viene scelto per cosa filtrare
         /// </summary>
