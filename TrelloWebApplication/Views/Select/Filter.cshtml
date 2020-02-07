@@ -8,7 +8,6 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/TweenLite.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/jquery.gsap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/plugins/CSSPlugin.min.js"></script>
-    <style type="text/css"></style>
 </head>
    
 <div class="jumbotron" style="background:rgba(255, 255, 255, 0.4)">
@@ -17,22 +16,24 @@
 <div>
     <h1>Trello's Board Cards List Filter</h1>
     <p>
-        Lista dell cards presenti nella bacheca di Trello
+        <h4 style="text-align:center">Lista dell cards presenti nella bacheca di Trello</h4> 
     </p>
     <p>
-        - Per filtrare le card selezionare la list e/o archivied per i quali si vuole filtrare e premere il tasto Filter 
+        - Per filtrare le card selezionare la <i>list</i> e/o archivied per i quali si vuole filtrare e premere il tasto <b>Filter</b> 
     </p>
     <p>
-        - Il tasto sposta serve per andare nella scermata spostamento di massa con le carte filtrate
+        - Il tasto <b>Sposta</b> serve per andare nella schermata <i>Spostamento di massa</i> con le carte filtrate
     </p>
     <p>
-        - Go to Home per tornare alla scermata inziale
+        - <b>Go to Home</b> per tornare alla schermata inziale
     </p>
 </div>
 @using (Html.BeginForm(new { id = "frmId" }))
 {
     @Html.AntiForgeryToken()
+
     <table  id="tb4">
+
         <tr>
             <th>
                 <h4> LIST : @Html.DropDownList("stato", null, new { @id = "Dropdown1Id" })</h4>
@@ -47,8 +48,10 @@
     </table>
 
     <br />
+
     //<div id="risultato"></div>
     <div id="divTable">
+
         <div id="dropDownsDiv">
             @Html.Partial("_FilterTable", Model)
         </div>
