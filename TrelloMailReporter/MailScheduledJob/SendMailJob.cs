@@ -33,7 +33,7 @@ namespace TrelloMailReporter.MailScheduledJob
                 Api myApi = PopolateModel.Crea();
                 //variabile controllo che le modifiche inerenti alla board su cui mi trovo per non inviare 
                 //la mail in caso ci siano modifiche su una board non inerente
-                var checkkiamo = db.Tracings.ToList().Where(g => g.FKboardID == myApi.idBrod && g.Check == false);
+                var checkkiamo = db.Tracings.ToList().Where(g => g.Board.IdBoard == myApi.idBrod && g.Check == false);
                 //se la lista checkkiamo ha uno o più valori significa che ci sono state modifiche sulla board
                 //su cui mi trovo e devo inviarela mail
                 if (checkkiamo.Count()>=1)

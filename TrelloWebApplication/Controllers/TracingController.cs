@@ -19,7 +19,7 @@ namespace TrelloWebApplication.Controllers
         public ActionResult Index()
         {
             Api myApi = PopolateModel.Crea();
-            var tracings = db.Tracings.ToList().Where(g=>g.FKboardID==myApi.idBrod);
+            var tracings = db.Tracings.ToList().Where(g=>g.Board.IdBoard==myApi.idBrod);
             return View(tracings);
         }
 
@@ -59,7 +59,7 @@ namespace TrelloWebApplication.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FKboardID = new SelectList(db.ApiModels, "IdBoard", "IdBoard", tracing.FKboardID);
+            ViewBag.FKboardID = new SelectList(db.ApiModels, "IdBoard", "IdBoard", tracing.Board.IdBoard);
             return View(tracing);
         }
 
@@ -75,7 +75,7 @@ namespace TrelloWebApplication.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.FKboardID = new SelectList(db.ApiModels, "IdBoard", "IdBoard", tracing.FKboardID);
+            ViewBag.FKboardID = new SelectList(db.ApiModels, "IdBoard", "IdBoard", tracing.Board.IdBoard);
             return View(tracing);
         }
 
@@ -92,7 +92,7 @@ namespace TrelloWebApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.FKboardID = new SelectList(db.ApiModels, "IdBoard", "IdBoard", tracing.FKboardID);
+            ViewBag.FKboardID = new SelectList(db.ApiModels, "IdBoard", "IdBoard", tracing.Board.IdBoard);
             return View(tracing);
         }
 
