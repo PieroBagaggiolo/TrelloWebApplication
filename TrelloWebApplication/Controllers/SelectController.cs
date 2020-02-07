@@ -16,6 +16,7 @@ namespace TrelloWebApplication.Controllers
 {
     public class SelectController : Controller
     {
+        private DatabaseContext db = new DatabaseContext();
         /// <summary>
         /// Pagina di filtraggio dati stato e closed sono le DropDownList dove viene scelto per cosa filtrare
         /// </summary>
@@ -161,6 +162,7 @@ namespace TrelloWebApplication.Controllers
             List<Card> cards = new List<Card>();
             var model = PopolateModel.Popola();
             var myApi = PopolateModel.Crea();
+            Tracing modifica = new Tracing();
             //creazione lista di card con id presennte e con stato differnte al nuovo
             foreach (var value in result)
             {
@@ -178,6 +180,12 @@ namespace TrelloWebApplication.Controllers
             //lancio la funzione spostemnto di massa 
             myApi.PutMassa(cards, idList);
             var script = string.Format("PageReload()");
+            modifica.id = db.Tracings.Count();
+            modifica.FKboardID = myApi.idBrod;
+            modifica.Event = "Eseguito spostamento di massa sullo stato: "+idlistino;
+            //AGGIUNGO IL TRACING PER L'AZIONE DELETE DELLE CARD
+            db.Tracings.Add(modifica);
+            db.SaveChanges();
             return JavaScript(script);
         }
     }
