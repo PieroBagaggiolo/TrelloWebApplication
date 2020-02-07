@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TrelloUtilities.Models;
+using TrelloWebApplication.Utiliti;
 
 namespace TrelloWebApplication.Controllers
 {
@@ -17,7 +18,8 @@ namespace TrelloWebApplication.Controllers
         // GET: Tracing
         public ActionResult Index()
         {
-            var tracings = db.Tracings.ToList();
+            Api myApi = PopolateModel.Crea();
+            var tracings = db.Tracings.ToList().Where(g=>g.FKboardID==myApi.idBrod);
             return View(tracings);
         }
 
