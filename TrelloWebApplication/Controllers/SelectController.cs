@@ -16,33 +16,38 @@ namespace TrelloWebApplication.Controllers
 {
     public class SelectController : Controller
     {
-   
-
-
+        private DatabaseContext db = new DatabaseContext();
         /// <summary>
         /// Pagina di filtraggio dati stato e closed sono le DropDownList dove viene scelto per cosa filtrare
         /// </summary>
         /// <param name="stato">DropDownList della lista degli stati </param>
         /// <param name="closed">DropDownList del archivazione se si o no </param>
         /// <returns></returns>
-        public ActionResult Filter(string stato,  string closed)
+        public ActionResult Filter(string stato, string closed)
         {
             List<Card> cards = new List<Card>();
             var model = PopolateModel.Popola();
             var myApi = PopolateModel.Crea();
+            List<Closed> stateList = new List<Closed>();
+            stateList.Add(new Closed("All"));
+            foreach (var item in myApi.GetState())
+            {
+                stateList.Add(new Closed(item.Name));
+            }
             List<Closed> closedList = new List<Closed>();
+            closedList.Add(new Closed("All"));
             closedList.Add(new Closed("False"));
             closedList.Add(new Closed("True"));
-            ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
-            ViewBag.closed = new SelectList(closedList, "Id", "Name");
+            ViewBag.stato = new SelectList(stateList, "id", "id");
+            ViewBag.closed = new SelectList(closedList, "Id", "id");
 
-            if ((stato != null && stato != "") || (closed != null && closed != ""))
+            if ((stato != null && stato != "All") || (closed != null && closed != "All"))
             {
                 foreach (var card in model)
                 {
-                    if (card.IdList == stato || stato == "")
+                    if (card.IdList == stato || stato == "All")
                     {
-                        if (card.Closed == closed || closed == "")
+                        if (card.Closed == closed || closed == "All")
                         {
                             cards.Add(card);
                         }
@@ -52,8 +57,6 @@ namespace TrelloWebApplication.Controllers
             }
             return View(model);
         }
-
-
 
 
         /// <summary>
@@ -159,6 +162,7 @@ namespace TrelloWebApplication.Controllers
             List<Card> cards = new List<Card>();
             var model = PopolateModel.Popola();
             var myApi = PopolateModel.Crea();
+            Tracing modifica = new Tracing();
             //creazione lista di card con id presennte e con stato differnte al nuovo
             foreach (var value in result)
             {
@@ -176,6 +180,12 @@ namespace TrelloWebApplication.Controllers
             //lancio la funzione spostemnto di massa 
             myApi.PutMassa(cards, idList);
             var script = string.Format("PageReload()");
+            modifica.id = db.Tracings.Count();
+            modifica.FKboardID = myApi.idBrod;
+            modifica.Event = "Eseguito spostamento di massa sullo stato: "+idlistino;
+            //AGGIUNGO IL TRACING PER L'AZIONE DELETE DELLE CARD
+            db.Tracings.Add(modifica);
+            db.SaveChanges();
             return JavaScript(script);
         }
     }

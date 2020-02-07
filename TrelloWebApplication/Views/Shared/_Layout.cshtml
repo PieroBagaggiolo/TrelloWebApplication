@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">       
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <a href="/"><div class="logoNav"></div>@*@Html.ActionLink("Trello Web App", "Index", "Card", new { area = "" }, new { @class = "navbar-brand" })*@</a>
@@ -25,14 +25,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-
-                    @*<li>@Html.ActionLink("Filter", "Filter", "Select")</li>*@
                     <li><a href="/Select/Filter" class="logoFiltro"></a></li>
                     <li><a href="/Emails" class="logoEmail"></a></li>
                     <li><a href="/Apimodels" class="logoMono"></a></li>
+                    <li><a href="/Tracing">Tracing</a></li>
                 </ul>
             </div>
-            
+
         </div>
         </div>
     <div class="container body-content">

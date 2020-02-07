@@ -8,6 +8,35 @@
     overflow-x: hidden;
 }
 
+#Closed {
+    color: black;
+    padding: 4px;
+    font-size: 16px;
+    font-style: italic;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
+}
+
+    #Closed > option {
+        color: black;
+        padding: 16px;
+        font-size: 16px;
+        background-color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+#tb4 {
+    background-color: transparent;
+    width: 58%;
+    margin-left: 21%;
+    margin-right: 21%;
+    opacity: 1;
+    color: black;
+}
+
 .logoEmail {
     background-image: url("/Content/img/Email.png");
     width: 30px;
@@ -155,10 +184,10 @@ p {
 #btnCom {
     margin-left: 42%;
 }
-#Select {
+#Select:hover {
     /*margin-left:45%;*/
     margin-bottom: 1%;
-    /*background-color: black;*/
+    background-color: cyan;
     opacity: 0.8;
 }
 
@@ -235,9 +264,28 @@ p {
     cursor: pointer;
     height:25px;
     width:100%;
+}
 
+#Closed {
+    color: black;
+    padding: 4px;
+    font-size: 16px;
+    font-style: italic;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    width: 100%;
 }
-#stato {
+
+#Closed > option {
+        color: black;
+        padding: 16px;
+        font-size: 16px;
+        background-color: white;
+        border: none;
+        cursor: pointer;
+    }
+#Dropdown1Id {
     color: black;
     padding: 4px;
     font-size: 16px;
@@ -247,7 +295,7 @@ p {
     cursor: pointer;
     height: 25px;
 }
-#closed {
+#Dropdown2Id {
     color: black;
     padding: 4px;
     font-size: 16px;
@@ -256,7 +304,7 @@ p {
     border-radius: 15px;
     cursor: pointer;
     height: 25px;
-    width:100px;
+    width: 100px;
 }
 #Stato.option {
     color: black;

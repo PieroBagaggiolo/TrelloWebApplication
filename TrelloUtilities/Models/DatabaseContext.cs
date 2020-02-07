@@ -11,7 +11,7 @@ namespace TrelloUtilities.Models
     {
         public DbSet<ApiModel>ApiModels { get; set; }
         public DbSet<Email> Emails { get; set; }
-
+        public DbSet<Tracing> Tracings { get; set; }
         public DatabaseContext() :
             base("DefaultConnection") { }
     }
