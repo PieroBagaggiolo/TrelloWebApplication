@@ -14,11 +14,11 @@ namespace TrelloWebApplication.Controllers
     public class TracingController : Controller
     {
         private DatabaseContext db = new DatabaseContext();
-
+        PopolateModel popMod = new PopolateModel();
         // GET: Tracing
         public ActionResult Index()
         {
-            Api myApi = PopolateModel.Crea();
+            Api myApi = popMod.Crea();
             var tracings = db.Tracings.ToList().Where(g=>g.Board.IdBoard==myApi.idBrod);
             return View(tracings);
         }

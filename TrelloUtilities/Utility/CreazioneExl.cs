@@ -8,10 +8,9 @@ using System.Web;
 namespace TrelloUtilities
 {
     
-    public static class CreazioneExl
+    public class CreazioneExl
     {
-
-        public static void CreazioneFile(ExcelPackage ex, string title)
+        public void CreazioneFile(ExcelPackage ex, string title)
         {
             using (var memoryStream = new MemoryStream())
             {
@@ -24,6 +23,5 @@ namespace TrelloUtilities
                 cur.Response.End();
             }
         }
-    }
-    
+    }  
 }

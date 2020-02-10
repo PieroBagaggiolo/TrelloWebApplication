@@ -9,7 +9,7 @@ namespace TrelloUtilities
 {
     public class PopolateExl
     {
-        public static void Riempimento(Card model, ExcelWorksheet workSheet, int recordIndex, int fine)
+        public void Riempimento(Card model, ExcelWorksheet workSheet, int recordIndex, int fine)
         {
             //intestazione
             workSheet.Row(recordIndex).Height = 20;
@@ -145,7 +145,7 @@ namespace TrelloUtilities
             //VerticalTitle(workSheet, 10, fine, i);
         }
 
-        private static void VerticalTitle(ExcelWorksheet workSheet, int col, int fine, int i)
+        private void VerticalTitle(ExcelWorksheet workSheet, int col, int fine, int i)
         {
             using (var title = workSheet.Cells[i, col, fine, col]) //funzione per unire più celle verticalmente
             {

@@ -13,14 +13,17 @@ namespace TrelloWebApplication.Controllers
 {
     public class CardController : Controller
     {
+        TraceMethod trac = new TraceMethod();
+        PopolateModel popModel = new PopolateModel();
+        CreazioneExl createExl = new CreazioneExl();
         /// <summary>
         /// visualizzia la lista di card predenti nella pagina trello
         /// </summary>
         /// <returns>ritorna una view</returns>
         public ActionResult Index(string stato)
         {
-            var myApi = PopolateModel.Crea();
-            List<Card> model = PopolateModel.Popola();
+            var myApi = popModel.Crea();
+            List<Card> model = popModel.Popola();
             List<Card> cards = new  List<Card>();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
             if (stato != null && stato != "")
@@ -42,7 +45,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns></returns>
         public ActionResult PdfIndex()
         {
-            return View(PopolateModel.Popola());
+            return View(popModel.Popola());
         }
 
         /// <summary>
@@ -51,7 +54,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns>file pdf</returns>
         public ActionResult ExportPDFIndex()
         {
-            ActionAsPdf result = new ActionAsPdf("PdfIndex", PopolateModel.Popola())
+            ActionAsPdf result = new ActionAsPdf("PdfIndex", popModel.Popola())
             {
                 FileName = Server.MapPath("Index.pdf")
             };
@@ -64,7 +67,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns></returns>
         public ActionResult Delete(string id = null)
         {
-            List<Card> model = PopolateModel.Popola();
+            List<Card> model = popModel.Popola();
             Card card = null;
             foreach (var item in model)
             {
@@ -81,7 +84,7 @@ namespace TrelloWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            List<Card> model = PopolateModel.Popola();
+            List<Card> model = popModel.Popola();
             Card card = null;
             foreach (var item in model)
             {
@@ -91,10 +94,10 @@ namespace TrelloWebApplication.Controllers
                     card = item;
                 }
             }
-            var myApi = PopolateModel.Crea();
+            var myApi = popModel.Crea();
 
             //Testo evento Cancellazione Card per la tabella tracing
-            TraceMethod.FillTracing("Eseguita cancellazione card: " + card.Name);
+            trac.FillTracing("Eseguita cancellazione card: " + card.Name);
           
             myApi.DelateCard(card);
             return RedirectToAction("Index", model);
@@ -106,7 +109,7 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna una view</returns>
         public ActionResult Details(string id = null)
         {
-            List<Card> model = PopolateModel.Popola();
+            List<Card> model = popModel.Popola();
             Card card = null;
             foreach (var item in model)
             {
@@ -121,7 +124,7 @@ namespace TrelloWebApplication.Controllers
         }
         public ActionResult newCard()
         {
-            var myApi = PopolateModel.Crea();
+            var myApi = popModel.Crea();
             Card card = new Card();
             var stato = myApi.GetState();
             ViewBag.Stato = new SelectList(stato, "Id", "Name", card.IdList);
@@ -131,15 +134,15 @@ namespace TrelloWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult newCard(Card card,string Stato)
         {
-            var myApi = PopolateModel.Crea();
+            var myApi = popModel.Crea();
             Tracing modifica = new Tracing();
             card.IdList = Stato;
             myApi.PostCard(card);
 
             //Testo evento Creazione Card per la tabella tracing
-            TraceMethod.FillTracing("Eseguita creazione nuova card: " + card.Name);
+            trac.FillTracing("Eseguita creazione nuova card: " + card.Name);
 
-            return RedirectToAction("Index", PopolateModel.Popola());
+            return RedirectToAction("Index", popModel.Popola());
         }
             /// <summary>
             /// Pagina di modifica card
@@ -150,7 +153,7 @@ namespace TrelloWebApplication.Controllers
             {
             string inzio = "";
             Card card = null;
-            foreach (var item in PopolateModel.Popola())
+            foreach (var item in popModel.Popola())
             {
                 if (item.Id == id)
 
@@ -159,7 +162,7 @@ namespace TrelloWebApplication.Controllers
                     inzio = item.IdList;
                 }
             }
-            var myApi = PopolateModel.Crea();
+            var myApi = popModel.Crea();
             var stato = myApi.GetState().Where(g => g.Name == inzio).ToList();
             stato.AddRange(myApi.GetState().Where(g => g.Name != inzio).ToList());
             ViewBag.Stato = new SelectList(stato, "Id", "Name",card.IdList);
@@ -175,9 +178,9 @@ namespace TrelloWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Card card,string stato)
         {
-            var myApi = PopolateModel.Crea();
+            var myApi = popModel.Crea();
             Tracing modifica = new Tracing();
-            var model = PopolateModel.Popola();
+            var model = popModel.Popola();
             Card cardVecchia = null;
             foreach (var item in model)
             {
@@ -219,7 +222,7 @@ namespace TrelloWebApplication.Controllers
             }
 
             //Testo evento modifica Card per la tabella tracing
-            TraceMethod.FillTracing("Eseguita modifica sulla card: " + card.Name);
+            trac.FillTracing("Eseguita modifica sulla card: " + card.Name);
 
             return RedirectToAction("Index",model);
         }
@@ -231,7 +234,7 @@ namespace TrelloWebApplication.Controllers
         public ActionResult PdfDetails(string id = null)
         {
             Card card = null;
-            foreach (var item in PopolateModel.Popola())
+            foreach (var item in popModel.Popola())
             {
                 if (item.Id == id)
 
@@ -250,15 +253,16 @@ namespace TrelloWebApplication.Controllers
         public ActionResult ExcelEx(string id = null)
         {
             Card card = null;
-            foreach (var item in PopolateModel.Popola())
+            foreach (var item in popModel.Popola())
             {
                 if (item.Id == id)
                 {
                     card = item;
                 }
             }
-            ExcelPackage ex = ReportMethods.ExportSingleExcel(card);
-            CreazioneExl.CreazioneFile(ex, "Details");
+            ReportMethods repMet = new ReportMethods();
+            ExcelPackage ex = repMet.ExportSingleExcel(card);
+            createExl.CreazioneFile(ex, "Details");
             return View(card);
         }
 
@@ -268,8 +272,9 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna la view</returns>
         public ActionResult ExcelExIndex()
         {
-            ExcelPackage ex = ReportMethods.ExportExcelTotal(PopolateModel.Popola());
-            CreazioneExl.CreazioneFile(ex, "Index");
+            ReportMethods repM = new ReportMethods();
+            ExcelPackage ex = repM.ExportExcelTotal(popModel.Popola());
+            createExl.CreazioneFile(ex, "Index");
             return View();
         }
 
@@ -281,7 +286,7 @@ namespace TrelloWebApplication.Controllers
         public ActionResult ExportPDFDetalis(string id=null)
         {
             Card card = null;
-            foreach (var item in PopolateModel.Popola())
+            foreach (var item in popModel.Popola())
             {
                 if (item.Id == id)
 
@@ -303,9 +308,9 @@ namespace TrelloWebApplication.Controllers
         [HttpPost]
         public ActionResult Details(Card pro)
         {
-            var myApi = PopolateModel.Crea();
+            var myApi = popModel.Crea();
             Card card = null;
-            foreach (var item in PopolateModel.Popola())
+            foreach (var item in popModel.Popola())
             {
                 if (item.Id == pro.Id)
 

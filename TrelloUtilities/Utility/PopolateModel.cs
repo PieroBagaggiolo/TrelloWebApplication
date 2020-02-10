@@ -13,7 +13,7 @@ namespace TrelloWebApplication.Utiliti
         /// </summary>
         /// <param name="myApi">Il mio collegamento con le api trello</param>
         /// <returns>ritorno la lista di card con le opportune modifiche</returns>
-        public static List<Card> Popola()
+        public List<Card> Popola()
         {
             var myApi = Crea();
             //lista di card presenti
@@ -65,7 +65,7 @@ namespace TrelloWebApplication.Utiliti
             //ritorno la lista di card con le modifiche 
             return cardtot;
         }
-        public static Api Crea()
+        public Api Crea()
         {
             DatabaseContext db = new DatabaseContext();
             ApiModel[] apiArrey = db.ApiModels.OrderBy(g => g.Primo).ToArray();

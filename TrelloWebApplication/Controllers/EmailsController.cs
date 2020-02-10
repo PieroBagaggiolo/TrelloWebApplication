@@ -66,8 +66,9 @@ namespace TrelloWebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                string criptate = SecurityPWD.Encrypt(email.Password);
-                email.Password = criptate;
+                SecurityPWD criptPsw = new SecurityPWD();
+                var cript = criptPsw.Encrypt(email.Password);
+                email.Password = cript;
                 db.Emails.Add(email);
                 db.SaveChanges();
 

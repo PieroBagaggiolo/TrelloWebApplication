@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace TrelloUtilities.Utility
 {
-    public static class SecurityPWD
+    public class SecurityPWD
     {
-        static string EncryptionKey = "Giorgio";
+        string EncryptionKey = "Giorgio";
 
-        public static string Encrypt(string clearText)
+        public string Encrypt(string clearText)
         {
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
             using (Aes encryptor = Aes.Create())
@@ -33,7 +33,7 @@ namespace TrelloUtilities.Utility
             return clearText;
         }
 
-        public static string Decrypt(string cipherText)
+        public string Decrypt(string cipherText)
         {
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             using (Aes encryptor = Aes.Create())
