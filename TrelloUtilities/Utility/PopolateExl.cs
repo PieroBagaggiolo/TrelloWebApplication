@@ -135,7 +135,6 @@ namespace TrelloUtilities
                 Titles.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 Titles.Style.Fill.BackgroundColor.SetColor(Color.LightGreen);
             }
-
             //VerticalTitle(workSheet, 1, fine, i);
             //VerticalTitle(workSheet, 2, fine, i);
             //VerticalTitle(workSheet, 3, fine, i);

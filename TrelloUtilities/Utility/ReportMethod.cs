@@ -34,7 +34,7 @@ namespace TrelloUtilities
             workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
-        public static void DelegateMethod(ref ExcelPackage ex)
+        public void DelegateMethod(ref ExcelPackage ex)
         {
               // elementi neccessari per fare le chiamate le informazioni sono prese da db prende la prima sequenza
              ApiModel[] apiArrey = db.ApiModels.ToArray();

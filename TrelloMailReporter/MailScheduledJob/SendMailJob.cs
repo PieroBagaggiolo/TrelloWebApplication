@@ -19,6 +19,7 @@ namespace TrelloMailReporter.MailScheduledJob
         private DatabaseContext db = new DatabaseContext();
         public delegate void Del(ref ExcelPackage fileEx);
         PopolateModel popModel = new PopolateModel();
+        ReportMethods dlg = new ReportMethods();
         public Task Execute(IJobExecutionContext context)
         {
             return Task.Factory.StartNew(() => SendMail());
@@ -44,7 +45,7 @@ namespace TrelloMailReporter.MailScheduledJob
                     using (var memoryStream = new MemoryStream())
                     {
                         //creazione allegato excel prima di inviare la mail
-                        Del del = ReportMethods.DelegateMethod;
+                        Del del = dlg.DelegateMethod;
                         ExcelPackage ex = new ExcelPackage();
                         del(ref ex);
                         ex.SaveAs(memoryStream);

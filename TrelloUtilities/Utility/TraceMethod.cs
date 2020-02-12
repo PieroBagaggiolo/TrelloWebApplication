@@ -19,7 +19,7 @@ namespace TrelloUtilities.Utility
             Api myApi = popMod.Crea();
             Tracing modifica = new Tracing();         
             modifica.id = db.Tracings.Count();
-            modifica.Board.IdBoard = myApi.idBrod;
+            modifica.FKboardID = myApi.idBrod;
             modifica.Event = text;
             //AGGIUNGO IL TRACING PER L'AZIONE DELETE DELLE CARD 
             db.Tracings.Add(modifica);
