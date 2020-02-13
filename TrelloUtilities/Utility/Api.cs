@@ -36,8 +36,8 @@ namespace TrelloWebApplication.Utiliti
         public List<Card> GetCards()
         {
             //craazione stringhe json
-            string cardN = ChiamtaApi(urlBoards + idBrod + "/cards?key=" + key + "&token=" + token, "GET");
-            string cardArchiviate = ChiamtaApi(urlBoards + idBrod + "/cards/closed?key=" + key + "&token=" + token, "GET");
+            string cardN = ChiamataApi(urlBoards + idBrod + "/cards?key=" + key + "&token=" + token, "GET");
+            string cardArchiviate = ChiamataApi(urlBoards + idBrod + "/cards/closed?key=" + key + "&token=" + token, "GET");
             //creazione di oggetti tramite il json
             var Cardtot = serializer.Deserialize<List<Card>>(cardN);
             Cardtot.AddRange(serializer.Deserialize<List<Card>>(cardArchiviate));
@@ -49,7 +49,7 @@ namespace TrelloWebApplication.Utiliti
         /// <returns>Ritorna una lista completa di stati </returns>
         public List<List> GetState()
         {
-            string nomeList = ChiamtaApi(urlBoards + idBrod + "/lists?key=" + key + "&token=" + token, "GET");
+            string nomeList = ChiamataApi(urlBoards + idBrod + "/lists?key=" + key + "&token=" + token, "GET");
             var listC = serializer.Deserialize<List<List>>(nomeList);
             return listC;
         }
@@ -60,7 +60,7 @@ namespace TrelloWebApplication.Utiliti
         /// <returns>Ritorna una lista completa di allegati </returns>
         public List<Attachment> GetAttachment(string cardId)
         {
-            string url = ChiamtaApi(urlCard + cardId + "/attachments?key=" + key + "&token=" + token, "GET");
+            string url = ChiamataApi(urlCard + cardId + "/attachments?key=" + key + "&token=" + token, "GET");
             var allegato = serializer.Deserialize<List<Attachment>>(url);
             return allegato;
         }
@@ -71,7 +71,7 @@ namespace TrelloWebApplication.Utiliti
         /// <returns>Ritorna una lista completa di cheked list </returns>
         public List<ChekedList> GetCheckedList(string cardId)
         {
-            string check = ChiamtaApi(urlCard + cardId + "/checklists?key=" + key + "&token=" + token, "GET");
+            string check = ChiamataApi(urlCard + cardId + "/checklists?key=" + key + "&token=" + token, "GET");
             var checklist = serializer.Deserialize<List<ChekedList>>(check);
             return checklist;
         }
@@ -94,7 +94,7 @@ namespace TrelloWebApplication.Utiliti
         public void PutClosed(string value, Card model)
         {
             string url = urlCard + model.Id + "?closed=" + value + "&key=" + key + "&token=" + token;
-            ChiamtaApi(url, "PUT");
+            ChiamataApi(url, "PUT");
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace TrelloWebApplication.Utiliti
         public void PutName(string newName, Card model)
         {
             string url = urlCard + model.Id + "?name=" + newName + "&key=" + key + "&token=" + token;
-            ChiamtaApi(url, "PUT");
+            ChiamataApi(url, "PUT");
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace TrelloWebApplication.Utiliti
         public void PutList(string newList, Card model)
         {
             string url = urlCard + model.Id + "?idList=" + newList + "&key=" + key + "&token=" + token;
-            ChiamtaApi(url, "PUT");
+            ChiamataApi(url, "PUT");
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace TrelloWebApplication.Utiliti
         {
             string mezzo = "%2F";
             string url = urlCard + model.Id + "?due=" + newData.Month+mezzo+newData.Day+mezzo+newData.Year + "&key=" + key + "&token=" + token;
-            ChiamtaApi(url, "PUT");
+            ChiamataApi(url, "PUT");
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace TrelloWebApplication.Utiliti
         public void PostCard(Card model)
         {
             string url = urlCard + "?name="+model.Name+ "&idList="+model.IdList + "&key=" + key + "&token=" + token;
-            ChiamtaApi(url, "POST");
+            ChiamataApi(url, "POST");
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace TrelloWebApplication.Utiliti
         public void AddComment(string comment, Card model)
         {
             string url = urlCard + model.Id + "/actions/comments?text=" + comment + "&key=" + key + "&token=" + token;
-            ChiamtaApi(url, "POST");
+            ChiamataApi(url, "POST");
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace TrelloWebApplication.Utiliti
         public void DelateCard( Card model)
         {
             string url = urlCard + model.Id +"?key=" + key + "&token=" + token;
-            ChiamtaApi(url, "DELETE");
+            ChiamataApi(url, "DELETE");
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace TrelloWebApplication.Utiliti
         /// <param name="prov">chiamata da fare</param>
         /// <param name="metodo">tipo di chiamata che si desidera fare</param>
         /// <returns></returns>
-        private static string ChiamtaApi(string prov, string metodo)
+        private string ChiamataApi(string prov, string metodo)
         {
             WebRequest requestObj = WebRequest.Create(prov);
             requestObj.Method = metodo;

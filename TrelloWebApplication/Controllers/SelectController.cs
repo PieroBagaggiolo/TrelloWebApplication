@@ -9,6 +9,7 @@ using System.Text;
 using System.Web.Mvc;
 using TrelloUtilities;
 using TrelloUtilities.Models;
+using TrelloUtilities.Utility;
 using TrelloWebApplication.Models;
 using TrelloWebApplication.Utiliti;
 
@@ -16,6 +17,7 @@ namespace TrelloWebApplication.Controllers
 {
     public class SelectController : Controller
     {
+        PopolateModel popMod = new PopolateModel();
         /// <summary>
         /// Pagina di filtraggio dati stato e closed sono le DropDownList dove viene scelto per cosa filtrare
         /// </summary>
@@ -25,8 +27,8 @@ namespace TrelloWebApplication.Controllers
         public ActionResult Filter(string stato, string closed)
         {
             List<Card> cards = new List<Card>();
-            var model = PopolateModel.Popola();
-            var myApi = PopolateModel.Crea();
+            var model = popMod.Popola();
+            var myApi = popMod.Crea();
             List<Closed> stateList = new List<Closed>();
             stateList.Add(new Closed("All"));
             foreach (var item in myApi.GetState())
@@ -65,11 +67,12 @@ namespace TrelloWebApplication.Controllers
         /// <returns>ritorna la view</returns>
         public ActionResult PdfIndex(string newModel)
         {
+            var model = popMod.Popola();
             // rinconversione da json a lista di stringhe
             List<String> result = System.Web.Helpers.Json.Decode<List<String>>(newModel);
             List<Card> cards = new List<Card>();
             //popolamento di una lista di card con id uguale a quelli presenti nella varibile result
-            foreach (var card in PopolateModel.Popola())
+            foreach (var card in model)
             {
                 foreach (var value in result)
                 {
@@ -101,10 +104,11 @@ namespace TrelloWebApplication.Controllers
 
         public ActionResult ExcelExIndex(string lstString)
         {
+            var model = popMod.Popola();
             List<String> result = System.Web.Helpers.Json.Decode<List<String>>(lstString);
 
             List<Card> cards = new List<Card>();
-            foreach (var card in PopolateModel.Popola())
+            foreach (var card in model)
             {
                 foreach (var value in result)
                 {
@@ -114,9 +118,11 @@ namespace TrelloWebApplication.Controllers
                     }
                 }
             }
+            ReportMethods rep = new ReportMethods();
+            CreazioneExl createExl = new CreazioneExl();
 
-            ExcelPackage ex = ReportMethods.ExportExcelTotal(cards);
-            CreazioneExl.CreazioneFile(ex, "Index");
+            ExcelPackage ex = rep.ExportExcelTotal(cards);
+            createExl.CreazioneFile(ex, "Index");
             return View();
         }
         /// <summary>
@@ -126,9 +132,10 @@ namespace TrelloWebApplication.Controllers
         /// <returns></returns>
         public ActionResult Sposta(string lstString)
         {
+            var model = popMod.Popola();
             List<String> result = System.Web.Helpers.Json.Decode<List<String>>(lstString);
             List<Card> cards = new List<Card>();
-            foreach (var card in PopolateModel.Popola())
+            foreach (var card in model)
             {
                 foreach (var value in result)
                 {
@@ -138,7 +145,7 @@ namespace TrelloWebApplication.Controllers
                     }
                 }
             }
-            var myApi = PopolateModel.Crea();
+            var myApi = popMod.Crea();
             ViewBag.Stato = new SelectList(myApi.GetState(), "Name", "Name");
             ViewBag.stato = new SelectList(myApi.GetState(), "Name", "Name");
             return View(cards);
@@ -159,8 +166,10 @@ namespace TrelloWebApplication.Controllers
             stream.Position = 0;
             List<String> result = System.Web.Helpers.Json.Decode<List<String>>(jsonids);
             List<Card> cards = new List<Card>();
-            var model = PopolateModel.Popola();
-            var myApi = PopolateModel.Crea();
+            PopolateModel modello = new PopolateModel();
+            var model = modello.Popola();
+            var myApi = popMod.Crea();
+            Tracing modifica = new Tracing();
             //creazione lista di card con id presennte e con stato differnte al nuovo
             foreach (var value in result)
             {
@@ -178,8 +187,11 @@ namespace TrelloWebApplication.Controllers
             //lancio la funzione spostemnto di massa 
             myApi.PutMassa(cards, idList);
             var script = string.Format("PageReload()");
+
+            //Testo evento Spostamento di massa per la tabella tracing
+            TraceMethod Fill = new TraceMethod();
+            Fill.FillTracing("Eseguita spostamento di massa su Stato: " + idlistino);
             return JavaScript(script);
         }
     }
-
 }

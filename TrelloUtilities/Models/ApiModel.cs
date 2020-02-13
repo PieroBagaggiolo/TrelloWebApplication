@@ -26,5 +26,6 @@ namespace TrelloUtilities.Models
 
         public string NameBord { get; set; }
 
+        public ICollection<Tracing> Tracings { get; set; }
     }
 }

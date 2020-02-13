@@ -20,10 +20,10 @@ namespace TrelloMailReporter.MailScheduledJob
                 .WithDailyTimeIntervalSchedule
                   //scelgo ogni quanto eseguire il job ed a che ora farlo partire
                   (s =>
-                     s.WithIntervalInHours(24)
+                     s.WithIntervalInMinutes(5)
                     .OnEveryDay()
 
-                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(15, 40))
+                    .StartingDailyAt(TimeOfDay.HourAndMinuteOfDay(11, 42))
 
                   )
                 .Build();

@@ -10,10 +10,10 @@ using TrelloWebApplication.Utiliti;
 
 namespace TrelloUtilities
 {
-    public static class ReportMethods
+    public  class ReportMethods
     {
         private static DatabaseContext db = new DatabaseContext();
-        public static ExcelPackage ExportExcelTotal(List<Card> model)
+        public ExcelPackage ExportExcelTotal(List<Card> model)
         {
             
             //creazione di un foglio EXCEL
@@ -26,25 +26,28 @@ namespace TrelloUtilities
             foreach (var card in model)
             {
                 fine = CalcolateDimensionMax(recordIndex, card)+1;
-                PopolateExl.Riempimento(card, workSheet, recordIndex,fine);
+                PopolateExl riemp = new PopolateExl();
+                riemp.Riempimento(card, workSheet, recordIndex,fine);
                 recordIndex = fine;
                 recordIndex += 4;
             }
             workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
-        public static void DelegateMethod(ref ExcelPackage ex)
+        public void DelegateMethod(ref ExcelPackage ex)
         {
               // elementi neccessari per fare le chiamate le informazioni sono prese da db prende la prima sequenza
              ApiModel[] apiArrey = db.ApiModels.ToArray();
              ApiModel apiCredentials = apiArrey[0];
              // creazione del mio modello di api per le chiamate
              Api myApi = new Api(apiCredentials.Key, apiCredentials.Token, apiCredentials.IdBoard);
-             //creazione del modello di liste di card
-             List<Card> model = PopolateModel.Popola();
-             ex = ReportMethods.ExportExcelTotal(model);
+            //creazione del modello di liste di card
+            PopolateModel modello = new PopolateModel();
+             List<Card> model =modello.Popola();
+            ReportMethods exl = new ReportMethods();
+              exl.ExportExcelTotal(model);
         }
-        public static int CalcolateDimensionMax(int recordIndex, Card card)
+        public int CalcolateDimensionMax(int recordIndex, Card card)
         {
             int NumberAttachment;
             try
@@ -79,7 +82,7 @@ namespace TrelloUtilities
             
             return recordIndex;
         }
-        public static ExcelPackage ExportSingleExcel(Card model)
+        public ExcelPackage ExportSingleExcel(Card model)
         {
             //creazione di un foglio EXCEL
             var SheetName = "Foglio";
@@ -88,12 +91,13 @@ namespace TrelloUtilities
             ExcelPackage ex = CreazioneFoglio(SheetName);
             var workSheet = ex.Workbook.Worksheets[SheetName];
             int recordIndex = 1;
-            PopolateExl.Riempimento(model, workSheet, recordIndex,maxGrow);
+            PopolateExl riemp = new PopolateExl();
+            riemp.Riempimento(model, workSheet, recordIndex,maxGrow);
             workSheet.Cells[workSheet.Dimension.Address].AutoFitColumns();
             return ex;
         }
 
-        private static ExcelPackage CreazioneFoglio(string sheetName)
+        private ExcelPackage CreazioneFoglio(string sheetName)
         {
             ExcelPackage ex = new ExcelPackage();
             var workSheet = ex.Workbook.Worksheets.Add(sheetName);

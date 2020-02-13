@@ -64,6 +64,7 @@
     <Compile Include="Models\Closed.cs" />
     <Compile Include="Models\DatabaseContext.cs" />
     <Compile Include="Models\Email.cs" />
+    <Compile Include="Models\Tracing.cs" />
     <Compile Include="Models\Webhook.cs" />
     <Compile Include="Utility\Api.cs" />
     <Compile Include="Utility\CreazioneExl.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Models\ChekedList.cs" />
     <Compile Include="Models\Label.cs" />
     <Compile Include="Models\List.cs" />
+    <Compile Include="Utility\TraceMethod.cs" />
     <Compile Include="Utility\PopolateExl.cs" />
     <Compile Include="Utility\PopolateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
