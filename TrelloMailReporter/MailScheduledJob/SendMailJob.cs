@@ -16,10 +16,23 @@ namespace TrelloMailReporter.MailScheduledJob
 {
     public class SendMailJob : IJob
     {
+        //DatabaseContext db;
+        //PopolateModel popModel;
+        //ReportMethods dlg;
+        //public delegate void Del(ref ExcelPackage fileEx);
+
         private DatabaseContext db = new DatabaseContext();
-        public delegate void Del(ref ExcelPackage fileEx);
         PopolateModel popModel = new PopolateModel();
         ReportMethods dlg = new ReportMethods();
+        public delegate void Del(ref ExcelPackage fileEx);
+
+        //public SendMailJob(DatabaseContext db, PopolateModel popModel, ReportMethods dlg)
+        //{
+        //    this.db = db;
+        //    this.popModel = popModel;
+        //    this.dlg = dlg;
+        //}
+
         public Task Execute(IJobExecutionContext context)
         {
             return Task.Factory.StartNew(() => SendMail());
@@ -32,7 +45,7 @@ namespace TrelloMailReporter.MailScheduledJob
             if (2<=db.Emails.Count())
             {
                 Api myApi = popModel.Crea();                
-                var checkkiamo = db.Tracings.ToList().Where(g => g.Board.IdBoard == myApi.idBrod && g.Check == false);
+                var checkkiamo = db.Tracings.ToList().Where(g => g.FKboardID == myApi.idBrod && g.Check == false);
                 //se la lista checkkiamo ha uno o più valori significa che ci sono state modifiche sulla board
                 //su cui mi trovo e devo inviarela mail
                 if (checkkiamo.Count()>=1)
@@ -41,7 +54,7 @@ namespace TrelloMailReporter.MailScheduledJob
                     string emailSend = p[0].SenderEmail;
                     string password = p[0].Password;
                     SecurityPWD secPsw = new SecurityPWD();
-                    secPsw.Decrypt(password);
+                    var decPsw = secPsw.Decrypt(password);
                     using (var memoryStream = new MemoryStream())
                     {
                         //creazione allegato excel prima di inviare la mail
@@ -90,7 +103,7 @@ namespace TrelloMailReporter.MailScheduledJob
 
                         //Alcuni Server SMTP richiedono l'accesso autenticato
                         Smtp.UseDefaultCredentials = false;
-                        NetworkCredential Credential = new NetworkCredential(emailSend, password);
+                        NetworkCredential Credential = new NetworkCredential(emailSend, decPsw);
                         Smtp.Credentials = Credential;
 
                         //Certificato SSL

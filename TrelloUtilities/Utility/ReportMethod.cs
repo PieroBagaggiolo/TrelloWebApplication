@@ -45,7 +45,7 @@ namespace TrelloUtilities
             PopolateModel modello = new PopolateModel();
              List<Card> model =modello.Popola();
             ReportMethods exl = new ReportMethods();
-              exl.ExportExcelTotal(model);
+              ex=exl.ExportExcelTotal(model);
         }
         public int CalcolateDimensionMax(int recordIndex, Card card)
         {

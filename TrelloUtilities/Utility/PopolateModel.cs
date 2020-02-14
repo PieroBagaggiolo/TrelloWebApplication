@@ -73,6 +73,5 @@ namespace TrelloWebApplication.Utiliti
             // creazione del mio modello di api per le chiamate
             return new Api(apiCredentials.Key, apiCredentials.Token, apiCredentials.IdBoard);
         }
-        
     }
 }
